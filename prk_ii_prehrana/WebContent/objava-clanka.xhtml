@@ -41,11 +41,13 @@
 								<h:form class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											<h:inputText name="title" value="#{ClanekJSFBean.c.title}" a:placeholder="Naslov">
+											<h:inputText id="clanek-title" name="title" value="#{ClanekJSFBean.c.title}" a:placeholder="Naslov">
 												<f:validateLength minimum="5" maximum="100"></f:validateLength>
 											</h:inputText>
 											
-											<h:inputTextarea name="content" value="#{ClanekJSFBean.c.content}" a:placeholder="Vsebina" cols="30" rows="10" />
+											<h:inputTextarea id="clanek-content" name="content" value="#{ClanekJSFBean.c.content}" a:placeholder="Vsebina" cols="30" rows="10">
+												<f:validateLength maximum="9999" minimum="10"/>
+											</h:inputTextarea>
 											
 											<!-- redirect na seznam člankov... -->
 											<h:commandButton class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
@@ -53,6 +55,9 @@
 										</div>
 									</div>
 								</h:form>
+								<h:message for="clanek-title" style="color:red" />
+								<br />
+								<h:message for="clanek-content" style="color:red" />
 							</div>
 						</div>
 					</div>

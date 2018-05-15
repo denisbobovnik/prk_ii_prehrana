@@ -17,7 +17,7 @@ public class ClanekDAO {
 	Logger log=LoggerFactory.getLogger(ClanekDAO.class);
 	
 	private static ClanekDAO instance=null;
-	public static synchronized ClanekDAO getInstance() {
+	public static synchronized ClanekDAO getInstance() {		
 		if (instance==null) instance=new ClanekDAO();
 		return instance;
 	}
