@@ -1,0 +1,76 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
+		
+		<ui:define name="title">
+			Objava članka
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+	
+	
+	
+				<!-- Contact section -->
+				<div class="contact-section spad fix">
+					<div class="container">
+						<div class="row">
+						
+							<!-- contact info -->
+							<div class="col-md-5 col-md-offset-1 contact-info col-push">
+								<div class="section-title left">
+									<h2>Objavite članek</h2>
+								</div>
+								<p>Če imate zanimivo zgodbo o vašem osebnem napredku in bi jo radi delili z vsemi, jo napišite in pošljite na našo stran. <br />Dobrodošli so tudi nasveti!</p>
+							</div>
+						
+							<!-- contact form -->
+							<div class="col-md-6 col-pull">
+								<h:form class="form-class" id="con_form">
+									<div class="row">
+										<div class="col-sm-12">
+											<h:inputText name="title" value="#{ClanekJSFBean.c.title}" a:placeholder="Naslov">
+												<f:validateLength minimum="5" maximum="100"></f:validateLength>
+											</h:inputText>
+											
+											<h:inputTextarea name="content" value="#{ClanekJSFBean.c.content}" a:placeholder="Vsebina" cols="30" rows="10" />
+											
+											<!-- redirect na seznam člankov... -->
+											<h:commandButton class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
+									
+										</div>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Contact section end-->	
+	
+	
+	
+	
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>
