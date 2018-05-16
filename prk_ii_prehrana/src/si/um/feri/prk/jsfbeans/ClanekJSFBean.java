@@ -1,9 +1,14 @@
 package si.um.feri.prk.jsfbeans;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import si.um.feri.prk.dao.ClanekDAO;
 import si.um.feri.prk.objekti.Clanek;
 
@@ -13,14 +18,24 @@ public class ClanekJSFBean {
 	
 	Logger log=LoggerFactory.getLogger(ClanekJSFBean.class);
 	private Clanek c = new Clanek();
+	private UploadedFile thumbnail;
 	private ClanekDAO cD = ClanekDAO.getInstance();
 	
-	public void dodajClanek() {		
+	public void dodajClanek() {
 		try {
-			cD.shrani(c);
-			c = new Clanek();
+			String str = thumbnail.getFileName();
+			if(str.contains(".")) {
+				String ext = str.substring(str.lastIndexOf('.'), str.length());
+				if(ext.equals(".jpg")||(ext.equals(".png"))||(ext.equals(".jpeg"))||(ext.equals(".gif"))) {
+					c.setThumbnail(thumbnail.getContents());
+					cD.shrani(c);
+					c = new Clanek();
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka nalaganja!", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 		}
 	}
 
@@ -29,5 +44,17 @@ public class ClanekJSFBean {
 	}
 	public void setC(Clanek c) {
 		this.c = c;
+	}
+	public UploadedFile getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(UploadedFile thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public ClanekDAO getcD() {
+		return cD;
+	}
+	public void setcD(ClanekDAO cD) {
+		this.cD = cD;
 	}
 }
