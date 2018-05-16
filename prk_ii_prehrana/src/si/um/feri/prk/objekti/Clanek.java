@@ -37,6 +37,7 @@ public class Clanek {
 		this.content = content;
 		this.thumbnail = thumbnail;
 	}
+	
 
 	public int getClanek_id() {
 		return clanek_id;

@@ -16,6 +16,7 @@ import si.um.feri.prk.objekti.Clanek;
 @SessionScoped
 public class ClanekJSFBean {
 	
+	
 	Logger log=LoggerFactory.getLogger(ClanekJSFBean.class);
 	private Clanek c = new Clanek();
 	private UploadedFile thumbnail;

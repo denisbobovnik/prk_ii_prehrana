@@ -88,6 +88,7 @@ public class ClanekDAO {
 		return ret;
 	}
 	
+	
 	public void shrani(Clanek c) throws Exception {
 		log.info("ClanekDAO: shranjujem " + c);
 		Connection conn=null;
