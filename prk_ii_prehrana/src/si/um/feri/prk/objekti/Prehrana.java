@@ -1,5 +1,6 @@
 package si.um.feri.prk.objekti;
 
+
 public class Prehrana {
 	private int id_prehrana;
 	private String naslovPrehrane;
