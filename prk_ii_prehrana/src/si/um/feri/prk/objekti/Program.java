@@ -3,7 +3,7 @@ package si.um.feri.prk.objekti;
 import java.sql.Blob;
 
 public class Program {
-   private int id_program;
+   private int id_program, tk_id_prehrana;
    private String naslov;
    private String autor;
    private Blob slika;
@@ -18,6 +18,14 @@ public class Program {
 	    this.autor = autor;
 	    this.slika = slika;
    }
+    public Program(int id_program, int tk_id_prehrana, String naslov, String autor, Blob slika) {
+    	super();
+    	this.id_program = id_program;
+    	this.tk_id_prehrana = tk_id_prehrana;
+    	this.naslov = naslov;
+    	this.autor = autor;
+    	this.slika = slika;
+    }
 	public int getId_program() {
 		return id_program;
 	}
@@ -42,5 +50,12 @@ public class Program {
 	public void setSlika(Blob slika) {
 		this.slika = slika;
 	}
+	public int getTk_id_prehrana() {
+		return tk_id_prehrana;
+	}
+	public void setTk_id_prehrana(int tk_id_prehrana) {
+		this.tk_id_prehrana = tk_id_prehrana;
+	}
+	
     
 }
