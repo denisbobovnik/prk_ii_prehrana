@@ -1,9 +1,12 @@
 package si.um.feri.prk.dao;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 
+import org.primefaces.model.UploadedFile;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
@@ -35,7 +38,7 @@ public class ClanekDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Clanek(clanek_id int not null auto_increment primary key, title varchar(100) not null, content varchar(9999) not null, user_id int)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Clanek(clanek_id int not null auto_increment primary key, title varchar(100) not null, content varchar(9999) not null, user_id int, thumbnail longblob not null, datumClanka timestamp not null)");
 			//zgor še not null dodat
 			//to spodaj priredit za user_id
 			//conn.createStatement().execute("ALTER TABLE Meritev ADD CONSTRAINT IDpovezanegaClana FOREIGN KEY (idClanaTeMeritve) REFERENCES Clan(idClana) ON DELETE CASCADE");
@@ -71,6 +74,14 @@ public class ClanekDAO {
 			while(rs.next()) {
 				ret = new Clanek(rs.getInt("user_id"), rs.getString("title"), rs.getString("content"));
 				ret.setClanek_id(clanek_id);
+				
+				Blob blob = rs.getBlob("thumbnail");
+				int blobLength = (int) blob.length();  
+				byte[] blobAsBytes = blob.getBytes(1, blobLength);
+				
+				ret.setThumbnail(blobAsBytes);
+				
+				ret.getDatumClanka().setTimeInMillis(rs.getTimestamp("datumClanka").getTime());
 				break;
 			}
 		} catch (Exception e) {
@@ -81,6 +92,7 @@ public class ClanekDAO {
 		return ret;
 	}
 	
+	
 	public void shrani(Clanek c) throws Exception {
 		log.info("ClanekDAO: shranjujem " + c);
 		Connection conn=null;
@@ -89,10 +101,12 @@ public class ClanekDAO {
 			if(najdi(c.getClanek_id()) != null) {
 				//clanek z id-jem že obstaja...pohandle-at
 			} else {
-				PreparedStatement ps = conn.prepareStatement("INSERT INTO Clanek(title, content, user_id) VALUES (?,?,?)");
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO Clanek(title, content, user_id, thumbnail, datumClanka) VALUES (?,?,?,?,?)");
 				ps.setString(1, c.getTitle());
 				ps.setString(2, c.getContent());
 				ps.setInt(3, c.getUser_id());
+				ps.setBinaryStream(4, c.getThumbnail().getBinaryStream());
+				ps.setTimestamp(5, new Timestamp(c.getDatumClanka().getTimeInMillis()));
 				ps.executeUpdate();
 			}
 		} catch (Exception e) {

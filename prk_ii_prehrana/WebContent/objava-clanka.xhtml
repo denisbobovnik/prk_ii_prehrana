@@ -3,10 +3,12 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:jsf="http://xmlns.jcp.org/jsf">
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
 	
 	<h:body>
 	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
+		
 		
 		<ui:define name="title">
 			Objava članka
@@ -20,9 +22,7 @@
 		
 		<ui:define name="content">
 			<f:view>
-	
-	
-	
+
 				<!-- Contact section -->
 				<div class="contact-section spad fix">
 					<div class="container">
@@ -38,34 +38,35 @@
 						
 							<!-- contact form -->
 							<div class="col-md-6 col-pull">
-								<h:form class="form-class" id="con_form">
+								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											<h:inputText id="clanek-title" name="title" value="#{ClanekJSFBean.c.title}" a:placeholder="Naslov">
+											<p:inputText id="clanek-title" name="title" value="#{ClanekJSFBean.c.title}" a:placeholder="Naslov(*)">
 												<f:validateLength minimum="5" maximum="100"></f:validateLength>
-											</h:inputText>
+											</p:inputText>
 											
-											<h:inputTextarea id="clanek-content" name="content" value="#{ClanekJSFBean.c.content}" a:placeholder="Vsebina" cols="30" rows="10">
+											<p:inputTextarea id="clanek-content" name="content" value="#{ClanekJSFBean.c.content}" a:placeholder="Vsebina(*)" cols="30" rows="10">
 												<f:validateLength maximum="9999" minimum="10"/>
-											</h:inputTextarea>
+											</p:inputTextarea>
+											
+											Naslovnica(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ClanekJSFBean.thumbnail}" mode="simple" />
+											
+											<br />
+											<br />
 											
 											<!-- redirect na seznam člankov... -->
-											<h:commandButton class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
-									
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
+											
+											<br />
+											<p:messages showDetail="false"/>
 										</div>
 									</div>
 								</h:form>
-								<h:message for="clanek-title" style="color:red" />
-								<br />
-								<h:message for="clanek-content" style="color:red" />
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- Contact section end-->	
-	
-	
-	
 	
 			</f:view>
 		</ui:define>
