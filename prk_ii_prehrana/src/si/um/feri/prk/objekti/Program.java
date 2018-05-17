@@ -2,7 +2,6 @@ package si.um.feri.prk.objekti;
 
 import java.sql.Blob;
 
-
 public class Program {
    private int id_program;
    private String naslov;
