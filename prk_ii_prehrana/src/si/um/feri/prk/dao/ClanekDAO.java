@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import org.primefaces.model.UploadedFile;
 import javax.naming.InitialContext;
@@ -115,4 +116,27 @@ public class ClanekDAO {
 			conn.close();
 		}
 	}
+	
+	public ArrayList<Clanek> vrniVse() throws Exception {
+		ArrayList<Clanek> seznam = new ArrayList<Clanek>();
+	
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM CLANEK");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Clanek clanek = new Clanek(rs.getInt("clanek_id"),rs.getInt("user_id"),rs.getString("title"), rs.getString("content"), rs.getBlob("thumbnail"));
+				seznam.add(clanek);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return seznam;
+	}
+	
 }
