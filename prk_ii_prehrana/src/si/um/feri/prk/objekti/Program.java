@@ -1,6 +1,9 @@
 package si.um.feri.prk.objekti;
 
 import java.sql.Blob;
+import java.sql.SQLException;
+
+import javax.sql.rowset.serial.SerialException;
 
 public class Program {
    private int id_program, tk_id_prehrana;
@@ -47,8 +50,14 @@ public class Program {
 	public Blob getSlika() {
 		return slika;
 	}
-	public void setSlika(Blob slika) {
-		this.slika = slika;
+	public void setSlika(byte[] iS) {
+		try {
+			this.slika = new javax.sql.rowset.serial.SerialBlob(iS);
+		} catch (SerialException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	public int getTk_id_prehrana() {
 		return tk_id_prehrana;
