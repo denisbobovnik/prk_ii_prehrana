@@ -63,7 +63,7 @@ public class ReceptDAO {
 			try {
 				conn=baza.getConnection();
 
-					PreparedStatement ps = conn.prepareStatement("INSERT INTO RECEPT(ime , dolzinaPriprave,steviloPorcij, opis, slika , linkVideo, kalorije) VALUES (?,?,?,?,?,?)");
+					PreparedStatement ps = conn.prepareStatement("INSERT INTO RECEPT(ime , dolzinaPriprave,steviloPorcij, opis, slika , linkVideo, kalorije) VALUES (?,?,?,?,?,?,?)");
 					ps.setString(1, r.getIme());
 					ps.setString(2, r.getDolzinaPriprave());
 					ps.setInt(3, r.getSteviloPorcij());
