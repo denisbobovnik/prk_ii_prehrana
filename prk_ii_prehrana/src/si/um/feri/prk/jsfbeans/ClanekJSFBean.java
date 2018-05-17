@@ -27,7 +27,7 @@ public class ClanekJSFBean {
 			String str = thumbnail.getFileName();
 			if(str.contains(".")) {
 				String ext = str.substring(str.lastIndexOf('.'), str.length());
-				if(ext.equals(".jpg")||(ext.equals(".png"))||(ext.equals(".jpeg"))||(ext.equals(".gif"))) {
+				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
 					c.setThumbnail(thumbnail.getContents());
 					cD.shrani(c);
 					c = new Clanek();
