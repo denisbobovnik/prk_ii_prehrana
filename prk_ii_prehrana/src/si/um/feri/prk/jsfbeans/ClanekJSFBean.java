@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import si.um.feri.prk.dao.ClanekDAO;
+import si.um.feri.prk.dao.UserDAO;
 import si.um.feri.prk.objekti.Clanek;
 
 @ManagedBean(name="ClanekJSFBean")
@@ -21,6 +22,8 @@ public class ClanekJSFBean {
 	private Clanek c = new Clanek();
 	private UploadedFile thumbnail;
 	private ClanekDAO cD = ClanekDAO.getInstance();
+	
+	private UserDAO uD = UserDAO.getInstance();
 	
 	public void dodajClanek() {
 		try {
@@ -57,5 +60,11 @@ public class ClanekJSFBean {
 	}
 	public void setcD(ClanekDAO cD) {
 		this.cD = cD;
+	}
+	public UserDAO getuD() {
+		return uD;
+	}
+	public void setuD(UserDAO uD) {
+		this.uD = uD;
 	}
 }
