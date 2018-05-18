@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import si.um.feri.prk.dao.ClanekDAO;
-import si.um.feri.prk.dao.UserDAO;
 import si.um.feri.prk.objekti.Clanek;
 
 @ManagedBean(name="LogoutJSFBean")

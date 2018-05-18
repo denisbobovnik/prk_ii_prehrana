@@ -7,7 +7,8 @@ import java.util.GregorianCalendar;
 import javax.sql.rowset.serial.SerialException;
 
 public class Clanek {
-	private int clanek_id, user_id;
+	private int clanek_id;
+	private String user_username;
 	private String title, content;
 	private Calendar datumClanka;
 	private Blob thumbnail;
@@ -16,25 +17,25 @@ public class Clanek {
 		super();
 		this.datumClanka = new GregorianCalendar();
 	}
-	public Clanek(int user_id, String title, String content) {
+	public Clanek(String user_username, String title, String content) {
 		super();
-		this.user_id = user_id;
+		this.user_username = user_username;
 		this.title = title;
 		this.content = content;
 		this.datumClanka = new GregorianCalendar();
 	}
-	public Clanek(int clanek_id, int user_id, String title, String content) {
+	public Clanek(int clanek_id, String user_username, String title, String content) {
 		super();
 		this.clanek_id = clanek_id;
-		this.user_id = user_id;
+		this.user_username = user_username;
 		this.title = title;
 		this.content = content;
 		this.datumClanka = new GregorianCalendar();
 	}
-	public Clanek(int clanek_id, int user_id, String title, String content, Blob thumbnail) {
+	public Clanek(int clanek_id, String user_username, String title, String content, Blob thumbnail) {
 		super();
 		this.clanek_id = clanek_id;
-		this.user_id = user_id;
+		this.user_username = user_username;
 		this.title = title;
 		this.content = content;
 		this.thumbnail = thumbnail;
@@ -47,11 +48,14 @@ public class Clanek {
 	public void setClanek_id(int clanek_id) {
 		this.clanek_id = clanek_id;
 	}
-	public int getUser_id() {
-		return user_id;
+	public void setThumbnail(Blob thumbnail) {
+		this.thumbnail = thumbnail;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public String getUser_username() {
+		return user_username;
+	}
+	public void setUser_username(String user_username) {
+		this.user_username = user_username;
 	}
 	public String getTitle() {
 		return title;
@@ -86,7 +90,7 @@ public class Clanek {
 	
 	@Override
 	public String toString() {
-		return "Clanek [clanek_id=" + clanek_id + ", user_id=" + user_id + ", title=" + title + ", content=" + content
-				+ ", thumbnail=" + thumbnail + "]";
+		return "Clanek [clanek_id=" + clanek_id + ", user_username=" + user_username + ", title=" + title + ", content="
+				+ content + ", datumClanka=" + datumClanka + ", thumbnail=" + thumbnail + "]";
 	}
 }

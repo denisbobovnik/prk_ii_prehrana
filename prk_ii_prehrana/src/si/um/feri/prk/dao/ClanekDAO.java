@@ -39,10 +39,7 @@ public class ClanekDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Clanek(clanek_id int not null auto_increment primary key, title varchar(100) not null, content varchar(9999) not null, user_id int, thumbnail longblob not null, datumClanka timestamp not null)");
-			//zgor še not null dodat
-			//to spodaj priredit za user_id
-			//conn.createStatement().execute("ALTER TABLE Meritev ADD CONSTRAINT IDpovezanegaClana FOREIGN KEY (idClanaTeMeritve) REFERENCES Clan(idClana) ON DELETE CASCADE");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Clanek(clanek_id int not null auto_increment primary key, title varchar(100) not null, content varchar(9999) not null, user_username varchar(100) not null, thumbnail longblob not null, datumClanka timestamp not null)");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -73,7 +70,7 @@ public class ClanekDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				ret = new Clanek(rs.getInt("user_id"), rs.getString("title"), rs.getString("content"));
+				ret = new Clanek(rs.getString("user_username"), rs.getString("title"), rs.getString("content"));
 				ret.setClanek_id(clanek_id);
 				
 				Blob blob = rs.getBlob("thumbnail");
@@ -102,10 +99,10 @@ public class ClanekDAO {
 			if(najdi(c.getClanek_id()) != null) {
 				//clanek z id-jem že obstaja...pohandle-at
 			} else {
-				PreparedStatement ps = conn.prepareStatement("INSERT INTO Clanek(title, content, user_id, thumbnail, datumClanka) VALUES (?,?,?,?,?)");
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO Clanek(title, content, user_username, thumbnail, datumClanka) VALUES (?,?,?,?,?)");
 				ps.setString(1, c.getTitle());
 				ps.setString(2, c.getContent());
-				ps.setInt(3, c.getUser_id());
+				ps.setString(3, c.getUser_username());
 				ps.setBinaryStream(4, c.getThumbnail().getBinaryStream());
 				ps.setTimestamp(5, new Timestamp(c.getDatumClanka().getTimeInMillis()));
 				ps.executeUpdate();
@@ -127,7 +124,7 @@ public class ClanekDAO {
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM CLANEK");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Clanek clanek = new Clanek(rs.getInt("clanek_id"),rs.getInt("user_id"),rs.getString("title"), rs.getString("content"), rs.getBlob("thumbnail"));
+				Clanek clanek = new Clanek(rs.getInt("clanek_id"),rs.getString("user_username"),rs.getString("title"), rs.getString("content"), rs.getBlob("thumbnail"));
 				seznam.add(clanek);
 			}
 			rs.close();
