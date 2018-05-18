@@ -1,6 +1,9 @@
 package si.um.feri.prk.objekti;
 
 import java.sql.Blob;
+import java.sql.SQLException;
+
+import javax.sql.rowset.serial.SerialException;
 
 public class Recept {
 	private int id_recept;
@@ -81,8 +84,14 @@ public class Recept {
 		return slika;
 	}
 
-	public void setSlika(Blob slika) {
-		this.slika = slika;
+	public void setSlika(byte[] iS) {
+		try {
+			this.slika = new javax.sql.rowset.serial.SerialBlob(iS);
+		} catch (SerialException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String getLinkVideo() {
