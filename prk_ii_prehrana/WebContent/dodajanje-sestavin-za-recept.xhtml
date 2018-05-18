@@ -40,20 +40,20 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											<p:inputText id="sestavina-title" name="sestavina" value="#{ClanekJSFBean.c.title}" a:placeholder="Sestavina(*)">
+											<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" a:placeholder="Sestavina(*)">
 											</p:inputText>
 											
-											<p:inputText id="kolicina-title" name="kolicina" value="#{ClanekJSFBean.c.title}" a:placeholder="Kolièina(*)">
+											<p:inputText id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.rs.kolicina}" a:placeholder="Kolièina(*)">
 											</p:inputText>
 											
-											<p:inputText id="enota-title" name="enota" value="#{ClanekJSFBean.c.title}" a:placeholder="enota(*)">
+											<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota}" a:placeholder="Enota(*)">
 											</p:inputText>
 					
 											<br />
 											<br />
 											
 											<!-- redirect na seznam èlankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ReceptJSFBean.dodajSestavino}" action="objava-clanka.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>
