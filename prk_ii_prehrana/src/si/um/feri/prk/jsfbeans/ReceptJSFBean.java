@@ -1,6 +1,8 @@
 package si.um.feri.prk.jsfbeans;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.model.UploadedFile;
@@ -12,7 +14,8 @@ import si.um.feri.prk.dao.SestavineDAO;
 import si.um.feri.prk.objekti.Recept;
 import si.um.feri.prk.objekti.Sestavine;
 
-
+@ManagedBean(name="RecpetJSFBean")
+@SessionScoped
 public class ReceptJSFBean {
 	
 	Logger log=LoggerFactory.getLogger(ClanekJSFBean.class);
