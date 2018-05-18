@@ -1,24 +1,26 @@
 package si.um.feri.prk.objekti;
 
 public class Program_Ima_Recept {
-	private int id_Program_Ima_Recept, tk_id_program, tk_id_recept;
-	private int dan;
+	private int id_Program_Ima_Recept;
+	private Recept recept = new Recept();
+	private Program program = new Program();
+	private String dan;
 	
 	public Program_Ima_Recept() {
 		super();
 	}
 	
-	public Program_Ima_Recept(int id_Program_Ima_Recept, int dan) {
+	public Program_Ima_Recept(int id_Program_Ima_Recept, String dan) {
 		super();
 		this.id_Program_Ima_Recept = id_Program_Ima_Recept;
 		this.dan = dan;
 	}
 	
-	public Program_Ima_Recept(int id_Program_Ima_Recept, int tk_id_program, int tk_id_recept, int dan) {
+	public Program_Ima_Recept(int id_Program_Ima_Recept, Recept recept, Program program, String dan) {
 		super();
 		this.id_Program_Ima_Recept = id_Program_Ima_Recept;
-		this.tk_id_program = tk_id_program;
-		this.tk_id_recept = tk_id_recept;
+		this.program = program;
+		this.recept = recept;
 		this.dan = dan;
 	}
 
@@ -30,27 +32,27 @@ public class Program_Ima_Recept {
 		this.id_Program_Ima_Recept = id_Program_Ima_Recept;
 	}
 
-	public int getTk_id_program() {
-		return tk_id_program;
+	public Program getProgram() {
+		return program;
 	}
 
-	public void setTk_id_program(int tk_id_program) {
-		this.tk_id_program = tk_id_program;
+	public void setProgram(Program program) {
+		this.program = program;
 	}
 
-	public int getTk_id_recept() {
-		return tk_id_recept;
+	public Recept getRecept() {
+		return recept;
 	}
 
-	public void setTk_id_recept(int tk_id_recept) {
-		this.tk_id_recept = tk_id_recept;
+	public void setRecept(Recept recept) {
+		this.recept = recept;
 	}
 
-	public int getDan() {
+	public String getDan() {
 		return dan;
 	}
 
-	public void setDan(int dan) {
+	public void setDan(String dan) {
 		this.dan = dan;
 	}
 	
