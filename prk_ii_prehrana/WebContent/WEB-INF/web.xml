@@ -13,13 +13,20 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
+  
+  <!-- 
+  <servlet>
+  	<servlet-name></servlet-name>
+  </servlet>
+	PO VIDEU
+	-->
 
   	<!--Defining security constraint for type of roles available-->   
    <security-constraint>
     <display-name>c01</display-name>
     <web-resource-collection>
       <web-resource-name>strokovnjak</web-resource-name>
-      <url-pattern>/faces/index.xhtml</url-pattern>
+      <url-pattern>/faces/objava-recepta.xhtml</url-pattern>
       <http-method>POST</http-method>
       <http-method>GET</http-method>
       <http-method>PUT</http-method>
