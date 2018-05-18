@@ -1,0 +1,80 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
+		
+		
+		<ui:define name="title">
+			Objava èlanka
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- Contact section -->
+				<div class="contact-section spad fix">
+					<div class="container">
+						<div class="row">
+						
+							<!-- contact info -->
+							<div class="col-md-5 col-md-offset-1 contact-info col-push">
+								<div class="section-title left">
+									<h2>Objavite recept</h2>
+								</div>
+							</div>
+						
+							<!-- contact form -->
+							<div class="col-md-6 col-pull">
+								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
+									<div class="row">
+										<div class="col-sm-12">
+											<p:inputText id="sestavina-title" name="sestavina" value="#{ClanekJSFBean.c.title}" a:placeholder="Sestavina(*)">
+											</p:inputText>
+											
+											<p:inputText id="kolicina-title" name="kolicina" value="#{ClanekJSFBean.c.title}" a:placeholder="Kolièina(*)">
+											</p:inputText>
+											
+											<p:inputText id="enota-title" name="enota" value="#{ClanekJSFBean.c.title}" a:placeholder="enota(*)">
+											</p:inputText>
+					
+											<br />
+											<br />
+											
+											<!-- redirect na seznam èlankov... -->
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
+											
+											<br />
+											<p:messages showDetail="false"/>
+										</div>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Contact section end-->	
+	
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>
