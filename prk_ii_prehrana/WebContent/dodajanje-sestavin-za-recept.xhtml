@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Objava èlanka
+			Objava Älanka
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -43,7 +43,7 @@
 											<p:inputText id="sestavina-title" name="sestavina" value="#{ClanekJSFBean.c.title}" a:placeholder="Sestavina(*)">
 											</p:inputText>
 											
-											<p:inputText id="kolicina-title" name="kolicina" value="#{ClanekJSFBean.c.title}" a:placeholder="Kolièina(*)">
+											<p:inputText id="kolicina-title" name="kolicina" value="#{ClanekJSFBean.c.title}" a:placeholder="KoliÄina(*)">
 											</p:inputText>
 											
 											<p:inputText id="enota-title" name="enota" value="#{ClanekJSFBean.c.title}" a:placeholder="enota(*)">
@@ -52,8 +52,8 @@
 											<br />
 											<br />
 											
-											<!-- redirect na seznam èlankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
+											<!-- redirect na seznam Älankov... -->
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="PoÅ¡lji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>

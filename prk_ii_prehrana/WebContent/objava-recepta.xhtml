@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Objava Ëlanka
+			Objava ƒçlanka
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -44,10 +44,10 @@
 												<f:validateLength minimum="3" maximum="100"></f:validateLength>
 											</p:inputText>
 											
-											<p:inputText id="dolzina-title" name="dolzina" value="#{ClanekJSFBean.c.title}" a:placeholder="Dolûina priprave(*)">
+											<p:inputText id="dolzina-title" name="dolzina" value="#{ClanekJSFBean.c.title}" a:placeholder="Dol≈æina priprave(*)">
 											</p:inputText>
 											
-											<p:inputText id="stevilo-title" name="stevilo" value="#{ClanekJSFBean.c.title}" a:placeholder="ätevilo porcij(*)">
+											<p:inputText id="stevilo-title" name="stevilo" value="#{ClanekJSFBean.c.title}" a:placeholder="≈†tevilo porcij(*)">
 											</p:inputText>
 							
 											<p:inputTextarea id="recept-content" name="content" value="#{ClanekJSFBean.c.content}" a:placeholder="Opis(*)" cols="30" rows="10">
@@ -63,8 +63,8 @@
 											<br />
 											<br />
 											
-											<!-- redirect na seznam Ëlankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Poölji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
+											<!-- redirect na seznam ƒçlankov... -->
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Po≈°lji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>
