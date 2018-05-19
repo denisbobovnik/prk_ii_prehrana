@@ -15,6 +15,7 @@ public class ImageServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int clanek_id = Integer.parseInt(request.getParameter("id"));
 		
 		

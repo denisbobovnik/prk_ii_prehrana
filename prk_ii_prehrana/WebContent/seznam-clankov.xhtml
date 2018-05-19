@@ -15,7 +15,7 @@
 	<br />	<br />	<br />	<br />	<br />	
 		<p:dataTable var="clanek" value="#{ClanekJSFBean.vrniVseClanke()}">
 		    <p:column headerText="">
-		        <p:graphicImage id="image" alt="slika" url="ImageServlet?id=#{clanek.clanek_id}" name="#{clanek.thumbnail}" title="#{image}"/>
+		        <p:graphicImage id="image" alt="slika" url="/ImageServlet?id=#{clanek.clanek_id}" name="#{clanek.thumbnail}" title="#{image}"/>
 		    </p:column>
 		 
 		    <p:column headerText="">
