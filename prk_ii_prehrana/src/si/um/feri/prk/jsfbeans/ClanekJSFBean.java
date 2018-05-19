@@ -1,12 +1,19 @@
 package si.um.feri.prk.jsfbeans;
 
+
 import java.util.ArrayList;
 import java.util.List;
+
+
+import java.security.Principal;
+
+import javax.ejb.SessionContext;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.naming.InitialContext;
 
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
@@ -34,6 +41,13 @@ public class ClanekJSFBean {
 				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
 					nastaviTipSlike(ext);
 					c.setThumbnail(thumbnail.getContents());
+					
+					FacesContext context = FacesContext.getCurrentInstance();
+					String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
+					String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
+					
+					c.setUser_username(username);
+					
 					cD.shrani(c);
 					c = new Clanek();
 				}
@@ -45,6 +59,7 @@ public class ClanekJSFBean {
 		}
 	}
 	
+
 	private void nastaviTipSlike(String ext) {
 		ext = ext.substring(1, ext.length());
 		if(ext.equals("jpg")) {
@@ -53,6 +68,17 @@ public class ClanekJSFBean {
 		else {
 			c.setTipSlike("image/"+ext.toLowerCase());
 		}
+	}
+
+
+	private String getUserRole(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		String[] vloge = {"ADMINISTRATOR", "STROKOVNJAK", "POSAMEZNIK"};
+		String ret = "";
+		for(String s : vloge)
+			if(context.getExternalContext().isUserInRole(s))
+				ret = s;
+		return ret;
 	}
 
 	public Clanek getC() {
