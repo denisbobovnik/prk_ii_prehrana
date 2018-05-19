@@ -1,14 +1,8 @@
 package si.um.feri.prk.jsfbeans;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 import java.security.Principal;
 
 import javax.ejb.SessionContext;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -31,7 +25,6 @@ public class ClanekJSFBean {
 	private Clanek c = new Clanek();
 	private UploadedFile thumbnail;
 	private ClanekDAO cD = ClanekDAO.getInstance();
-	private ArrayList<Clanek> vsiClanki;
 	
 	public void dodajClanek() {
 		try {
@@ -39,7 +32,6 @@ public class ClanekJSFBean {
 			if(str.contains(".")) {
 				String ext = str.substring(str.lastIndexOf('.'), str.length());
 				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
-					nastaviTipSlike(ext);
 					c.setThumbnail(thumbnail.getContents());
 					
 					FacesContext context = FacesContext.getCurrentInstance();
@@ -59,18 +51,6 @@ public class ClanekJSFBean {
 		}
 	}
 	
-
-	private void nastaviTipSlike(String ext) {
-		ext = ext.substring(1, ext.length());
-		if(ext.equals("jpg")) {
-			c.setTipSlike("image/jpeg");
-		}
-		else {
-			c.setTipSlike("image/"+ext.toLowerCase());
-		}
-	}
-
-
 	private String getUserRole(){
 		FacesContext context = FacesContext.getCurrentInstance();
 		String[] vloge = {"ADMINISTRATOR", "STROKOVNJAK", "POSAMEZNIK"};
@@ -80,7 +60,7 @@ public class ClanekJSFBean {
 				ret = s;
 		return ret;
 	}
-
+	
 	public Clanek getC() {
 		return c;
 	}
@@ -98,18 +78,5 @@ public class ClanekJSFBean {
 	}
 	public void setcD(ClanekDAO cD) {
 		this.cD = cD;
-	}
-	
-	public List<Clanek> vrniVseClanke() {
-		vsiClanki=new ArrayList<>();
-		if (vsiClanki!=null) {
-			try {
-				vsiClanki=ClanekDAO.getInstance().vrniVse();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return vsiClanki;
 	}
 }

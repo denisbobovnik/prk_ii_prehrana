@@ -7,11 +7,11 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<h:body>
-	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
+	<ui:composition template="WEB-INF/template/template-obiskovalec.xhtml">
 		
 		
 		<ui:define name="title">
-			Objava Ã¨lanka
+			Login
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -31,41 +31,32 @@
 							<!-- contact info -->
 							<div class="col-md-5 col-md-offset-1 contact-info col-push">
 								<div class="section-title left">
-									<h2>Objavite recept</h2>
+									<h2>Prijavite se</h2>
 								</div>
+								<p>Za uporabo te spletne strani je potrebna prijava! <br />Vnesite vaše uporabniško ime in geslo.</p>
 							</div>
 						
 							<!-- contact form -->
 							<div class="col-md-6 col-pull">
-								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
+								<form action="j_security_check" method="post" class="form-class" id="con_form">
 									<div class="row">
+										<div class="col-sm-6">
+											<input type="text" name="j_username" placeholder="Uporabniško ime(*)" required="required" />
+										</div>
+										<div class="col-sm-6">
+											<input type="password" style="width: 100%; margin-bottom: 26px; border-width: initial; border-style: none; border-color: initial; border-image: initial; background: rgb(246, 237, 251); padding: 17px 20px;" name="j_password" placeholder="Geslo(*)" required="required" />
+										</div>
 										<div class="col-sm-12">
-											<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" a:placeholder="Sestavina(*)">
-											</p:inputText>
-											
-											<p:inputText id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.rs.kolicina}" a:placeholder="KoliÃ¨ina(*)">
-											</p:inputText>
-											
-											<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota}" a:placeholder="Enota(*)">
-											</p:inputText>
-					
-											<br />
-											<br />
-											
-											<!-- redirect na seznam Ã¨lankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="PoÅ¡lji" actionListener="#{ReceptJSFBean.dodajSestavino}" action="objava-clanka.xhtml"/>
-											
-											<br />
-											<p:messages showDetail="false"/>
+											<button type="submit" class="site-btn">Prijava</button>		
 										</div>
 									</div>
-								</h:form>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- Contact section end-->	
-	
+
 			</f:view>
 		</ui:define>
 		

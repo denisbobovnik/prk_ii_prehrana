@@ -59,7 +59,7 @@ public class ProgramDAO {
 	}
 	
 	public Program najdi(int id_program) throws Exception{
-		log.info("ProgramDAO: i≈°ƒçem " + id_program);
+		log.info("ProgramDAO: iöËem " + id_program);
 		Program ret = null;
 		Connection conn=null;
 		try {
@@ -114,5 +114,3 @@ public class ProgramDAO {
 		}
 	}	
 }
-
-

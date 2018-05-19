@@ -1,7 +1,9 @@
 package si.um.feri.prk.objekti;
 
 public class Recept_Ima_Sestavino {
-	private int id_Recept_Ima_Sestavino, tk_id_recept, tk_id_sestavine;
+	private int id_Recept_Ima_Sestavino;
+	private Recept recept = new Recept();
+	private Sestavine sestavine = new Sestavine();
 	private double kolicina;
 	
 	public Recept_Ima_Sestavino() {
@@ -14,11 +16,11 @@ public class Recept_Ima_Sestavino {
 		this.kolicina = kolicina;
 	}
 	
-	public Recept_Ima_Sestavino(int id_Recept_Ima_Sestavino, int tk_id_recept, int tk_id_sestavine, double kolicina) {
+	public Recept_Ima_Sestavino(int id_Recept_Ima_Sestavino, Recept recept, Sestavine sestavine, double kolicina) {
 		super();
 		this.id_Recept_Ima_Sestavino = id_Recept_Ima_Sestavino;
-		this.tk_id_recept = tk_id_recept;
-		this.tk_id_sestavine = tk_id_sestavine;
+		this.recept=recept;
+		this.sestavine = sestavine;
 		this.kolicina = kolicina;
 	}
 
@@ -30,20 +32,20 @@ public class Recept_Ima_Sestavino {
 		this.id_Recept_Ima_Sestavino = id_Recept_Ima_Sestavino;
 	}
 
-	public int getTk_id_recept() {
-		return tk_id_recept;
+	public Recept getRecept() {
+		return recept;
 	}
 
-	public void setTk_id_recept(int tk_id_recept) {
-		this.tk_id_recept = tk_id_recept;
+	public void setRecept(Recept recept) {
+		this.recept = recept;
 	}
 
-	public int getTk_id_sestavine() {
-		return tk_id_sestavine;
+	public Sestavine getSestavine() {
+		return sestavine;
 	}
 
-	public void setTk_id_sestavine(int tk_id_sestavine) {
-		this.tk_id_sestavine = tk_id_sestavine;
+	public void setSestavine(Sestavine sestavine) {
+		this.sestavine = sestavine;
 	}
 
 	public double getKolicina() {

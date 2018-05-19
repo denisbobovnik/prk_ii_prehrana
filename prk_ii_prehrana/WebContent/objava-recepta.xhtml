@@ -40,31 +40,31 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											<p:inputText id="recept-title" name="ime" value="#{ClanekJSFBean.c.title}" a:placeholder="Ime(*)">
+											<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.r.ime}" a:placeholder="Ime(*)">
 												<f:validateLength minimum="3" maximum="100"></f:validateLength>
 											</p:inputText>
 											
-											<p:inputText id="dolzina-title" name="dolzina" value="#{ClanekJSFBean.c.title}" a:placeholder="Dolžina priprave(*)">
+											<p:inputText id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.r.dolzinaPriprave}" a:placeholder="Dolžina priprave(*)">
 											</p:inputText>
 											
-											<p:inputText id="stevilo-title" name="stevilo" value="#{ClanekJSFBean.c.title}" a:placeholder="Število porcij(*)">
+											<p:inputText id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.r.steviloPorcij}" a:placeholder="Število porcij(*)">
 											</p:inputText>
 							
-											<p:inputTextarea id="recept-content" name="content" value="#{ClanekJSFBean.c.content}" a:placeholder="Opis(*)" cols="30" rows="10">
+											<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.r.opis}" a:placeholder="Opis(*)" cols="30" rows="10">
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
-											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ClanekJSFBean.thumbnail}" mode="simple" />
-											<p:inputText id="video-title" name="video" value="#{ClanekJSFBean.c.title}" a:placeholder="Video(*)">
+											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.slika}" mode="simple" />
+											<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.r.video}" a:placeholder="Video(*)">
 											</p:inputText>
 											
-											<p:inputText id="kalorije-title" name="kalorije" value="#{ClanekJSFBean.c.title}" a:placeholder="Kalorije(*)">
+											<p:inputText id="kalorije-title" name="kalorije" value="#{ReceptJSFBean.c.kalorije}" a:placeholder="Kalorije(*)">
 											</p:inputText>
 											<br />
 											<br />
 											
 											<!-- redirect na seznam člankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="objava-clanka.xhtml"/>
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ReceptJSFBean.dodajRecept}" action="objava-clanka.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>
