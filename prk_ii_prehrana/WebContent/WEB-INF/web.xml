@@ -13,14 +13,16 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
-  
-  <!-- 
+ 
   <servlet>
-  	<servlet-name></servlet-name>
+  	<servlet-name>Image Servlet</servlet-name>
+  	<servlet-class>si.um.feri.prk.servleti.ImageServlet</servlet-class>
   </servlet>
-	PO VIDEU
-	-->
-
+   <servlet-mapping>
+    <servlet-name>Image Servlet</servlet-name>
+    <url-pattern>/faces/ImageServlet</url-pattern>
+  </servlet-mapping>
+	
   	<!--Defining security constraint for type of roles available-->   
    <security-constraint>
     <display-name>c01</display-name>

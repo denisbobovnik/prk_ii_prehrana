@@ -1,6 +1,8 @@
 package si.um.feri.prk.jsfbeans;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.ejb.SessionContext;
 import javax.faces.application.FacesMessage;
@@ -70,6 +72,27 @@ public class ClanekJSFBean {
 			if(context.getExternalContext().isUserInRole(s))
 				ret = s;
 		return ret;
+	}
+	
+	public String getDayOfMonth(Calendar cal) {
+		int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+		return "" + dayOfMonth;
+	}
+	
+	public String getMonthAndYear(Calendar cal) {
+		String month = new SimpleDateFormat("MMM").format(cal.getTime());
+		month = month.substring(0, 1).toUpperCase() + month.substring(1);
+		int year = cal.get(Calendar.YEAR);
+		return "" + month + " " + year;
+	}
+	
+	public String trimContent318(String content) {
+		if(content.length()<318) {
+			return content;
+		} else {
+			content = content.substring(0, 318);
+			return content;
+		}
 	}
 	
 	public Clanek getC() {

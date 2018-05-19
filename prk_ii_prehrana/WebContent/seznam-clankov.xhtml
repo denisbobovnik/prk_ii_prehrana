@@ -29,26 +29,28 @@
 						<div class="row">
 							<div class="col-md-12 col-sm-12 blog-posts">
 								
-								<ui:repeat var="clanek" value="#{ClanekJSFBean.cD.vrniVse()}" varStatus="status">
+								<ui:repeat var="clanek" value="#{ClanekJSFBean.cD.vrniVse()}">
 								
 									<!-- Post item -->
 									<div class="post-item">
 										<div class="post-thumbnail">
-											<img src="img/blog/blog-2.jpg" alt="" />
+											<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?id=#{clanek.clanek_id}" height="270"/>
 											<div class="post-date">
-												<h2>03</h2>
-												<h3>Nov 2017</h3>
+												<h2><h:outputText value="#{ClanekJSFBean.getDayOfMonth(clanek.datumClanka)}" /></h2>
+												<h3><h:outputText value="#{ClanekJSFBean.getMonthAndYear(clanek.datumClanka)}" /></h3>
 											</div>
 										</div>
 										<div class="post-content">
-											<h2 class="post-title">Just a simple blog post</h2>
+											<h2 class="post-title"><h:outputText value="#{clanek.title}" /></h2>
 											<div class="post-meta">
-												<a href="">Loredana Papp</a>
-												<a href="">Design, Inspiration</a>
-												<a href="">2 Comments</a>
+												<a href=""><h:outputText value="#{clanek.user_username}" /></a>
 											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Phasellus vestibulum, quam tincidunt venenatis ultrices, est libero mattis ante, ac consectetur diam neque eget quam. Etiam feugiat augue et varius blandit. Praesent mattis, eros a sodales commodo.</p>
+											<p><h:outputText value="#{ClanekJSFBean.trimContent318(clanek.content)}" /></p>
+											
+											<!-- TU BO FORMA ZA PRIKAZ POSAMEZNEGA -->
 											<a href="blog-post.html" class="read-more">Read More</a>
+										
+										
 										</div>
 									</div>
 								
