@@ -32,6 +32,7 @@ public class ClanekJSFBean {
 			if(str.contains(".")) {
 				String ext = str.substring(str.lastIndexOf('.'), str.length());
 				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
+					nastaviTipSlike(ext);
 					c.setThumbnail(thumbnail.getContents());
 					
 					FacesContext context = FacesContext.getCurrentInstance();
@@ -48,6 +49,16 @@ public class ClanekJSFBean {
 			e.printStackTrace();
 			FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka nalaganja!", e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
+		}
+	}
+	
+	private void nastaviTipSlike(String ext) {
+		ext = ext.substring(1, ext.length());
+		if(ext.equals("jpg")) {
+			c.setTipSlike("image/jpeg");
+		}
+		else {
+			c.setTipSlike("image/"+ext.toLowerCase());
 		}
 	}
 	

@@ -39,7 +39,7 @@ public class ClanekDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Clanek(clanek_id int not null auto_increment primary key, title varchar(100) not null, content varchar(9999) not null, user_username varchar(100) not null, thumbnail longblob not null, datumClanka timestamp not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Clanek(clanek_id int not null auto_increment primary key, title varchar(100) not null, content varchar(9999) not null, user_username varchar(100) not null, thumbnail longblob not null, datumClanka timestamp not null, tipSlike varchar(20) not null)");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -60,7 +60,7 @@ public class ClanekDAO {
 	}
 	
 	public Clanek najdi(int clanek_id) throws Exception {
-		log.info("ClanekDAO: i≈°ƒçem " + clanek_id);
+		log.info("ClanekDAO: iöËem " + clanek_id);
 		Clanek ret = null;
 		Connection conn=null;
 		try {
