@@ -11,6 +11,7 @@ public class Clanek {
 	private String title, content;
 	private Calendar datumClanka;
 	private Blob thumbnail;
+	private String tipSlike;
 	
 	public Clanek() {
 		super();
@@ -65,6 +66,12 @@ public class Clanek {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getTipSlike() {
+		return tipSlike;
+	}
+	public void setTipSlike(String tipSlike) {
+		this.tipSlike = tipSlike;
+	}
 	public Blob getThumbnail() {
 		return thumbnail;
 	}
@@ -83,10 +90,11 @@ public class Clanek {
 	public void setDatumClanka(Calendar datumClanka) {
 		this.datumClanka = datumClanka;
 	}
-	
 	@Override
 	public String toString() {
 		return "Clanek [clanek_id=" + clanek_id + ", user_id=" + user_id + ", title=" + title + ", content=" + content
-				+ ", thumbnail=" + thumbnail + "]";
+				+ ", datumClanka=" + datumClanka + ", thumbnail=" + thumbnail + ", tipSlike=" + tipSlike + "]";
 	}
+	
+
 }
