@@ -1,0 +1,74 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
+		
+		
+		<ui:define name="title">
+			Seznam člankov
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- page section -->
+				<div class="page-section spad">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 blog-posts">
+								
+								<ui:repeat var="clanek" value="#{ClanekJSFBean.cD.vrniVse()}" varStatus="status">
+								
+									<!-- Post item -->
+									<div class="post-item">
+										<div class="post-thumbnail">
+											<img src="img/blog/blog-2.jpg" alt="" />
+											<div class="post-date">
+												<h2>03</h2>
+												<h3>Nov 2017</h3>
+											</div>
+										</div>
+										<div class="post-content">
+											<h2 class="post-title">Just a simple blog post</h2>
+											<div class="post-meta">
+												<a href="">Loredana Papp</a>
+												<a href="">Design, Inspiration</a>
+												<a href="">2 Comments</a>
+											</div>
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Phasellus vestibulum, quam tincidunt venenatis ultrices, est libero mattis ante, ac consectetur diam neque eget quam. Etiam feugiat augue et varius blandit. Praesent mattis, eros a sodales commodo.</p>
+											<a href="blog-post.html" class="read-more">Read More</a>
+										</div>
+									</div>
+								
+								</ui:repeat>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- page section end-->
+
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>

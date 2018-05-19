@@ -39,14 +39,7 @@ public class ClanekDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-<<<<<<< HEAD
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Clanek(clanek_id int not null auto_increment primary key, title varchar(100) not null, content varchar(9999) not null, user_id int, thumbnail longblob not null, datumClanka timestamp not null, tipSlike varchar(20) not null)");
-			//zgor še not null dodat
-			//to spodaj priredit za user_id
-			//conn.createStatement().execute("ALTER TABLE Meritev ADD CONSTRAINT IDpovezanegaClana FOREIGN KEY (idClanaTeMeritve) REFERENCES Clan(idClana) ON DELETE CASCADE");
-=======
 			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Clanek(clanek_id int not null auto_increment primary key, title varchar(100) not null, content varchar(9999) not null, user_username varchar(100) not null, thumbnail longblob not null, datumClanka timestamp not null)");
->>>>>>> branch 'master' of https://github.com/denisbobovnik/prk_ii_prehrana.git
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
