@@ -26,6 +26,8 @@ public class ReceptJSFBean {
 	private UploadedFile thumbnail;
 	private ReceptDAO rD = ReceptDAO.getInstance();
 	private SestavineDAO sD = SestavineDAO.getInstance();
+	private Recept izbranRecept = new Recept();
+	
 	
 	public void dodajRecept() {
 		try {
@@ -49,6 +51,13 @@ public class ReceptJSFBean {
 		s = new Sestavine();
 		//KO BO NAREJEN DAO SE DODAJ DA SE DODA KOLICINA PA V XHTML PREVERI
 		
+	}
+	public void izberiRecept(int recept_id) {
+		try {
+			izbranRecept = rD.najdi(recept_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		};
 	}
 
 	public Recept getR() {
@@ -90,6 +99,13 @@ public class ReceptJSFBean {
 	public void setsD(SestavineDAO sD) {
 		this.sD = sD;
 	}
+	public Recept getIzbranRecept() {
+		return izbranRecept;
+	}
+	public void setIzbranRecept(Recept izbranRecept) {
+		this.izbranRecept = izbranRecept;
+	}
+	
 	
 
 }

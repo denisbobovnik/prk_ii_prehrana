@@ -1,0 +1,66 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
+		
+		
+		<ui:define name="title">
+			Recept
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- page section -->
+				<div class="page-section spad">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 blog-posts">
+								<!-- Single Post -->
+								<div class="single-post">
+									<div class="post-thumbnail">
+										<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?id=#{ReceptJSFBean.izbranCRecept.recept_id}" height="270"/>
+										
+									</div>
+									<div class="post-content">
+										<h2 class="post-title"><h:outputText value="#{ReceptJSFBean.izbranRecept.ime}" /></h2>
+										
+										<p><h:outputText value="#{ReceptJSFBean.izbranRecept.opis}" /></p>
+										<p><h:outputText value="#{ReceptJSFBean.izbranRecept.dolzinaPriprave}" /></p>
+									    <p><h:outputText value="#{ReceptJSFBean.izbranRecept.steviloPorcij}" /></p>
+									    <p><h:outputText value="#{ReceptJSFBean.izbranRecept.kalorije}" /></p>
+									    <p><h:outputText value="#{ReceptJSFBean.izbranRecept.opis}" /></p>
+									    <p><iframe width="420" height="345" src="#{ReceptJSFBean.izbranRecept.linkVideo}"></iframe></p>
+									
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- page section end-->
+
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>

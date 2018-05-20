@@ -14,6 +14,7 @@ public class Recept {
 	private Blob slika;
 	private String linkVideo;
 	private double kalorije;
+	private String tipSlika;
 	
 	
 	public Recept() {
@@ -30,6 +31,20 @@ public class Recept {
 		this.kalorije = kalorije;
 		this.slika = slika;
 		this.linkVideo = linkVideo;
+	}
+	public Recept(int id_recept, String ime, Blob slika) {
+		super();
+		this.id_recept = id_recept;
+		this.ime = ime;
+		this.slika = slika;
+		
+	}
+	
+	public Recept( String ime) {
+		super();
+		this.ime = ime;
+		
+		
 	}
 
 	public int getId_recept() {
@@ -100,6 +115,13 @@ public class Recept {
 
 	public void setLinkVideo(String linkVideo) {
 		this.linkVideo = linkVideo;
+	}
+	public String getTipSlika() {
+		return tipSlika;
+	}
+
+	public void setTipSlika(String tipSlika) {
+		this.tipSlika=tipSlika;
 	}
 	
 	
