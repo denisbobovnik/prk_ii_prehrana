@@ -1,0 +1,65 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
+		
+		
+		<ui:define name="title">
+			Članek
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- page section -->
+				<div class="page-section spad">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 blog-posts">
+								<!-- Single Post -->
+								<div class="single-post">
+									<div class="post-thumbnail">
+										<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?id=#{ClanekJSFBean.izbranClanek.clanek_id}" height="270"/>
+										<div class="post-date">
+											<h2><h:outputText value="#{ClanekJSFBean.getDayOfMonth(ClanekJSFBean.izbranClanek.datumClanka)}" /></h2>
+											<h3><h:outputText value="#{ClanekJSFBean.getMonthAndYear(ClanekJSFBean.izbranClanek.datumClanka)}" /></h3>
+										</div>
+									</div>
+									<div class="post-content">
+										<h2 class="post-title"><h:outputText value="#{ClanekJSFBean.izbranClanek.title}" /></h2>
+										<div class="post-meta">
+											<a href=""><h:outputText value="#{ClanekJSFBean.izbranClanek.user_username}" /></a>
+										</div>
+										<p><h:outputText value="#{ClanekJSFBean.izbranClanek.content}" /></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- page section end-->
+
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>

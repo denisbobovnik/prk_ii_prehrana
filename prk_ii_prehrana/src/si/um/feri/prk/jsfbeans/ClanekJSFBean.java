@@ -27,6 +27,7 @@ public class ClanekJSFBean {
 	private Clanek c = new Clanek();
 	private UploadedFile thumbnail;
 	private ClanekDAO cD = ClanekDAO.getInstance();
+	private Clanek izbranClanek = new Clanek();
 	
 	public void dodajClanek() {
 		try {
@@ -52,6 +53,15 @@ public class ClanekJSFBean {
 			FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka nalaganja!", e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 		}
+	}
+	
+	public void izberiClanek(int clanek_id) {
+		log.info("ClanekJSFBean: izberiClanek");
+		try {
+			izbranClanek = cD.najdi(clanek_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		};
 	}
 	
 	private void nastaviTipSlike(String ext) {
@@ -112,5 +122,11 @@ public class ClanekJSFBean {
 	}
 	public void setcD(ClanekDAO cD) {
 		this.cD = cD;
+	}
+	public Clanek getIzbranClanek() {
+		return izbranClanek;
+	}
+	public void setIzbranClanek(Clanek izbranClanek) {
+		this.izbranClanek = izbranClanek;
 	}
 }

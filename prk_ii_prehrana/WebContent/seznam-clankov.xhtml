@@ -28,9 +28,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-md-12 col-sm-12 blog-posts">
-								
 								<ui:repeat var="clanek" value="#{ClanekJSFBean.cD.vrniVse()}">
-								
 									<!-- Post item -->
 									<div class="post-item">
 										<div class="post-thumbnail">
@@ -46,16 +44,12 @@
 												<a href=""><h:outputText value="#{clanek.user_username}" /></a>
 											</div>
 											<p><h:outputText value="#{ClanekJSFBean.trimContent318(clanek.content)}" /></p>
-											
-											<!-- TU BO FORMA ZA PRIKAZ POSAMEZNEGA -->
-											<a href="blog-post.html" class="read-more">Read More</a>
-										
-										
+											<h:form>
+												<h:commandLink class="read-more" value="Preberi več" action="clanek.xhtml" actionListener="#{ClanekJSFBean.izberiClanek(clanek.clanek_id)}"></h:commandLink>
+											</h:form>
 										</div>
 									</div>
-								
 								</ui:repeat>
-								
 							</div>
 						</div>
 					</div>
