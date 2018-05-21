@@ -9,32 +9,27 @@ import javax.sql.rowset.serial.SerialException;
 public class Program {
    private int id_program;
    private String naslov;
-   private String autor;
    private Blob slika;
    private String user_username;
    private ArrayList<Recept> recepti = new ArrayList();
-   private ArrayList<Prehrana> prehrane = new ArrayList();
    
    public Program() {
 		super();
 	}  
-    public Program(int id_program, String user_username, String naslov, String autor, Blob slika) {
+    public Program(int id_program, String user_username, String naslov, Blob slika) {
 	    super();
 	    this.id_program = id_program;
 	    this.user_username = user_username;
 	    this.naslov = naslov;
-	    this.autor = autor;
 	    this.slika = slika;
    }
-    public Program(int id_program, String user_username, String naslov, String autor, Blob slika, ArrayList recepti, ArrayList prehrane) {
+    public Program(int id_program, String user_username, String naslov, Blob slika, ArrayList recepti) {
     	super();
     	this.id_program = id_program;
     	this.user_username = user_username;
     	this.naslov = naslov;
-    	this.autor = autor;
     	this.slika = slika;
     	this.recepti = recepti;
-    	this.prehrane = prehrane;
     }
     
 	public int getId_program() {
@@ -48,12 +43,6 @@ public class Program {
 	}
 	public void setNaslov(String naslov) {
 		this.naslov = naslov;
-	}
-	public String getAutor() {
-		return autor;
-	}
-	public void setAutor(String autor) {
-		this.autor = autor;
 	}
 	public Blob getSlika() {
 		return slika;
@@ -78,12 +67,6 @@ public class Program {
 	}
 	public void setRecepti(ArrayList<Recept> recepti) {
 		this.recepti = recepti;
-	}
-	public ArrayList<Prehrana> getPrehrane() {
-		return prehrane;
-	}
-	public void setPrehrane(ArrayList<Prehrana> prehrane) {
-		this.prehrane = prehrane;
 	}
 	
     
