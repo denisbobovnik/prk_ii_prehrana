@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import si.um.feri.prk.objekti.Prehrana;
 import si.um.feri.prk.objekti.Program;
 
 public class ProgramDAO {
@@ -64,7 +65,7 @@ public class ProgramDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Program WHERE autor=?");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Program WHERE naslov=?");
 			ps.setInt(1, 0);
 			ResultSet rs = ps.executeQuery();
 			
@@ -90,7 +91,7 @@ public class ProgramDAO {
 		
 	
 	
-	public void shrani(Program p) throws Exception {
+	public void shrani(Program p, Prehrana pr) throws Exception {
 		log.info("ProgramDAO: shranjujem " + p);
 		Connection conn=null;
 		try {
@@ -98,12 +99,12 @@ public class ProgramDAO {
 			if(najdi(p.getId_program()) != null) {
 				
 			} else {
-				PreparedStatement ps = conn.prepareStatement("INSERT INTO Program(naslov, autor,slika,tk_id_prehrana,user_id) VALUES (?,?,?,?,?)");
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO Program(naslov, autor,slika,tk_id_prehrana) VALUES (?,?,?,?)");
 				ps.setString(1, p.getNaslov());
 				ps.setString(2, p.getUser_username());
 				ps.setBinaryStream(3, p.getSlika().getBinaryStream());
-				//ps.setInt(4, p.getTk_id_prehrana());
-				//ps.setInt(5, p.getUser_id);
+				ps.setInt(4, pr.getId_prehrana());
+				
 				
 				ps.executeUpdate();
 			}
