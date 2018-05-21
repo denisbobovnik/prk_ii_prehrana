@@ -6,7 +6,7 @@ Projekt pri predmetu Praktikum II
 ## E-R model
 ![er_model](/er_model/er_model.png)
 
-## Navodila za razvoj/uporabo (testirano na WF 12, MySQL Server 5.7.18 in Eclipse Oxygen.2):
+## Navodila za razvoj/uporabo (testirano na WildFly 12, MySQL Server 5.7.17 in Eclipse EE Oxygen.2):
 - Potrebno si je kreirati datasource v Wildfly aplikacijskem strežniku. Ugasnemo strežnik in prepišemo datoteke v njegovem imenu z temi, ki so v sledečem imeniku (prenos): https://mega.nz/#!KZMg1DCS!iNFLC8482Xl1U_pn8hj54rDGCMV9ZphFveeV5pOzOBs
 - Najprej v MySQL ustvarimo podatkovno bazo "prk_ii_prehrana"
 ```bash
