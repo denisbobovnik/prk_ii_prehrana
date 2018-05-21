@@ -3,4 +3,7 @@ Projekt pri predmetu Praktikum II
 
 ![er_mode](/er_model/er_model.png)
 
-//prereqs za datasource
+Navodila za razvoj/uporabo:
+- datasource za mysql
+- create statemnt za mysql (ustvarimo tabelo clanek, recept, ...) - statement še napisat
+- add-user in ustvarjanje dveh vlog (POSAMEZNIK/STORKOVNJAK). - konkretno kodo
