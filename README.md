@@ -1,7 +1,9 @@
 # prk_ii_prehrana
 Projekt pri predmetu Praktikum II
 
+<center>
 <img align="center" src="/prk_ii_prehrana/WebContent/img/logo.png" alt="logo">
+</center>
 
 ![er_model](/er_model/er_model.png)
 
