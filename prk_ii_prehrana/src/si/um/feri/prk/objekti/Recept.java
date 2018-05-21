@@ -17,8 +17,10 @@ public class Recept {
 	private double kalorije;
 	private String tipSlika;
 	private ArrayList<Sestavine> sestavine = new ArrayList();
+	private ArrayList<Alergeni> alergeni = new ArrayList();
 	private ArrayList<Program> programi = new ArrayList();
-	
+
+
 	public Recept() {
 		super();
 	}
@@ -34,7 +36,7 @@ public class Recept {
 		this.slika = slika;
 		this.linkVideo = linkVideo;
 	}
-	public Recept(int id_recept, String ime, String dolzinaPriprave, int steviloPorcij, String opis, double kalorije, Blob slika, String linkVideo, ArrayList sestavine, ArrayList programi) {
+	public Recept(int id_recept, String ime, String dolzinaPriprave, int steviloPorcij, String opis, double kalorije, Blob slika, String linkVideo, ArrayList sestavine, ArrayList alergeni, ArrayList programi) {
 		super();
 		this.id_recept = id_recept;
 		this.ime = ime;
@@ -45,6 +47,7 @@ public class Recept {
 		this.slika = slika;
 		this.linkVideo = linkVideo;
 		this.sestavine = sestavine;
+		this.alergeni = alergeni;
 		this.programi = programi;
 	}
 	public Recept(int id_recept, String ime, Blob slika) {
@@ -147,12 +150,19 @@ public class Recept {
 		this.sestavine = sestavine;
 	}
 
+	public ArrayList<Alergeni> getAlergeni() {
+		return alergeni;
+	}
 	public ArrayList<Program> getProgrami() {
 		return programi;
 	}
 
 	public void setProgrami(ArrayList<Program> programi) {
 		this.programi = programi;
+	}
+
+	public void setAlergeni(ArrayList<Alergeni> alergeni) {
+		this.alergeni = alergeni;
 	}
 	
 

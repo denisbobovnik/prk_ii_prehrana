@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import si.um.feri.prk.objekti.Alergeni;
+import si.um.feri.prk.objekti.Recept;
 
 public class AlergeniDAO {
 
@@ -55,14 +56,14 @@ public class AlergeniDAO {
 		}
 	}
 	
-	public void shrani(Alergeni a) throws Exception {
+	public void shrani(Alergeni a, Recept r) throws Exception {
 		log.info("AlergeniDAO: shranjujem " + a);
 		Connection conn=null;
 		try {
 			    conn=baza.getConnection();
-				PreparedStatement ps = conn.prepareStatement("INSERT INTO SESTAVINE(ime, tk_id_recept) VALUES (?,?)");
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO ALERGENI(ime, tk_id_recept) VALUES (?,?)");
 				ps.setString(1, a.getIme());
-				//ps.setInt(2, a.getTk_id_recept());
+				ps.setInt(2, r.getId_recept());
 				ps.executeUpdate();
 			
 		} catch (Exception e) {

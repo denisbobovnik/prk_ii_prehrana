@@ -46,7 +46,7 @@ public class ReceptJSFBean {
 		}
 	}
 	public void dodajSestavino() throws Exception {
-		sD.shrani(s);
+		sD.shrani(s,r);
 		s = new Sestavine();
 		//KO BO NAREJEN DAO SE DODAJ DA SE DODA KOLICINA PA V XHTML PREVERI
 		

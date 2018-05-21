@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import si.um.feri.prk.objekti.Recept;
 import si.um.feri.prk.objekti.Sestavine;
 
 public class SestavineDAO {
@@ -35,7 +36,7 @@ public class SestavineDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS SESTAVINE(id_sestavine int not null auto_increment primary key, ime varchar(100) not null, enota varchar(10) not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS SESTAVINE(id_sestavine int not null auto_increment primary key, ime varchar(100) not null, enota varchar(10) not null, tk_recept int not null)");
 			} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -55,14 +56,15 @@ public class SestavineDAO {
 		}
 	}
 	
-	public void shrani(Sestavine s) throws Exception {
+	public void shrani(Sestavine s, Recept r) throws Exception {
 		log.info("SestavineDAO: shranjujem " + s);
 		Connection conn=null;
 		try {
 			    conn=baza.getConnection();
-				PreparedStatement ps = conn.prepareStatement("INSERT INTO SESTAVINE(ime, enota) VALUES (?,?)");
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO SESTAVINE(ime, enota,tk_recept ) VALUES (?,?,?)");
 				ps.setString(1, s.getIme());
 				ps.setString(2, s.getEnota());
+				ps.setInt(3, r.getId_recept());
 				ps.executeUpdate();
 			
 		} catch (Exception e) {

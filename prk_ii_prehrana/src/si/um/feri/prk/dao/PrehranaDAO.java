@@ -40,7 +40,7 @@ public class PrehranaDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS PREHRANA(id_prehrana int not null auto_increment primary key, naslovPrehrane varchar(100) not null, user_id int)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS PREHRANA(id_prehrana int not null auto_increment primary key, naslovPrehrane varchar(100) not null)");
 			} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -65,7 +65,7 @@ public class PrehranaDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Prehrana WHERE user_id=?");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Prehrana ");
 			ps.setInt(1, 0);
 			ResultSet rs = ps.executeQuery();
 			
@@ -92,9 +92,9 @@ public class PrehranaDAO {
 		if(najdi(pr.getId_prehrana()) != null) {
 			
 		} else {
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO Prehrana(naslovPrehrae,user_id) VALUES (?,?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Prehrana(naslovPrehrane) VALUES (?)");
 			ps.setString(1, pr.getNaslovPrehrane());
-	        //ps.setInt(2, pr.getUser_id);
+	        
 			ps.executeUpdate();
 		}
 	} catch (Exception e) {
