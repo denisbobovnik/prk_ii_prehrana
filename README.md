@@ -19,7 +19,7 @@ CREATE SCHEMA `prk_ii_prehrana` DEFAULT CHARACTER SET utf8 COLLATE utf8_slovenia
 
 V cmd prilepimo in potrdimo:
 ```bash
-cd <kopirana_pot
+cd <kopirana_pot>
 ```
 
 Napišemo in potrdimo:
