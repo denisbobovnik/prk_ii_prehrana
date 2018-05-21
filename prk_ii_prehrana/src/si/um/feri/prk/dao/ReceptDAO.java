@@ -140,5 +140,6 @@ public class ReceptDAO {
 			}
 			return seznam;
 		}
+		
 
 }

@@ -92,7 +92,7 @@ public class PrehranaDAO {
 		if(najdi(pr.getId_prehrana()) != null) {
 			
 		} else {
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO Prehrana(naslovPrehrae) VALUES (?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Prehrana(naslovPrehrane) VALUES (?)");
 			ps.setString(1, pr.getNaslovPrehrane());
 	        
 			ps.executeUpdate();
