@@ -62,7 +62,7 @@ public class AlergeniDAO {
 			    conn=baza.getConnection();
 				PreparedStatement ps = conn.prepareStatement("INSERT INTO SESTAVINE(ime, tk_id_recept) VALUES (?,?)");
 				ps.setString(1, a.getIme());
-				ps.setInt(2, a.getTk_id_recept());
+				//ps.setInt(2, a.getTk_id_recept());
 				ps.executeUpdate();
 			
 		} catch (Exception e) {

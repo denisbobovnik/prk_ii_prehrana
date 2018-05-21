@@ -6,29 +6,36 @@ import java.sql.SQLException;
 import javax.sql.rowset.serial.SerialException;
 
 public class Program {
-   private int id_program, tk_id_prehrana;
+   private int id_program;
    private String naslov;
    private String autor;
    private Blob slika;
+   private String user_username;
+   private Recept recept = new Recept();
+   private Prehrana prehrana = new Prehrana();
    
    public Program() {
 		super();
 	}  
-    public Program(int id_program, String naslov, String autor, Blob slika) {
+    public Program(int id_program, String user_username, String naslov, String autor, Blob slika) {
 	    super();
 	    this.id_program = id_program;
+	    this.user_username = user_username;
 	    this.naslov = naslov;
 	    this.autor = autor;
 	    this.slika = slika;
    }
-    public Program(int id_program, int tk_id_prehrana, String naslov, String autor, Blob slika) {
+    public Program(int id_program, String user_username, String naslov, String autor, Blob slika, Recept recept, Prehrana prehrana) {
     	super();
     	this.id_program = id_program;
-    	this.tk_id_prehrana = tk_id_prehrana;
+    	this.user_username = user_username;
     	this.naslov = naslov;
     	this.autor = autor;
     	this.slika = slika;
+    	this.recept = recept;
+    	this.prehrana = prehrana;
     }
+    
 	public int getId_program() {
 		return id_program;
 	}
@@ -59,12 +66,23 @@ public class Program {
 			e.printStackTrace();
 		}
 	}
-	public int getTk_id_prehrana() {
-		return tk_id_prehrana;
+	public Recept getRecept() {
+		return recept;
 	}
-	public void setTk_id_prehrana(int tk_id_prehrana) {
-		this.tk_id_prehrana = tk_id_prehrana;
+	public void setRecept(Recept recept) {
+		this.recept = recept;
 	}
-	
+	public Prehrana getPrehrana() {
+	    return prehrana;
+	}
+	public void setPrehrana(Prehrana prehrana) {
+		this.prehrana = prehrana;
+	}
+	public String getUser_username() {
+		return user_username;
+	}
+	public void setUser_username(String user_username) {
+		this.user_username = user_username;
+	}
     
 }

@@ -4,7 +4,8 @@ public class Sestavine {
 	private int id_sestavine;
 	private String ime;
 	private String enota;
-	
+	private Recept recept = new Recept();
+
 	public Sestavine() {
 		super();
 	}
@@ -14,6 +15,13 @@ public class Sestavine {
 		this.id_sestavine = id_sestavine;
 		this.ime = ime;
 		this.enota = enota;
+	}
+	public Sestavine(int id_sestavine, String ime, String enota, Recept recept) {
+		super();
+		this.id_sestavine = id_sestavine;
+		this.ime = ime;
+		this.enota = enota;
+		this.recept = recept;
 	}
 
 	public int getId_sestavine() {
@@ -39,6 +47,14 @@ public class Sestavine {
 	public void setEnota(String enota) {
 		this.enota = enota;
 	}
+	public Recept getRecept() {
+		return recept;
+	}
+
+	public void setRecept(Recept recept) {
+		this.recept = recept;
+	}
+
 	
 	
 

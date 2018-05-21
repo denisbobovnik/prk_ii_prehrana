@@ -15,7 +15,8 @@ public class Recept {
 	private String linkVideo;
 	private double kalorije;
 	private String tipSlika;
-	
+	private Sestavine sestavine = new Sestavine();
+	private Program program = new Program();	
 	
 	public Recept() {
 		super();
@@ -31,6 +32,19 @@ public class Recept {
 		this.kalorije = kalorije;
 		this.slika = slika;
 		this.linkVideo = linkVideo;
+	}
+	public Recept(int id_recept, String ime, String dolzinaPriprave, int steviloPorcij, String opis, double kalorije, Blob slika, String linkVideo, Sestavine sestavine, Program program) {
+		super();
+		this.id_recept = id_recept;
+		this.ime = ime;
+		this.dolzinaPriprave = dolzinaPriprave;
+		this.steviloPorcij = steviloPorcij;
+		this.opis = opis;
+		this.kalorije = kalorije;
+		this.slika = slika;
+		this.linkVideo = linkVideo;
+		this.sestavine = sestavine;
+		this.program = program;
 	}
 	public Recept(int id_recept, String ime, Blob slika) {
 		super();
@@ -123,7 +137,22 @@ public class Recept {
 	public void setTipSlika(String tipSlika) {
 		this.tipSlika=tipSlika;
 	}
-	
+	public Sestavine getSestavine() {
+		return sestavine;
+	}
+
+	public void setSestavine(Sestavine sestavine) {
+		this.sestavine = sestavine;
+	}
+
+	public Program getProgram() {
+		return program;
+	}
+
+	public void setProgram(Program program) {
+		this.program = program;
+	}
+
 	
     
 	

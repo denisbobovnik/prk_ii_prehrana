@@ -69,7 +69,7 @@ public class ProgramDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				ret = new Program(rs.getInt("id_program"), rs.getString("naslov"), rs.getString("autor"), rs.getBlob("slika"));
+				//ret = new Program(rs.getInt("id_program"), rs.getString("naslov"), rs.getString("autor"), rs.getBlob("slika"));
 				ret.setId_program(id_program);
 				
 				Blob blob = rs.getBlob("slika");
@@ -102,7 +102,7 @@ public class ProgramDAO {
 				ps.setString(1, p.getNaslov());
 				ps.setString(2, p.getAutor());
 				ps.setBinaryStream(3, p.getSlika().getBinaryStream());
-				ps.setInt(4, p.getTk_id_prehrana());
+				//ps.setInt(4, p.getTk_id_prehrana());
 				//ps.setInt(5, p.getUser_id);
 				
 				ps.executeUpdate();

@@ -1,6 +1,7 @@
 package si.um.feri.prk.jsfbeans;
 
 import javax.faces.application.FacesMessage;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -12,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import si.um.feri.prk.dao.ReceptDAO;
 import si.um.feri.prk.dao.SestavineDAO;
 import si.um.feri.prk.objekti.Recept;
-import si.um.feri.prk.objekti.Recept_Ima_Sestavino;
 import si.um.feri.prk.objekti.Sestavine;
 
 @ManagedBean(name="RecpetJSFBean")
@@ -22,7 +22,6 @@ public class ReceptJSFBean {
 	Logger log=LoggerFactory.getLogger(ClanekJSFBean.class);
 	private Recept r = new Recept();
 	private Sestavine s = new Sestavine();
-	private Recept_Ima_Sestavino rs = new Recept_Ima_Sestavino();
 	private UploadedFile thumbnail;
 	private ReceptDAO rD = ReceptDAO.getInstance();
 	private SestavineDAO sD = SestavineDAO.getInstance();

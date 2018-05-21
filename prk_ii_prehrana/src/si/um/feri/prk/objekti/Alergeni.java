@@ -1,9 +1,10 @@
 package si.um.feri.prk.objekti;
 
 public class Alergeni {
-	private int id, tk_id_recept;
+	private int id;
 	private String ime;
-	
+	private Recept recept = new Recept();
+
 	public Alergeni() {
 		super();
 	}
@@ -14,11 +15,11 @@ public class Alergeni {
 		this.ime = ime;
 	}
 	
-	public Alergeni(int id, int tk_id_recept, String ime) {
+	public Alergeni(int id, String ime, Recept recept) {
 		super();
 		this.id = id;
-		this.tk_id_recept = tk_id_recept;
 		this.ime = ime;
+		this.recept = recept;
 	}
 
 	public int getId() {
@@ -29,20 +30,19 @@ public class Alergeni {
 		this.id = id;
 	}
 
-	public int getTk_id_recept() {
-		return tk_id_recept;
-	}
-
-	public void setTk_id_recept(int tk_id_recept) {
-		this.tk_id_recept = tk_id_recept;
-	}
-
 	public String getIme() {
 		return ime;
 	}
 
 	public void setIme(String ime) {
 		this.ime = ime;
+	}
+	public Recept getRecept() {
+		return recept;
+	}
+
+	public void setRecept(Recept recept) {
+		this.recept = recept;
 	}
 	
 	
