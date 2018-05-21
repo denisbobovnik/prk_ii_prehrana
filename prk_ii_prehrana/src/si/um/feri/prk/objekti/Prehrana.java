@@ -1,8 +1,15 @@
 package si.um.feri.prk.objekti;
 
+import java.sql.Blob;
+import java.util.ArrayList;
+
 public class Prehrana {
 	private int id_prehrana;
 	private String naslovPrehrane;
+	private Blob thumbnail;
+	private String content;
+	private ArrayList<Program> prehranskiProgrami;
+	
 	
 	public Prehrana() {
 		super();
