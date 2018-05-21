@@ -38,7 +38,7 @@ public class ProgramDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS PROGRAM(id_program int not null auto_increment primary key, naslov varchar(100) not null, autor varchar(100) not null, slika longblob not null, user_id int, tk_id_prehrana int not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS PROGRAM(id_program int not null auto_increment primary key, naslov varchar(100) not null, autor varchar(100) not null, slika longblob not null, tk_id_prehrana int not null)");
 			} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -64,7 +64,7 @@ public class ProgramDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Program WHERE user_id=?");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Program WHERE autor=?");
 			ps.setInt(1, 0);
 			ResultSet rs = ps.executeQuery();
 			
@@ -100,7 +100,7 @@ public class ProgramDAO {
 			} else {
 				PreparedStatement ps = conn.prepareStatement("INSERT INTO Program(naslov, autor,slika,tk_id_prehrana,user_id) VALUES (?,?,?,?,?)");
 				ps.setString(1, p.getNaslov());
-				ps.setString(2, p.getAutor());
+				ps.setString(2, p.getUser_username());
 				ps.setBinaryStream(3, p.getSlika().getBinaryStream());
 				//ps.setInt(4, p.getTk_id_prehrana());
 				//ps.setInt(5, p.getUser_id);

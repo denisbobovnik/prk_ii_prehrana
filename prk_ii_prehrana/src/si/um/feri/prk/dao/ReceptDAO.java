@@ -74,7 +74,7 @@ public class ReceptDAO {
 					ps.setBinaryStream(5, r.getSlika().getBinaryStream());
 					ps.setString(6, r.getLinkVideo());
 					ps.setDouble(7, r.getKalorije());
-					//ps.setInt(5, p.getUser_id);
+					
 					
 					ps.executeUpdate();
 				
