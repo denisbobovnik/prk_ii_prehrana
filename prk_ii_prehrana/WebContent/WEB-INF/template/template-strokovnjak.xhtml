@@ -43,8 +43,9 @@
 				<div class="responsive"><i class="fa fa-bars"></i></div>
 				<nav>
 					<h:form>
-						<ul class="menu-list">						
-							<!-- <li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><a href="index.xhtml">Home</a></li>-->
+						<ul class="menu-list">
+							<li class="#{view.viewId eq '/seznam-prehran.xhtml' ? 'active' : ''}"><a href="seznam-prehran.xhtml">Seznam prehran</a></li>
+							<li class="#{view.viewId eq '/seznam-clankov.xhtml' ? 'active' : ''}"><a href="seznam-clankov.xhtml">Seznam člankov</a></li>
 							
 							<h:panelGroup rendered="#{not empty request.remoteUser}">		
 								<li><h:commandLink action="#{LogoutJSFBean.logout}" value="Odjava" /></li>		
