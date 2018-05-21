@@ -1,4 +1,4 @@
-![logo](/prk_ii_prehrana/WebContent/img/logo.png)
+# ![logo](/prk_ii_prehrana/WebContent/img/logo.png)
 Projekt pri predmetu Praktikum II
 
 ## E-R model
