@@ -1,0 +1,81 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-strokovnjak.xhtml">
+		
+		
+		<ui:define name="title">
+			Objava članka
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- Contact section -->
+				<div class="contact-section spad fix">
+					<div class="container">
+						<div class="row">
+						
+							<!-- contact info -->
+							<div class="col-md-5 col-md-offset-1 contact-info col-push">
+								<div class="section-title left">
+									<h2>Objavite članek</h2>
+								</div>
+								<p>Če imate zanimivo zgodbo o vašem osebnem napredku in bi jo radi delili z vsemi, jo napišite in pošljite na našo stran. <br />Dobrodošli so tudi nasveti!</p>
+							</div>
+						
+							<!-- contact form -->
+							<div class="col-md-6 col-pull">
+								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
+									<div class="row">
+										<div class="col-sm-12">
+											<p:inputText id="clanek-title" name="title" value="#{ClanekJSFBean.c.title}" a:placeholder="Naslov(*)">
+												<f:validateLength minimum="5" maximum="100"></f:validateLength>
+											</p:inputText>
+											
+											<p:inputTextarea id="clanek-content" name="content" value="#{ClanekJSFBean.c.content}" a:placeholder="Vsebina(*)" cols="30" rows="10">
+												<f:validateLength maximum="9999" minimum="10"/>
+											</p:inputTextarea>
+											
+											Naslovnica(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ClanekJSFBean.thumbnail}" mode="simple" />
+											
+											<br />
+											<br />
+											
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="seznam-clankov.xhtml"/>
+											
+											<br />
+											<p:messages showDetail="false"/>
+										</div>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Contact section end-->	
+	
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>
