@@ -4,7 +4,8 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -39,7 +40,7 @@ public class ProgramDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS PROGRAM(id_program int not null auto_increment primary key, naslov varchar(100) not null, autor varchar(100) not null, slika longblob not null, tk_id_prehrana int not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS PROGRAM(id_program int not null auto_increment primary key, naslov varchar(100) not null, autor varchar(100) not null, slika longblob not null, tk_id_prehrana int not null, tipPrograma varchar(45) not null, tipSlike varchar(20) not null)");
 			} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -65,20 +66,14 @@ public class ProgramDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Program WHERE naslov=?");
-			ps.setInt(1, 0);
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Program WHERE id_program=?");
+			ps.setInt(1, id_program);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				//ret = new Program(rs.getInt("id_program"), rs.getString("naslov"), rs.getString("autor"), rs.getBlob("slika"));
-				ret.setId_program(id_program);
-				
-				Blob blob = rs.getBlob("slika");
-				int blobLength = (int) blob.length();  
-				byte[] blobAsBytes = blob.getBytes(1, blobLength);
-				
-				ret.setSlika(blobAsBytes);
-				
+				ret = new Program(rs.getInt("id_program"), rs.getString("autor"), rs.getString("naslov"), rs.getBlob("slika"), rs.getString("tipPrograma"), rs.getString("tipSlike"));				
+				//ko bodo strukture narete dalje, še njegove enote in recepte setat tu in posobno metodo kot za prehrano tukaj napiši še tam v receptih
+				//program.setRecepti("tukaj jo klices");
 				break;
 			}
 		} catch (Exception e) {
@@ -113,5 +108,38 @@ public class ProgramDAO {
 		} finally {
 			conn.close();
 		}
-	}	
+	}
+
+	public ArrayList<Program> najdiVsePoPrehrani(int id_prehrana) throws Exception {
+		ArrayList<Program> seznam = new ArrayList<Program>();
+		
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM PROGRAM WHERE tk_id_prehrana=?");
+			ps.setInt(1, id_prehrana);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Program program = new Program(rs.getInt("id_program"), rs.getString("autor"), rs.getString("naslov"), rs.getBlob("slika"), rs.getString("tipPrograma"), rs.getString("tipSlike"));
+				//ko bodo strukture narete dalje, še njegove enote in recepte setat tu in posobno metodo kot za prehrano tukaj napiši še tam v receptih
+				//program.setRecepti("tukaj jo klices");
+				seznam.add(program);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return seznam;
+	}
+	
+	public ArrayList<Program> vrniSplosneProgrameZaToPrehrano(int id_prehrana) throws Exception {
+		ArrayList<Program> vsiZaToPrehrano = najdiVsePoPrehrani(id_prehrana);
+		ArrayList<Program> ret = new ArrayList<Program>();
+		for(Program pr : vsiZaToPrehrano)
+			if(pr.getTipPrograma().equals("splosni"))
+				ret.add(pr);
+		return ret;
+	}
 }

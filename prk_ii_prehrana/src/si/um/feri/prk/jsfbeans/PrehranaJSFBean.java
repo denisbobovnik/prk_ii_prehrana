@@ -66,7 +66,7 @@ public class PrehranaJSFBean {
 				ret = s;
 		return ret;
 	}
-	public void izberiClanek(int prehrana_id) {
+	public void izberiPrehrano(int prehrana_id) {
 		log.info("PrehranaJSFBean: izberiPrehrano");
 		try {
 			izbranaPrehrana = pD.najdi(prehrana_id);
@@ -74,6 +74,16 @@ public class PrehranaJSFBean {
 			e.printStackTrace();
 		};
 	}
+	
+	public String trimContent121(String content) {
+		if(content.length()<121) {
+			return content;
+		} else {
+			content = content.substring(0, 121);
+			return content;
+		}
+	}
+	
 	public Prehrana getP() {
 		return p;
 	}

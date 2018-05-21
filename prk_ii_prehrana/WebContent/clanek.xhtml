@@ -31,7 +31,7 @@
 								<!-- Single Post -->
 								<div class="single-post">
 									<div class="post-thumbnail">
-										<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?id=#{ClanekJSFBean.izbranClanek.clanek_id}" height="270"/>
+										<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?klic=clanek&amp;id=#{ClanekJSFBean.izbranClanek.clanek_id}" height="270"/>
 										<div class="post-date">
 											<h2><h:outputText value="#{ClanekJSFBean.getDayOfMonth(ClanekJSFBean.izbranClanek.datumClanka)}" /></h2>
 											<h3><h:outputText value="#{ClanekJSFBean.getMonthAndYear(ClanekJSFBean.izbranClanek.datumClanka)}" /></h3>

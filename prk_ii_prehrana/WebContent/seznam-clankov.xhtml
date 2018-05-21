@@ -32,7 +32,7 @@
 									<!-- Post item -->
 									<div class="post-item">
 										<div class="post-thumbnail">
-											<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?id=#{clanek.clanek_id}" height="270"/>
+											<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?klic=clanek&amp;id=#{clanek.clanek_id}" height="270"/>
 											<div class="post-date">
 												<h2><h:outputText value="#{ClanekJSFBean.getDayOfMonth(clanek.datumClanka)}" /></h2>
 												<h3><h:outputText value="#{ClanekJSFBean.getMonthAndYear(clanek.datumClanka)}" /></h3>

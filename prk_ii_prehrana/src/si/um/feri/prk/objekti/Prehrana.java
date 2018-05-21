@@ -24,6 +24,19 @@ public class Prehrana {
 		this.id_prehrana = id_prehrana;
 		this.naslovPrehrane = naslovPrehrane;
 	}
+	
+	
+
+
+
+	public Prehrana(int id_prehrana, String naslovPrehrane, Blob thumbnail, String content, String tipSlike) {
+		super();
+		this.id_prehrana = id_prehrana;
+		this.naslovPrehrane = naslovPrehrane;
+		this.thumbnail = thumbnail;
+		this.content = content;
+		this.tipSlike = tipSlike;
+	}
 
 	public int getId_prehrana() {
 		return id_prehrana;

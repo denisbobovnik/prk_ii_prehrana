@@ -1,0 +1,91 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
+		
+		
+		<ui:define name="title">
+			Prehrana
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- page section -->
+				<div class="page-section spad">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 blog-posts">
+								<!-- Single Post -->
+								<div class="single-post">
+									<div class="post-thumbnail">
+										<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?klic=prehrana&amp;id=#{PrehranaJSFBean.izbranaPrehrana.id_prehrana}" height="271"/>
+									</div>
+									<div class="post-content">
+										<h2 class="post-title"><h:outputText value="#{PrehranaJSFBean.izbranaPrehrana.naslovPrehrane}" /></h2>
+										<p><h:outputText value="#{PrehranaJSFBean.izbranaPrehrana.content}" /></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- page section end-->
+				
+				<!-- services section -->
+				<div class="services-section spad">
+					<div class="container">
+						<div class="section-title dark">
+							<h2>SPLOŠNI PREHRANSKI PROGRAMI</h2>
+						</div>
+						<div class="row">
+						
+							<c:set var="IDIzbranePrehrane" value="#{PrehranaJSFBean.izbranaPrehrana.id_prehrana}" scope="request" />
+							<ui:repeat var="program" value="#{PrehranaJSFBean.pD.pD.vrniSplosneProgrameZaToPrehrano(IDIzbranePrehrane)}">
+						
+								<!-- single service -->
+								<div class="col-md-4 col-sm-6">
+									<div class="service">
+										<div class="service-text">
+											<h2><h:outputText value="#{program.naslov}" /></h2>
+											<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=program&amp;id=#{program.id_program}" height="271"></p:graphicImage>
+											<h:form>
+												<h:commandLink class="read-more" value="Ogled" action="program.xhtml" actionListener="#{ProgramJSFBean.izberiProgram(program.id_program)}"></h:commandLink>
+											</h:form>
+										</div>
+									</div>
+								</div>
+							
+							</ui:repeat>
+						</div>
+					</div>
+				</div>
+				<!-- services section end -->
+
+				<!-- prikaz programov (vseh za to prehrano) in prikaz personaliziranih (če je user prijavljen), za tistega userja -->
+
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>

@@ -8,7 +8,7 @@ import javax.sql.rowset.serial.SerialException;
 
 public class Program {
    private int id_program;
-   private String naslov;
+   private String naslov, tipPrograma, tipSlike;
    private Blob slika;
    private String user_username;
    private ArrayList<Recept> recepti = new ArrayList();
@@ -16,20 +16,24 @@ public class Program {
    public Program() {
 		super();
 	}  
-    public Program(int id_program, String user_username, String naslov, Blob slika) {
+    public Program(int id_program, String user_username, String naslov, Blob slika, String tipPrograma, String tipSlike) {
 	    super();
 	    this.id_program = id_program;
 	    this.user_username = user_username;
 	    this.naslov = naslov;
 	    this.slika = slika;
+	    this.tipPrograma = tipPrograma;
+	    this.tipSlike = tipSlike;
    }
-    public Program(int id_program, String user_username, String naslov, Blob slika, ArrayList recepti) {
+    public Program(int id_program, String user_username, String naslov, Blob slika, ArrayList recepti, String tipPrograma, String tipSlike) {
     	super();
     	this.id_program = id_program;
     	this.user_username = user_username;
     	this.naslov = naslov;
     	this.slika = slika;
     	this.recepti = recepti;
+    	this.tipPrograma = tipPrograma;
+    	this.tipSlike = tipSlike;
     }
     
 	public int getId_program() {
@@ -68,6 +72,24 @@ public class Program {
 	public void setRecepti(ArrayList<Recept> recepti) {
 		this.recepti = recepti;
 	}
+	public String getTipPrograma() {
+		return tipPrograma;
+	}
+	public void setTipPrograma(String tipPrograma) {
+		this.tipPrograma = tipPrograma;
+	}
+	public void setSlika(Blob slika) {
+		this.slika = slika;
+	}
+	public String getTipSlike() {
+		return tipSlike;
+	}
+	public void setTipSlike(String tipSlike) {
+		this.tipSlike = tipSlike;
+	}
+	
+	
+	
 	
     
 }
