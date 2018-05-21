@@ -1,7 +1,5 @@
-# prk_ii_prehrana
-Projekt pri predmetu Praktikum II
-
 ![logo](/prk_ii_prehrana/WebContent/img/logo.png)
+Projekt pri predmetu Praktikum II
 
 ## E-R model
 ![er_model](/er_model/er_model.png)
