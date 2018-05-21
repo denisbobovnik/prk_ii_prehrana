@@ -1,16 +1,102 @@
 package si.um.feri.prk.jsfbeans;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import si.um.feri.prk.dao.ClanekDAO;
+import si.um.feri.prk.dao.PrehranaDAO;
+import si.um.feri.prk.objekti.Clanek;
+import si.um.feri.prk.objekti.Prehrana;
 
 @ManagedBean(name="PrehranaJSFBean")
 @SessionScoped
 public class PrehranaJSFBean {
 	
 	Logger log=LoggerFactory.getLogger(ClanekJSFBean.class);
-
-	//metode
-
+	private Prehrana p = new Prehrana();
+	private UploadedFile thumbnail;
+	private PrehranaDAO pD = PrehranaDAO.getInstance();
+	private Prehrana izbranaPrehrana = new Prehrana();
+	
+	public void dodajPrehrano() {
+		try {
+			String str = thumbnail.getFileName();
+			if(str.contains(".")) {
+				String ext = str.substring(str.lastIndexOf('.'), str.length());
+				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
+					nastaviTipSlike(ext);
+					p.setThumbnail(thumbnail.getContents());
+					
+					FacesContext context = FacesContext.getCurrentInstance();
+					String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
+					String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
+					
+					
+					pD.shrani(p);
+					p = new Prehrana();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka nalaganja!", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
+		}
+	}
+	private void nastaviTipSlike(String ext) {
+		ext = ext.substring(1, ext.length());
+		if(ext.equals("jpg")) {
+			p.setTipSlike("image/jpeg");
+		}
+		else {
+			p.setTipSlike("image/"+ext.toLowerCase());
+		}
+	}
+	private String getUserRole(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		String[] vloge = {"ADMINISTRATOR", "STROKOVNJAK", "POSAMEZNIK"};
+		String ret = "";
+		for(String s : vloge)
+			if(context.getExternalContext().isUserInRole(s))
+				ret = s;
+		return ret;
+	}
+	public void izberiClanek(int prehrana_id) {
+		log.info("PrehranaJSFBean: izberiPrehrano");
+		try {
+			izbranaPrehrana = pD.najdi(prehrana_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		};
+	}
+	public Prehrana getP() {
+		return p;
+	}
+	public void setP(Prehrana p) {
+		this.p = p;
+	}
+	public UploadedFile getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(UploadedFile thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public PrehranaDAO getpD() {
+		return pD;
+	}
+	public void setpD(PrehranaDAO pD) {
+		this.pD = pD;
+	}
+	public Prehrana getIzbranaPrehrana() {
+		return izbranaPrehrana;
+	}
+	public void setIzbranaPrehrana(Prehrana izbranaPrehrana) {
+		this.izbranaPrehrana = izbranaPrehrana;
+	}
+	
 }
