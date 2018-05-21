@@ -1,10 +1,12 @@
 package si.um.feri.prk.objekti;
 
+import java.util.ArrayList;
+
 public class Sestavine {
 	private int id_sestavine;
 	private String ime;
 	private String enota;
-	private Recept recept = new Recept();
+	private ArrayList<Recept> list = new ArrayList();
 
 	public Sestavine() {
 		super();
@@ -16,12 +18,12 @@ public class Sestavine {
 		this.ime = ime;
 		this.enota = enota;
 	}
-	public Sestavine(int id_sestavine, String ime, String enota, Recept recept) {
+	public Sestavine(int id_sestavine, String ime, String enota, ArrayList list) {
 		super();
 		this.id_sestavine = id_sestavine;
 		this.ime = ime;
 		this.enota = enota;
-		this.recept = recept;
+		this.list = list;
 	}
 
 	public int getId_sestavine() {
@@ -47,12 +49,12 @@ public class Sestavine {
 	public void setEnota(String enota) {
 		this.enota = enota;
 	}
-	public Recept getRecept() {
-		return recept;
+	public ArrayList getList() {
+		return list;
 	}
 
-	public void setRecept(Recept recept) {
-		this.recept = recept;
+	public void setRecept(ArrayList list) {
+		this.list = list;
 	}
 
 	

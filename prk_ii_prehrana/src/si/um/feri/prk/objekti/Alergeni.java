@@ -1,9 +1,11 @@
 package si.um.feri.prk.objekti;
 
+import java.util.ArrayList;
+
 public class Alergeni {
 	private int id;
 	private String ime;
-	private Recept recept = new Recept();
+	private ArrayList<Recept> recepti = new ArrayList();
 
 	public Alergeni() {
 		super();
@@ -15,11 +17,11 @@ public class Alergeni {
 		this.ime = ime;
 	}
 	
-	public Alergeni(int id, String ime, Recept recept) {
+	public Alergeni(int id, String ime, ArrayList recepti) {
 		super();
 		this.id = id;
 		this.ime = ime;
-		this.recept = recept;
+		this.recepti = recepti;
 	}
 
 	public int getId() {
@@ -37,13 +39,15 @@ public class Alergeni {
 	public void setIme(String ime) {
 		this.ime = ime;
 	}
-	public Recept getRecept() {
-		return recept;
+
+	public ArrayList<Recept> getRecepti() {
+		return recepti;
 	}
 
-	public void setRecept(Recept recept) {
-		this.recept = recept;
+	public void setRecepti(ArrayList<Recept> recepti) {
+		this.recepti = recepti;
 	}
+	
 	
 	
 	

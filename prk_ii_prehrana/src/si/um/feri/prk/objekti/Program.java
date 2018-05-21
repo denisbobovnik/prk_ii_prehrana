@@ -2,6 +2,7 @@ package si.um.feri.prk.objekti;
 
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.rowset.serial.SerialException;
 
@@ -11,8 +12,8 @@ public class Program {
    private String autor;
    private Blob slika;
    private String user_username;
-   private Recept recept = new Recept();
-   private Prehrana prehrana = new Prehrana();
+   private ArrayList<Recept> recepti = new ArrayList();
+   private ArrayList<Prehrana> prehrane = new ArrayList();
    
    public Program() {
 		super();
@@ -25,15 +26,15 @@ public class Program {
 	    this.autor = autor;
 	    this.slika = slika;
    }
-    public Program(int id_program, String user_username, String naslov, String autor, Blob slika, Recept recept, Prehrana prehrana) {
+    public Program(int id_program, String user_username, String naslov, String autor, Blob slika, ArrayList recepti, ArrayList prehrane) {
     	super();
     	this.id_program = id_program;
     	this.user_username = user_username;
     	this.naslov = naslov;
     	this.autor = autor;
     	this.slika = slika;
-    	this.recept = recept;
-    	this.prehrana = prehrana;
+    	this.recepti = recepti;
+    	this.prehrane = prehrane;
     }
     
 	public int getId_program() {
@@ -66,23 +67,24 @@ public class Program {
 			e.printStackTrace();
 		}
 	}
-	public Recept getRecept() {
-		return recept;
-	}
-	public void setRecept(Recept recept) {
-		this.recept = recept;
-	}
-	public Prehrana getPrehrana() {
-	    return prehrana;
-	}
-	public void setPrehrana(Prehrana prehrana) {
-		this.prehrana = prehrana;
-	}
 	public String getUser_username() {
 		return user_username;
 	}
 	public void setUser_username(String user_username) {
 		this.user_username = user_username;
 	}
+	public ArrayList<Recept> getRecepti() {
+		return recepti;
+	}
+	public void setRecepti(ArrayList<Recept> recepti) {
+		this.recepti = recepti;
+	}
+	public ArrayList<Prehrana> getPrehrane() {
+		return prehrane;
+	}
+	public void setPrehrane(ArrayList<Prehrana> prehrane) {
+		this.prehrane = prehrane;
+	}
+	
     
 }
