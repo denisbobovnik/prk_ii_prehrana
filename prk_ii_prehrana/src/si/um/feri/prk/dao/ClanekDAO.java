@@ -119,6 +119,21 @@ public class ClanekDAO {
 		}
 	}
 	
+	public void izbrisi(int clanek_id) throws Exception {
+		log.info("ClanekDAO: brišem " + clanek_id);
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM CLANEK WHERE clanek_id=?");
+			ps.setInt(1, clanek_id);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+	}
+	
 	public ArrayList<Clanek> vrniVse() throws Exception {
 		ArrayList<Clanek> seznam = new ArrayList<Clanek>();
 	

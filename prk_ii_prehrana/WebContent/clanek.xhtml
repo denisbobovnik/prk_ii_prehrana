@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 	
 	<h:body>
 	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
@@ -43,6 +44,16 @@
 											<a href=""><h:outputText value="#{ClanekJSFBean.izbranClanek.user_username}" /></a>
 										</div>
 										<p><h:outputText value="#{ClanekJSFBean.izbranClanek.content}" /></p>
+										
+										<hr />
+										<c:set var="idIzbranegaClanka" value="#{ClanekJSFBean.izbranClanek.clanek_id}" scope="request" />
+										
+										<h:panelGroup rendered="#{not empty request.remoteUser}">
+											<h:form>
+												<h:commandButton action="seznam-clankov.xhtml" actionListener="#{ClanekJSFBean.izbrisiClanek(idIzbranegaClanka)}" style="background: #d9534f; color: white;" class="site-btn" value="Izbriši"> </h:commandButton>
+											</h:form>
+										</h:panelGroup>
+										<p:messages globalOnly="true" showDetail="false"/>
 									</div>
 								</div>
 							</div>

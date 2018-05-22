@@ -64,6 +64,24 @@ public class ClanekJSFBean {
 		};
 	}
 	
+	public void izbrisiClanek(int clanek_id) {
+		log.info("ClanekJSFBean: izbrisiClanek");
+		try {
+			Clanek tmp = cD.najdi(clanek_id);
+			FacesContext context = FacesContext.getCurrentInstance();
+			if(getUserRole().equals("STROKOVNJAK")||getUserRole().equals("ADMINISTRATOR")||tmp.getUser_username().equals(context.getExternalContext().getRemoteUser()))
+				cD.izbrisi(clanek_id);
+			else {
+				FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka brisanja!", "Nimate pravic brisanja tega èlanka!");
+				FacesContext.getCurrentInstance().addMessage(null, errorMsg);
+				context.getExternalContext().redirect("clanek.xhtml");
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		};
+	}
+	
 	private void nastaviTipSlike(String ext) {
 		ext = ext.substring(1, ext.length());
 		if(ext.equals("jpg")) {
