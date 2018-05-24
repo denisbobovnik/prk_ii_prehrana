@@ -50,10 +50,8 @@ public class ReceptJSFBean {
 		}
 	}
 	public void dodajSestavino() throws Exception {
-		sD.shrani(s,r);
-		s = new Sestavine();
-		//KO BO NAREJEN DAO SE DODAJ DA SE DODA KOLICINA PA V XHTML PREVERI
-		
+		r.getSestavine().add(s);
+		s = new Sestavine();	
 	}
 	public void parseAlergeni() {
 		StringTokenizer st = new StringTokenizer(alergeniPrivremeni, ", ");
