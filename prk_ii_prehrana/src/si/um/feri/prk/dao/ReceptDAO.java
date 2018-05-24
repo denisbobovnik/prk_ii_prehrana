@@ -41,7 +41,7 @@ public class ReceptDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Recept(id_recept int not null auto_increment primary key, ime varchar(100) not null, dolzinaPriprave varchar(20) not null,steviloPorcij int not null, opis varchar(500) not null, slika longblob not null, linkVideo varchar(700) not null, kalorije double not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Recept(id_recept int not null auto_increment primary key, ime varchar(100) not null, dolzinaPriprave varchar(20) not null,steviloPorcij int not null, opis varchar(9999) not null, slika longblob not null, linkVideo varchar(700) not null, kalorije double not null, tipSlike varchar(20) not null, tk_id_enota int not null)");
 			} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -68,7 +68,7 @@ public class ReceptDAO {
 		try {
 			conn=baza.getConnection();
 
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO Recept(id_recept, ime, dolzinaPriprave, steviloPorcij, opis, slika, linkVideo, kalorije) VALUES (?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Recept(id_recept, ime, dolzinaPriprave, steviloPorcij, opis, slika, linkVideo, kalorije, tipSlike, tk_id_enota) VALUES (?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, r.getId_recept());
 			ps.setString(2, r.getIme());
 			ps.setInt(3, r.getDolzinaPriprave());
@@ -77,6 +77,8 @@ public class ReceptDAO {
 			ps.setBinaryStream(6, r.getSlika().getBinaryStream());
 			ps.setString(7, r.getLinkVideo());
 			ps.setDouble(8, r.getKalorije());
+			ps.setString(9, r.getTipSlike());
+			ps.setInt(10, r.getTk_id_enota());
 				
 			ps.executeUpdate();
 				
