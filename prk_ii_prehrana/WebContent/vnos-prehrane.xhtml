@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<h:body>
-	<ui:composition template="WEB-INF/template/template-strokovnjak.xhtml">
+	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
 		
 		
 		<ui:define name="title">
@@ -31,10 +31,8 @@
 							<!-- contact info -->
 							<div class="col-md-5 col-md-offset-1 contact-info col-push">
 								<div class="section-title left">
-									<h2>Vnesite tip prehrane</h2>
+									<h2>Vnos prehrane</h2>
 								</div>
-								<p></p>
-							</div>
 						
 							<!-- contact form -->
 							<div class="col-md-6 col-pull">
@@ -45,16 +43,16 @@
 												<f:validateLength minimum="5" maximum="100"></f:validateLength>
 											</p:inputText>
 											
-											<p:inputTextarea id="clanek-content" name="content" value="#{PrehranaJSFBean.p.content}" a:placeholder="Vsebina(*)" cols="30" rows="10">
+											<p:inputTextarea id="prehrana-content" name="content" value="#{PrehranaJSFBean.p.content}" a:placeholder="Vsebina(*)" cols="30" rows="10">
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
-											Naslovnica(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{PrehranaJSFBean.thumbnail}" mode="simple" />
+											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{PrehranaJSFBean.thumbnail}" mode="simple" />
 											
 											<br />
 											<br />
 											
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{PrehranaJSFBean.dodajPrehrano}" action="seznam-prehrane.xhtml"/>
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{PrehranaJSFBean.dodajPrehrano}" action="vnos-prehrane.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>

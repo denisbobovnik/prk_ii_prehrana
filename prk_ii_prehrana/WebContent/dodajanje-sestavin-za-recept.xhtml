@@ -31,7 +31,7 @@
 							<!-- contact info -->
 							<div class="col-md-5 col-md-offset-1 contact-info col-push">
 								<div class="section-title left">
-									<h2>Objavite recept</h2>
+									<h2>Vnos sestavin </h2>
 								</div>
 							</div>
 						
@@ -43,7 +43,7 @@
 											<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" a:placeholder="Sestavina(*)">
 											</p:inputText>
 											
-											<p:inputText id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.rs.kolicina}" a:placeholder="Kolièina(*)">
+											<p:inputText id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.rs.kolicina}" a:placeholder="Količina(*)">
 											</p:inputText>
 											
 											<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota}" a:placeholder="Enota(*)">
@@ -54,7 +54,7 @@
 											
 											<!-- redirect na seznam èlankov... -->
 											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ReceptJSFBean.dodajSestavino}" action="objava-clanka.xhtml"/>
-											
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ReceptJSFBean.dodajSestavino}" action="objava-clanka.xhtml"/>
 											<br />
 											<p:messages showDetail="false"/>
 										</div>

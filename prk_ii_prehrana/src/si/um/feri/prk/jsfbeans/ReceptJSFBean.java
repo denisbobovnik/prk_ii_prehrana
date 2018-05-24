@@ -1,5 +1,7 @@
 package si.um.feri.prk.jsfbeans;
 
+import java.util.StringTokenizer;
+
 import javax.faces.application.FacesMessage;
 
 import javax.faces.bean.ManagedBean;
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import si.um.feri.prk.dao.ReceptDAO;
 import si.um.feri.prk.dao.SestavineDAO;
+import si.um.feri.prk.objekti.Alergeni;
 import si.um.feri.prk.objekti.Recept;
 import si.um.feri.prk.objekti.Sestavine;
 
@@ -26,6 +29,7 @@ public class ReceptJSFBean {
 	private ReceptDAO rD = ReceptDAO.getInstance();
 	private SestavineDAO sD = SestavineDAO.getInstance();
 	private Recept izbranRecept = new Recept();
+	private String alergeniPrivremeni;
 	
 	
 	public void dodajRecept() {
@@ -50,6 +54,14 @@ public class ReceptJSFBean {
 		s = new Sestavine();
 		//KO BO NAREJEN DAO SE DODAJ DA SE DODA KOLICINA PA V XHTML PREVERI
 		
+	}
+	public void parseAlergeni() {
+		StringTokenizer st = new StringTokenizer(alergeniPrivremeni, ", ");
+	     while (st.hasMoreTokens()) {
+	    	 Alergeni a = new Alergeni();
+	    	 a.setIme(st.nextToken());
+	        r.getAlergeni().add(a);
+	     }
 	}
 	public void izberiRecept(int recept_id) {
 		try {
