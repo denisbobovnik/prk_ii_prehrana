@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import javax.sql.rowset.serial.SerialException;
 
 public class Program {
-   private int id_program;
+   private int id_program, tk_id_prehrana;
    private String naslov, tipPrograma, tipSlike;
    private Blob slika;
    private String user_username;
-   private ArrayList<Recept> recepti = new ArrayList();
+   private ArrayList<Recept> recepti = new ArrayList<Recept>();
    
    public Program() {
 		super();
@@ -25,7 +25,7 @@ public class Program {
 	    this.tipPrograma = tipPrograma;
 	    this.tipSlike = tipSlike;
    }
-    public Program(int id_program, String user_username, String naslov, Blob slika, ArrayList recepti, String tipPrograma, String tipSlike) {
+    public Program(int id_program, String user_username, String naslov, Blob slika, ArrayList<Recept> recepti, String tipPrograma, String tipSlike) {
     	super();
     	this.id_program = id_program;
     	this.user_username = user_username;
@@ -34,8 +34,19 @@ public class Program {
     	this.recepti = recepti;
     	this.tipPrograma = tipPrograma;
     	this.tipSlike = tipSlike;
-    }
-    
+    }    
+	public Program(int id_program, int tk_id_prehrana, String naslov, String tipPrograma, String tipSlike, Blob slika,
+			String user_username) {
+		super();
+		this.id_program = id_program;
+		this.tk_id_prehrana = tk_id_prehrana;
+		this.naslov = naslov;
+		this.tipPrograma = tipPrograma;
+		this.tipSlike = tipSlike;
+		this.slika = slika;
+		this.user_username = user_username;
+	}
+	
 	public int getId_program() {
 		return id_program;
 	}
@@ -87,9 +98,17 @@ public class Program {
 	public void setTipSlike(String tipSlike) {
 		this.tipSlike = tipSlike;
 	}
+	public int getTk_id_prehrana() {
+		return tk_id_prehrana;
+	}
+	public void setTk_id_prehrana(int tk_id_prehrana) {
+		this.tk_id_prehrana = tk_id_prehrana;
+	}
 	
-	
-	
-	
-    
+	@Override
+	public String toString() {
+		return "Program [id_program=" + id_program + ", tk_id_prehrana=" + tk_id_prehrana + ", naslov=" + naslov
+				+ ", tipPrograma=" + tipPrograma + ", tipSlike=" + tipSlike + ", slika=" + slika + ", user_username="
+				+ user_username + "]";
+	}
 }
