@@ -5,141 +5,186 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import si.um.feri.prk.objekti.Clanek;
 import si.um.feri.prk.objekti.Recept;
+import si.um.feri.prk.objekti.Sestavine;
+import si.um.feri.prk.objekti.Alergeni;
 
 public class ReceptDAO {
 
-
-		DataSource baza;
-		Logger log=LoggerFactory.getLogger(ReceptDAO.class);
+	DataSource baza;
+	Logger log=LoggerFactory.getLogger(ReceptDAO.class);
+	private AlergeniDAO aD = AlergeniDAO.getInstance();
+	private SestavineDAO sD = SestavineDAO.getInstance();
 		
-		private static ReceptDAO instance=null;
-		public static synchronized ReceptDAO getInstance() {		
-			if (instance==null) instance=new ReceptDAO();
-			return instance;
+	private static ReceptDAO instance=null;
+	public static synchronized ReceptDAO getInstance() {		
+		if (instance==null) instance=new ReceptDAO();
+		return instance;
+	}
+		
+	private ReceptDAO() {
+		log.info("ReceptDAO: ReceptDAO ");
+		try {
+			baza=(DataSource)new InitialContext().lookup("java:jboss/datasources/prk_ii_prehrana");	
+			kreirajTabele();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+	}
 		
-		private ReceptDAO() {
-			try {
-				baza=(DataSource)new InitialContext().lookup("java:jboss/datasources/prk_ii_prehrana");	
-				kreirajTabele();
+	public void kreirajTabele() throws Exception {
+		log.info("ReceptDAO: kreirajTabele ");
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Recept(id_recept int not null auto_increment primary key, ime varchar(100) not null, dolzinaPriprave varchar(20) not null,steviloPorcij int not null, opis varchar(500) not null, slika longblob not null, linkVideo varchar(700) not null, kalorije double not null)");
 			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			e.printStackTrace();
+		} finally {
+			conn.close();
 		}
+	}
 		
-		public void kreirajTabele() throws Exception {
-			Connection conn=null;
-			try {
-				conn=baza.getConnection();
-				conn.createStatement().execute("CREATE TABLE IF NOT EXISTS RECEPT(id_recept int not null auto_increment primary key, ime varchar(100) not null, dolzinaPriprave varchar(20) not null,steviloPorcij int not null, opis varchar(500) not null, slika longblob not null, linkVideo varchar(700) not null, kalorije double not null");
-				} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				conn.close();
-			}
+	public void pobrisiTabele() throws Exception {
+		log.info("ReceptDAO: pobrisiTabele ");
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+			conn.createStatement().execute("DROP TABLE IF EXISTS Recept CASCADE");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
 		}
+	}
 		
-		public void pobrisiTabele() throws Exception {
-			Connection conn=null;
-			try {
-				conn=baza.getConnection();
-				conn.createStatement().execute("DROP TABLE IF EXISTS RECEPT CASCADE");
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				conn.close();
-			}
-		}
-		
-		public void shrani(Recept r) throws Exception {
-			log.info("ReceptDAO: shranjujem " + r);
-			Connection conn=null;
-			try {
-				conn=baza.getConnection();
+	public void shrani(Recept r) throws Exception {
+		log.info("ReceptDAO: shranjujem " + r);
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
 
-					PreparedStatement ps = conn.prepareStatement("INSERT INTO RECEPT(ime , dolzinaPriprave,steviloPorcij, opis, slika , linkVideo, kalorije) VALUES (?,?,?,?,?,?,?)");
-					ps.setString(1, r.getIme());
-					ps.setString(2, r.getDolzinaPriprave());
-					ps.setInt(3, r.getSteviloPorcij());
-					ps.setString(4, r.getOpis());
-					ps.setBinaryStream(5, r.getSlika().getBinaryStream());
-					ps.setString(6, r.getLinkVideo());
-					ps.setDouble(7, r.getKalorije());
-					
-					
-					ps.executeUpdate();
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Recept(id_recept, ime, dolzinaPriprave, steviloPorcij, opis, slika, linkVideo, kalorije) VALUES (?,?,?,?,?,?,?,?)");
+			ps.setInt(1, r.getId_recept());
+			ps.setString(2, r.getIme());
+			ps.setInt(3, r.getDolzinaPriprave());
+			ps.setInt(4, r.getSteviloPorcij());
+			ps.setString(5, r.getOpis());
+			ps.setBinaryStream(6, r.getSlika().getBinaryStream());
+			ps.setString(7, r.getLinkVideo());
+			ps.setDouble(8, r.getKalorije());
 				
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				conn.close();
-			}
-		}
-		public Recept najdi(int recept_id) throws Exception {
-		
-			Recept ret = null;
-			Connection conn=null;
-			try {
-				conn=baza.getConnection();
-				PreparedStatement ps = conn.prepareStatement("SELECT * FROM RECEPT WHERE id_recept=?");
-				ps.setInt(1, recept_id);
-				ResultSet rs = ps.executeQuery();
+			ps.executeUpdate();
 				
-				while(rs.next()) {
-					ret = new Recept(rs.getString("ime"));
-					ret.setId_recept(recept_id);
-					
-					Blob blob = rs.getBlob("slika");
-					int blobLength = (int) blob.length();  
-					byte[] blobAsBytes = blob.getBytes(1, blobLength);
-					
-					ret.setSlika(blobAsBytes);
-					
-					
-					break;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				conn.close();
-			}
-			return ret;
+			for(Alergeni a : r.getAlergeni())
+				aD.shrani(a);
+				
+			for(Sestavine s : r.getSestavine())
+				sD.shrani(s);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
 		}
-		
-		
-		public ArrayList<Recept> vrniVse() throws Exception {
-			ArrayList<Recept> seznam = new ArrayList<Recept>();
-		
-			Connection conn=null;
-			try {
-				conn=baza.getConnection();
-
-				PreparedStatement ps = conn.prepareStatement("SELECT * FROM RECEPT");
-				ResultSet rs = ps.executeQuery();
-				while (rs.next()) {
-
-					Recept recept = new Recept(rs.getInt("recept_id"),rs.getString("ime"), rs.getBlob("slika"));
-					//recept.setTipSlika(rs.getString("tipSlike"));
-
-					seznam.add(recept);
-				}
-				rs.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				conn.close();
+	}
+	public Recept najdi(int id_recept) throws Exception {
+		log.info("ReceptDAO: najdi " + id_recept);
+		Recept ret = null;
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Recept WHERE id_recept=?");
+			ps.setInt(1, id_recept);
+			ResultSet rs = ps.executeQuery();
+				
+			while(rs.next()) {
+				ret = new Recept(id_recept, rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), rs.getInt("tk_id_enota"), rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"));
+				
+				Blob blob = rs.getBlob("slika");
+				int blobLength = (int) blob.length();  
+				byte[] blobAsBytes = blob.getBytes(1, blobLength);
+					
+				ret.setSlika(blobAsBytes);
+					
+				ret.setAlergeni(aD.najdiVsePoReceptu(ret.getId_recept()));
+				ret.setSestavine(sD.najdiVsePoReceptu(ret.getId_recept()));
+				break;
 			}
-			return seznam;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
 		}
+		return ret;
+	}
 		
+	public ArrayList<Recept> najdiVsePoEnoti(int tk_id_enota) throws Exception {
+		log.info("ReceptDAO: najdiVsePoEnoti " + tk_id_enota);
+		ArrayList<Recept> seznam = new ArrayList<Recept>();
+			
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Recept WHERE tk_id_enota=?");
+			ps.setInt(1, tk_id_enota);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Recept recept = new Recept(rs.getInt("id_recept"), rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), tk_id_enota, rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"));
 
+				Blob blob = rs.getBlob("slika");
+				int blobLength = (int) blob.length();  
+				byte[] blobAsBytes = blob.getBytes(1, blobLength);
+					
+				recept.setSlika(blobAsBytes);
+					
+				recept.setAlergeni(aD.najdiVsePoReceptu(recept.getId_recept()));
+				recept.setSestavine(sD.najdiVsePoReceptu(recept.getId_recept()));
+				
+				seznam.add(recept);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return seznam;
+	}
+		
+	public ArrayList<Recept> vrniVse() throws Exception {
+		log.info("ReceptDAO: vrniVse ");
+		ArrayList<Recept> seznam = new ArrayList<Recept>();
+		
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Recept");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Recept recept = new Recept(rs.getInt("id_recept"), rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), rs.getInt("tk_id_enota"), rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"));
+					
+				Blob blob = rs.getBlob("slika");
+				int blobLength = (int) blob.length();  
+				byte[] blobAsBytes = blob.getBytes(1, blobLength);
+					
+				recept.setSlika(blobAsBytes);
+					
+				recept.setAlergeni(aD.najdiVsePoReceptu(recept.getId_recept()));
+				recept.setSestavine(sD.najdiVsePoReceptu(recept.getId_recept()));
+					
+				seznam.add(recept);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return seznam;
+	}
 }

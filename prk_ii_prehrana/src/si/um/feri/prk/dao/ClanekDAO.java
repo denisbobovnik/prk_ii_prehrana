@@ -6,13 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-
-import org.primefaces.model.UploadedFile;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import si.um.feri.prk.objekti.Clanek;
 
 public class ClanekDAO {
@@ -27,6 +24,7 @@ public class ClanekDAO {
 	}
 	
 	private ClanekDAO() {
+		log.info("ClanekDAO: ClanekDAO ");
 		try {
 			baza=(DataSource)new InitialContext().lookup("java:jboss/datasources/prk_ii_prehrana");	
 			kreirajTabele();
@@ -36,6 +34,7 @@ public class ClanekDAO {
 	}
 	
 	public void kreirajTabele() throws Exception {
+		log.info("ClanekDAO: kreirajTabele ");
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
@@ -48,6 +47,7 @@ public class ClanekDAO {
 	}
 	
 	public void pobrisiTabele() throws Exception {
+		log.info("ClanekDAO: pobrisiTabele ");
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
@@ -60,7 +60,7 @@ public class ClanekDAO {
 	}
 	
 	public Clanek najdi(int clanek_id) throws Exception {
-		log.info("ClanekDAO: išèem " + clanek_id);
+		log.info("ClanekDAO: najdi " + clanek_id);
 		Clanek ret = null;
 		Connection conn=null;
 		try {
@@ -120,7 +120,7 @@ public class ClanekDAO {
 	}
 	
 	public void izbrisi(int clanek_id) throws Exception {
-		log.info("ClanekDAO: brišem " + clanek_id);
+		log.info("ClanekDAO: izbrisi " + clanek_id);
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
@@ -135,6 +135,7 @@ public class ClanekDAO {
 	}
 	
 	public ArrayList<Clanek> vrniVse() throws Exception {
+		log.info("ClanekDAO: vrniVse ");
 		ArrayList<Clanek> seznam = new ArrayList<Clanek>();
 	
 		Connection conn=null;
@@ -158,5 +159,4 @@ public class ClanekDAO {
 		}
 		return seznam;
 	}
-	
 }
