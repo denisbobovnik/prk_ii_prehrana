@@ -18,7 +18,7 @@ import si.um.feri.prk.objekti.Alergeni;
 import si.um.feri.prk.objekti.Recept;
 import si.um.feri.prk.objekti.Sestavine;
 
-@ManagedBean(name="RecpetJSFBean")
+@ManagedBean(name="ReceptJSFBean")
 @SessionScoped
 public class ReceptJSFBean {
 	

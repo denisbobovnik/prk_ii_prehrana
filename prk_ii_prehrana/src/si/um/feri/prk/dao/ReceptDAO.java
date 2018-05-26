@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -41,7 +42,7 @@ public class ReceptDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Recept(id_recept int not null auto_increment primary key, ime varchar(100) not null, dolzinaPriprave int not null,steviloPorcij int not null, opis varchar(9999) not null, slika longblob not null, linkVideo varchar(700) not null, kalorije double not null, tipSlike varchar(20) not null, tk_id_enota int not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Recept(id_recept int not null auto_increment primary key, ime varchar(100) not null, dolzinaPriprave int not null,steviloPorcij int not null, opis varchar(9999) not null, slika longblob not null, linkVideo varchar(700) not null, kalorije double not null, tipSlike varchar(20) not null, tk_id_enota int not null, datumDodajanja timestamp not null, sladkorji double not null)");
 			} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -68,7 +69,7 @@ public class ReceptDAO {
 		try {
 			conn=baza.getConnection();
 
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO Recept(id_recept, ime, dolzinaPriprave, steviloPorcij, opis, slika, linkVideo, kalorije, tipSlike, tk_id_enota) VALUES (?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Recept(id_recept, ime, dolzinaPriprave, steviloPorcij, opis, slika, linkVideo, kalorije, tipSlike, tk_id_enota, datumDodajanja, sladkorji) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, r.getId_recept());
 			ps.setString(2, r.getIme());
 			ps.setInt(3, r.getDolzinaPriprave());
@@ -79,6 +80,8 @@ public class ReceptDAO {
 			ps.setDouble(8, r.getKalorije());
 			ps.setString(9, r.getTipSlike());
 			ps.setInt(10, r.getTk_id_enota());
+			ps.setTimestamp(11, new Timestamp(r.getDatumDodajanja().getTimeInMillis()));
+			ps.setDouble(12, r.getSladkorji());
 				
 			ps.executeUpdate();
 				
@@ -104,7 +107,7 @@ public class ReceptDAO {
 			ResultSet rs = ps.executeQuery();
 				
 			while(rs.next()) {
-				ret = new Recept(id_recept, rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), rs.getInt("tk_id_enota"), rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"));
+				ret = new Recept(id_recept, rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), rs.getDouble("sladkorji"), rs.getInt("tk_id_enota"), rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"));
 				
 				Blob blob = rs.getBlob("slika");
 				int blobLength = (int) blob.length();  
@@ -114,6 +117,8 @@ public class ReceptDAO {
 					
 				ret.setAlergeni(aD.najdiVsePoReceptu(ret.getId_recept()));
 				ret.setSestavine(sD.najdiVsePoReceptu(ret.getId_recept()));
+				
+				ret.getDatumDodajanja().setTimeInMillis(rs.getTimestamp("datumDodajanja").getTime());
 				break;
 			}
 		} catch (Exception e) {
@@ -135,7 +140,7 @@ public class ReceptDAO {
 			ps.setInt(1, tk_id_enota);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Recept recept = new Recept(rs.getInt("id_recept"), rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), tk_id_enota, rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"));
+				Recept recept = new Recept(rs.getInt("id_recept"), rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), rs.getDouble("sladkorji"), tk_id_enota, rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"));
 
 				Blob blob = rs.getBlob("slika");
 				int blobLength = (int) blob.length();  
@@ -145,6 +150,8 @@ public class ReceptDAO {
 					
 				recept.setAlergeni(aD.najdiVsePoReceptu(recept.getId_recept()));
 				recept.setSestavine(sD.najdiVsePoReceptu(recept.getId_recept()));
+				
+				recept.getDatumDodajanja().setTimeInMillis(rs.getTimestamp("datumDodajanja").getTime());
 				
 				seznam.add(recept);
 			}
@@ -168,7 +175,7 @@ public class ReceptDAO {
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Recept");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Recept recept = new Recept(rs.getInt("id_recept"), rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), rs.getInt("tk_id_enota"), rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"));
+				Recept recept = new Recept(rs.getInt("id_recept"), rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), rs.getDouble("sladkorji"), rs.getInt("tk_id_enota"), rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"));
 					
 				Blob blob = rs.getBlob("slika");
 				int blobLength = (int) blob.length();  
@@ -178,6 +185,8 @@ public class ReceptDAO {
 					
 				recept.setAlergeni(aD.najdiVsePoReceptu(recept.getId_recept()));
 				recept.setSestavine(sD.najdiVsePoReceptu(recept.getId_recept()));
+				
+				recept.getDatumDodajanja().setTimeInMillis(rs.getTimestamp("datumDodajanja").getTime());
 					
 				seznam.add(recept);
 			}

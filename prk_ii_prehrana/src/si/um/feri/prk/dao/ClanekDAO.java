@@ -148,6 +148,8 @@ public class ClanekDAO {
 
 				Clanek clanek = new Clanek(rs.getInt("clanek_id"),rs.getString("user_username"),rs.getString("title"), rs.getString("content"), rs.getBlob("thumbnail"));
 				clanek.setTipSlike(rs.getString("tipSlike"));
+				
+				clanek.getDatumClanka().setTimeInMillis(rs.getTimestamp("datumClanka").getTime());
 
 				seznam.add(clanek);
 			}

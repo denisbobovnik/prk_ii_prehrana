@@ -3,23 +3,29 @@ package si.um.feri.prk.objekti;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import javax.sql.rowset.serial.SerialException;
 
 public class Recept {
 	private int id_recept, dolzinaPriprave, steviloPorcij, tk_id_enota;
 	private String ime, opis, linkVideo, tipSlike;
 	private Blob slika;
-	private double kalorije;
+	private double kalorije, sladkorji;
+	private Calendar datumDodajanja;
 	private ArrayList<Sestavine> sestavine = new ArrayList<Sestavine>();
 	private ArrayList<Alergeni> alergeni = new ArrayList<Alergeni>();
 
 	public Recept() {
 		super();
+		this.datumDodajanja = new GregorianCalendar();
 	}
-	public Recept(int id_recept, int dolzinaPriprave, int steviloPorcij, int tk_id_enota, String ime, String opis,
+	public Recept(int id_recept, int dolzinaPriprave, int steviloPorcij, double sladkorji, int tk_id_enota, String ime, String opis,
 			String linkVideo, String tipSlike, Blob slika, double kalorije) {
 		super();
 		this.id_recept = id_recept;
+		this.sladkorji = sladkorji;
 		this.dolzinaPriprave = dolzinaPriprave;
 		this.steviloPorcij = steviloPorcij;
 		this.tk_id_enota = tk_id_enota;
@@ -29,6 +35,7 @@ public class Recept {
 		this.tipSlike = tipSlike;
 		this.slika = slika;
 		this.kalorije = kalorije;
+		this.datumDodajanja = new GregorianCalendar();
 	}
 
 	public int getId_recept() {
@@ -112,11 +119,24 @@ public class Recept {
 			e.printStackTrace();
 		}
 	}
+	public Calendar getDatumDodajanja() {
+		return datumDodajanja;
+	}
+	public void setDatumDodajanja(Calendar datumDodajanja) {
+		this.datumDodajanja = datumDodajanja;
+	}
+	public double getSladkorji() {
+		return sladkorji;
+	}
+	public void setSladkorji(double sladkorji) {
+		this.sladkorji = sladkorji;
+	}
 	
 	@Override
 	public String toString() {
 		return "Recept [id_recept=" + id_recept + ", dolzinaPriprave=" + dolzinaPriprave + ", steviloPorcij="
 				+ steviloPorcij + ", tk_id_enota=" + tk_id_enota + ", ime=" + ime + ", opis=" + opis + ", linkVideo="
-				+ linkVideo + ", tipSlike=" + tipSlike + ", slika=" + slika + ", kalorije=" + kalorije + "]";
+				+ linkVideo + ", tipSlike=" + tipSlike + ", slika=" + slika + ", kalorije=" + kalorije + ", sladkorji="
+				+ sladkorji + ", datumDodajanja=" + datumDodajanja + "]";
 	}
 }

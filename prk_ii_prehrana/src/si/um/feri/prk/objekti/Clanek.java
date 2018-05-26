@@ -8,8 +8,7 @@ import javax.sql.rowset.serial.SerialException;
 
 public class Clanek {
 	private int clanek_id;
-	private String user_username;
-	private String title, content;
+	private String user_username, title, content;
 	private Calendar datumClanka;
 	private Blob thumbnail;
 	private String tipSlike;
