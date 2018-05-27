@@ -35,7 +35,6 @@ public class ProgramJSFBean {
 	private UploadedFile thumbnail;
 	private Enota enota = new Enota();
 	private Recept izbranRecept = new Recept();
-	//private ArrayList<Enota> enote = new ArrayList();
 	
 	public void dodajProgram() {
 		try {
