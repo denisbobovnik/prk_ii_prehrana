@@ -22,7 +22,100 @@
 		
 		<ui:define name="content">
 			<f:view>
-				Content
+					<br /><br /><br />
+					<div class="newsletter-section spad">
+						<div class="container">
+							<div class="row">
+								<h:form class="nl-form" rendered="#{DnevnikJSFBean.izbranCilj eq null}">
+									<div class="col-md-3">
+										<h2>Seznam ciljev</h2>
+									</div>
+									<div class="col-md-6">
+								    	<h:selectOneMenu style="border: none; padding: 15px 30px; height: 51px; margin-right: 30px; width: 100%; background: #19cc93; color: #fff;" id="cilj" value="#{DnevnikJSFBean.izbranCilj}">
+								        	<f:selectItem itemLabel="Izberi cilj" itemValue="" noSelectionOption="true" />
+								        	<f:selectItems value="#{DnevnikJSFBean.mozniCilji}" />
+								   		</h:selectOneMenu>
+								    </div>
+								    <div class="col-md-3">
+										<h:commandButton class="site-btn btn-2" action="dnevnik.xhtml" value="Naprej na vnos" />
+									</div>
+								</h:form>
+								
+								<f:metadata>
+								  <f:event type="preRenderView" listener="#{DnevnikJSFBean.nastaviKategorije()}"/>
+								</f:metadata>
+								
+								<h:form class="nl-form" rendered="#{(DnevnikJSFBean.izbranCilj == '1x na teden jej hrano kategorije X') and (DnevnikJSFBean.izbranaKategorija eq null)}">
+									<div class="col-md-3">
+										<h2>Kategorija</h2>
+									</div>
+									<div class="col-md-6">
+								    	<h:selectOneMenu style="border: none; padding: 15px 30px; height: 51px; margin-right: 30px; width: 100%; background: #19cc93; color: #fff;" id="cilj" value="#{DnevnikJSFBean.izbranaKategorija}">
+								        	<f:selectItem itemLabel="Izberi kategorijo" itemValue="" noSelectionOption="true" />
+								        	<f:selectItems value="#{DnevnikJSFBean.kategorijeHrane}" />
+								   		</h:selectOneMenu>
+								    </div>
+								    <div class="col-md-3">
+										<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.dodajCilj()}" action="dnevnik.xhtml" value="Zaključi" />
+										<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.razveljaviDodajanje()}" action="dnevnik.xhtml" value="Prekliči" />
+									</div>
+								</h:form>
+								
+								<h:form class="nl-form" rendered="#{(DnevnikJSFBean.izbranCilj == 'Na dan pojej za X kalorij') and (DnevnikJSFBean.steviloKalorij eq null)}">
+									<div class="col-md-3">
+										<h2>Število kalorij</h2>
+									</div>
+									<div class="col-md-6">
+										<h:inputText style="border: none; float:none; padding: 15px 30px; height: 51px; margin-right: 30px; width: 100%; background: #19cc93; color: #fff;" value="#{DnevnikJSFBean.steviloKalorij}"/>
+								    </div>
+								    <div class="col-md-3">
+										<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.dodajCilj()}" action="dnevnik.xhtml" value="Zaključi" />
+										<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.razveljaviDodajanje()}" action="dnevnik.xhtml" value="Prekliči" />
+									</div>
+								</h:form>
+								
+								<h:form class="nl-form" rendered="#{(DnevnikJSFBean.izbranCilj == 'Spij X litrov vode na dan') and (DnevnikJSFBean.kolicinaVode eq null)}">
+									<div class="col-md-3">
+										<h2>Količina vode</h2>
+									</div>
+									<div class="col-md-6">
+										<h:inputText style="border: none; float:none; padding: 15px 30px; height: 51px; margin-right: 30px; width: 100%; background: #19cc93; color: #fff;" value="#{DnevnikJSFBean.kolicinaVode}"/>
+								    </div>
+								    <div class="col-md-3">
+										<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.dodajCilj()}" action="dnevnik.xhtml" value="Zaključi" />
+										<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.razveljaviDodajanje()}" action="dnevnik.xhtml" value="Prekliči" />
+									</div>
+								</h:form>
+								
+								<h:form class="nl-form" rendered="#{(DnevnikJSFBean.izbranCilj == 'Na dan zaužij X gramov sladkorja') and (DnevnikJSFBean.kolicinaSladkorja eq null)}">
+									<div class="col-md-3">
+										<h2>Količina sladkorja</h2>
+									</div>
+									<div class="col-md-6">
+										<h:inputText style="border: none; float:none; padding: 15px 30px; height: 51px; margin-right: 30px; width: 100%; background: #19cc93; color: #fff;" value="#{DnevnikJSFBean.kolicinaSladkorja}"/>
+								    </div>
+								    <div class="col-md-3">
+										<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.dodajCilj()}" action="dnevnik.xhtml" value="Zaključi" />
+										<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.razveljaviDodajanje()}" action="dnevnik.xhtml" value="Prekliči" />
+									</div>
+								</h:form>
+
+								<h:form class="nl-form" rendered="#{(DnevnikJSFBean.izbranCilj == 'X obrokov na dan') and (DnevnikJSFBean.steviloObrokov eq null)}">
+									<div class="col-md-3">
+										<h2>Število obrokov</h2>
+									</div>
+									<div class="col-md-6">
+										<h:inputText style="border: none; float:none; padding: 15px 30px; height: 51px; margin-right: 30px; width: 100%; background: #19cc93; color: #fff;" value="#{DnevnikJSFBean.steviloObrokov}"/>
+								    </div>
+								    <div class="col-md-3">
+										<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.dodajCilj()}" action="dnevnik.xhtml" value="Zaključi" />
+										<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.razveljaviDodajanje()}" action="dnevnik.xhtml" value="Prekliči" />
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+
 			</f:view>
 		</ui:define>
 		

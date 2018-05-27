@@ -12,6 +12,12 @@ public class ZauzitaHrana {
 		super();
 		datumZauzitja = new GregorianCalendar();
 	}
+	public ZauzitaHrana(int id_zauzitaHrana, String user_username) {
+		super();
+		this.id_zauzitaHrana = id_zauzitaHrana;
+		this.user_username = user_username;
+		datumZauzitja = new GregorianCalendar();
+	}
 	public ZauzitaHrana(int id_zauzitaHrana, int tk_recept_id, String user_username) {
 		super();
 		this.id_zauzitaHrana = id_zauzitaHrana;

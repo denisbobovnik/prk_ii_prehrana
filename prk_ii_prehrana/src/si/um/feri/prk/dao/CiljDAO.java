@@ -37,7 +37,7 @@ public class CiljDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Cilj(id_cilj int not null auto_increment primary key, user_username varchar(100) not null, tip varchar(100) not null, datumZastavitve timestamp not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Cilj(id_cilj int not null auto_increment primary key, user_username varchar(100) not null, tip varchar(100) not null, datumZastavitve timestamp not null, vrednost varchar(100) not null)");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -69,7 +69,7 @@ public class CiljDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				ret = new Cilj(id_cilj, rs.getString("user_username"), rs.getString("tip"));
+				ret = new Cilj(id_cilj, rs.getString("user_username"), rs.getString("tip"), rs.getString("vrednost"));
 				ret.getDatumZastavitve().setTimeInMillis(rs.getTimestamp("datumZastavitve").getTime());
 				break;
 			}
@@ -91,11 +91,12 @@ public class CiljDAO {
 				//cilj z id-jem že obstaja...pohandle-at
 			} else {
 
-				PreparedStatement ps = conn.prepareStatement("INSERT INTO Cilj(user_username, tip, datumZastavitve) VALUES (?,?,?)");
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO Cilj(user_username, tip, datumZastavitve, vrednost) VALUES (?,?,?,?)");
 
 				ps.setString(1, c.getUser_username());
 				ps.setString(2, c.getTip());
 				ps.setTimestamp(3, new Timestamp(c.getDatumZastavitve().getTimeInMillis()));
+				ps.setString(4, c.getVrednost());
 				ps.executeUpdate();
 			}
 		} catch (Exception e) {
@@ -131,9 +132,8 @@ public class CiljDAO {
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Cilj");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Cilj cilj = new Cilj(rs.getInt("id_cilj"), rs.getString("user_username"), rs.getString("tip"));
+				Cilj cilj = new Cilj(rs.getInt("id_cilj"), rs.getString("user_username"), rs.getString("tip"), rs.getString("vrednost"));
 				cilj.getDatumZastavitve().setTimeInMillis(rs.getTimestamp("datumZastavitve").getTime());
-						
 				seznam.add(cilj);
 			}
 			rs.close();

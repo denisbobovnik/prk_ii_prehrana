@@ -5,18 +5,19 @@ import java.util.GregorianCalendar;
 
 public class Cilj {
 	private int id_cilj;
-	private String user_username, tip;
+	private String user_username, tip, vrednost;
 	private Calendar datumZastavitve;
 	
 	public Cilj() {
 		super();
 		datumZastavitve = new GregorianCalendar();
 	}
-	public Cilj(int id_cilj, String user_username, String tip) {
+	public Cilj(int id_cilj, String user_username, String tip, String vrednost) {
 		super();
 		this.id_cilj = id_cilj;
 		this.user_username = user_username;
 		this.tip = tip;
+		this.vrednost = vrednost;
 		datumZastavitve = new GregorianCalendar();
 	}
 	
@@ -44,10 +45,16 @@ public class Cilj {
 	public void setDatumZastavitve(Calendar datumZastavitve) {
 		this.datumZastavitve = datumZastavitve;
 	}
+	public String getVrednost() {
+		return vrednost;
+	}
+	public void setVrednost(String vrednost) {
+		this.vrednost = vrednost;
+	}
 	
 	@Override
 	public String toString() {
-		return "Cilj [id_cilj=" + id_cilj + ", user_username=" + user_username + ", tip=" + tip + ", datumZastavitve="
-				+ datumZastavitve + "]";
+		return "Cilj [id_cilj=" + id_cilj + ", user_username=" + user_username + ", tip=" + tip + ", vrednost="
+				+ vrednost + ", datumZastavitve=" + datumZastavitve + "]";
 	}
 }
