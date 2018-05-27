@@ -1,0 +1,90 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-posameznik.xhtml">
+		
+		
+		<ui:define name="title">
+			Objava èlanka
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- Contact section -->
+				<div class="contact-section spad fix">
+					<div class="container">
+						<div class="row">
+						
+							<!-- contact info -->
+							<div class="col-md-5 col-md-offset-1 contact-info col-push">
+								<div class="section-title left">
+									<h2>Vnos programa</h2>
+								</div>
+								
+							</div>
+						
+							<!-- contact form -->
+							<div class="col-md-6 col-pull">
+								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
+									<div class="row">
+										<div class="col-sm-12">
+											<p:inputText id="program-title" name="title" value="#{ProgramJSFBean.p.naslov}" a:placeholder="Naslov(*)">
+												<f:validateLength minimum="5" maximum="100"></f:validateLength>
+											</p:inputText>
+											
+											<p:inputText id="tip" name="tip" value="#{ProgramJSFBean.p.tipPrograma}" a:placeholder="Tip programa(*)">
+												<f:validateLength minimum="5" maximum="100"></f:validateLength>
+											</p:inputText>
+											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ProgramJSFBean.thumbnail}" mode="simple" />
+	                                        
+	                                         Izberi dan: 
+   		                                     <h:selectOneMenu value="#{ProgramJSFBean.e.dan_v_tednu}">
+   			                                     <f:selectItem itemValue="Ponedeljek" itemLabel="Ponedeljek" />
+   			                                     <f:selectItem itemValue="Torek" itemLabel="Torek" />
+   			                                     <f:selectItem itemValue="Sreda" itemLabel="Sreda" />
+   			                                     <f:selectItem itemValue="Èetrtek" itemLabel="Èetrtek" />
+   			                                     <f:selectItem itemValue="Petek" itemLabel="Petek" />
+   		                                      </h:selectOneMenu>
+		
+		<br /><br />
+											
+											<br />
+											
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="seznam-clankov.xhtml"/>
+											
+											<br />
+											<p:messages showDetail="false"/>
+										</div>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Contact section end-->	
+	
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>
