@@ -1,5 +1,7 @@
 package si.um.feri.prk.jsfbeans;
 
+import java.util.ArrayList;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

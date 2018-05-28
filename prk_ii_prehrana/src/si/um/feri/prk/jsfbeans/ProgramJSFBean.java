@@ -17,9 +17,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import si.um.feri.prk.dao.ClanekDAO;
+import si.um.feri.prk.dao.PrehranaDAO;
 import si.um.feri.prk.dao.ProgramDAO;
 import si.um.feri.prk.objekti.Clanek;
 import si.um.feri.prk.objekti.Enota;
+import si.um.feri.prk.objekti.Prehrana;
 import si.um.feri.prk.objekti.Program;
 import si.um.feri.prk.objekti.Recept;
 
@@ -30,11 +32,17 @@ public class ProgramJSFBean {
 	
 	Logger log=LoggerFactory.getLogger(ProgramJSFBean.class);
 	private ProgramDAO pD = ProgramDAO.getInstance();
+	private PrehranaDAO prehD = PrehranaDAO.getInstance();
 	private Program p = new Program();
 	private Program izbranProgram = new Program();
 	private UploadedFile thumbnail;
 	private Enota enota = new Enota();
 	private Recept izbranRecept = new Recept();
+	
+	
+	public ArrayList<Prehrana> vrniVse() throws Exception {
+		return prehD.vrniVse();
+	}
 	
 	public void dodajProgram() {
 		try {
@@ -58,10 +66,7 @@ public class ProgramJSFBean {
 		p.getEnote().add(enota);
 		enota = new Enota();
 	}
-	public void dodajRecept() {
-		enota.getRecepti().add(izbranRecept);
-		izbranRecept = new Recept();
-	}
+
 	
 	public Recept getIzbranRecept() {
 		return izbranRecept;

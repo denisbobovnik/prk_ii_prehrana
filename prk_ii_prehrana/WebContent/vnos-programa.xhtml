@@ -44,28 +44,17 @@
 											<p:inputText id="program-title" name="title" value="#{ProgramJSFBean.p.naslov}" a:placeholder="Naslov(*)">
 												<f:validateLength minimum="5" maximum="100"></f:validateLength>
 											</p:inputText>
-											
-											<p:inputText id="tip" name="tip" value="#{ProgramJSFBean.p.tipPrograma}" a:placeholder="Tip programa(*)">
-												<f:validateLength minimum="5" maximum="100"></f:validateLength>
-											</p:inputText>
+									
 											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ProgramJSFBean.thumbnail}" mode="simple" />
 	                                        
-	                                         Izberi dan: 
-   		                                     <h:selectOneMenu value="#{ProgramJSFBean.e.dan_v_tednu}">
-   			                                     <f:selectItem itemValue="Ponedeljek" itemLabel="Ponedeljek" />
-   			                                     <f:selectItem itemValue="Torek" itemLabel="Torek" />
-   			                                     <f:selectItem itemValue="Sreda" itemLabel="Sreda" />
-   			                                     <f:selectItem itemValue="Èetrtek" itemLabel="Èetrtek" />
-   			                                     <f:selectItem itemValue="Petek" itemLabel="Petek" />
-   		                                      </h:selectOneMenu>
-   		                                      
-   		                                      
-		
-		<br /><br />
+	                                        <br />
+	                                        <h:selectOneMenu value="#{ProgramJSFBean.p.tk_id_prehrana)}">
+                                                <f:selectItems value="#{ProgramJSFBean.vrniVse()}" var="preh" itemValue="#{preh.id_prehrana}" itemLabel="#{preh.naslovPrehrane}" />
+                                            </h:selectOneMenu>
 											
 											<br />
 											
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ProgramJSFBean.dodajProgram}" action="seznam-clankov.xhtml"/>
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ProgramJSFBean.dodajProgram()}" action="urejanje-programa.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>
