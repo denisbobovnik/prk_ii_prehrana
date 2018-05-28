@@ -66,6 +66,12 @@ public class ReceptJSFBean {
 			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 		}
 	}
+	
+	public String vrniIme(int recept_id_enote) throws Exception {
+		Recept r = rD.najdi(recept_id_enote);
+		return r.getIme();
+	}
+	
 	public void dodajSestavino() throws Exception {
 		sestavineTrenutnegaRecepta.add(s);
 		s = new Sestavine();	

@@ -23,7 +23,45 @@
 		
 		<ui:define name="content">
 			<f:view>
-<!-- prikaz programa (za vsaki dan - nekak združeno po dnevu, našteti recepti, ki so nastavljeni, ter link do le-teh (uporabiš ReceptJSFBean in nastavis izbranRecept ter daš action na stran recept.xhtml -->
+			
+				<!-- page section -->
+				<div class="page-section spad">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 blog-posts">
+								<!-- Single Post -->
+								<div class="single-post">
+									<div class="post-thumbnail">
+										<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=program&amp;id=#{ProgramJSFBean.izbranProgram.id_program}" height="270"/>
+									</div>
+									<div class="post-content">
+										<h2 class="post-title"><h:outputText value="#{ProgramJSFBean.izbranProgram.naslov}" /></h2>
+										<div class="post-meta">
+											<a href=""><h:outputText value="#{ProgramJSFBean.izbranProgram.user_username}" /></a>
+										</div>
+										<h:form>
+											<h:dataTable value="#{ProgramJSFBean.izbranProgram.enote}" var="enota">
+											   <h:column>    				
+											      <f:facet name="header"><h:outputText value="Dan v tednu" /></f:facet>    				
+											      <h:outputText value="#{enota.dan_v_tednu}" />
+											   </h:column>
+											   <h:column>
+											      <f:facet name="header"><h:outputText value="Povezava do recepta" /></f:facet>
+											      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(enota.tk_recept_id)}" value="#{ReceptJSFBean.vrniIme(enota.tk_recept_id)}" />
+											   </h:column>
+											</h:dataTable>
+										</h:form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- page section end-->
+
+				
+				
+<!-- našteti recepti, ki so nastavljeni, ter link do le-teh (uporabiš ReceptJSFBean in nastavis izbranRecept ter daš action na stran recept.xhtml -->
 			</f:view>
 		</ui:define>
 		

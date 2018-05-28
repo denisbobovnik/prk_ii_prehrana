@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import javax.ejb.SessionContext;
 import javax.faces.application.FacesMessage;
@@ -45,7 +46,7 @@ public class ProgramJSFBean {
 	private ReceptDAO rD = ReceptDAO.getInstance();
 	private ArrayList<Enota> enotePrograma = new ArrayList<Enota>();
 	private EnotaDAO eD = EnotaDAO.getInstance();
-	
+		
 	public void dodajProgram() {
 		try {
 			String str = thumbnail.getFileName();
@@ -124,6 +125,7 @@ public class ProgramJSFBean {
 		enotePrograma.add(enota);
 		enota = new Enota();
 	}
+
 	public void zakljuciUrejanje() throws Exception {
 		for(Enota e : enotePrograma)
 			eD.shrani(e);
