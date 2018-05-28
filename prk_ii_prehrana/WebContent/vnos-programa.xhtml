@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Objava èlanka
+			Objava clanka
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -48,13 +48,13 @@
 											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ProgramJSFBean.thumbnail}" mode="simple" />
 	                                        
 	                                        <br />
-	                                        <h:selectOneMenu value="#{ProgramJSFBean.p.tk_id_prehrana)}">
+	                                        <h:selectOneMenu value="#{ProgramJSFBean.p.tk_id_prehrana}">
                                                 <f:selectItems value="#{ProgramJSFBean.vrniVse()}" var="preh" itemValue="#{preh.id_prehrana}" itemLabel="#{preh.naslovPrehrane}" />
                                             </h:selectOneMenu>
 											
 											<br />
 											
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ProgramJSFBean.dodajProgram()}" action="urejanje-programa.xhtml"/>
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Poslji" actionListener="#{ProgramJSFBean.dodajProgram()}" action="urejanje-programa.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>
