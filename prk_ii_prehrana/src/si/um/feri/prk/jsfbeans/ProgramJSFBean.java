@@ -17,13 +17,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import si.um.feri.prk.dao.ClanekDAO;
+import si.um.feri.prk.dao.EnotaDAO;
 import si.um.feri.prk.dao.PrehranaDAO;
 import si.um.feri.prk.dao.ProgramDAO;
+import si.um.feri.prk.dao.ReceptDAO;
 import si.um.feri.prk.objekti.Clanek;
 import si.um.feri.prk.objekti.Enota;
 import si.um.feri.prk.objekti.Prehrana;
 import si.um.feri.prk.objekti.Program;
 import si.um.feri.prk.objekti.Recept;
+import si.um.feri.prk.objekti.Sestavine;
 
 @ManagedBean(name="ProgramJSFBean")
 @SessionScoped
@@ -39,6 +42,9 @@ public class ProgramJSFBean {
 	private Enota enota = new Enota();
 	private Recept izbranRecept = new Recept();
 	private int idZadnjiDodaniProgram;
+	private ReceptDAO rD = ReceptDAO.getInstance();
+	private ArrayList<Enota> enotePrograma = new ArrayList<Enota>();
+	private EnotaDAO eD = EnotaDAO.getInstance();
 	
 	public void dodajProgram() {
 		try {
@@ -77,6 +83,34 @@ public class ProgramJSFBean {
 
 	public void setEnota(Enota enota) {
 		this.enota = enota;
+	}
+	
+	public void dodajReceptNaProgram() {
+		enota.setId_enota(0);
+		enota.setTk_program_id(idZadnjiDodaniProgram);
+		enotePrograma.add(enota);
+		enota = new Enota();
+	}
+	public void zakljuciUrejanje() throws Exception {
+		for(Enota e : enotePrograma)
+			eD.shrani(e);
+		enotePrograma.clear();
+	}	
+
+	public int getIdZadnjiDodaniProgram() {
+		return idZadnjiDodaniProgram;
+	}
+
+	public void setIdZadnjiDodaniProgram(int idZadnjiDodaniProgram) {
+		this.idZadnjiDodaniProgram = idZadnjiDodaniProgram;
+	}
+
+	public ReceptDAO getrD() {
+		return rD;
+	}
+
+	public void setrD(ReceptDAO rD) {
+		this.rD = rD;
 	}
 
 	public UploadedFile getThumbnail() {

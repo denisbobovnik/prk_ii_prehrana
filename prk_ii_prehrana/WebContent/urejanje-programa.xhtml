@@ -1,0 +1,83 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-strokovnjak.xhtml">
+		
+		
+		<ui:define name="title">
+			Urejanje programa
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- Contact section -->
+				<div class="contact-section spad fix">
+					<div class="container">
+						<div class="row">
+						
+							<!-- contact info -->
+							<div class="col-md-5 col-md-offset-1 contact-info col-push">
+								<div class="section-title left">
+									<h2>Urejanje programa</h2>
+								</div>
+								
+							</div>
+						
+							<!-- contact form -->
+							<div class="col-md-6 col-pull">
+								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
+									<div class="row">
+										<div class="col-sm-12">
+											<h:form>
+												<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
+													<h:outputLabel style="color: black;" for="basic" value="Dan v tednu:" />
+													<h:selectOneMenu id="basic" value="#{ProgramJSFBean.enota.dan_v_tednu}">
+		   			                                	<f:selectItem itemValue="Ponedeljek" itemLabel="Ponedeljek" />
+		   			                            		<f:selectItem itemValue="Torek" itemLabel="Torek" />
+		   			                                    <f:selectItem itemValue="Sreda" itemLabel="Sreda" />
+		   			                                    <f:selectItem itemValue="Četrtek" itemLabel="Četrtek" />
+		   			                                    <f:selectItem itemValue="Petek" itemLabel="Petek" />
+		   		                                	</h:selectOneMenu>
+													<h:outputLabel style="color: black;" for="advanced" value="Izbor recepta:" />
+													<p:selectOneListbox id="advanced" value="#{ProgramJSFBean.enota.tk_recept_id}" filter="true" filterMatchMode="contains">
+											            <f:selectItems value="#{ProgramJSFBean.rD.vrniVse()}" var="recept" itemLabel="#{recept.ime}" itemValue="#{recept.id_recept}" />
+											        </p:selectOneListbox>
+												</h:panelGrid>
+												<h:commandButton class="site-btn" value="Dodaj k programu" actionListener="#{ProgramJSFBean.dodajReceptNaProgram()}" action="urejanje-programa.xhtml"/>
+												<br /><br />
+												<h:commandButton class="site-btn" value="Zaključi urejanje" actionListener="#{ProgramJSFBean.zakljuciUrejanje()}" action="seznam-prehran.xhtml"/>
+											</h:form>
+										</div>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Contact section end-->	
+	
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>

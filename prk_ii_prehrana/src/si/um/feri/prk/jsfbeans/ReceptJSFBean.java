@@ -75,7 +75,8 @@ public class ReceptJSFBean {
 		for(Sestavine s : sestavineTrenutnegaRecepta) {
 			s.setTk_recept_id(id_trenutnega_recepta);
 			sD.shrani(s);
-		}		
+		}
+		sestavineTrenutnegaRecepta.clear(); //da "poèisti array sestavin, za naslednji recept"
 	}
 	
     public ArrayList<String> razreziZvejicoArrayList(String str) {
