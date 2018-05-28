@@ -50,9 +50,6 @@
 							<h:panelGroup rendered="#{not empty request.remoteUser}">		
 								<li><h:commandLink action="#{LogoutJSFBean.logout}" value="Odjava" /></li>		
 							</h:panelGroup>
-							 <h:panelGroup rendered="#{empty request.remoteUser}">
-							   <li><h:commandLink action="login.xhtml" value="Prijava" /></li>
-							 </h:panelGroup>
 						</ul>
 					</h:form>
 				</nav>
