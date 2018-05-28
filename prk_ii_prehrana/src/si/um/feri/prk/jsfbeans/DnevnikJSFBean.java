@@ -12,26 +12,29 @@ import si.um.feri.prk.dao.CiljDAO;
 import si.um.feri.prk.dao.PrehranaDAO;
 import si.um.feri.prk.objekti.Cilj;
 import si.um.feri.prk.objekti.Prehrana;
+import si.um.feri.prk.objekti.ZauzitaHrana;
 
 @ManagedBean(name="DnevnikJSFBean")
 @SessionScoped
 public class DnevnikJSFBean {
 
-	Logger log=LoggerFactory.getLogger(DnevnikJSFBean.class);
-	ArrayList<String> mozniCilji = new ArrayList<String>() {{
+	private Logger log=LoggerFactory.getLogger(DnevnikJSFBean.class);
+	private ArrayList<String> mozniCilji = new ArrayList<String>() {{
 	    add("1x na teden jej hrano kategorije X");
 	    add("Na dan pojej za X kalorij");
 	    add("Spij X litrov vode na dan");
 	    add("Na dan zaužij X gramov sladkorja");
 	    add("X obrokov na dan");
 	}};
-	PrehranaDAO pD = PrehranaDAO.getInstance();
-	CiljDAO cD = CiljDAO.getInstance();
-	ArrayList<String> kategorijeHrane = new ArrayList<String>();
-	
+	private PrehranaDAO pD = PrehranaDAO.getInstance();
+	private CiljDAO cD = CiljDAO.getInstance();
+	private ArrayList<String> kategorijeHrane = new ArrayList<String>();
 	private String izbranCilj, izbranaKategorija;
 	private Double steviloKalorij, kolicinaVode, kolicinaSladkorja;
 	private Integer steviloObrokov;
+	
+	private String tipZauziteHrane; //ali roèni vnos ali po receptu
+	private ZauzitaHrana zH;
 	
 	public ArrayList<String> getMozniCilji() {
 		return mozniCilji;
@@ -99,6 +102,18 @@ public class DnevnikJSFBean {
 	public void setSteviloObrokov(Integer steviloObrokov) {
 		this.steviloObrokov = steviloObrokov;
 	}
+	public String getTipZauziteHrane() {
+		return tipZauziteHrane;
+	}
+	public void setTipZauziteHrane(String tipZauziteHrane) {
+		this.tipZauziteHrane = tipZauziteHrane;
+	}
+	public ZauzitaHrana getzH() {
+		return zH;
+	}
+	public void setzH(ZauzitaHrana zH) {
+		this.zH = zH;
+	}
 	
 	public void nastaviKategorije() throws Exception {
 		kategorijeHrane.clear();
@@ -139,5 +154,8 @@ public class DnevnikJSFBean {
 			steviloObrokov = null;
 		}
 		izbranCilj = null;
+	}
+	public void razveljaviVnosHrane() {
+		tipZauziteHrane = null;
 	}
 }

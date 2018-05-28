@@ -15,7 +15,6 @@ public class EnotaDAO {
 	
 	DataSource baza;
 	Logger log=LoggerFactory.getLogger(EnotaDAO.class);
-	private ReceptDAO rD = ReceptDAO.getInstance();
 	
 	private static EnotaDAO instance=null;
 	public static synchronized EnotaDAO getInstance() {		

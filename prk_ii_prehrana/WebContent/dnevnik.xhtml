@@ -22,10 +22,12 @@
 		
 		<ui:define name="content">
 			<f:view>
+			
 					<br /><br /><br />
 					<div class="newsletter-section spad">
 						<div class="container">
 							<div class="row">
+							
 								<h:form class="nl-form" rendered="#{DnevnikJSFBean.izbranCilj eq null}">
 									<div class="col-md-3">
 										<h2>Seznam ciljev</h2>
@@ -115,6 +117,71 @@
 							</div>
 						</div>
 					</div>
+					<ui:fragment rendered="#{DnevnikJSFBean.tipZauziteHrane eq null}">
+						<div class="newsletter-section spad">
+							<div class="container">
+								<div class="row">
+									<h:form class="nl-form" style="text-align: left;">
+										<div class="col-md-3">
+											<h2>Način vnosa zaužite hrane</h2>
+										</div>
+										<div class="col-md-6">
+									        <p:selectOneButton value="#{DnevnikJSFBean.tipZauziteHrane}">
+									            <f:selectItem itemLabel="Ročni vnos" itemValue="rocni" />
+									            <f:selectItem itemLabel="Vnos po receptu" itemValue="recept" />
+									        </p:selectOneButton>
+									 	</div>
+									    <div class="col-md-3">
+											<h:commandButton class="site-btn btn-2" action="dnevnik.xhtml" value="Naprej na vnos" />
+										</div>
+									</h:form>
+								</div>
+							</div>
+						</div>
+					</ui:fragment>
+					
+					<ui:fragment rendered="#{(DnevnikJSFBean.tipZauziteHrane == 'rocni') and (DnevnikJSFBean.zH.user_username eq null)}">
+						<!-- Contact section -->
+						<div class="contact-section spad fix">
+							<div class="container">
+								<div class="row">
+								
+									<!-- contact info -->
+									<div class="col-md-5 col-md-offset-1 contact-info col-push">
+										<div class="section-title left">
+											<h2>Ročni vnos zaužite hrane</h2>
+										</div>
+										<p>Izpolnite obzrazec, da dodate na novo zaužito hrano, ki je še ni med recepti. <br />Če ste se zmotili pri izbiri načina vnosa, kliknite prekliči.</p>
+									</div>
+								
+									<!-- contact form -->
+									<div class="col-md-6 col-pull">
+										<h:form class="form-class" id="con_form">
+											<div class="row">
+												<div class="col-sm-12">
+													<p:inputText id="clanek-title" name="title" value="#{ClanekJSFBean.c.title}" a:placeholder="Naslov(*)" />
+													
+													<p:inputTextarea id="clanek-content" name="content" value="#{ClanekJSFBean.c.content}" a:placeholder="Vsebina(*)" cols="30" rows="10" />
+													
+													Naslovnica(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ClanekJSFBean.thumbnail}" mode="simple" />
+													
+													<br />
+													<br />
+													
+													<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="seznam-clankov.xhtml"/>
+													<h:commandButton class="site-btn btn-2" actionListener="#{DnevnikJSFBean.razveljaviVnosHrane()}" action="dnevnik.xhtml" value="Prekliči" />
+													
+													<br />
+													<p:messages showDetail="false"/>
+												</div>
+											</div>
+										</h:form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Contact section end-->	
+					</ui:fragment>
 
 			</f:view>
 		</ui:define>
