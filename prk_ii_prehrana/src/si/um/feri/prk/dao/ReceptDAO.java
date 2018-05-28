@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
@@ -100,6 +101,50 @@ public class ReceptDAO {
 			conn.close();
 		}
 	}
+	
+	public int shraniInVrniID(Recept r) throws Exception {
+		log.info("ReceptDAO: shranjujem " + r);
+		Connection conn=null;
+		int generiranID = 0;
+		try {
+			conn=baza.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Recept(id_recept, ime, dolzinaPriprave, steviloPorcij, opis, slika, linkVideo, kalorije, tipSlike, datumDodajanja, sladkorji) VALUES (?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, r.getId_recept());
+			ps.setString(2, r.getIme());
+			ps.setInt(3, r.getDolzinaPriprave());
+			ps.setInt(4, r.getSteviloPorcij());
+			ps.setString(5, r.getOpis());
+			ps.setBinaryStream(6, r.getSlika().getBinaryStream());
+			ps.setString(7, r.getLinkVideo());
+			ps.setDouble(8, r.getKalorije());
+			ps.setString(9, r.getTipSlike());
+			ps.setTimestamp(10, new Timestamp(r.getDatumDodajanja().getTimeInMillis()));
+			ps.setDouble(11, r.getSladkorji());
+				
+			ps.executeUpdate();
+				
+			for(Alergeni a : r.getAlergeni())
+				aD.shrani(a);
+				
+			for(Sestavine s : r.getSestavine())
+				sD.shrani(s);
+			
+			for(Enota e : r.getEnote())
+				eD.shrani(e);
+			
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next()){
+				generiranID=rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return generiranID;
+	}
+	
 	public Recept najdi(int id_recept) throws Exception {
 		log.info("ReceptDAO: najdi " + id_recept);
 		Recept ret = null;

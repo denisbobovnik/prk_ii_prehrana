@@ -54,14 +54,14 @@
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
-											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.slika}" mode="simple" />
-											<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.r.video}" a:placeholder="Video(*)">
+											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
+											<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.r.linkVideo}" a:placeholder="Video(*)">
 											</p:inputText>
 											
-											<p:inputText id="kalorije-title" name="kalorije" value="#{ReceptJSFBean.c.kalorije}" a:placeholder="Kalorije(*)">
+											<p:inputText id="kalorije-title" name="kalorije" value="#{ReceptJSFBean.r.kalorije}" a:placeholder="Kalorije(*)">
 											</p:inputText>
 											
-											<p:inputText id="sladkor-title" name="sladkor" value="#{ReceptJSFBean.c.sladkor}" a:placeholder="Sladkor(*)">
+											<p:inputText id="sladkor-title" name="sladkor" value="#{ReceptJSFBean.r.sladkorji}" a:placeholder="Sladkor(*)">
 											</p:inputText>
 											
 											<br />
@@ -71,7 +71,7 @@
 											<br />
 											
 											<!-- redirect na seznam člankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ReceptJSFBean.parseAlergeni}" action="dodajanje-sestavin-za-recept.xhtml"/>
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ReceptJSFBean.dodajRecept()}" action="dodajanje-sestavin-za-recept.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>

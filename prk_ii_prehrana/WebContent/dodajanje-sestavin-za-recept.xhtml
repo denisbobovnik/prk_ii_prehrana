@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Objava èlanka
+			Objava članka
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -40,21 +40,22 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" a:placeholder="Sestavina(*)">
+											<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" a:placeholder="Ime(*)">
 											</p:inputText>
 											
 											<p:inputText id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.s.kolicina}" a:placeholder="Količina(*)">
 											</p:inputText>
 											
-											<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota_kolicine}" a:placeholder="Enota(*)">
+											<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota_kolicine}" a:placeholder="Enota količine(*)">
 											</p:inputText>
 					
 											<br />
 											<br />
 											
 											<!-- redirect na seznam èlankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Dodaj sestavino" actionListener="#{ReceptJSFBean.dodajSestavino}" action="objava-clanka.xhtml"/>
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Shrani recept" actionListener="#{ReceptJSFBean.dodajRecept}" action="objava-clanka.xhtml"/>
+											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Dodaj sestavino" actionListener="#{ReceptJSFBean.dodajSestavino()}" action="dodajanje-sestavin-za-recept.xhtml"/>
+											<br />
+											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Shrani recept" actionListener="#{ReceptJSFBean.dodajSestavineReceptu()}" action="seznam-receptov.xhtml"/>
 											<br />
 											<p:messages showDetail="false"/>
 										</div>

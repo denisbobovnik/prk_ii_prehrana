@@ -89,9 +89,6 @@ public class Recept {
 	public Blob getSlika() {
 		return slika;
 	}
-	public void setSlika(Blob slika) {
-		this.slika = slika;
-	}
 	public double getKalorije() {
 		return kalorije;
 	}
