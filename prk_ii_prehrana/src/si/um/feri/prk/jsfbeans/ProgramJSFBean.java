@@ -59,7 +59,7 @@ public class ProgramJSFBean {
 		enota = new Enota();
 	}
 	public void dodajRecept() {
-		enota.getRecepti().add(izbranRecept);
+	//	enota.getRecepti().add(izbranRecept);
 		izbranRecept = new Recept();
 	}
 	
