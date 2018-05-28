@@ -52,7 +52,20 @@ public class ProgramJSFBean {
 			if(str.contains(".")) {
 				String ext = str.substring(str.lastIndexOf('.'), str.length());
 				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
+					nastaviTipSlike(ext);
 					p.setSlika(thumbnail.getContents());
+					
+					FacesContext context = FacesContext.getCurrentInstance();
+					String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
+					
+					p.setUser_username(username);
+					
+					String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
+					if(vloga.equals("STROKOVNJAK"))
+						p.setTipPrograma("splosni");
+					else
+						p.setTipPrograma("personaliziran");
+					
 					int id = pD.shraniInVrniId(p);
 					idZadnjiDodaniProgram = id;
 					p = new Program();
@@ -64,7 +77,27 @@ public class ProgramJSFBean {
 			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 		}
 	}
+	
+	private String getUserRole(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		String[] vloge = {"ADMINISTRATOR", "STROKOVNJAK", "POSAMEZNIK"};
+		String ret = "";
+		for(String s : vloge)
+			if(context.getExternalContext().isUserInRole(s))
+				ret = s;
+		return ret;
+	}
 
+	private void nastaviTipSlike(String ext) {
+		ext = ext.substring(1, ext.length());
+		if(ext.equals("jpg")) {
+			p.setTipSlike("image/jpeg");
+		}
+		else {
+			p.setTipSlike("image/"+ext.toLowerCase());
+		}
+	}
+	
 	public void dodajEnoto() {
 		p.getEnote().add(enota);
 		enota = new Enota();
