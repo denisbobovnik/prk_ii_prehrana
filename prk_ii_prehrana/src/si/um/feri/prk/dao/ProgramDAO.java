@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -92,6 +93,34 @@ public class ProgramDAO {
 				//že obstaja, update
 			} else { //ne obstaja, insert
 				PreparedStatement ps = conn.prepareStatement("INSERT INTO Program(id_program, tk_id_prehrana, naslov, tipPrograma, tipSlike, slika, user_username) VALUES (?,?,?,?,?,?,?)");
+				ps.setInt(1, p.getId_program());
+				ps.setInt(2, p.getTk_id_prehrana());
+				ps.setString(3, p.getNaslov());
+				ps.setString(4, p.getTipPrograma());
+				ps.setString(5, p.getTipSlike());
+				ps.setBinaryStream(6, p.getSlika().getBinaryStream());
+				ps.setString(7, p.getUser_username());
+				
+				ps.executeUpdate();
+				
+				for(Enota e : p.getEnote())
+					eD.shrani(e);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+	}
+	public void shraniInVrniId(Program p) throws Exception {
+		log.info("ProgramDAO: shranjujem " + p);
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+			if(najdi(p.getId_program()) != null) {
+				//že obstaja, update
+			} else { //ne obstaja, insert
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO Program(id_program, tk_id_prehrana, naslov, tipPrograma, tipSlike, slika, user_username) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1, p.getId_program());
 				ps.setInt(2, p.getTk_id_prehrana());
 				ps.setString(3, p.getNaslov());
