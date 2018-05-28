@@ -112,9 +112,10 @@ public class ProgramDAO {
 			conn.close();
 		}
 	}
-	public void shraniInVrniId(Program p) throws Exception {
+	public int shraniInVrniId(Program p) throws Exception {
 		log.info("ProgramDAO: shranjujem " + p);
 		Connection conn=null;
+		int generiranID = 0;
 		try {
 			conn=baza.getConnection();
 			if(najdi(p.getId_program()) != null) {
@@ -133,12 +134,17 @@ public class ProgramDAO {
 				
 				for(Enota e : p.getEnote())
 					eD.shrani(e);
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()){
+					generiranID=rs.getInt(1);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			conn.close();
 		}
+		return generiranID;
 	}
 
 	public ArrayList<Program> najdiVsePoPrehrani(int id_prehrana) throws Exception {

@@ -38,11 +38,7 @@ public class ProgramJSFBean {
 	private UploadedFile thumbnail;
 	private Enota enota = new Enota();
 	private Recept izbranRecept = new Recept();
-	
-	
-	public ArrayList<Prehrana> vrniVse() throws Exception {
-		return prehD.vrniVse();
-	}
+	private int idZadnjiDodaniProgram;
 	
 	public void dodajProgram() {
 		try {
@@ -51,7 +47,8 @@ public class ProgramJSFBean {
 				String ext = str.substring(str.lastIndexOf('.'), str.length());
 				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
 					p.setSlika(thumbnail.getContents());
-					pD.shrani(p);
+					int id = pD.shraniInVrniId(p);
+					idZadnjiDodaniProgram = id;
 					p = new Program();
 				}
 			}
@@ -113,6 +110,26 @@ public class ProgramJSFBean {
 
 	public void setIzbranProgram(Program izbranProgram) {
 		this.izbranProgram = izbranProgram;
+	}
+
+	public PrehranaDAO getPrehD() {
+		return prehD;
+	}
+
+	public void setPrehD(PrehranaDAO prehD) {
+		this.prehD = prehD;
+	}
+
+	public int getZadnjiDodaniProgram() {
+		return idZadnjiDodaniProgram;
+	}
+
+	public void setZadnjiDodaniProgram(int zadnjiDodaniProgram) {
+		this.idZadnjiDodaniProgram = zadnjiDodaniProgram;
+	}
+
+	public ArrayList<Prehrana> vrniVse() throws Exception {
+		return prehD.vrniVse();
 	}
 
 	public void izberiProgram(int id_program) {
