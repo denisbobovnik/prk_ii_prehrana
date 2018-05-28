@@ -9,26 +9,26 @@ import java.util.GregorianCalendar;
 import javax.sql.rowset.serial.SerialException;
 
 public class Recept {
-	private int id_recept, dolzinaPriprave, steviloPorcij, tk_id_enota;
+	private int id_recept, dolzinaPriprave, steviloPorcij;
 	private String ime, opis, linkVideo, tipSlike;
 	private Blob slika;
 	private double kalorije, sladkorji;
 	private Calendar datumDodajanja;
 	private ArrayList<Sestavine> sestavine = new ArrayList<Sestavine>();
 	private ArrayList<Alergeni> alergeni = new ArrayList<Alergeni>();
+	private ArrayList<Enota> enote = new ArrayList<Enota>();
 
 	public Recept() {
 		super();
 		this.datumDodajanja = new GregorianCalendar();
 	}
-	public Recept(int id_recept, int dolzinaPriprave, int steviloPorcij, double sladkorji, int tk_id_enota, String ime, String opis,
+	public Recept(int id_recept, int dolzinaPriprave, int steviloPorcij, double sladkorji, String ime, String opis,
 			String linkVideo, String tipSlike, Blob slika, double kalorije) {
 		super();
 		this.id_recept = id_recept;
 		this.sladkorji = sladkorji;
 		this.dolzinaPriprave = dolzinaPriprave;
 		this.steviloPorcij = steviloPorcij;
-		this.tk_id_enota = tk_id_enota;
 		this.ime = ime;
 		this.opis = opis;
 		this.linkVideo = linkVideo;
@@ -56,11 +56,11 @@ public class Recept {
 	public void setSteviloPorcij(int steviloPorcij) {
 		this.steviloPorcij = steviloPorcij;
 	}
-	public int getTk_id_enota() {
-		return tk_id_enota;
+	public ArrayList<Enota> getEnote() {
+		return enote;
 	}
-	public void setTk_id_enota(int tk_id_enota) {
-		this.tk_id_enota = tk_id_enota;
+	public void setEnote(ArrayList<Enota> enote) {
+		this.enote = enote;
 	}
 	public String getIme() {
 		return ime;
@@ -135,8 +135,8 @@ public class Recept {
 	@Override
 	public String toString() {
 		return "Recept [id_recept=" + id_recept + ", dolzinaPriprave=" + dolzinaPriprave + ", steviloPorcij="
-				+ steviloPorcij + ", tk_id_enota=" + tk_id_enota + ", ime=" + ime + ", opis=" + opis + ", linkVideo="
-				+ linkVideo + ", tipSlike=" + tipSlike + ", slika=" + slika + ", kalorije=" + kalorije + ", sladkorji="
-				+ sladkorji + ", datumDodajanja=" + datumDodajanja + "]";
+				+ steviloPorcij + ", ime=" + ime + ", opis=" + opis + ", linkVideo=" + linkVideo + ", tipSlike="
+				+ tipSlike + ", slika=" + slika + ", kalorije=" + kalorije + ", sladkorji=" + sladkorji
+				+ ", datumDodajanja=" + datumDodajanja + "]";
 	}
 }

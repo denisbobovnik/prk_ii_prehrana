@@ -38,7 +38,7 @@ public class EnotaDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Enota(id_enota int not null auto_increment primary key, tk_program_id int not null, dan_v_tednu varchar(100) not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Enota(id_enota int not null auto_increment primary key, tk_program_id int not null, dan_v_tednu varchar(100) not null, tk_recept_id int not null)");
 			} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -70,8 +70,7 @@ public class EnotaDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				ret = new Enota(id_enota, rs.getInt("tk_program_id"), rs.getString("dan_v_tednu"));
-				ret.setRecepti(rD.najdiVsePoEnoti(ret.getId_enota()));
+				ret = new Enota(rs.getInt("id_enota"), rs.getInt("tk_program_id"), rs.getInt("tk_recept_id"), rs.getString("dan_v_tednu"));
 				break;
 			}
 		} catch (Exception e) {
@@ -90,15 +89,13 @@ public class EnotaDAO {
 			if(najdi(e.getId_enota()) != null) {
 				//že obstaja, update
 			} else { //ne obstaja, insert
-				PreparedStatement ps = conn.prepareStatement("INSERT INTO Enota(id_enota, tk_program_id, dan_v_tednu) VALUES (?,?,?)");
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO Enota(id_enota, tk_program_id, dan_v_tednu, tk_recept_id) VALUES (?,?,?,?)");
 				ps.setInt(1, e.getId_enota());
 				ps.setInt(2, e.getTk_program_id());
 				ps.setString(3, e.getDan_v_tednu());
+				ps.setInt(4, e.getTk_recept_id());
 				
 				ps.executeUpdate();
-				
-				for(Recept r : e.getRecepti())
-					rD.shrani(r);
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -118,8 +115,30 @@ public class EnotaDAO {
 			ps.setInt(1, tk_program_id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Enota enota = new Enota(rs.getInt("id_enota"), rs.getInt("tk_program_id"), rs.getString("dan_v_tednu"));
-				enota.setRecepti(rD.najdiVsePoEnoti(enota.getId_enota()));
+				Enota enota = new Enota(rs.getInt("id_enota"), rs.getInt("tk_program_id"), rs.getInt("tk_recept_id"), rs.getString("dan_v_tednu"));
+				seznam.add(enota);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return seznam;
+	}
+	
+	public ArrayList<Enota> najdiVsePoReceptu(int tk_recept_id) throws Exception {
+		log.info("EnotaDAO: najdiVsePoReceptu " + tk_recept_id);
+		ArrayList<Enota> seznam = new ArrayList<Enota>();
+		
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Enota WHERE tk_recept_id=?");
+			ps.setInt(1, tk_recept_id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Enota enota = new Enota(rs.getInt("id_enota"), rs.getInt("tk_program_id"), rs.getInt("tk_recept_id"), rs.getString("dan_v_tednu"));
 				seznam.add(enota);
 			}
 			rs.close();
