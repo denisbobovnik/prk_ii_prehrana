@@ -15,6 +15,7 @@ import si.um.feri.prk.dao.ClanekDAO;
 import si.um.feri.prk.dao.PrehranaDAO;
 import si.um.feri.prk.objekti.Clanek;
 import si.um.feri.prk.objekti.Prehrana;
+import si.um.feri.prk.objekti.Program;
 
 @ManagedBean(name="PrehranaJSFBean")
 @SessionScoped
@@ -25,6 +26,7 @@ public class PrehranaJSFBean {
 	private UploadedFile thumbnail;
 	private PrehranaDAO pD = PrehranaDAO.getInstance();
 	private Prehrana izbranaPrehrana = new Prehrana();
+	private String username; //USERNAME UPORABNIKA
 	
 	public void dodajPrehrano() {
 		try {
@@ -68,6 +70,21 @@ public class PrehranaJSFBean {
 				ret = s;
 		return ret;
 	}
+	public ArrayList<Program> vrniPersonaliziranePrograme() throws Exception {
+		FacesContext context = FacesContext.getCurrentInstance();
+		username = context.getExternalContext().getRemoteUser();
+		ArrayList<Program> vsiZaToPrehrano = pD.getpD().najdiVsePoPrehrani(izbranaPrehrana.getId_prehrana());
+		ArrayList<Program> ret = new ArrayList<Program>();
+		for(Program pr : vsiZaToPrehrano)
+			if(pr.getTipPrograma().equals("personaliziran"))
+				if(username.equals(pr.getUser_username()))
+					ret.add(pr);
+		return ret;
+	}
+	public void ponovnoPreveriPrijavo() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		username = context.getExternalContext().getRemoteUser();
+	}
 	public void izberiPrehrano(int prehrana_id) {
 		log.info("PrehranaJSFBean: izberiPrehrano");
 		try {
@@ -94,6 +111,12 @@ public class PrehranaJSFBean {
 	}
 	public UploadedFile getThumbnail() {
 		return thumbnail;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public void setThumbnail(UploadedFile thumbnail) {
 		this.thumbnail = thumbnail;

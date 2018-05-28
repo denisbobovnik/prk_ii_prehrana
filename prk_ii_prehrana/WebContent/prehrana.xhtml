@@ -74,8 +74,42 @@
 					</div>
 				</div>
 				<!-- services section end -->
-
-				<!-- prikaz programov (vseh za to prehrano) in prikaz personaliziranih (če je user prijavljen), za tistega userja -->
+				
+				<f:metadata>
+					<f:event type="preRenderView" listener="#{PrehranaJSFBean.ponovnoPreveriPrijavo()}"/>
+				</f:metadata>
+				
+				<ui:fragment rendered="#{PrehranaJSFBean.username ne null}" >
+					<!-- services section -->
+					<div class="services-section spad">
+						<div class="container">
+							<div class="section-title dark">
+								<h2>PERSONALIZIRANI PREHRANSKI PROGRAMI</h2>
+							</div>
+							<div class="row">
+							
+								<c:set var="IDIzbranePrehrane" value="#{PrehranaJSFBean.izbranaPrehrana.id_prehrana}" scope="request" />
+								<ui:repeat var="program" value="#{PrehranaJSFBean.vrniPersonaliziranePrograme()}">
+							
+									<!-- single service -->
+									<div class="col-md-4 col-sm-6">
+										<div class="service">
+											<div class="service-text">
+												<h2><h:outputText value="#{program.naslov}" /></h2>
+												<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=program&amp;id=#{program.id_program}" height="271"></p:graphicImage>
+												<h:form>
+													<h:commandLink class="read-more" value="Ogled" action="program.xhtml" actionListener="#{ProgramJSFBean.izberiProgram(program.id_program)}"></h:commandLink>
+												</h:form>
+											</div>
+										</div>
+									</div>
+								
+								</ui:repeat>
+							</div>
+						</div>
+					</div>
+					<!-- services section end -->
+				</ui:fragment>
 
 			</f:view>
 		</ui:define>

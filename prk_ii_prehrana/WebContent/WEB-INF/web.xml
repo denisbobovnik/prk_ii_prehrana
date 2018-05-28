@@ -31,6 +31,8 @@
       <url-pattern>/faces/objava-recepta.xhtml</url-pattern>
       <url-pattern>/faces/vnos-prehrane.xhtml</url-pattern>
       <url-pattern>/faces/objava-clanka.xhtml</url-pattern>
+      <url-pattern>/faces/vnos-programa.xhtml</url-pattern>
+      <url-pattern>/faces/urejanje-programa.xhtml</url-pattern>
       <http-method>POST</http-method>
       <http-method>GET</http-method>
       <http-method>PUT</http-method>
@@ -47,6 +49,8 @@
       <web-resource-name>posameznik</web-resource-name>
       <url-pattern>/faces/objava-clanka.xhtml</url-pattern>
       <url-pattern>/faces/dnevnik.xhtml</url-pattern>
+      <url-pattern>/faces/vnos-programa.xhtml</url-pattern>
+      <url-pattern>/faces/urejanje-programa.xhtml</url-pattern>
       <http-method>POST</http-method>
       <http-method>GET</http-method>
       <http-method>PUT</http-method>
