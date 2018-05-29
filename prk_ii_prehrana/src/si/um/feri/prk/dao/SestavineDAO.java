@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import si.um.feri.prk.objekti.Clanek;
 import si.um.feri.prk.objekti.Sestavine;
 
 public class SestavineDAO {
@@ -92,6 +94,29 @@ public class SestavineDAO {
 			while (rs.next()) {
 				Sestavine sestavina = new Sestavine(rs.getInt("id_sestavine"), rs.getInt("tk_recept_id"), rs.getDouble("kolicina"), rs.getDouble("kalorije"), rs.getDouble("sladkorji"), rs.getString("ime"), rs.getString("enota_kolicine"));
 				seznam.add(sestavina);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return seznam;
+	}
+	
+	public ArrayList<Sestavine> vrniVse() throws Exception {
+		log.info("SestavineDAO: vrniVse ");
+		ArrayList<Sestavine> seznam = new ArrayList<Sestavine>();
+	
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Sestavine");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Sestavine sestavine = new Sestavine(rs.getInt("id_sestavine"), rs.getInt("tk_recept_id"), rs.getDouble("kolicina"), rs.getDouble("kalorije"), rs.getDouble("sladkorji"), rs.getString("ime"), rs.getString("enota_kolicine"));
+				seznam.add(sestavine);
 			}
 			rs.close();
 		} catch (Exception e) {

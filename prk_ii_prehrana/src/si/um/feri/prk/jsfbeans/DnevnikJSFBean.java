@@ -10,8 +10,12 @@ import org.slf4j.LoggerFactory;
 
 import si.um.feri.prk.dao.CiljDAO;
 import si.um.feri.prk.dao.PrehranaDAO;
+import si.um.feri.prk.dao.ReceptDAO;
+import si.um.feri.prk.dao.SestavineDAO;
+import si.um.feri.prk.dao.ZauzitaHranaDAO;
 import si.um.feri.prk.objekti.Cilj;
 import si.um.feri.prk.objekti.Prehrana;
+import si.um.feri.prk.objekti.Recept;
 import si.um.feri.prk.objekti.ZauzitaHrana;
 
 @ManagedBean(name="DnevnikJSFBean")
@@ -28,13 +32,16 @@ public class DnevnikJSFBean {
 	}};
 	private PrehranaDAO pD = PrehranaDAO.getInstance();
 	private CiljDAO cD = CiljDAO.getInstance();
+	private ReceptDAO rD = ReceptDAO.getInstance();
+	private SestavineDAO sD = SestavineDAO.getInstance();
+	private ZauzitaHranaDAO zhD = ZauzitaHranaDAO.getInstance();
 	private ArrayList<String> kategorijeHrane = new ArrayList<String>();
 	private String izbranCilj, izbranaKategorija;
 	private Double steviloKalorij, kolicinaVode, kolicinaSladkorja;
 	private Integer steviloObrokov;
 	
-	private String tipZauziteHrane; //ali roèni vnos ali po receptu
-	private ZauzitaHrana zH;
+	private String tipZauziteHrane;
+	private ZauzitaHrana zH = new ZauzitaHrana();
 	
 	public ArrayList<String> getMozniCilji() {
 		return mozniCilji;
@@ -114,11 +121,32 @@ public class DnevnikJSFBean {
 	public void setzH(ZauzitaHrana zH) {
 		this.zH = zH;
 	}
+	public ReceptDAO getrD() {
+		return rD;
+	}
+	public void setrD(ReceptDAO rD) {
+		this.rD = rD;
+	}
+	public SestavineDAO getsD() {
+		return sD;
+	}
+	public void setsD(SestavineDAO sD) {
+		this.sD = sD;
+	}
+	public ZauzitaHranaDAO getZhD() {
+		return zhD;
+	}
+	public void setZhD(ZauzitaHranaDAO zhD) {
+		this.zhD = zhD;
+	}
 	
+	public void dolociTipVnosaZauziteHrane(String tip) {
+		tipZauziteHrane = tip;
+	}
 	public void nastaviKategorije() throws Exception {
 		kategorijeHrane.clear();
-		for(Prehrana p : pD.vrniVse())
-			kategorijeHrane.add(p.getNaslovPrehrane());
+		for(Recept r : rD.vrniVse())
+			kategorijeHrane.add(r.getKategorija());
 	}
 	public void dodajCilj() throws Exception {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -157,5 +185,19 @@ public class DnevnikJSFBean {
 	}
 	public void razveljaviVnosHrane() {
 		tipZauziteHrane = null;
+		zH = new ZauzitaHrana();
+	}
+	public void dodajZauzitoHrano() throws Exception {
+		FacesContext context = FacesContext.getCurrentInstance();
+		zH.setUser_username(context.getExternalContext().getRemoteUser());
+		zH.setVrednost(tipZauziteHrane);
+		zhD.shrani(zH);
+		zH = new ZauzitaHrana();
+		tipZauziteHrane = null;
+	}
+	public void dodajZauzitoHranoVODA(int kolicina) throws Exception {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ZauzitaHrana voda = new ZauzitaHrana(0, kolicina, context.getExternalContext().getRemoteUser(), "voda");
+		zhD.shrani(voda);
 	}
 }
