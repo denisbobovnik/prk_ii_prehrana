@@ -45,16 +45,18 @@
 					<ui:fragment rendered="#{facesContext.externalContext.isUserInRole('STROKOVNJAK')}">
 						<h:form>
 							<ul class="menu-list">
-								<li class="#{view.viewId eq '/vnos-programa.xhtml' ? 'active' : ''}"><a href="vnos-programa.xhtml">Vnos programa</a></li>
-								<li class="#{view.viewId eq '/vnos-prehrane.xhtml' ? 'active' : ''}"><a href="vnos-prehrane.xhtml">Vnos prehrane</a></li>
-								<li class="#{view.viewId eq '/seznam-prehran.xhtml' ? 'active' : ''}"><a href="seznam-prehran.xhtml">Seznam prehran</a></li>
-								<li class="#{view.viewId eq '/seznam-clankov.xhtml' ? 'active' : ''}"><a href="seznam-clankov.xhtml">Seznam člankov</a></li>
+								<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><a href="index.xhtml">Domov</a></li>
+								<li class="#{view.viewId eq '/seznam-prehran.xhtml' ? 'active' : ''}"><a href="seznam-prehran.xhtml">Prehrane</a></li>
+								<li class="#{view.viewId eq '/seznam-receptov.xhtml' ? 'active' : ''}"><a href="seznam-receptov.xhtml">Recepti</a></li>
+								<li class="#{view.viewId eq '/vnos-programa.xhtml' ? 'active' : ''}"><a href="vnos-programa.xhtml">Nov program</a></li>
+								<li class="#{view.viewId eq '/vnos-prehrane.xhtml' ? 'active' : ''}"><a href="vnos-prehrane.xhtml">Nova prehrana</a></li>
+								<li class="#{view.viewId eq '/objava-recepta.xhtml' ? 'active' : ''}"><a href="objava-recepta.xhtml">Nov recept</a></li>
 								
 								<h:panelGroup rendered="#{not empty request.remoteUser}">		
 									<li><h:commandLink action="#{LogoutJSFBean.logout}" value="Odjava" /></li>		
 								</h:panelGroup>
 								<h:panelGroup rendered="#{empty request.remoteUser}">		
-									<li><h:commandLink action="#{login.xhtml}" value="Prijava" /></li>		
+									<li><h:commandLink action="login.xhtml" value="Prijava" /></li>		
 								</h:panelGroup>
 							</ul>
 						</h:form>
@@ -62,17 +64,19 @@
 					<ui:fragment rendered="#{facesContext.externalContext.isUserInRole('POSAMEZNIK')}">
 						<h:form>
 							<ul class="menu-list">
-								<li class="#{view.viewId eq '/vnos-programa.xhtml' ? 'active' : ''}"><a href="vnos-programa.xhtml">Vnos programa</a></li>
+								<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><a href="index.xhtml">Domov</a></li>
+								<li class="#{view.viewId eq '/seznam-clankov.xhtml' ? 'active' : ''}"><a href="seznam-clankov.xhtml">Članki</a></li>
+								<li class="#{view.viewId eq '/seznam-prehran.xhtml' ? 'active' : ''}"><a href="seznam-prehran.xhtml">Prehrane</a></li>
+								<li class="#{view.viewId eq '/seznam-receptov.xhtml' ? 'active' : ''}"><a href="seznam-receptov.xhtml">Recepti</a></li>
+								<li class="#{view.viewId eq '/vnos-programa.xhtml' ? 'active' : ''}"><a href="vnos-programa.xhtml">Nov program</a></li>
+								<li class="#{view.viewId eq '/objava-clanka.xhtml' ? 'active' : ''}"><a href="objava-clanka.xhtml">Nov članek</a></li>
 								<li class="#{view.viewId eq '/dnevnik.xhtml' ? 'active' : ''}"><a href="dnevnik.xhtml">Dnevnik</a></li>
-								<li class="#{view.viewId eq '/seznam-prehran.xhtml' ? 'active' : ''}"><a href="seznam-prehran.xhtml">Seznam prehran</a></li>
-								<li class="#{view.viewId eq '/seznam-clankov.xhtml' ? 'active' : ''}"><a href="seznam-clankov.xhtml">Seznam člankov</a></li>
-								<li class="#{view.viewId eq '/objava-clanka.xhtml' ? 'active' : ''}"><a href="objava-clanka.xhtml">Objava članka</a></li>
-							
-								<h:panelGroup rendered="#{not empty request.remoteUser}">
-								   <li><h:commandLink action="#{LogoutJSFBean.logout}" value="Odjava" /></li>
-								 </h:panelGroup>
+								
+								<h:panelGroup rendered="#{not empty request.remoteUser}">		
+									<li><h:commandLink action="#{LogoutJSFBean.logout}" value="Odjava" /></li>		
+								</h:panelGroup>
 								<h:panelGroup rendered="#{empty request.remoteUser}">		
-									<li><h:commandLink action="#{login.xhtml}" value="Prijava" /></li>		
+									<li><h:commandLink action="login.xhtml" value="Prijava" /></li>		
 								</h:panelGroup>
 							</ul>
 						</h:form>
@@ -80,14 +84,16 @@
 					<ui:fragment rendered="#{empty request.remoteUser}">
 						<h:form>
 							<ul class="menu-list">
-								<li class="#{view.viewId eq '/seznam-prehran.xhtml' ? 'active' : ''}"><a href="seznam-prehran.xhtml">Seznam prehran</a></li>
-								<li class="#{view.viewId eq '/seznam-clankov.xhtml' ? 'active' : ''}"><a href="seznam-clankov.xhtml">Seznam člankov</a></li>
-							
+								<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><a href="index.xhtml">Domov</a></li>
+								<li class="#{view.viewId eq '/seznam-clankov.xhtml' ? 'active' : ''}"><a href="seznam-clankov.xhtml">Članki</a></li>
+								<li class="#{view.viewId eq '/seznam-prehran.xhtml' ? 'active' : ''}"><a href="seznam-prehran.xhtml">Prehrane</a></li>
+								<li class="#{view.viewId eq '/seznam-receptov.xhtml' ? 'active' : ''}"><a href="seznam-receptov.xhtml">Recepti</a></li>
+								
 								<h:panelGroup rendered="#{not empty request.remoteUser}">		
 									<li><h:commandLink action="#{LogoutJSFBean.logout}" value="Odjava" /></li>		
 								</h:panelGroup>
 								<h:panelGroup rendered="#{empty request.remoteUser}">		
-									<li><h:commandLink action="#{login.xhtml}" value="Prijava" /></li>		
+									<li><h:commandLink action="login.xhtml" value="Prijava" /></li>		
 								</h:panelGroup>
 							</ul>
 						</h:form>

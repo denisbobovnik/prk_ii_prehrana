@@ -35,16 +35,6 @@
       <url-pattern>/faces/urejanje-programa.xhtml</url-pattern>
       <url-pattern>/faces/objava-clanka.xhtml</url-pattern>
       <url-pattern>/faces/dnevnik.xhtml</url-pattern>
-      <url-pattern>/faces/login.xhtml</url-pattern>
-      <url-pattern>/faces/index.xhtml</url-pattern>
-      <url-pattern>/faces/clanek.xhtml</url-pattern>
-      <url-pattern>/faces/error.xhtml</url-pattern>
-      <url-pattern>/faces/prehrana.xhtml</url-pattern>
-      <url-pattern>/faces/program.xhtml</url-pattern>
-      <url-pattern>/faces/recept.xhtml</url-pattern>
-      <url-pattern>/faces/seznam-clankov.xhtml</url-pattern>
-      <url-pattern>/faces/seznam-prehran.xhtml</url-pattern>
-      <url-pattern>/faces/seznam-receptov.xhtml</url-pattern>   
       <http-method>POST</http-method>
       <http-method>GET</http-method>
       <http-method>PUT</http-method>
@@ -63,16 +53,6 @@
       <url-pattern>/faces/urejanje-programa.xhtml</url-pattern>
       <url-pattern>/faces/objava-clanka.xhtml</url-pattern>
       <url-pattern>/faces/dnevnik.xhtml</url-pattern>
-      <url-pattern>/faces/login.xhtml</url-pattern>
-      <url-pattern>/faces/index.xhtml</url-pattern>
-      <url-pattern>/faces/clanek.xhtml</url-pattern>
-      <url-pattern>/faces/error.xhtml</url-pattern>
-      <url-pattern>/faces/prehrana.xhtml</url-pattern>
-      <url-pattern>/faces/program.xhtml</url-pattern>
-      <url-pattern>/faces/recept.xhtml</url-pattern>
-      <url-pattern>/faces/seznam-clankov.xhtml</url-pattern>
-      <url-pattern>/faces/seznam-prehran.xhtml</url-pattern>
-      <url-pattern>/faces/seznam-receptov.xhtml</url-pattern>      
       <http-method>POST</http-method>
       <http-method>GET</http-method>
       <http-method>PUT</http-method>
@@ -88,15 +68,6 @@
     <web-resource-collection>
       <web-resource-name>login</web-resource-name>
       <url-pattern>/faces/login.xhtml</url-pattern>
-      <url-pattern>/faces/index.xhtml</url-pattern>
-      <url-pattern>/faces/clanek.xhtml</url-pattern>
-      <url-pattern>/faces/error.xhtml</url-pattern>
-      <url-pattern>/faces/prehrana.xhtml</url-pattern>
-      <url-pattern>/faces/program.xhtml</url-pattern>
-      <url-pattern>/faces/recept.xhtml</url-pattern>
-      <url-pattern>/faces/seznam-clankov.xhtml</url-pattern>
-      <url-pattern>/faces/seznam-prehran.xhtml</url-pattern>
-      <url-pattern>/faces/seznam-receptov.xhtml</url-pattern>
       <http-method>POST</http-method>
       <http-method>GET</http-method>
       <http-method>PUT</http-method>
