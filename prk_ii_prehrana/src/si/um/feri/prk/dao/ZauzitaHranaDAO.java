@@ -37,7 +37,7 @@ public class ZauzitaHranaDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS ZauzitaHrana(id_zauzitaHrana int not null auto_increment primary key, tk_recept_id int null, user_username varchar(100) not null, datumZauzitja timestamp not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS ZauzitaHrana(id_zauzitaHrana int not null auto_increment primary key, tk_recept_sestavina_id int not null, user_username varchar(100) not null, datumZauzitja timestamp not null, vrednost varchar(100) not null)");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -69,7 +69,7 @@ public class ZauzitaHranaDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				ret = new ZauzitaHrana(id_zauzitaHrana, rs.getInt("tk_recept_id"), rs.getString("user_username"));
+				ret = new ZauzitaHrana(rs.getInt("id_zauzitaHrana"), rs.getInt("tk_recept_sestavina_id"), rs.getString("user_username"), rs.getString("vrednost"));
 				ret.getDatumZauzitja().setTimeInMillis(rs.getTimestamp("datumZauzitja").getTime());
 				break;
 			}
@@ -91,11 +91,12 @@ public class ZauzitaHranaDAO {
 				//zauzita hrana z id-jem že obstaja...pohandle-at
 			} else {
 
-				PreparedStatement ps = conn.prepareStatement("INSERT INTO ZauzitaHrana(tk_recept_id, user_username, datumZauzitja) VALUES (?,?,?)");
+				PreparedStatement ps = conn.prepareStatement("INSERT INTO ZauzitaHrana(tk_recept_sestavina_id, user_username, datumZauzitja, vrednost) VALUES (?,?,?,?)");
 				
-				ps.setInt(1, zH.getTk_recept_id());
+				ps.setInt(1, zH.getTk_recept_sestavina_id());
 				ps.setString(2, zH.getUser_username());
 				ps.setTimestamp(3, new Timestamp(zH.getDatumZauzitja().getTimeInMillis()));
+				ps.setString(4, zH.getVrednost());
 
 				ps.executeUpdate();
 			}
@@ -132,7 +133,7 @@ public class ZauzitaHranaDAO {
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM ZauzitaHrana");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				ZauzitaHrana zauzitaHrana = new ZauzitaHrana(rs.getInt("id_zauzitaHrana"), rs.getInt("tk_recept_id"), rs.getString("user_username"));
+				ZauzitaHrana zauzitaHrana = new ZauzitaHrana(rs.getInt("id_zauzitaHrana"), rs.getInt("tk_recept_sestavina_id"), rs.getString("user_username"), rs.getString("vrednost"));
 				zauzitaHrana.getDatumZauzitja().setTimeInMillis(rs.getTimestamp("datumZauzitja").getTime());
 				seznam.add(zauzitaHrana);
 			}

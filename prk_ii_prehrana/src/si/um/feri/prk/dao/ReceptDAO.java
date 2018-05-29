@@ -65,6 +65,33 @@ public class ReceptDAO {
 			conn.close();
 		}
 	}
+	
+	public void posodobi(Recept r) throws Exception {
+		log.info("ReceptDAO: posodobi ");
+		Connection conn=null;		
+		try {
+			conn=baza.getConnection();
+			PreparedStatement ps = conn.prepareStatement("UPDATE Recept SET ime=?, dolzinaPriprave=?, steviloPorcij=?, opis=?, slika=?, linkVideo=?, kalorije=?, tipSlike=?, datumDodajanja=?, sladkorji=?, kategorija=? WHERE id_recept=?");
+			ps.setString(1, r.getIme());
+			ps.setInt(2, r.getDolzinaPriprave());
+			ps.setInt(3, r.getSteviloPorcij());
+			ps.setString(4, r.getOpis());
+			ps.setBinaryStream(5, r.getSlika().getBinaryStream());
+			ps.setString(6, r.getLinkVideo());
+			ps.setDouble(7, r.getKalorije());
+			ps.setString(8, r.getTipSlike());
+			ps.setTimestamp(9, new Timestamp(r.getDatumDodajanja().getTimeInMillis()));
+			ps.setDouble(10, r.getSladkorji());
+			ps.setString(11, r.getKategorija());
+			ps.setInt(12, r.getId_recept());
+			
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+	}
 		
 	public void shrani(Recept r) throws Exception {
 		log.info("ReceptDAO: shranjujem " + r);

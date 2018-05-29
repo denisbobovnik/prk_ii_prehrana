@@ -36,7 +36,7 @@ public class SestavineDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Sestavine(id_sestavine int not null auto_increment primary key, ime varchar(100) not null, enota_kolicine varchar(45) not null, tk_recept_id int not null, kolicina int not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Sestavine(id_sestavine int not null auto_increment primary key, ime varchar(100) not null, enota_kolicine varchar(45) not null, tk_recept_id int not null, kolicina double not null, kalorije double not null, sladkorji double not null)");
 			} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -62,12 +62,15 @@ public class SestavineDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO Sestavine(id_sestavine, ime, enota_kolicine, tk_recept_id, kolicina) VALUES (?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO Sestavine(id_sestavine, ime, enota_kolicine, tk_recept_id, kolicina, kalorije, sladkorji) VALUES (?,?,?,?,?,?,?)");
 			ps.setInt(1, s.getId_sestavine());
 			ps.setString(2, s.getIme());
 			ps.setString(3, s.getEnota_kolicine());
 			ps.setInt(4, s.getTk_recept_id());
 			ps.setDouble(5, s.getKolicina());
+			ps.setDouble(6, s.getKalorije());
+			ps.setDouble(7, s.getSladkorji());
+			
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,7 +90,7 @@ public class SestavineDAO {
 			ps.setInt(1, tk_recept_id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Sestavine sestavina = new Sestavine(rs.getInt("id_sestavine"), rs.getDouble("kolicina"), rs.getInt("tk_recept_id"), rs.getString("ime"), rs.getString("enota_kolicine"));
+				Sestavine sestavina = new Sestavine(rs.getInt("id_sestavine"), rs.getInt("tk_recept_id"), rs.getDouble("kolicina"), rs.getDouble("kalorije"), rs.getDouble("sladkorji"), rs.getString("ime"), rs.getString("enota_kolicine"));
 				seznam.add(sestavina);
 			}
 			rs.close();

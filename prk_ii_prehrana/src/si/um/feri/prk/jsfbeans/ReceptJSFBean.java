@@ -82,6 +82,21 @@ public class ReceptJSFBean {
 			s.setTk_recept_id(id_trenutnega_recepta);
 			sD.shrani(s);
 		}
+		
+		double kalorijeSkupaj = 0;
+		double sladkorjiSkupaj = 0;
+		
+		for(Sestavine s : sestavineTrenutnegaRecepta) {
+			kalorijeSkupaj += s.getKalorije();
+			sladkorjiSkupaj += s.getSladkorji();
+		}
+		
+		Recept dodaneKalorijeInSladkorji = rD.najdi(id_trenutnega_recepta);
+		dodaneKalorijeInSladkorji.setKalorije(kalorijeSkupaj);
+		dodaneKalorijeInSladkorji.setSladkorji(sladkorjiSkupaj);
+		
+		rD.posodobi(dodaneKalorijeInSladkorji);
+		
 		sestavineTrenutnegaRecepta.clear(); //da "poèisti array sestavin, za naslednji recept"
 	}
 	

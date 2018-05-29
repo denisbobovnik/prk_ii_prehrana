@@ -2,21 +2,36 @@ package si.um.feri.prk.objekti;
 
 public class Sestavine {
 	private int id_sestavine, tk_recept_id;
-	private double kolicina;
+	private double kolicina, kalorije, sladkorji;
 	private String ime, enota_kolicine;
 	
 	public Sestavine() {
 		super();
-	}
-	public Sestavine(int id_sestavine, double kolicina, int tk_recept_id, String ime, String enota_kolicine) {
+	}	
+	public Sestavine(int id_sestavine, int tk_recept_id, double kolicina, double kalorije, double sladkorji, String ime,
+			String enota_kolicine) {
 		super();
 		this.id_sestavine = id_sestavine;
-		this.kolicina = kolicina;
 		this.tk_recept_id = tk_recept_id;
+		this.kolicina = kolicina;
+		this.kalorije = kalorije;
+		this.sladkorji = sladkorji;
 		this.ime = ime;
 		this.enota_kolicine = enota_kolicine;
 	}
-	
+
+	public double getKalorije() {
+		return kalorije;
+	}
+	public void setKalorije(double kalorije) {
+		this.kalorije = kalorije;
+	}
+	public double getSladkorji() {
+		return sladkorji;
+	}
+	public void setSladkorji(double sladkorji) {
+		this.sladkorji = sladkorji;
+	}
 	public int getId_sestavine() {
 		return id_sestavine;
 	}
@@ -50,7 +65,8 @@ public class Sestavine {
 	
 	@Override
 	public String toString() {
-		return "Sestavine [id_sestavine=" + id_sestavine + ", kolicina=" + kolicina + ", tk_recept_id=" + tk_recept_id
-				+ ", ime=" + ime + ", enota_kolicine=" + enota_kolicine + "]";
+		return "Sestavine [id_sestavine=" + id_sestavine + ", tk_recept_id=" + tk_recept_id + ", kolicina=" + kolicina
+				+ ", kalorije=" + kalorije + ", sladkorji=" + sladkorji + ", ime=" + ime + ", enota_kolicine="
+				+ enota_kolicine + "]";
 	}
 }

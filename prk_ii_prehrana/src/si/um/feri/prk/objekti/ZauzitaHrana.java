@@ -4,39 +4,40 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class ZauzitaHrana {
-	private int id_zauzitaHrana, tk_recept_id;
-	private String user_username;
+	private int id_zauzitaHrana, tk_recept_sestavina_id;
+	private String user_username, vrednost;
 	private Calendar datumZauzitja;
 	
 	public ZauzitaHrana() {
 		super();
 		datumZauzitja = new GregorianCalendar();
 	}
-	public ZauzitaHrana(int id_zauzitaHrana, String user_username) {
+	public ZauzitaHrana(int id_zauzitaHrana, int tk_recept_sestavina_id, String user_username, String vrednost) {
 		super();
 		this.id_zauzitaHrana = id_zauzitaHrana;
+		this.tk_recept_sestavina_id = tk_recept_sestavina_id;
 		this.user_username = user_username;
-		datumZauzitja = new GregorianCalendar();
-	}
-	public ZauzitaHrana(int id_zauzitaHrana, int tk_recept_id, String user_username) {
-		super();
-		this.id_zauzitaHrana = id_zauzitaHrana;
-		this.tk_recept_id = tk_recept_id;
-		this.user_username = user_username;
+		this.vrednost = vrednost;
 		datumZauzitja = new GregorianCalendar();
 	}
 	
+	public String getVrednost() {
+		return vrednost;
+	}
+	public void setVrednost(String vrednost) {
+		this.vrednost = vrednost;
+	}
 	public int getId_zauzitaHrana() {
 		return id_zauzitaHrana;
 	}
 	public void setId_zauzitaHrana(int id_zauzitaHrana) {
 		this.id_zauzitaHrana = id_zauzitaHrana;
 	}
-	public int getTk_recept_id() {
-		return tk_recept_id;
+	public int getTk_recept_sestavina_id() {
+		return tk_recept_sestavina_id;
 	}
-	public void setTk_recept_id(int tk_recept_id) {
-		this.tk_recept_id = tk_recept_id;
+	public void setTk_recept_sestavina_id(int tk_recept_sestavina_id) {
+		this.tk_recept_sestavina_id = tk_recept_sestavina_id;
 	}
 	public String getUser_username() {
 		return user_username;
@@ -53,7 +54,8 @@ public class ZauzitaHrana {
 	
 	@Override
 	public String toString() {
-		return "ZauzitaHrana [id_zauzitaHrana=" + id_zauzitaHrana + ", tk_recept_id=" + tk_recept_id
-				+ ", user_username=" + user_username + ", datumZauzitja=" + datumZauzitja + "]";
+		return "ZauzitaHrana [id_zauzitaHrana=" + id_zauzitaHrana + ", tk_recept_sestavina_id=" + tk_recept_sestavina_id
+				+ ", user_username=" + user_username + ", vrednost=" + vrednost + ", datumZauzitja=" + datumZauzitja
+				+ "]";
 	}
 }
