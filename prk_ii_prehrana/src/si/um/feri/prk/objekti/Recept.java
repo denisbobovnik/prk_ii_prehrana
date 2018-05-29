@@ -10,7 +10,7 @@ import javax.sql.rowset.serial.SerialException;
 
 public class Recept {
 	private int id_recept, dolzinaPriprave, steviloPorcij;
-	private String ime, opis, linkVideo, tipSlike;
+	private String ime, opis, linkVideo, tipSlike, kategorija;
 	private Blob slika;
 	private double kalorije, sladkorji;
 	private Calendar datumDodajanja;
@@ -23,7 +23,7 @@ public class Recept {
 		this.datumDodajanja = new GregorianCalendar();
 	}
 	public Recept(int id_recept, int dolzinaPriprave, int steviloPorcij, double sladkorji, String ime, String opis,
-			String linkVideo, String tipSlike, Blob slika, double kalorije) {
+			String linkVideo, String tipSlike, Blob slika, double kalorije, String kategorija) {
 		super();
 		this.id_recept = id_recept;
 		this.sladkorji = sladkorji;
@@ -35,11 +35,18 @@ public class Recept {
 		this.tipSlike = tipSlike;
 		this.slika = slika;
 		this.kalorije = kalorije;
+		this.kategorija = kategorija;
 		this.datumDodajanja = new GregorianCalendar();
 	}
 
 	public int getId_recept() {
 		return id_recept;
+	}
+	public String getKategorija() {
+		return kategorija;
+	}
+	public void setKategorija(String kategorija) {
+		this.kategorija = kategorija;
 	}
 	public void setId_recept(int id_recept) {
 		this.id_recept = id_recept;
@@ -128,12 +135,12 @@ public class Recept {
 	public void setSladkorji(double sladkorji) {
 		this.sladkorji = sladkorji;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Recept [id_recept=" + id_recept + ", dolzinaPriprave=" + dolzinaPriprave + ", steviloPorcij="
 				+ steviloPorcij + ", ime=" + ime + ", opis=" + opis + ", linkVideo=" + linkVideo + ", tipSlike="
-				+ tipSlike + ", slika=" + slika + ", kalorije=" + kalorije + ", sladkorji=" + sladkorji
-				+ ", datumDodajanja=" + datumDodajanja + "]";
+				+ tipSlike + ", kategorija=" + kategorija + ", slika=" + slika + ", kalorije=" + kalorije
+				+ ", sladkorji=" + sladkorji + ", datumDodajanja=" + datumDodajanja + "]";
 	}
 }
