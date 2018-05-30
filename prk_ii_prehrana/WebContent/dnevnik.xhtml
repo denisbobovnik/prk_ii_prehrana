@@ -249,7 +249,7 @@
 								<div class="col-md-12">
 									<!-- Single element -->
 									<div class="element">
-										<h4>Spremljanje zaužite hrane</h4>
+										<h4>Spremljanje napredkov glede na cilje</h4>
 										<div class="row">
 											<!-- Progress bars -->
 											<div class="col-md-12">
@@ -297,6 +297,52 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- page section -->
+					<div class="page-section spad">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<!-- Single element -->
+									<div class="element">
+										<h4>Vsa zaužita hrana</h4>
+										<div class="row">
+											<div class="col-md-12">
+												<h:form>
+													<h:dataTable value="#{DnevnikJSFBean.zhD.vrniVseZaPrijavljenega()}" var="zauzitaHrana">
+													   <h:column>    				
+													      <f:facet name="header"><h:outputText value="Datum zaužitja" /></f:facet>    				
+													      <h:outputText value="#{DnevnikJSFBean.formatirajDatum(zauzitaHrana.datumZauzitja)}" />
+													   </h:column>
+													   <h:column>
+													      <f:facet name="header"><h:outputText value="Tip vnosa" /></f:facet>
+													      	<h:outputText value="#{zauzitaHrana.vrednost}" />
+													   </h:column>
+													   <h:column>
+													      <f:facet name="header"><h:outputText value="Opis" /></f:facet>
+													      	<ui:fragment rendered="#{zauzitaHrana.vrednost == 'voda'}">
+													      		<h:outputText value="voda#{DnevnikJSFBean.vrniKolicinoVode(zauzitaHrana.tk_recept_sestavina_id)}" />
+													  		</ui:fragment>
+													      	<ui:fragment rendered="#{zauzitaHrana.vrednost == 'sestavina'}">
+													      		<h:outputText value="#{ReceptJSFBean.sD.najdi(zauzitaHrana.tk_recept_sestavina_id).ime} / #{ReceptJSFBean.sD.najdi(zauzitaHrana.tk_recept_sestavina_id).sladkorji}g sladkorja / #{ReceptJSFBean.sD.najdi(zauzitaHrana.tk_recept_sestavina_id).kalorije}kcal" />
+													  		</ui:fragment>
+													  		<ui:fragment rendered="#{zauzitaHrana.vrednost == 'recept'}">
+													      		<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(zauzitaHrana.tk_recept_sestavina_id)}" value="#{ReceptJSFBean.vrniIme(zauzitaHrana.tk_recept_sestavina_id)}" />
+													  		</ui:fragment>
+													   </h:column>
+													</h:dataTable>
+												</h:form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					
+				
 
 			</f:view>
 		</ui:define>

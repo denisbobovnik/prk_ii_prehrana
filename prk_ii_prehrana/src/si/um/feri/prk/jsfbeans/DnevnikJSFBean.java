@@ -1,5 +1,6 @@
 package si.um.feri.prk.jsfbeans;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -285,6 +286,13 @@ public class DnevnikJSFBean {
 		if(percent>100)
 			percent=100;
 		return "" + percent;
+	}
+	public String vrniKolicinoVode(int stDeci) {
+		return " (" + (double) stDeci / 10 + "l)";
+	}
+	public String formatirajDatum(Calendar c) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		return sdf.format(c.getTime());
 	}
 	public String vrniVrednostSteviloObrokov(Cilj c) throws Exception {
 		int steviloObrokov = Integer.parseInt(c.getVrednost());
