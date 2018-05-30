@@ -242,7 +242,61 @@
 						<!-- Contact section end-->	
 					</ui:fragment>
 					
-
+					<!-- page section -->
+					<div class="page-section spad">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<!-- Single element -->
+									<div class="element">
+										<h4>Spremljanje zaužite hrane</h4>
+										<div class="row">
+											<!-- Progress bars -->
+											<div class="col-md-12">
+												<ui:repeat var="cilj" value="#{DnevnikJSFBean.cD.vrniVseZaPrijavljenega()}">
+													<ui:fragment rendered="#{(cilj.tip == '1x na teden jej hrano kategorije X') and (DnevnikJSFBean.vrniVrednostKategorija(cilj) != null)}">
+														<div class="single-progress-item">
+															<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
+															<br />
+															<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostKategorija(cilj)}"></div>
+														</div>
+													</ui:fragment>
+													<ui:fragment rendered="#{(cilj.tip == 'Na dan pojej za X kalorij') and (DnevnikJSFBean.vrniVrednostKalorije(cilj) != null)}">
+														<div class="single-progress-item">
+															<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
+															<br />
+															<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostKalorije(cilj)}"></div>
+														</div>
+													</ui:fragment>
+													<ui:fragment rendered="#{(cilj.tip == 'Spij X litrov vode na dan') and (DnevnikJSFBean.vrniVrednostVoda(cilj) != null)}">
+														<div class="single-progress-item">
+															<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
+															<br />
+															<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostVoda(cilj)}"></div>
+														</div>
+													</ui:fragment>
+													<ui:fragment rendered="#{(cilj.tip == 'Na dan zaužij X gramov sladkorja') and (DnevnikJSFBean.vrniVrednostSladkorji(cilj) != null)}">
+														<div class="single-progress-item">
+															<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
+															<br />
+															<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostSladkorji(cilj)}"></div>
+														</div>
+													</ui:fragment>
+													<ui:fragment rendered="#{(cilj.tip == 'X obrokov na dan') and (DnevnikJSFBean.vrniVrednostSteviloObrokov(cilj) != null)}">
+														<div class="single-progress-item">
+															<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
+															<br />
+															<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostSteviloObrokov(cilj)}"></div>
+														</div>
+													</ui:fragment>
+												</ui:repeat>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 			</f:view>
 		</ui:define>

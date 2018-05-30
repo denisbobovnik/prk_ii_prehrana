@@ -1,5 +1,6 @@
 package si.um.feri.prk.dao;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,6 +58,28 @@ public class SestavineDAO {
 		} finally {
 			conn.close();
 		}
+	}
+	
+	public Sestavine najdi(int id_sestavine) throws Exception {
+		log.info("SestavineDAO: najdi " + id_sestavine);
+		Sestavine ret = null;
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Sestavine WHERE id_sestavine=?");
+			ps.setInt(1, id_sestavine);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ret = new Sestavine(rs.getInt("id_sestavine"), rs.getInt("tk_recept_id"), rs.getDouble("kolicina"), rs.getDouble("kalorije"), rs.getDouble("sladkorji"), rs.getString("ime"), rs.getString("enota_kolicine"));
+				break;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return ret;
 	}
 	
 	public void shrani(Sestavine s) throws Exception {

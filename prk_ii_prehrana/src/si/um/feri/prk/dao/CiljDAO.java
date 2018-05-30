@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
@@ -130,6 +132,34 @@ public class CiljDAO {
 			conn=baza.getConnection();
 
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Cilj");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Cilj cilj = new Cilj(rs.getInt("id_cilj"), rs.getString("user_username"), rs.getString("tip"), rs.getString("vrednost"));
+				cilj.getDatumZastavitve().setTimeInMillis(rs.getTimestamp("datumZastavitve").getTime());
+				seznam.add(cilj);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return seznam;
+	}
+	
+	public ArrayList<Cilj> vrniVseZaPrijavljenega() throws Exception {
+		log.info("CiljDAO: vrniVseZaPrijavljenega ");
+		ArrayList<Cilj> seznam = new ArrayList<Cilj>();
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		String username = context.getExternalContext().getRemoteUser();
+	
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Cilj WHERE user_username=?");
+			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Cilj cilj = new Cilj(rs.getInt("id_cilj"), rs.getString("user_username"), rs.getString("tip"), rs.getString("vrednost"));

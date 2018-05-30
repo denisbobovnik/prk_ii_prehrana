@@ -1,13 +1,16 @@
 package si.um.feri.prk.jsfbeans;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import si.um.feri.prk.dao.CiljDAO;
 import si.um.feri.prk.dao.PrehranaDAO;
 import si.um.feri.prk.dao.ReceptDAO;
@@ -16,6 +19,7 @@ import si.um.feri.prk.dao.ZauzitaHranaDAO;
 import si.um.feri.prk.objekti.Cilj;
 import si.um.feri.prk.objekti.Prehrana;
 import si.um.feri.prk.objekti.Recept;
+import si.um.feri.prk.objekti.Sestavine;
 import si.um.feri.prk.objekti.ZauzitaHrana;
 
 @ManagedBean(name="DnevnikJSFBean")
@@ -36,11 +40,9 @@ public class DnevnikJSFBean {
 	private SestavineDAO sD = SestavineDAO.getInstance();
 	private ZauzitaHranaDAO zhD = ZauzitaHranaDAO.getInstance();
 	private ArrayList<String> kategorijeHrane = new ArrayList<String>();
-	private String izbranCilj, izbranaKategorija;
+	private String izbranCilj, izbranaKategorija, tipZauziteHrane;
 	private Double steviloKalorij, kolicinaVode, kolicinaSladkorja;
 	private Integer steviloObrokov;
-	
-	private String tipZauziteHrane;
 	private ZauzitaHrana zH = new ZauzitaHrana();
 	
 	public ArrayList<String> getMozniCilji() {
@@ -140,6 +142,11 @@ public class DnevnikJSFBean {
 		this.zhD = zhD;
 	}
 	
+	public String dobiDejanskoIme(Cilj cilj) {
+		String tip = cilj.getTip();
+		tip = tip.replaceAll("X", "'" + cilj.getVrednost() + "'");
+		return tip;
+	}
 	public void dolociTipVnosaZauziteHrane(String tip) {
 		tipZauziteHrane = tip;
 	}
@@ -187,6 +194,131 @@ public class DnevnikJSFBean {
 		tipZauziteHrane = null;
 		zH = new ZauzitaHrana();
 	}
+	public String vrniVrednostKategorija(Cilj c) throws Exception {
+		int stDni = daysBetween(c.getDatumZastavitve().getTime(), new GregorianCalendar().getTime()) + 1;
+		if(stDni<=7) {
+			String zadanaKategorija = c.getVrednost();
+			for(ZauzitaHrana hrana : zhD.vrniVseZaPrijavljenega())
+				if(hrana.getVrednost().equals("recept")) {
+					Recept recept = rD.najdi(hrana.getTk_recept_sestavina_id());
+					if(datumMedDatumoma(c.getDatumZastavitve().getTime(), new GregorianCalendar().getTime(), hrana.getDatumZauzitja().getTime()))
+						if(recept.getKategorija().equals(zadanaKategorija))
+							return "" + 100;
+				}
+		} else
+			return null;
+		return null;
+	}
+	public String vrniVrednostKalorije(Cilj c) throws Exception {
+		//recept ali sestavina
+		double steviloKalorij = Double.parseDouble(c.getVrednost());
+		double kalorijeDejansko = 0;
+		if(!isSameDay(c.getDatumZastavitve(), new GregorianCalendar())) //cilj ni današnji
+			kalorijeDejansko=-1;
+		else { //gre za današnji dan
+			for(ZauzitaHrana hrana : zhD.vrniVseZaPrijavljenega())
+				if(hrana.getVrednost().equals("recept")) {
+					Recept receptK = rD.najdi(hrana.getTk_recept_sestavina_id());
+					if(isSameDay(c.getDatumZastavitve(), hrana.getDatumZauzitja())) //èe je blo danes zaužito, se beleži
+						kalorijeDejansko += receptK.getKalorije();
+				} else if(hrana.getVrednost().equals("sestavina")) {
+					Sestavine sestavineK = sD.najdi(hrana.getTk_recept_sestavina_id());
+					if(isSameDay(c.getDatumZastavitve(), hrana.getDatumZauzitja())) //èe je blo danes zaužito, se beleži
+						kalorijeDejansko += sestavineK.getKalorije();
+				}
+		}
+		
+		if(kalorijeDejansko==-1) //gre za stari cilj, ne prikažemo
+			return null;
+		
+		int percent = (int)((kalorijeDejansko * 100.0f) / steviloKalorij);
+		if(percent>100)
+			percent=100;
+		return "" + percent;
+	}
+	public String vrniVrednostVoda(Cilj c) throws Exception {
+		//le voda
+		double kolicinaVode = Double.parseDouble(c.getVrednost());
+		double vodeDejansko = 0;
+		if(!isSameDay(c.getDatumZastavitve(), new GregorianCalendar())) //cilj ni današnji
+			vodeDejansko=-1;
+		else { //gre za današnji dan
+			for(ZauzitaHrana hrana : zhD.vrniVseZaPrijavljenega())
+				if(hrana.getVrednost().equals("voda")) {
+					double zauzitaKolicina = (double) hrana.getTk_recept_sestavina_id() / 10;
+					if(isSameDay(c.getDatumZastavitve(), hrana.getDatumZauzitja())) //èe je blo danes zaužito, se beleži
+						vodeDejansko += zauzitaKolicina;
+				}
+		}
+		
+		if(vodeDejansko==-1) //gre za stari cilj, ne prikažemo
+			return null;
+		
+		int percent = (int)((vodeDejansko * 100.0f) / kolicinaVode);
+		if(percent>100)
+			percent=100;
+		return "" + percent;
+	}
+	public String vrniVrednostSladkorji(Cilj c) throws Exception {
+		//recept ali sestavina
+		double kolicinaSladkorja = Double.parseDouble(c.getVrednost());
+		double sladkorjiDejansko = 0;
+		if(!isSameDay(c.getDatumZastavitve(), new GregorianCalendar())) //cilj ni današnji
+			sladkorjiDejansko=-1;
+		else { //gre za današnji dan
+			for(ZauzitaHrana hrana : zhD.vrniVseZaPrijavljenega())
+				if(hrana.getVrednost().equals("recept")) {
+					Recept receptK = rD.najdi(hrana.getTk_recept_sestavina_id());
+					if(isSameDay(c.getDatumZastavitve(), hrana.getDatumZauzitja())) //èe je blo danes zaužito, se beleži
+						sladkorjiDejansko += receptK.getSladkorji();
+				} else if(hrana.getVrednost().equals("sestavina")) {
+					Sestavine sestavineK = sD.najdi(hrana.getTk_recept_sestavina_id());
+					if(isSameDay(c.getDatumZastavitve(), hrana.getDatumZauzitja())) //èe je blo danes zaužito, se beleži
+						sladkorjiDejansko += sestavineK.getSladkorji();
+				}
+		}
+		
+		if(sladkorjiDejansko==-1) //gre za stari cilj, ne prikažemo
+			return null;
+		
+		int percent = (int)((sladkorjiDejansko * 100.0f) / kolicinaSladkorja);
+		if(percent>100)
+			percent=100;
+		return "" + percent;
+	}
+	public String vrniVrednostSteviloObrokov(Cilj c) throws Exception {
+		int steviloObrokov = Integer.parseInt(c.getVrednost());
+		int steviloDejansko = 0;
+		if(!isSameDay(c.getDatumZastavitve(), new GregorianCalendar())) //cilj ni današnji
+			steviloDejansko=-1;
+		else { //gre za današnji dan
+			for(ZauzitaHrana hrana : zhD.vrniVseZaPrijavljenega())
+				if(hrana.getVrednost().equals("recept"))
+					if(isSameDay(c.getDatumZastavitve(), hrana.getDatumZauzitja())) //èe je blo danes zaužito, se beleži
+						steviloDejansko++;
+		}
+		if(steviloDejansko==-1) //gre za stari cilj, ne prikažemo
+			return null;
+		
+		int percent = (int)((steviloDejansko * 100.0f) / steviloObrokov);
+		if(percent>100)
+			percent=100;
+		return "" + percent;
+	}
+    public static boolean isSameDay(Calendar cal1, Calendar cal2) {
+        if (cal1 == null || cal2 == null) {
+            throw new IllegalArgumentException("The dates must not be null");
+        }
+        return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
+                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
+                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
+    }
+	public boolean datumMedDatumoma(Date prvi, Date drugi, Date vmesni) {
+		return vmesni.after(prvi) && vmesni.before(drugi);
+	}
+    public int daysBetween(Date d1, Date d2){
+        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    }
 	public void dodajZauzitoHrano() throws Exception {
 		FacesContext context = FacesContext.getCurrentInstance();
 		zH.setUser_username(context.getExternalContext().getRemoteUser());
