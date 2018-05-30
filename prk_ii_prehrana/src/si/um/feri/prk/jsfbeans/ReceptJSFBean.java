@@ -126,6 +126,34 @@ public class ReceptJSFBean {
 			r.setTipSlike("image/"+ext.toLowerCase());
 		}
 	}
+	
+	public ArrayList<Sestavine> vrniVsehSestavine(int recept_id){
+		recept_id = izbranRecept.getId_recept();
+		ArrayList<Sestavine> sestavine = null;
+		if(sestavine == null) {
+			try {
+				sestavine = SestavineDAO.getInstance().najdiVsePoReceptu(recept_id);
+			}
+			catch (Exception e ) {
+				sestavine = new ArrayList<>();
+			}
+		}
+		return sestavine;
+	}
+	
+	public ArrayList<Alergeni> vrniVsehAlergene(int recept_id){
+		recept_id = izbranRecept.getId_recept();
+		ArrayList<Alergeni> alergeni = null;
+		if(alergeni == null) {
+			try {
+				alergeni = AlergeniDAO.getInstance().najdiVsePoReceptu(recept_id);
+			}
+			catch (Exception e ) {
+				alergeni = new ArrayList<>();
+			}
+		}
+		return alergeni;
+	}
 
 	public Recept getR() {
 		return r;

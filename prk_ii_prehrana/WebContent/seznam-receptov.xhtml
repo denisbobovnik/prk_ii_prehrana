@@ -36,10 +36,10 @@
 											
 										</div>
 										<div class="post-content">
-											<h2 class="post-title"><h:outputText value="#{recept.ime}" /></h2>
+											<h2 class="post-title"><h:outputText value="#{ReceptJSFBean.r.ime}" /></h2>
 					
 											<h:form>
-												<h:commandLink class="read-more" value="Preberi več" action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept.id_recept)}"></h:commandLink>
+												<h:commandLink class="read-more" value="Preberi več" action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(r.id_recept)}"></h:commandLink>
 											</h:form>
 										</div>
 									</div>
