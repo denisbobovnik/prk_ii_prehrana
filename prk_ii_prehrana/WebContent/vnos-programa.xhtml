@@ -41,14 +41,14 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											<p:inputText id="program-title" name="title" value="#{ProgramJSFBean.p.naslov}" a:placeholder="Naslov(*)">
+											Naslov(*)<p:inputText required="true" id="program-title" name="title" value="#{ProgramJSFBean.p.naslov}" >
 												<f:validateLength minimum="5" maximum="100"></f:validateLength>
 											</p:inputText>
 									
-											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ProgramJSFBean.thumbnail}" mode="simple" />
+											Slika(*): <p:fileUpload  required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ProgramJSFBean.thumbnail}" mode="simple" />
 	                                        
 	                                        <br />
-	                                        <h:selectOneMenu value="#{ProgramJSFBean.p.tk_id_prehrana}">
+	                                        <h:selectOneMenu required="true" value="#{ProgramJSFBean.p.tk_id_prehrana}">
                                                 <f:selectItems value="#{ProgramJSFBean.vrniVse()}" var="preh" itemValue="#{preh.id_prehrana}" itemLabel="#{preh.naslovPrehrane}" />
                                             </h:selectOneMenu>
 											

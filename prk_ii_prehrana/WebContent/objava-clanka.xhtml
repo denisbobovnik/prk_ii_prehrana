@@ -41,15 +41,15 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											<p:inputText id="clanek-title" name="title" value="#{ClanekJSFBean.c.title}" a:placeholder="Naslov(*)">
+											Naslov(*)<p:inputText required="true" id="clanek-title" name="title" value="#{ClanekJSFBean.c.title}">
 												<f:validateLength minimum="5" maximum="100"></f:validateLength>
 											</p:inputText>
 											
-											<p:inputTextarea id="clanek-content" name="content" value="#{ClanekJSFBean.c.content}" a:placeholder="Vsebina(*)" cols="30" rows="10">
+											Vsebina(*)<p:inputTextarea required="true" id="clanek-content" name="content" value="#{ClanekJSFBean.c.content}" cols="30" rows="10">
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
-											Naslovnica(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ClanekJSFBean.thumbnail}" mode="simple" />
+											Naslovnica(*): <p:fileUpload required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ClanekJSFBean.thumbnail}" mode="simple" />
 											
 											<br />
 											<br />
