@@ -40,29 +40,29 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.r.ime}" a:placeholder="Ime(*)">
+											Ime(*)<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.urejenRecept.ime}">
 												<f:validateLength minimum="3" maximum="100"></f:validateLength>
 											</p:inputText>
 											
-											<p:inputText id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.r.dolzinaPriprave}" a:placeholder="Dolžina priprave(*)">
+											Dolžina priprave(*)<p:inputText id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.urejenRecept.dolzinaPriprave}">
 											</p:inputText>
 											
-											<p:inputText id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.r.steviloPorcij}" a:placeholder="Število porcij(*)">
+											Število porcij(*)<p:inputText id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.urejenRecept.steviloPorcij}">
 											</p:inputText>
 							
-											<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.r.opis}" a:placeholder="Opis(*)" cols="30" rows="10">
+											Opis(*)<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.urejenRecept.opis}" cols="30" rows="10">
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
 											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
-											<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.r.linkVideo}" a:placeholder="Video(*)">
+											Video(*)<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.urejenRecept.linkVideo}">
 											</p:inputText>
 											
-											<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.r.kategorija}" a:placeholder="Kategorija(*)">
+											Kategorija(*)<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.urejenRecept.kategorija}">
 											</p:inputText>
 											
 											<br />
-											<p:inputTextarea id="recept-alergeni" name="content" value="#{ReceptJSFBean.alergeniPrivremeni}" a:placeholder="Alergeni(*)" cols="30" rows="10">
+											Alergeni(*)<p:inputTextarea id="recept-alergeni" name="content" value="#{ReceptJSFBean.alergeniZVejicami}" cols="30" rows="10">
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											<br />

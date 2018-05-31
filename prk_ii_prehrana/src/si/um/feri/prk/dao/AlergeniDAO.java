@@ -3,12 +3,14 @@ package si.um.feri.prk.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import si.um.feri.prk.objekti.Alergeni;
+import si.um.feri.prk.objekti.Recept;
 
 public class AlergeniDAO {
 
@@ -72,7 +74,7 @@ public class AlergeniDAO {
 		} finally {
 			conn.close();
 		}
-	}	
+	}
 	
 	public ArrayList<Alergeni> najdiVsePoReceptu(int tk_recept_id) throws Exception {
 		log.info("AlergeniDAO: najdiVsePoReceptu " + tk_recept_id);
