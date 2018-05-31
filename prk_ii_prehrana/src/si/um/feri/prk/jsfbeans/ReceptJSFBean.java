@@ -35,7 +35,9 @@ public class ReceptJSFBean {
 	private AlergeniDAO aD = AlergeniDAO.getInstance();
 	private int id_trenutnega_recepta;
 	private ArrayList<Sestavine> sestavineTrenutnegaRecepta = new ArrayList<Sestavine>();
-	
+	private Recept urejenRecept = new Recept();
+	private StringBuilder alergeniZVejicami;
+
 	public void dodajRecept() {
 		try {
 			
@@ -70,6 +72,31 @@ public class ReceptJSFBean {
 	public String vrniIme(int recept_id_enote) throws Exception {
 		Recept r = rD.najdi(recept_id_enote);
 		return r.getIme();
+	}
+	public void urediRecept(int id) throws Exception {
+		urejenRecept = rD.najdi(id);		
+	}
+	public void posodobiRecept() throws Exception {
+	try {
+			
+			String str = thumbnail.getFileName();
+			if(str.contains(".")) {
+				String ext = str.substring(str.lastIndexOf('.'), str.length());
+				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
+					nastaviTipSlike(ext);
+					r.setSlika(thumbnail.getContents());
+					
+					int id = urejenRecept.getId_recept();
+					rD.posodobi(urejenRecept);					
+					urejenRecept = new Recept();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka nalaganja!", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
+		}
+				
 	}
 	
 	public String zlepiAlergene(ArrayList<Alergeni> seznam) {
@@ -239,6 +266,20 @@ public class ReceptJSFBean {
 	}
 	public void setSestavineTrenutnegaRecepta(ArrayList<Sestavine> sestavineTrenutnegaRecepta) {
 		this.sestavineTrenutnegaRecepta = sestavineTrenutnegaRecepta;
+	}
+	public Recept getUrejenRecept() {
+		return urejenRecept;
+	}
+
+	public void setUrejenRecept(Recept urejenRecept) {
+		this.urejenRecept = urejenRecept;
+	}
+	public StringBuilder getAlergeniZVejicami() {
+		return alergeniZVejicami;
+	}
+
+	public void setAlergeniZVejicami(StringBuilder alergeniZVejicami) {
+		this.alergeniZVejicami = alergeniZVejicami;
 	}
 	
 	

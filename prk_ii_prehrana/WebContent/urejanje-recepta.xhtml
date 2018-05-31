@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Objava ƒçlanka
+			Objava Ëlanka
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -40,40 +40,32 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											Ime(*)<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.r.ime}"  validatorMessage="Ime vsebuje samo crke" requried="true">
+											Ime(*)<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.urejenRecept.ime}">
 												<f:validateLength minimum="3" maximum="100"></f:validateLength>
-												<f:validateRegex pattern="^([a-zA-Z]+(.)?[\s]*)$" /> 
 											</p:inputText>
 											
-											Dolzina priprave(min)<p:inputNumber id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.r.dolzinaPriprave}"   validatorMessage="Prevec je dolgocasno" requried="true">
-											    <f:validateLongRange minimum="1" maximum="420" />
-											</p:inputNumber>
 											
-											Stevilo porcij(*)<p:inputNumber id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.r.steviloPorcij}"  requried="true">
-											     <f:validateLongRange minimum="1" maximum="10" />
-											</p:inputNumber>
+											Dolûina priprave(*)<p:inputText id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.urejenRecept.dolzinaPriprave}">
+											</p:inputText>
+											
+											ätevilo porcij(*)<p:inputText id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.urejenRecept.steviloPorcij}">
+											</p:inputText>
 							
-											Opis(*)<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.r.opis}"  cols="30" rows="10" requried="true">
+											Opis(*)<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.urejenRecept.opis}" cols="30" rows="10">
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
 											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
-											Video(*)<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.r.linkVideo}">
+											Video(*)<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.urejenRecept.linkVideo}">
 											</p:inputText>
 											
-											Kategorija(*)<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.r.kategorija}"  requried="true">
-											   <f:validateRegex pattern="^([a-zA-Z]+(.)?[\s]*)$" /> 
-											   <f:validateLength maximum="100" minimum="1"/>
+											Kategorija(*)<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.urejenRecept.kategorija}">
 											</p:inputText>
 											
 											<br />
-											Alergeni(*)<p:inputTextarea id="recept-alergeni" name="content" value="#{ReceptJSFBean.alergeniPrivremeni}"  cols="30" rows="10" requried="false">
-												<f:validateLength maximum="9999" minimum="3"/>
-											</p:inputTextarea>
-											<br />
 											
-											<!-- redirect na seznam ƒçlankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Po≈°lji" actionListener="#{ReceptJSFBean.dodajRecept()}" action="dodajanje-sestavin-za-recept.xhtml"/>
+											<!-- redirect na seznam Ëlankov... -->
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Poölji" actionListener="#{ReceptJSFBean.dodajRecept()}" action="dodajanje-sestavin-za-recept.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>
