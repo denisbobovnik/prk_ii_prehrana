@@ -99,7 +99,7 @@ public class ClanekDAO {
 		try {
 			conn=baza.getConnection();
 			if(najdi(c.getClanek_id()) != null) {
-				//clanek z id-jem Å¾e obstaja...pohandle-at
+				//clanek z id-jem že obstaja...pohandle-at
 			} else {
 
 				PreparedStatement ps = conn.prepareStatement("INSERT INTO Clanek(title, content, user_username, thumbnail, datumClanka, tipSlike) VALUES (?,?,?,?,?,?)");

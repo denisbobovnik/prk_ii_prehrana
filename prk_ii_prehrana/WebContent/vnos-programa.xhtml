@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Objava clanka
+			Nov program
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -31,9 +31,9 @@
 							<!-- contact info -->
 							<div class="col-md-5 col-md-offset-1 contact-info col-push">
 								<div class="section-title left">
-									<h2>Vnos programa</h2>
+									<h2>Nov program</h2>
 								</div>
-								
+								<p>Tukaj določite naslov novega prehranskega programa ("tedenski jedilnik"), mu dodaste sliko (opcijsko) in mu določite pripadnost k določeni prehrani.</p>
 							</div>
 						
 							<!-- contact form -->
@@ -45,16 +45,19 @@
 												<f:validateLength minimum="5" maximum="100"></f:validateLength>
 											</p:inputText>
 									
-											Slika(*): <p:fileUpload  required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ProgramJSFBean.thumbnail}" mode="simple" />
+											Slika: <p:fileUpload  required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ProgramJSFBean.thumbnail}" mode="simple" />
 	                                        
 	                                        <br />
+	                                        <br />
+	                                        Prehrana, h kateri pripada program(*):
 	                                        <h:selectOneMenu required="true" value="#{ProgramJSFBean.p.tk_id_prehrana}">
                                                 <f:selectItems value="#{ProgramJSFBean.vrniVse()}" var="preh" itemValue="#{preh.id_prehrana}" itemLabel="#{preh.naslovPrehrane}" />
                                             </h:selectOneMenu>
 											
 											<br />
+											<br />
 											
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Poslji" actionListener="#{ProgramJSFBean.dodajProgram()}" action="urejanje-programa.xhtml"/>
+											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Vnesi" actionListener="#{ProgramJSFBean.dodajProgram()}" action="urejanje-programa.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>

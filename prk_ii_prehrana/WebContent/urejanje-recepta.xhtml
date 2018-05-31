@@ -33,6 +33,7 @@
 								<div class="section-title left">
 									<h2>Urejanje recepta</h2>
 								</div>
+								<p>Manjka kaj pri receptu (kakšna kuharska skrivnost?), ali pa se je pretihotapil tipkarski škrat? <br />Uredite recept prav tukaj!</p>
 							</div>
 						
 							<!-- contact form -->
@@ -55,7 +56,7 @@
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
-											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
+											Slika: <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
 											
 											<br />
 											<br />
@@ -69,7 +70,7 @@
 											<br />
 											
 											<!-- redirect na seznam člankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Posodobi" action="seznam-receptov.xhtml" actionListener="#{ReceptJSFBean.posodobiRecept()}" />
+											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Posodobi" action="seznam-receptov.xhtml" actionListener="#{ReceptJSFBean.posodobiRecept()}" />
 											
 											<br />
 											<p:messages showDetail="false"/>

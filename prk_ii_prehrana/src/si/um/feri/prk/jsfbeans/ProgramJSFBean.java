@@ -1,5 +1,6 @@
 package si.um.feri.prk.jsfbeans;
 
+import java.io.InputStream;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import javax.naming.InitialContext;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.io.ByteStreams;
 
 import si.um.feri.prk.dao.ClanekDAO;
 import si.um.feri.prk.dao.EnotaDAO;
@@ -49,34 +52,59 @@ public class ProgramJSFBean {
 		
 	public void dodajProgram() {
 		try {
-			String str = thumbnail.getFileName();
-			if(str.contains(".")) {
-				String ext = str.substring(str.lastIndexOf('.'), str.length());
-				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
-					nastaviTipSlike(ext);
-					p.setSlika(thumbnail.getContents());
-					
-					FacesContext context = FacesContext.getCurrentInstance();
-					String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
-					
-					p.setUser_username(username);
-					
-					String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
-					if(vloga.equals("STROKOVNJAK"))
-						p.setTipPrograma("splosni");
-					else
-						p.setTipPrograma("personaliziran");
-					
-					int id = pD.shraniInVrniId(p);
-					idZadnjiDodaniProgram = id;
-					p = new Program();
+			if(!isUploadedFileEmpty()) {
+				String str = thumbnail.getFileName();
+				if(str.contains(".")) {
+					String ext = str.substring(str.lastIndexOf('.'), str.length());
+					if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
+						nastaviTipSlike(ext);
+						p.setSlika(thumbnail.getContents());
+						
+						FacesContext context = FacesContext.getCurrentInstance();
+						String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
+						
+						p.setUser_username(username);
+						
+						String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
+						if(vloga.equals("STROKOVNJAK"))
+							p.setTipPrograma("splosni");
+						else
+							p.setTipPrograma("personaliziran");
+						
+						int id = pD.shraniInVrniId(p);
+						idZadnjiDodaniProgram = id;
+						p = new Program();
+					}
 				}
+			} else {
+				p.setTipSlike("image/jpeg");
+				
+				InputStream iStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/img/default-tall.jpg");
+				p.setSlika(ByteStreams.toByteArray(iStream));
+				
+				FacesContext context = FacesContext.getCurrentInstance();
+				String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
+				String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
+				p.setUser_username(username);
+				
+				if(vloga.equals("STROKOVNJAK"))
+					p.setTipPrograma("splosni");
+				else
+					p.setTipPrograma("personaliziran");
+				
+				int id = pD.shraniInVrniId(p);
+				idZadnjiDodaniProgram = id;
+				p = new Program();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka nalaganja!", e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 		}
+	}
+	
+	public boolean isUploadedFileEmpty() {
+		return thumbnail == null || thumbnail.getSize() == 0;
 	}
 	
 	private String getUserRole(){

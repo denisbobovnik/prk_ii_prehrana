@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Objava članka
+			Nov članek
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -31,7 +31,7 @@
 							<!-- contact info -->
 							<div class="col-md-5 col-md-offset-1 contact-info col-push">
 								<div class="section-title left">
-									<h2>Objavite članek</h2>
+									<h2>Nov članek</h2>
 								</div>
 								<p>Če imate zanimivo zgodbo o vašem osebnem napredku in bi jo radi delili z vsemi, jo napišite in pošljite na našo stran. <br />Dobrodošli so tudi nasveti!</p>
 							</div>
@@ -49,12 +49,12 @@
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
-											Naslovnica(*): <p:fileUpload required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ClanekJSFBean.thumbnail}" mode="simple" />
+											Naslovnica: <p:fileUpload required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ClanekJSFBean.thumbnail}" mode="simple" />
 											
 											<br />
 											<br />
 											
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="seznam-clankov.xhtml"/>
+											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ClanekJSFBean.dodajClanek}" action="seznam-clankov.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>

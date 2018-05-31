@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Objava članka
+			Nov recept
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -31,8 +31,9 @@
 							<!-- contact info -->
 							<div class="col-md-5 col-md-offset-1 contact-info col-push">
 								<div class="section-title left">
-									<h2>Objavite recept</h2>
+									<h2>Nov recept</h2>
 								</div>
+								<p>Dodajte nov (zdrav) obrok k naši kolekciji.<br />Komaj čakamo, da ga poiskusimo ;)</p>
 							</div>
 						
 							<!-- contact form -->
@@ -42,7 +43,6 @@
 										<div class="col-sm-12">
 											Ime(*)<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.r.ime}"  validatorMessage="Ime vsebuje samo crke" requried="true">
 												<f:validateLength minimum="3" maximum="100"></f:validateLength>
-												<f:validateRegex pattern="^([a-zA-Z]+(.)?[\s]*)$" /> 
 											</p:inputText>
 											
 											Dolzina priprave(min)<p:inputNumber id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.r.dolzinaPriprave}"   validatorMessage="Prevec je dolgocasno" requried="true">
@@ -57,12 +57,13 @@
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
-											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
+											Slika: <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
+											
+											<br /><br />
 											Video(*)<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.r.linkVideo}">
 											</p:inputText>
 											
 											Kategorija(*)<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.r.kategorija}"  requried="true">
-											   <f:validateRegex pattern="^([a-zA-Z]+(.)?[\s]*)$" /> 
 											   <f:validateLength maximum="100" minimum="1"/>
 											</p:inputText>
 											
@@ -73,7 +74,7 @@
 											<br />
 											
 											<!-- redirect na seznam člankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{ReceptJSFBean.dodajRecept()}" action="dodajanje-sestavin-za-recept.xhtml"/>
+											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Vnesi" actionListener="#{ReceptJSFBean.dodajRecept()}" action="dodajanje-sestavin-za-recept.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>

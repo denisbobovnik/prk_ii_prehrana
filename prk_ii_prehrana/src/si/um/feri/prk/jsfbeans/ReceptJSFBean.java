@@ -1,5 +1,6 @@
 package si.um.feri.prk.jsfbeans;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -12,6 +13,8 @@ import javax.faces.context.FacesContext;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.io.ByteStreams;
 
 import si.um.feri.prk.dao.AlergeniDAO;
 import si.um.feri.prk.dao.ReceptDAO;
@@ -40,33 +43,57 @@ public class ReceptJSFBean {
 
 	public void dodajRecept() {
 		try {
-			
-			String str = thumbnail.getFileName();
-			if(str.contains(".")) {
-				String ext = str.substring(str.lastIndexOf('.'), str.length());
-				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
-					nastaviTipSlike(ext);
-					r.setSlika(thumbnail.getContents());
-					
-					int id = rD.shraniInVrniID(r);
-					id_trenutnega_recepta = id;
-					
-					ArrayList<String> alergeni = razreziZvejicoArrayList(alergeniPrivremeni);
-					ArrayList<Alergeni> alergeniVnos = new ArrayList<Alergeni>();
-					for(String s : alergeni)
-						alergeniVnos.add(new Alergeni(0, id, s));
+			if(!isUploadedFileEmpty()) {
+				String str = thumbnail.getFileName();
+				if(str.contains(".")) {
+					String ext = str.substring(str.lastIndexOf('.'), str.length());
+					if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
+						nastaviTipSlike(ext);
+						r.setSlika(thumbnail.getContents());
 						
-					for(Alergeni a : alergeniVnos)
-						aD.shrani(a);	
-					
-					r = new Recept();
+						int id = rD.shraniInVrniID(r);
+						id_trenutnega_recepta = id;
+						
+						ArrayList<String> alergeni = razreziZvejicoArrayList(alergeniPrivremeni);
+						ArrayList<Alergeni> alergeniVnos = new ArrayList<Alergeni>();
+						for(String s : alergeni)
+							alergeniVnos.add(new Alergeni(0, id, s));
+							
+						for(Alergeni a : alergeniVnos)
+							aD.shrani(a);
+						
+						alergeniPrivremeni = "";
+						r = new Recept();
+					}
 				}
+			} else {
+				r.setTipSlike("image/jpeg");
+				
+				InputStream iStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/img/default-tall.jpg");
+				r.setSlika(ByteStreams.toByteArray(iStream));
+				
+				int id = rD.shraniInVrniID(r);
+				id_trenutnega_recepta = id;
+
+				ArrayList<String> alergeni = razreziZvejicoArrayList(alergeniPrivremeni);
+				ArrayList<Alergeni> alergeniVnos = new ArrayList<Alergeni>();
+				for(String s : alergeni)
+					alergeniVnos.add(new Alergeni(0, id, s));
+					
+				for(Alergeni a : alergeniVnos)
+					aD.shrani(a);
+				
+				r = new Recept();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka nalaganja!", e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 		}
+	}
+	
+	public boolean isUploadedFileEmpty() {
+		return thumbnail == null || thumbnail.getSize() == 0;
 	}
 	
 	public String vrniIme(int recept_id_enote) throws Exception {
@@ -80,15 +107,24 @@ public class ReceptJSFBean {
 	
 	public void posodobiRecept() throws Exception {
 		try {
-			String str = thumbnail.getFileName();
-			if(str.contains(".")) {
-				String ext = str.substring(str.lastIndexOf('.'), str.length());
-				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
-					nastaviTipSlikeUPDATE(ext);
-					urejenRecept.setSlika(thumbnail.getContents());
-					rD.posodobi(urejenRecept);					
-					urejenRecept = new Recept();
+			if(!isUploadedFileEmpty()) {
+				String str = thumbnail.getFileName();
+				if(str.contains(".")) {
+					String ext = str.substring(str.lastIndexOf('.'), str.length());
+					if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
+						nastaviTipSlikeUPDATE(ext);
+						urejenRecept.setSlika(thumbnail.getContents());
+						rD.posodobi(urejenRecept);					
+						urejenRecept = new Recept();
+					}
 				}
+			} else {
+				urejenRecept.setTipSlike("image/jpeg");
+				
+				InputStream iStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/img/default-tall.jpg");
+				urejenRecept.setSlika(ByteStreams.toByteArray(iStream));
+				rD.posodobi(urejenRecept);					
+				urejenRecept = new Recept();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

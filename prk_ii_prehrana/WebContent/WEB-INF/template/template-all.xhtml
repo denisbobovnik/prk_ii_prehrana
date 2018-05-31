@@ -48,9 +48,9 @@
 								<li class="#{view.viewId eq '/index.xhtml' ? 'active' : ''}"><a href="/prk_ii_prehrana/faces/index.xhtml">Domov</a></li>
 								<li class="#{view.viewId eq '/seznam-prehran.xhtml' ? 'active' : ''}"><a href="/prk_ii_prehrana/faces/seznam-prehran.xhtml">Prehrane</a></li>
 								<li class="#{view.viewId eq '/seznam-receptov.xhtml' ? 'active' : ''}"><a href="/prk_ii_prehrana/faces/seznam-receptov.xhtml">Recepti</a></li>
-								<li class="#{view.viewId eq '/vnos-programa.xhtml' ? 'active' : ''}"><a href="/prk_ii_prehrana/faces/vnos-programa.xhtml">Nov program</a></li>
 								<li class="#{view.viewId eq '/vnos-prehrane.xhtml' ? 'active' : ''}"><a href="/prk_ii_prehrana/faces/vnos-prehrane.xhtml">Nova prehrana</a></li>
 								<li class="#{view.viewId eq '/objava-recepta.xhtml' ? 'active' : ''}"><a href="/prk_ii_prehrana/faces/objava-recepta.xhtml">Nov recept</a></li>
+								<li class="#{view.viewId eq '/vnos-programa.xhtml' ? 'active' : ''}"><a href="/prk_ii_prehrana/faces/vnos-programa.xhtml">Nov program</a></li>
 								
 								<h:panelGroup rendered="#{not empty request.remoteUser}">		
 									<li><h:commandLink style="color: #6a23b5; background: #B483E7;" action="#{LogoutJSFBean.logout}" value="Odjava" /></li>		

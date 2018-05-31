@@ -10,7 +10,7 @@ public class Prehrana {
 	private int id_prehrana;
 	private String naslovPrehrane, content, tipSlike;
 	private Blob thumbnail;
-	private ArrayList<Program> prehranskiProgrami;	
+	private ArrayList<Program> prehranskiProgrami = new ArrayList<Program>();	
 	
 	public Prehrana() {
 		super();

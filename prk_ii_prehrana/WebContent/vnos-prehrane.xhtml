@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Objava članka
+			Nova prehrana
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -31,8 +31,9 @@
 							<!-- contact info -->
 							<div class="col-md-5 col-md-offset-1 contact-info col-push">
 								<div class="section-title left">
-									<h2>Vnos prehrane</h2>
+									<h2>Nova prehrana</h2>
 								</div>
+								<p>Tukaj določite nov "stil" prehrane (npr. namenjena določeni starostni skupini ljudi, za določen namen, ali poljubno).</p>
 							</div>
 						
 							<!-- contact form -->
@@ -48,12 +49,12 @@
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
-											Slika(*): <p:fileUpload required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{PrehranaJSFBean.thumbnail}" mode="simple" />
+											Slika: <p:fileUpload required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{PrehranaJSFBean.thumbnail}" mode="simple" />
 											
 											<br />
 											<br />
 											
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Pošlji" actionListener="#{PrehranaJSFBean.dodajPrehrano}" action="vnos-prehrane.xhtml"/>
+											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Vnesi" actionListener="#{PrehranaJSFBean.dodajPrehrano}" action="seznam-prehran.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>

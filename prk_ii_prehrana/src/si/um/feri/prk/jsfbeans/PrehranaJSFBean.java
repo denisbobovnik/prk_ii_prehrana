@@ -1,5 +1,6 @@
 package si.um.feri.prk.jsfbeans;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.faces.application.FacesMessage;
@@ -10,6 +11,8 @@ import javax.faces.context.FacesContext;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.io.ByteStreams;
 
 import si.um.feri.prk.dao.ClanekDAO;
 import si.um.feri.prk.dao.PrehranaDAO;
@@ -30,21 +33,35 @@ public class PrehranaJSFBean {
 	
 	public void dodajPrehrano() {
 		try {
-			String str = thumbnail.getFileName();
-			if(str.contains(".")) {
-				String ext = str.substring(str.lastIndexOf('.'), str.length());
-				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
-					nastaviTipSlike(ext);
-					p.setThumbnail(thumbnail.getContents());
-					
-					FacesContext context = FacesContext.getCurrentInstance();
-					String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
-					String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
-					
-					
-					pD.shrani(p);
-					p = new Prehrana();
+			if(!isUploadedFileEmpty()) {
+				String str = thumbnail.getFileName();
+				if(str.contains(".")) {
+					String ext = str.substring(str.lastIndexOf('.'), str.length());
+					if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
+						nastaviTipSlike(ext);
+						p.setThumbnail(thumbnail.getContents());
+						
+						FacesContext context = FacesContext.getCurrentInstance();
+						String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
+						String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
+						
+						
+						pD.shrani(p);
+						p = new Prehrana();
+					}
 				}
+			} else {
+				p.setTipSlike("image/jpeg");
+				
+				InputStream iStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/img/default-tall.jpg");
+				p.setThumbnail(ByteStreams.toByteArray(iStream));
+
+				FacesContext context = FacesContext.getCurrentInstance();
+				String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
+				String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
+
+				pD.shrani(p);
+				p = new Prehrana();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,6 +69,11 @@ public class PrehranaJSFBean {
 			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 		}
 	}
+	
+	public boolean isUploadedFileEmpty() {
+		return thumbnail == null || thumbnail.getSize() == 0;
+	}
+	
 	private void nastaviTipSlike(String ext) {
 		ext = ext.substring(1, ext.length());
 		if(ext.equals("jpg")) {

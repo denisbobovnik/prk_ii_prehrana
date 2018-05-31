@@ -1,5 +1,6 @@
 package si.um.feri.prk.jsfbeans;
 
+import java.io.InputStream;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,6 +15,8 @@ import javax.naming.InitialContext;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.io.ByteStreams;
 
 import si.um.feri.prk.dao.ClanekDAO;
 import si.um.feri.prk.objekti.Clanek;
@@ -31,28 +34,47 @@ public class ClanekJSFBean {
 	
 	public void dodajClanek() {
 		try {
-			String str = thumbnail.getFileName();
-			if(str.contains(".")) {
-				String ext = str.substring(str.lastIndexOf('.'), str.length());
-				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
-					nastaviTipSlike(ext);
-					c.setThumbnail(thumbnail.getContents());
-					
-					FacesContext context = FacesContext.getCurrentInstance();
-					String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
-					String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
-					
-					c.setUser_username(username);
-					
-					cD.shrani(c);
-					c = new Clanek();
+			if(!isUploadedFileEmpty()) {
+				String str = thumbnail.getFileName();
+				if(str.contains(".")) {
+					String ext = str.substring(str.lastIndexOf('.'), str.length());
+					if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
+						nastaviTipSlike(ext);
+						c.setThumbnail(thumbnail.getContents());
+						
+						FacesContext context = FacesContext.getCurrentInstance();
+						String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
+						String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
+						
+						c.setUser_username(username);
+						
+						cD.shrani(c);
+						c = new Clanek();
+					}
 				}
+			} else {
+				c.setTipSlike("image/jpeg");
+				
+				InputStream iStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/img/default-wide.jpg");
+				c.setThumbnail(ByteStreams.toByteArray(iStream));
+
+				FacesContext context = FacesContext.getCurrentInstance();
+				String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
+				String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
+				c.setUser_username(username);
+				
+				cD.shrani(c);
+				c = new Clanek();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka nalaganja!", e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 		}
+	}
+	
+	public boolean isUploadedFileEmpty() {
+		return thumbnail == null || thumbnail.getSize() == 0;
 	}
 	
 	public void izberiClanek(int clanek_id) {
@@ -72,7 +94,7 @@ public class ClanekJSFBean {
 			if(getUserRole().equals("STROKOVNJAK")||getUserRole().equals("ADMINISTRATOR")||tmp.getUser_username().equals(context.getExternalContext().getRemoteUser()))
 				cD.izbrisi(clanek_id);
 			else {
-				FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka brisanja!", "Nimate pravic brisanja tega Ëlanka!");
+				FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka brisanja!", "Nimate pravic brisanja tega ƒçlanka!");
 				FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 				context.getExternalContext().redirect("clanek.xhtml");
 			}
