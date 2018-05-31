@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import si.um.feri.prk.dao.ClanekDAO;
 import si.um.feri.prk.dao.PrehranaDAO;
 import si.um.feri.prk.dao.ProgramDAO;
+import si.um.feri.prk.dao.ReceptDAO;
 import si.um.feri.prk.objekti.Clanek;
 import si.um.feri.prk.objekti.Prehrana;
 import si.um.feri.prk.objekti.Program;
+import si.um.feri.prk.objekti.Recept;
 
 @WebServlet("ImageServlet")
 public class ImageServlet extends HttpServlet {
@@ -23,7 +25,8 @@ public class ImageServlet extends HttpServlet {
     private ClanekDAO cD = ClanekDAO.getInstance();
     private PrehranaDAO pD = PrehranaDAO.getInstance();
     private ProgramDAO pDD = ProgramDAO.getInstance();
-	
+    private ReceptDAO rD = ReceptDAO.getInstance();
+    
 	public ImageServlet() {
         super();
     }
@@ -59,12 +62,19 @@ public class ImageServlet extends HttpServlet {
 				bitiSlike = blob.getBytes(1, blobLength);
 				blob.free();
 				tipSlike = p.getTipSlike();
+			} else if(klic.equals("recept")) {
+				int id_recept = id;
+				Recept r = rD.najdi(id_recept);
+				Blob blob = r.getSlika();
+				int blobLength = (int) blob.length();  
+				bitiSlike = blob.getBytes(1, blobLength);
+				blob.free();
+				tipSlike = r.getTipSlike();
 			}
 		} catch (Exception e) {
 			response.getWriter().write(e.getMessage());
 			response.getWriter().close();
 		}
-		
 		response.setContentType(tipSlike);
 		response.getOutputStream().write(bitiSlike);
 		response.getOutputStream().close();

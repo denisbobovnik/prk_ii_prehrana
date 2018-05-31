@@ -72,6 +72,13 @@ public class ReceptJSFBean {
 		return r.getIme();
 	}
 	
+	public String zlepiAlergene(ArrayList<Alergeni> seznam) {
+		String ret = "";
+		for(Alergeni a : seznam)
+			ret += a.getIme_alergena() + ", ";
+		return ret;
+	}
+	
 	public void dodajSestavino() throws Exception {
 		sestavineTrenutnegaRecepta.add(s);
 		s = new Sestavine();	
@@ -124,6 +131,15 @@ public class ReceptJSFBean {
 		}
 		else {
 			r.setTipSlike("image/"+ext.toLowerCase());
+		}
+	}
+	
+	public String trimContent121(String content) {
+		if(content.length()<121) {
+			return content;
+		} else {
+			content = content.substring(0, 121);
+			return content;
 		}
 	}
 	

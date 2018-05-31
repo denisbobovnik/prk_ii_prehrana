@@ -31,62 +31,54 @@
 								<!-- Single Post -->
 								<div class="single-post">
 									<div class="post-thumbnail">
-										<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?id=#{ReceptJSFBean.izbranRecept.id_recept}" height="270"/>
-										
+										<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=recept&amp;id=#{ReceptJSFBean.izbranRecept.id_recept}" height="270"/>
 									</div>
 									<div class="post-content">
 										<h2 class="post-title"><h:outputText value="#{ReceptJSFBean.izbranRecept.ime}" /></h2>
-										<p><h:outputText value="#{ReceptJSFBean.izbranRecept.datumDodajanja}" /></p>
-										<p><h:outputText value="#{ReceptJSFBean.izbranRecept.kategorija}" /></p>
-										<p><h:outputText value="#{ReceptJSFBean.izbranRecept.opis}" /></p>
-										<p><h:outputText value="#{ReceptJSFBean.izbranRecept.dolzinaPriprave}" /></p>
-									    <p><h:outputText value="#{ReceptJSFBean.izbranRecept.steviloPorcij}" /></p>
-									    <p><h:outputText value="#{ReceptJSFBean.izbranRecept.kalorije}" /></p>
-									    <p><h:outputText value="#{ReceptJSFBean.izbranRecept.sladkorji}" /></p>
-									    <div class="row">
-											<div class="col-md-12">
-												<h:form>
-												   <h:dataTable value="#{ReceptJSFBean.vrniVsehSestavine(ReceptJSFBean.izbranRecept.id_recept)}" var="sestavina">
-												       <h:column>    				
-													      <f:facet name="header"><h:outputText value="Ime" /></f:facet>    				
-													      <h:outputText value="#{sestavina.ime}" />
-													   </h:column>
-													   <h:column>    				
-													      <f:facet name="header"><h:outputText value="Kolicina" /></f:facet>    				
-													      <h:outputText value="#{sestavina.kolicina}" />
-													   </h:column>
-													   <h:column>    				
-													      <f:facet name="header"><h:outputText value="Enota" /></f:facet>    				
-													      <h:outputText value="#{sestavina.enota_kolicine}" />
-													   </h:column>
-													   <h:column>    				
-													      <f:facet name="header"><h:outputText value="Sladkorji" /></f:facet>    				
-													      <h:outputText value="#{sestavina.sladkorji}" />
-													   </h:column>
-													   <h:column>    				
-													      <f:facet name="header"><h:outputText value="Kalorij" /></f:facet>    				
-													      <h:outputText value="#{sestavina.kalorije}" />
-													   </h:column>
-
-												   </h:dataTable>
-												</h:form>
-											</div>
-										</div>		
+										<div class="post-meta">
+											<a href=""><h:outputText value="#{ReceptJSFBean.izbranRecept.kategorija}" /></a>
+										</div>
+										
 										<div class="row">
-											<div class="col-md-12">
-												<h:form>
-												   <h:dataTable value="#{ReceptJSFBean.vrniVsehAlergene(ReceptJSFBean.izbranRecept.id_recept)}" var="alergen">
-												       <h:column>    				
-													      <f:facet name="header"><h:outputText value="Ime alergena" /></f:facet>    				
-													      <h:outputText value="#{alergen.ime_alergena}" />
-													   </h:column>
-												   </h:dataTable>
-												</h:form>
+											<div class="col-md-6">
+												<h4><h:outputText value="Sestavine" /></h4>
+												<h:dataTable value="#{ReceptJSFBean.izbranRecept.sestavine}" var="sestavina">
+													<h:column>    				
+														<f:facet name="header"><h:outputText value="Ime" /></f:facet>    				
+														<h:outputText value="#{sestavina.ime}" />
+													</h:column>
+													<h:column>    				
+														<f:facet name="header"><h:outputText value="Količina" /></f:facet>    				
+														<h:outputText value="#{sestavina.kolicina}" /><h:outputText value="#{sestavina.enota_kolicine}" />
+													</h:column>
+													<h:column>    				
+														<f:facet name="header"><h:outputText value="Sladkorji" /></f:facet>    				
+														<h:outputText value="#{sestavina.sladkorji}" /><h:outputText value="g" />
+													</h:column>
+													<h:column>    				
+														<f:facet name="header"><h:outputText value="Kalorije" /></f:facet>    				
+														<h:outputText value="#{sestavina.kalorije}" /><h:outputText value="kcal" />
+													</h:column>
+												</h:dataTable>
 											</div>
-										</div>		
+											<div class="col-md-6">
+												<br />
+												<h4><h:outputText value="Dolžina priprave: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.dolzinaPriprave}" /> minut</h4>
+												<h4><h:outputText value="Število porcij: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.steviloPorcij}" /></h4>
+												<h4><h:outputText value="Število kalorij: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.kalorije}" />kcal</h4>
+												<h4><h:outputText value="Količina sladkorja: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.sladkorji}" />g</h4>
+												<h4><h:outputText value="Alergeni: " /><h:outputText value="#{ReceptJSFBean.zlepiAlergene(ReceptJSFBean.izbranRecept.alergeni)}" /></h4>
+											</div>
+										</div>
+										
+										<br />
+										<h4><h:outputText value="Postopek"/></h4>
+										<p><h:outputText value="#{ReceptJSFBean.izbranRecept.opis}" /></p>	
 									    
-									    <p><iframe width="420" height="345" src="#{ReceptJSFBean.izbranRecept.linkVideo}"></iframe></p>
-									    
+									    <h4><h:outputText value="Video"/></h4>
+									    <ui:fragment rendered="#{ReceptJSFBean.izbranRecept.linkVideo != ''}">
+									    	<p><iframe width="640" height="360" src="#{ReceptJSFBean.izbranRecept.linkVideo}"></iframe></p>
+										</ui:fragment>									    
 									</div>
 								</div>
 							</div>
