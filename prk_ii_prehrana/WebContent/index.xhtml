@@ -1,7 +1,11 @@
 <html
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 	
 	<h:body>
 	<ui:composition template="WEB-INF/template/template-all.xhtml">
@@ -18,7 +22,85 @@
 		
 		<ui:define name="content">
 			<f:view>
-
+			<br /><br /><br />
+				<!-- Intro Section -->
+				<div class="hero-section">
+					<div class="hero-content">
+						<div class="hero-center">
+						<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+							<img src="img/big-logo.png" alt="" />
+							<p>Kjer je zdrava prehrana doma.</p>
+						</div>
+					</div>
+					<!-- slider -->
+					<div id="hero-slider" class="owl-carousel">
+						<div style="opacity: 0.5;" class="item  hero-item" data-bg="img/01.jpg"></div>
+						<div style="opacity: 0.5;" class="item  hero-item" data-bg="img/02.jpg"></div>
+						<div style="opacity: 0.5;" class="item  hero-item" data-bg="img/03.jpg"></div>
+					</div>
+				</div>
+				<!-- Intro Section -->
+				
+				<!-- About section -->
+				<div class="about-section">
+					<div class="overlay"></div>
+					<!-- card section -->
+					<div class="card-section">
+						<div class="container">
+							<div class="row">
+								<!-- single card -->
+								<div class="col-md-4 col-sm-6">
+									<div class="lab-card">
+										<div class="icon">
+											<img src="img/1.png" alt="1" />
+										</div>
+										<h2>Sestavine</h2>
+										<p>Ključno pri zdravi prehrani.</p>
+									</div>
+								</div>
+								<!-- single card -->
+								<div class="col-md-4 col-sm-6">
+									<div class="lab-card">
+										<div class="icon">
+											<img src="img/2.png" alt="2" />
+										</div>
+										<h2>Recepti</h2>
+										<p>Pomembna je taktika.</p>
+									</div>
+								</div>
+								<!-- single card -->
+								<div class="col-md-4 col-sm-12">
+									<div class="lab-card">
+										<div class="icon">
+											<img src="img/3.png" alt="3" />
+										</div>
+										<h2>Voda</h2>
+										<p>Spremljajte napredek.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- card section end-->
+			
+			
+					<!-- About contant -->
+					<div class="about-contant">
+						<div class="container">
+							<div class="section-title">
+								<h2>Zdrava prehrana in zdrava hrana</h2>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<p>Zdrava prehrana je zelo pomemben element vašega zdravja, zato je zelo pomembno, kakšno hrano jeste. Zdrava hrana je vir energije za vaše življenje tako kot čisto gorivo za vaš avto. Preberite si koristne <a style="color: #2be6ab;" href="/prk_ii_prehrana/faces/seznam-clankov.xhtml">članke</a> na temo zdrava prehrana.</p>
+									<br /><br /><br />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- About section end -->
+				
 			</f:view>
 		</ui:define>
 		
