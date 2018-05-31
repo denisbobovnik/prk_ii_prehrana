@@ -40,9 +40,12 @@
 											<h:form style="display:inline-block;">
 												<h:commandLink class="read-more" value="Ogled" action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept.id_recept)}"></h:commandLink>
 											</h:form>
-											<h:form style="display:inline-block; margin-left: 20px;">
-												<h:commandLink class="read-more" value="Uredi" action="urejanje-recepta.xhtml" actionListener="#{ReceptJSFBean.urediRecept(recept.id_recept)}"></h:commandLink>
-											</h:form>
+											
+											<ui:fragment rendered="#{facesContext.externalContext.isUserInRole('STROKOVNJAK')}">
+												<h:form style="display:inline-block; margin-left: 20px;">
+													<h:commandLink class="read-more" value="Uredi" action="urejanje-recepta.xhtml" actionListener="#{ReceptJSFBean.urediRecept(recept.id_recept)}"></h:commandLink>
+												</h:form>
+											</ui:fragment>
 										</div>
 									</div>
 								</div>

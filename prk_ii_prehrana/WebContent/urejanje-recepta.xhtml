@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Objava Ëlanka
+			Urejanje recepta
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -31,7 +31,7 @@
 							<!-- contact info -->
 							<div class="col-md-5 col-md-offset-1 contact-info col-push">
 								<div class="section-title left">
-									<h2>Objavite recept</h2>
+									<h2>Urejanje recepta</h2>
 								</div>
 							</div>
 						
@@ -45,10 +45,10 @@
 											</p:inputText>
 											
 											
-											Dolûina priprave(*)<p:inputText id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.urejenRecept.dolzinaPriprave}">
+											Dol≈æina priprave(*)<p:inputText id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.urejenRecept.dolzinaPriprave}">
 											</p:inputText>
 											
-											ätevilo porcij(*)<p:inputText id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.urejenRecept.steviloPorcij}">
+											≈†tevilo porcij(*)<p:inputText id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.urejenRecept.steviloPorcij}">
 											</p:inputText>
 							
 											Opis(*)<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.urejenRecept.opis}" cols="30" rows="10">
@@ -56,6 +56,10 @@
 											</p:inputTextarea>
 											
 											Slika(*): <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
+											
+											<br />
+											<br />
+											
 											Video(*)<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.urejenRecept.linkVideo}">
 											</p:inputText>
 											
@@ -64,8 +68,8 @@
 											
 											<br />
 											
-											<!-- redirect na seznam Ëlankov... -->
-											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Poölji" actionListener="#{ReceptJSFBean.dodajRecept()}" action="dodajanje-sestavin-za-recept.xhtml"/>
+											<!-- redirect na seznam ƒçlankov... -->
+											<p:commandButton widgetVar="button" disabled="#{facesContext.renderResponse or not facesContext.postback}" ajax="false" class="site-btn" value="Posodobi" action="seznam-receptov.xhtml" actionListener="#{ReceptJSFBean.posodobiRecept()}" />
 											
 											<br />
 											<p:messages showDetail="false"/>

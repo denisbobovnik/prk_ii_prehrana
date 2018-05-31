@@ -73,20 +73,19 @@ public class ReceptJSFBean {
 		Recept r = rD.najdi(recept_id_enote);
 		return r.getIme();
 	}
+	
 	public void urediRecept(int id) throws Exception {
-		urejenRecept = rD.najdi(id);		
+		urejenRecept = rD.najdi(id);
 	}
+	
 	public void posodobiRecept() throws Exception {
-	try {
-			
+		try {
 			String str = thumbnail.getFileName();
 			if(str.contains(".")) {
 				String ext = str.substring(str.lastIndexOf('.'), str.length());
 				if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
-					nastaviTipSlike(ext);
-					r.setSlika(thumbnail.getContents());
-					
-					int id = urejenRecept.getId_recept();
+					nastaviTipSlikeUPDATE(ext);
+					urejenRecept.setSlika(thumbnail.getContents());
 					rD.posodobi(urejenRecept);					
 					urejenRecept = new Recept();
 				}
@@ -96,7 +95,6 @@ public class ReceptJSFBean {
 			FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka nalaganja!", e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 		}
-				
 	}
 	
 	public String zlepiAlergene(ArrayList<Alergeni> seznam) {
@@ -158,6 +156,16 @@ public class ReceptJSFBean {
 		}
 		else {
 			r.setTipSlike("image/"+ext.toLowerCase());
+		}
+	}
+	
+	private void nastaviTipSlikeUPDATE(String ext) {
+		ext = ext.substring(1, ext.length());
+		if(ext.equals("jpg")) {
+			urejenRecept.setTipSlike("image/jpeg");
+		}
+		else {
+			urejenRecept.setTipSlike("image/"+ext.toLowerCase());
 		}
 	}
 	
