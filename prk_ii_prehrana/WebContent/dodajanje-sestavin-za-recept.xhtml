@@ -40,20 +40,25 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" a:placeholder="Ime(*)">
+											<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" a:placeholder="Ime(*)" requried="true">
+											     <f:validateLength minimum="2" maximum="100"></f:validateLength>
+												 <f:validateRegex pattern="^([a-zA-Z]+(.)?[\s]*)$" /> 
 											</p:inputText>
 											
-											<p:inputText id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.s.kolicina}" a:placeholder="Količina(*)">
+											<p:inputNumber id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.s.kolicina}" a:placeholder="Količina(*)" minValue="0" maxValue="999.999" decimalPlaces="3" requried="true">
+											     
+											</p:inputNumber>
+											
+											<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota_kolicine}" a:placeholder="Enota količine(*)" requried="true">
+											    <f:validateLength minimum="2" maximum="45"></f:validateLength>
+												 <f:validateRegex pattern="^([a-zA-Z]+(.)?[\s]*)$" /> 
 											</p:inputText>
 											
-											<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota_kolicine}" a:placeholder="Enota količine(*)">
-											</p:inputText>
+											<p:inputNumber id="kalorije-title" name="kalorije" value="#{ReceptJSFBean.s.kalorije}" a:placeholder="Kalorije(*)" requried="true" minValue="0" maxValue="999.999" decimalPlaces="3"> 
+											</p:inputNumber>
 											
-											<p:inputText id="kalorije-title" name="kalorije" value="#{ReceptJSFBean.s.kalorije}" a:placeholder="Kalorije(*)">
-											</p:inputText>
-											
-											<p:inputText id="sladkorji-title" name="sladkorji" value="#{ReceptJSFBean.s.sladkorji}" a:placeholder="Sladkorji(*)">
-											</p:inputText>
+											<p:inputNumber id="sladkorji-title" name="sladkorji" value="#{ReceptJSFBean.s.sladkorji}" a:placeholder="Sladkorji(*)" requried="true" minValue="0" maxValue="999.999" decimalPlaces="3">
+											</p:inputNumber>
 
 											<br />
 											<br />

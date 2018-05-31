@@ -40,17 +40,18 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.r.ime}" a:placeholder="Ime(*)">
+											<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.r.ime}" a:placeholder="Ime(*)" validatorMessage="Ime vsebuje samo crke" requried="true">
 												<f:validateLength minimum="3" maximum="100"></f:validateLength>
+												<f:validateRegex pattern="^([a-zA-Z]+(.)?[\s]*)$" /> 
 											</p:inputText>
 											
-											<p:inputText id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.r.dolzinaPriprave}" a:placeholder="Dolžina priprave(*)">
-											</p:inputText>
+											<p:inputNumber id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.r.dolzinaPriprave}" a:placeholder="Dolžina priprave(*)" minValue="1" maxValue="420" synmbol="min" validatorMessage="Prevec je dolgocasno" requried="true">
+											</p:inputNumber>
 											
-											<p:inputText id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.r.steviloPorcij}" a:placeholder="Število porcij(*)">
-											</p:inputText>
+											<p:inputNumber id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.r.steviloPorcij}" a:placeholder="Število porcij(*)" minValue="1" maxValue="10" requried="true">
+											</p:inputNumber>
 							
-											<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.r.opis}" a:placeholder="Opis(*)" cols="30" rows="10">
+											<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.r.opis}" a:placeholder="Opis(*)" cols="30" rows="10" requried="true">
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											
@@ -58,11 +59,13 @@
 											<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.r.linkVideo}" a:placeholder="Video(*)">
 											</p:inputText>
 											
-											<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.r.kategorija}" a:placeholder="Kategorija(*)">
+											<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.r.kategorija}" a:placeholder="Kategorija(*)" requried="true">
+											   <f:validateRegex pattern="^([a-zA-Z]+(.)?[\s]*)$" /> 
+											   <f:validateLength maximum="100" minimum="1"/>
 											</p:inputText>
 											
 											<br />
-											<p:inputTextarea id="recept-alergeni" name="content" value="#{ReceptJSFBean.alergeniPrivremeni}" a:placeholder="Alergeni(*)" cols="30" rows="10">
+											<p:inputTextarea id="recept-alergeni" name="content" value="#{ReceptJSFBean.alergeniPrivremeni}" a:placeholder="Alergeni(*)" cols="30" rows="10" requried="false">
 												<f:validateLength maximum="9999" minimum="10"/>
 											</p:inputTextarea>
 											<br />
