@@ -41,17 +41,13 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											Ime(*)<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.r.ime}"  validatorMessage="Ime vsebuje samo crke" required="true">
+											Ime(*)<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.r.ime}" required="true">
 												<f:validateLength minimum="3" maximum="100"></f:validateLength>
 											</p:inputText>
 											
-											Dolzina priprave(min)<p:inputNumber id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.r.dolzinaPriprave}"   validatorMessage="Prevec je dolgocasno" required="true">
-											    <f:validateLongRange minimum="1" maximum="420" />
-											</p:inputNumber>
+											Dolzina priprave(min)<p:inputText id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.r.dolzinaPriprave}" required="true" />
 											
-											Stevilo porcij(*)<p:inputNumber id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.r.steviloPorcij}"  required="true">
-											     <f:validateLongRange minimum="1" maximum="10" />
-											</p:inputNumber>
+											Stevilo porcij(*)<p:inputText id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.r.steviloPorcij}"  required="true" />
 							
 											Opis(*)<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.r.opis}"  cols="30" rows="10" required="true">
 												<f:validateLength maximum="9999" minimum="10"/>
@@ -60,10 +56,9 @@
 											Slika: <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
 											
 											<br /><br />
-											Video(*)<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.r.linkVideo}" required="true">
-											</p:inputText>
+											Video(*)<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.r.linkVideo}" required="true" />
 											
-											Kategorija(*)<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.r.kategorija}"  required="true">
+											Kategorija(*)<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.r.kategorija}" required="true">
 											   <f:validateLength maximum="100" minimum="1"/>
 											</p:inputText>
 											

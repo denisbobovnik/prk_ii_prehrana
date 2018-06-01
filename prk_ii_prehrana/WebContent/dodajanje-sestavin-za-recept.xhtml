@@ -38,37 +38,33 @@
 						
 							<!-- contact form -->
 							<div class="col-md-6 col-pull">
-								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
-									<div class="row">
-										<div class="col-sm-12">
-											Naziv(*)<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" required="true">
-											</p:inputText>
-											
-											Količina(*)<p:inputNumber id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.s.kolicina}" minValue="0" maxValue="999.999" decimalPlaces="3" required="true">
-											     
-											</p:inputNumber>
-											
-											Enota količine(*)<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota_kolicine}"  required="true">
-											</p:inputText>
-											
-											Kalorije(*)<p:inputNumber id="kalorije-title" name="kalorije" value="#{ReceptJSFBean.s.kalorije}" required="true" minValue="0" maxValue="999.999" decimalPlaces="3"> 
-											</p:inputNumber>
-											
-											Sladkorji(*)<p:inputNumber id="sladkorji-title" name="sladkorji" value="#{ReceptJSFBean.s.sladkorji}" required="true" minValue="0" maxValue="999.999" decimalPlaces="3">
-											</p:inputNumber>
-
+								<div class="row">
+									<div class="col-sm-12">
+										<h:form enctype="multipart/form-data" class="form-class" id="con_form">
+											Naziv(*)<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" />
+												
+											Količina(*)<p:inputText id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.s.kolicina}" />
+												
+											Enota količine(*)<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota_kolicine}" />
+												
+											Kalorije(*)<p:inputText id="kalorije-title" name="kalorije" value="#{ReceptJSFBean.s.kalorije}" /> 
+												
+											Sladkorji(*)<p:inputText id="sladkorji-title" name="sladkorji" value="#{ReceptJSFBean.s.sladkorji}" />
+	
 											<br />
 											<br />
 											
-											<!-- redirect na seznam èlankov... -->
+											<!-- redirect na seznam člankov... -->
 											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Dodaj sestavino" actionListener="#{ReceptJSFBean.dodajSestavino()}" action="dodajanje-sestavin-za-recept.xhtml"/>
-											<br /><br />
+										</h:form>
+										<br /><br />
+										<h:form enctype="multipart/form-data" class="form-class" id="con_form2">
 											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Shrani recept" actionListener="#{ReceptJSFBean.dodajSestavineReceptu()}" action="seznam-receptov.xhtml"/>
-											<br />
-											<p:messages showDetail="false"/>
+										</h:form>
+										<br />
+										<p:messages showDetail="false"/>
 										</div>
 									</div>
-								</h:form>
 							</div>
 						</div>
 					</div>

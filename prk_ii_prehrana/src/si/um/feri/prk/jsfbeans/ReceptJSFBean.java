@@ -87,6 +87,7 @@ public class ReceptJSFBean {
 				for(Alergeni a : alergeniVnos)
 					aD.shrani(a);
 				
+				alergeniPrivremeni="";
 				r = new Recept();
 			}
 		} catch (Exception e) {
