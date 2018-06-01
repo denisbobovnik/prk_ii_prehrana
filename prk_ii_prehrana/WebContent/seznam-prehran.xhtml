@@ -36,7 +36,7 @@
 										</div>
 										<div class="card-text">
 											<h2><h:outputText value="#{prehrana.naslovPrehrane}" /></h2>
-											<p><h:outputText value="#{PrehranaJSFBean.trimContent121(prehrana.content)}" /></p>
+											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{PrehranaJSFBean.trimContent121(prehrana.content)}" /></p>
 											<h:form>
 												<h:commandLink class="read-more" value="Ogled" action="prehrana.xhtml" actionListener="#{PrehranaJSFBean.izberiPrehrano(prehrana.id_prehrana)}"></h:commandLink>
 											</h:form>

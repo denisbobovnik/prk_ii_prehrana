@@ -51,6 +51,8 @@ public class ReceptJSFBean {
 						nastaviTipSlike(ext);
 						r.setSlika(thumbnail.getContents());
 						
+						r.setOpis(r.getOpis().replaceAll("\n","<br />"));
+						
 						int id = rD.shraniInVrniID(r);
 						id_trenutnega_recepta = id;
 						
@@ -71,6 +73,8 @@ public class ReceptJSFBean {
 				
 				InputStream iStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/img/default-tall.jpg");
 				r.setSlika(ByteStreams.toByteArray(iStream));
+				
+				r.setOpis(r.getOpis().replaceAll("\n","<br />"));
 				
 				int id = rD.shraniInVrniID(r);
 				id_trenutnega_recepta = id;
@@ -114,6 +118,9 @@ public class ReceptJSFBean {
 					if(ext.equalsIgnoreCase(".jpg")||(ext.equalsIgnoreCase(".png"))||(ext.equalsIgnoreCase(".jpeg"))||(ext.equalsIgnoreCase(".gif"))) {
 						nastaviTipSlikeUPDATE(ext);
 						urejenRecept.setSlika(thumbnail.getContents());
+						
+						urejenRecept.setOpis(urejenRecept.getOpis().replaceAll("\n","<br />"));
+						
 						rD.posodobi(urejenRecept);					
 						urejenRecept = new Recept();
 					}
@@ -123,6 +130,9 @@ public class ReceptJSFBean {
 				
 				InputStream iStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/img/default-tall.jpg");
 				urejenRecept.setSlika(ByteStreams.toByteArray(iStream));
+				
+				urejenRecept.setOpis(urejenRecept.getOpis().replaceAll("\n","<br />"));
+				
 				rD.posodobi(urejenRecept);					
 				urejenRecept = new Recept();
 			}

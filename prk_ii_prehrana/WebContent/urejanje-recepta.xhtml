@@ -53,7 +53,7 @@
 											</p:inputText>
 							
 											Opis(*)<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.urejenRecept.opis}" cols="30" rows="10">
-												<f:validateLength maximum="9999" minimum="10"/>
+												<f:validateLength maximum="8000" minimum="10"/>
 											</p:inputTextarea>
 											
 											Slika: <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />

@@ -46,7 +46,7 @@
 											</p:inputText>
 											
 											Vsebina(*)<p:inputTextarea required="true" id="prehrana-content" name="content" value="#{PrehranaJSFBean.p.content}" cols="30" rows="10">
-												<f:validateLength maximum="9999" minimum="10"/>
+												<f:validateLength maximum="8000" minimum="10"/>
 											</p:inputTextarea>
 											
 											Slika: <p:fileUpload required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{PrehranaJSFBean.thumbnail}" mode="simple" />

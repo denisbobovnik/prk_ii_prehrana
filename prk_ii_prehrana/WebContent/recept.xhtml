@@ -73,7 +73,7 @@
 										
 										<br />
 										<h4><h:outputText value="Postopek"/></h4>
-										<p><h:outputText value="#{ReceptJSFBean.izbranRecept.opis}" /></p>	
+										<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ReceptJSFBean.izbranRecept.opis}" /></p>	
 									    
 									    <h4><h:outputText value="Video"/></h4>
 									    <ui:fragment rendered="#{ReceptJSFBean.izbranRecept.linkVideo != ''}">

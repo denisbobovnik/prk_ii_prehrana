@@ -41,10 +41,11 @@ public class PrehranaJSFBean {
 						nastaviTipSlike(ext);
 						p.setThumbnail(thumbnail.getContents());
 						
+						p.setContent(p.getContent().replaceAll("\n","<br />"));
+						
 						FacesContext context = FacesContext.getCurrentInstance();
 						String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
 						String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
-						
 						
 						pD.shrani(p);
 						p = new Prehrana();
@@ -56,6 +57,8 @@ public class PrehranaJSFBean {
 				InputStream iStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/img/default-tall.jpg");
 				p.setThumbnail(ByteStreams.toByteArray(iStream));
 
+				p.setContent(p.getContent().replaceAll("\n","<br />"));
+				
 				FacesContext context = FacesContext.getCurrentInstance();
 				String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
 				String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA

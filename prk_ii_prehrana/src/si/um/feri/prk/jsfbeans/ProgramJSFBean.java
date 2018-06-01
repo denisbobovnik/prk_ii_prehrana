@@ -36,7 +36,6 @@ import si.um.feri.prk.objekti.Sestavine;
 @SessionScoped
 public class ProgramJSFBean {
 	
-	
 	Logger log=LoggerFactory.getLogger(ProgramJSFBean.class);
 	private ProgramDAO pD = ProgramDAO.getInstance();
 	private PrehranaDAO prehD = PrehranaDAO.getInstance();

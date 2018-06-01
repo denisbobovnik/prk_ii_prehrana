@@ -68,9 +68,10 @@
 											</p:inputText>
 											
 											<br />
-											Alergeni(*)<p:inputTextarea id="recept-alergeni" name="content" value="#{ReceptJSFBean.alergeniPrivremeni}"  cols="30" rows="10" requried="false">
-												<f:validateLength maximum="9999" minimum="3"/>
-											</p:inputTextarea>
+											Alergeni(*)<p:inputText id="recept-alergeni" name="content" value="#{ReceptJSFBean.alergeniPrivremeni}" requried="false">
+												<f:validateLength maximum="8000" minimum="3"/>
+											</p:inputText>
+											
 											<br />
 											
 											<!-- redirect na seznam člankov... -->

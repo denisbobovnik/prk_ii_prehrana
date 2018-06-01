@@ -43,7 +43,7 @@
 											<div class="post-meta">
 												<a href=""><h:outputText value="#{clanek.user_username}" /></a>
 											</div>
-											<p><h:outputText value="#{ClanekJSFBean.trimContent318(clanek.content)}" /></p>
+											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ClanekJSFBean.trimContent318(clanek.content)}" /></p>
 											<h:form>
 												<h:commandLink class="read-more" value="Preberi več" action="clanek.xhtml" actionListener="#{ClanekJSFBean.izberiClanek(clanek.clanek_id)}"></h:commandLink>
 											</h:form>

@@ -36,7 +36,7 @@
 										</div>
 										<div class="card-text">
 											<h2 class="post-title"><h:outputText value="#{recept.ime}" /></h2>
-											<p><h:outputText value="#{ReceptJSFBean.trimContent121(recept.opis)}" /></p>
+											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ReceptJSFBean.trimContent121(recept.opis)}" /></p>
 											<h:form style="display:inline-block;">
 												<h:commandLink class="read-more" value="Ogled" action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept.id_recept)}"></h:commandLink>
 											</h:form>

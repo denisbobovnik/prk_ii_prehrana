@@ -46,7 +46,7 @@
 											</p:inputText>
 											
 											Vsebina(*)<p:inputTextarea required="true" id="clanek-content" name="content" value="#{ClanekJSFBean.c.content}" cols="30" rows="10">
-												<f:validateLength maximum="9999" minimum="10"/>
+												<f:validateLength maximum="8000" minimum="10"/>
 											</p:inputTextarea>
 											
 											Naslovnica: <p:fileUpload required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ClanekJSFBean.thumbnail}" mode="simple" />

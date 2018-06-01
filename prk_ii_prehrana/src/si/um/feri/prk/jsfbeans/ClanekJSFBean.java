@@ -42,6 +42,8 @@ public class ClanekJSFBean {
 						nastaviTipSlike(ext);
 						c.setThumbnail(thumbnail.getContents());
 						
+						c.setContent(c.getContent().replaceAll("\n","<br />"));
+						
 						FacesContext context = FacesContext.getCurrentInstance();
 						String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
 						String vloga = getUserRole(); //ROLE / VLOGA UPORABNIKA
@@ -57,6 +59,8 @@ public class ClanekJSFBean {
 				
 				InputStream iStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/img/default-wide.jpg");
 				c.setThumbnail(ByteStreams.toByteArray(iStream));
+				
+				c.setContent(c.getContent().replaceAll("\n","<br />"));
 
 				FacesContext context = FacesContext.getCurrentInstance();
 				String username = context.getExternalContext().getRemoteUser(); //USERNAME UPORABNIKA
