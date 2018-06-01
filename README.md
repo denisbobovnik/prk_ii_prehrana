@@ -27,7 +27,7 @@ add-user
 
 Sledimo navodilom in ustvarimo aplikacijskega uporabnika z uporabniškim imenom, geslom in vlogo (ime vloge: STROKOVNJAK; POSAMEZNIK). Ostale nastavitve nastavimo na "no" (EJB calls, ipd.).
 
-Ker pripravljam podatkovno strukturo, ki jo bo mogoče uvoziti in so nekatere funkcionalnosti omejene na točno določenega uporabnika (ne le vloga, temveč tudi username), je tukaj seznam uporabnikov, ki so prijavljeni v strežnik WF na razvojnem okolju:
+Ker pripravljam podatkovno strukturo, ki jo bo mogoče uvoziti (in imeti že vnesene podatke), ter so nekatere funkcionalnosti omejene na točno določenega uporabnika (ne le vloga, temveč tudi username), je tukaj seznam uporabnikov, ki so prijavljeni v strežnik WF na razvojnem okolju:
 ```bash
 Username: strokovnjak@eprehrana.si, Geslo: eprehrana, Vloga: STROKOVNJAK
 Username: posameznik@eprehrana.si,  Geslo: eprehrana, Vloga: POSAMEZNIK
