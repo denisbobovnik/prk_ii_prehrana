@@ -54,8 +54,8 @@
 						<div class="row">
 						
 							<c:set var="IDIzbranePrehrane" value="#{PrehranaJSFBean.izbranaPrehrana.id_prehrana}" scope="request" />
-							<ui:repeat var="program" value="#{PrehranaJSFBean.pD.pD.vrniSplosneProgrameZaToPrehrano(IDIzbranePrehrane)}">
-						
+							<ui:repeat var="program" value="#{PrehranaJSFBean.pD.pD.vrniSplosneProgrameZaToPrehrano(IDIzbranePrehrane)}" varStatus="loop">
+								<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
 								<!-- single service -->
 								<div class="col-md-4 col-sm-6">
 									<div class="service">
@@ -68,7 +68,6 @@
 										</div>
 									</div>
 								</div>
-							
 							</ui:repeat>
 						</div>
 					</div>
@@ -87,10 +86,9 @@
 								<h2>PERSONALIZIRANI PREHRANSKI PROGRAMI</h2>
 							</div>
 							<div class="row">
-							
 								<c:set var="IDIzbranePrehrane" value="#{PrehranaJSFBean.izbranaPrehrana.id_prehrana}" scope="request" />
-								<ui:repeat var="program" value="#{PrehranaJSFBean.vrniPersonaliziranePrograme()}">
-							
+								<ui:repeat var="program" value="#{PrehranaJSFBean.vrniPersonaliziranePrograme()}" varStatus="loop">
+									<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
 									<!-- single service -->
 									<div class="col-md-4 col-sm-6">
 										<div class="service">
@@ -103,7 +101,6 @@
 											</div>
 										</div>
 									</div>
-								
 								</ui:repeat>
 							</div>
 						</div>

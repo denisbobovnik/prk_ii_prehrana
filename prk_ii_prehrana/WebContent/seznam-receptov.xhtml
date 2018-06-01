@@ -27,7 +27,8 @@
 				<div class="services-card-section spad">
 					<div class="container">
 						<div class="row">
-							<ui:repeat var="recept" value="#{ReceptJSFBean.rD.vrniVse()}">
+							<ui:repeat var="recept" value="#{ReceptJSFBean.rD.vrniVse()}" varStatus="loop">
+								<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
 								<!-- Single Card -->
 								<div class="col-md-4 col-sm-12">
 									<div class="sv-card">
