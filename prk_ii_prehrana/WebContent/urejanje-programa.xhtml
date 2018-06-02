@@ -40,7 +40,7 @@
 							<div class="col-md-6 col-pull">
 								<div class="row">
 									<div class="col-sm-12">
-										<h:form>
+										<h:form enctype="multipart/form-data" id="con_form">
 											<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
 												<p:outputLabel style="color: black;" for="basic2" value="Kategorija receptov:" />
 												<h:commandButton class="site-btn" id="basic2" style="min-width: 50px; padding: 5px 10px;" value="Vsi" actionListener="#{ProgramJSFBean.ponastaviKategorijo()}" action="urejanje-programa.xhtml"/><br />
@@ -51,7 +51,7 @@
 										</h:form>
 
 										<ui:fragment rendered="#{ProgramJSFBean.izbranaKategorijaReceptov == null}">
-											<h:form>
+											<h:form enctype="multipart/form-data" id="con_form2">
 												<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
 													<p:outputLabel style="color: black;" for="basic" value="Dan v tednu:" />
 													<p:selectOneListbox id="basic" value="#{ProgramJSFBean.enota.dan_v_tednu}">
@@ -69,13 +69,13 @@
 											            <f:selectItems value="#{ProgramJSFBean.rD.vrniVse()}" var="recept" itemLabel="#{recept.ime}" itemValue="#{recept.id_recept}" />
 											        </p:selectOneListbox>
 												</h:panelGrid>
-												<p:commandButton class="site-btn" value="Dodaj k programu" actionListener="#{ProgramJSFBean.dodajReceptNaProgram()}" action="urejanje-programa.xhtml"/>
+												<h:commandButton class="site-btn" value="Dodaj k programu" actionListener="#{ProgramJSFBean.dodajReceptNaProgram()}" action="urejanje-programa.xhtml"/>
 												<br /><br />
-												<p:commandButton class="site-btn" value="Zaključi urejanje" actionListener="#{ProgramJSFBean.zakljuciUrejanje()}" action="seznam-prehran.xhtml"/>
+												<h:commandButton class="site-btn" value="Zaključi urejanje" actionListener="#{ProgramJSFBean.zakljuciUrejanje()}" action="seznam-prehran.xhtml"/>
 											</h:form>
 										</ui:fragment>
 										<ui:fragment rendered="#{ProgramJSFBean.izbranaKategorijaReceptov != null}">
-											<h:form>
+											<h:form enctype="multipart/form-data" id="con_form3">
 												<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
 													<p:outputLabel style="color: black;" for="basic" value="Dan v tednu:" />
 													<p:selectOneListbox id="basic" value="#{ProgramJSFBean.enota.dan_v_tednu}">
@@ -93,9 +93,9 @@
 											            <f:selectItems value="#{ProgramJSFBean.vrniRecepteZaPrikaz()}" var="recept" itemLabel="#{recept.ime}" itemValue="#{recept.id_recept}" />
 											        </p:selectOneListbox>
 												</h:panelGrid>
-												<p:commandButton class="site-btn" value="Dodaj k programu" actionListener="#{ProgramJSFBean.dodajReceptNaProgram()}" action="urejanje-programa.xhtml"/>
+												<h:commandButton class="site-btn" value="Dodaj k programu" actionListener="#{ProgramJSFBean.dodajReceptNaProgram()}" action="urejanje-programa.xhtml"/>
 												<br /><br />
-												<p:commandButton class="site-btn" value="Zaključi urejanje" actionListener="#{ProgramJSFBean.zakljuciUrejanje()}" action="seznam-prehran.xhtml"/>
+												<h:commandButton class="site-btn" value="Zaključi urejanje" actionListener="#{ProgramJSFBean.zakljuciUrejanje()}" action="seznam-prehran.xhtml"/>
 											</h:form>
 										</ui:fragment>
 									</div>

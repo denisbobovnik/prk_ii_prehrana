@@ -251,7 +251,7 @@
 										<h:form class="form-class" id="con_form2">
 											<div class="row">
 												<div class="col-sm-12">
-													<p:selectOneListbox id="advanced" value="#{DnevnikJSFBean.zH.tk_recept_sestavina_id}" filter="true" filterMatchMode="contains">
+													<p:selectOneListbox style="width: 100%;" id="advanced" value="#{DnevnikJSFBean.zH.tk_recept_sestavina_id}" filter="true" filterMatchMode="contains">
 											            <f:selectItems value="#{ReceptJSFBean.sD.vrniVse()}" var="sestavina" itemLabel="#{sestavina.ime}" itemValue="#{sestavina.id_sestavine}" />
 											        </p:selectOneListbox>
 													
