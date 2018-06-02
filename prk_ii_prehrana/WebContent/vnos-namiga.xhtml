@@ -11,7 +11,7 @@
 		
 		
 		<ui:define name="title">
-			Nova prehrana
+			Nov namig
 		</ui:define>
 		
 		<ui:insert name="pageLoader">
@@ -31,9 +31,9 @@
 							<!-- contact info -->
 							<div class="col-md-5 col-md-offset-1 contact-info col-push">
 								<div class="section-title left">
-									<h2>Vnesite namig</h2>
+									<h2>Nov namig</h2>
 								</div>
-								<p></p>
+								<p>Če imate kakšen namig, ki bi ga radi delili z ostalimi uporabniki, ga vnesite v polje in kliknite pošlji. <br/>Uporabniki ga bodo prejeli na njihove e-maile.</p>
 							</div>
 						
 							<!-- contact form -->
@@ -41,12 +41,12 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											Namig(*)<p:inputTextarea required="true" id="namig" name="content" value="#{NamigJSFBean.namig}" cols="30" rows="10">
+											Vsebina(*)<p:inputTextarea required="true" id="namig" name="content" value="#{NamigJSFBean.namig}" cols="30" rows="10">
 												<f:validateLength maximum="8000" minimum="10"/>
 											</p:inputTextarea>
 											<br />
 											
-											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Vnesi" actionListener="#{PrehranaJSFBean.dodajPrehrano}" action="seznam-prehran.xhtml"/>
+											<p:commandButton widgetVar="button" ajax="false" class="site-btn" value="Pošlji" actionListener="#{PrehranaJSFBean.dodajPrehrano}" action="seznam-prehran.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>

@@ -36,6 +36,7 @@
       <url-pattern>/faces/objava-clanka.xhtml</url-pattern>
       <url-pattern>/faces/dnevnik.xhtml</url-pattern>
       <url-pattern>/faces/urejanje-recepta.xhtml</url-pattern>
+      <url-pattern>/faces/vnos-namiga.xhtml</url-pattern>
       <http-method>POST</http-method>
       <http-method>GET</http-method>
       <http-method>PUT</http-method>
