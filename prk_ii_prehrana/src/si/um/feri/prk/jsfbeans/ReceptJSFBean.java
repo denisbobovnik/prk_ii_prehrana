@@ -1,6 +1,7 @@
 package si.um.feri.prk.jsfbeans;
 
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.io.ByteStreams;
+import com.sun.jndi.toolkit.url.Uri;
 
 import si.um.feri.prk.dao.AlergeniDAO;
 import si.um.feri.prk.dao.ReceptDAO;
@@ -22,6 +24,7 @@ import si.um.feri.prk.dao.SestavineDAO;
 import si.um.feri.prk.objekti.Alergeni;
 import si.um.feri.prk.objekti.Recept;
 import si.um.feri.prk.objekti.Sestavine;
+import sun.net.util.URLUtil;
 
 @ManagedBean(name="ReceptJSFBean")
 @SessionScoped
@@ -95,6 +98,15 @@ public class ReceptJSFBean {
 			FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Napaka nalaganja!", e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, errorMsg);
 		}
+	}
+	
+	public boolean isURL(String url) {
+	    try {
+	        new URL(url);
+	        return true;
+	    } catch (Exception e) {
+	        return false;
+	    }
 	}
 	
 	public boolean isUploadedFileEmpty() {
