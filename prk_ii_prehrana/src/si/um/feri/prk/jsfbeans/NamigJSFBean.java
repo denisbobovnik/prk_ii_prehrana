@@ -24,6 +24,16 @@ public class NamigJSFBean {
 		this.namig = namig;
 	}
 	
+	private String getUserRole(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		String[] vloge = {"ADMINISTRATOR", "STROKOVNJAK", "POSAMEZNIK"};
+		String ret = "";
+		for(String s : vloge)
+			if(context.getExternalContext().isUserInRole(s))
+				ret = s;
+		return ret;
+	}
+	
 	public void poslji() {
      		String obvestilo = namig;
      	    String m = "praktikumekd@gmail.com";
