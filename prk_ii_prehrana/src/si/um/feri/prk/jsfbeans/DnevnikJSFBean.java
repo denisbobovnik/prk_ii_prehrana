@@ -45,6 +45,40 @@ public class DnevnikJSFBean {
 	private Double steviloKalorij, kolicinaVode, kolicinaSladkorja;
 	private Integer steviloObrokov;
 	private ZauzitaHrana zH = new ZauzitaHrana();
+	private String izbranaKategorijaReceptov;
+	
+	public void nastaviKategorijo(String kategorija) {
+		izbranaKategorijaReceptov = kategorija;
+	}
+	public void ponastaviKategorijo() {
+		izbranaKategorijaReceptov = null;
+	}
+	public String getIzbranaKategorijaReceptov() {
+		return izbranaKategorijaReceptov;
+	}
+	public void setIzbranaKategorijaReceptov(String izbranaKategorijaReceptov) {
+		this.izbranaKategorijaReceptov = izbranaKategorijaReceptov;
+	}
+	
+	public ArrayList<String> vrniVseKategorijeReceptov() throws Exception {
+		ArrayList<Recept> vsiRecepti = rD.vrniVse();
+		ArrayList<String> ret = new ArrayList<String>();
+		for(Recept r : vsiRecepti)
+			if(!ret.contains(r.getKategorija()))
+				ret.add(r.getKategorija());
+		return ret;
+	}
+	
+	public ArrayList<Recept> vrniRecepteZaPrikaz() throws Exception {
+		ArrayList<Recept> ret = new ArrayList<Recept>();
+		if(izbranaKategorijaReceptov.equals("Vsi"))
+			return rD.vrniVse();
+		else
+			for(Recept rec : rD.vrniVse())
+				if(rec.getKategorija().equals(izbranaKategorijaReceptov))
+					ret.add(rec);
+		return ret;
+	}
 	
 	public ArrayList<String> getMozniCilji() {
 		return mozniCilji;
