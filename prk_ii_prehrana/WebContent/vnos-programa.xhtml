@@ -50,10 +50,10 @@
 	                                        <br />
 	                                        <br />
 	                                        Prehrana, h kateri pripada program(*):
-	                                        <h:selectOneMenu required="true" value="#{ProgramJSFBean.p.tk_id_prehrana}">
-                                                <f:selectItems value="#{ProgramJSFBean.vrniVse()}" var="preh" itemValue="#{preh.id_prehrana}" itemLabel="#{preh.naslovPrehrane}" />
-                                            </h:selectOneMenu>
-											
+	                                        <p:selectOneListbox style="width: 100%;" required="true" value="#{ProgramJSFBean.p.tk_id_prehrana}">
+	                                        	<f:selectItems value="#{ProgramJSFBean.vrniVse()}" var="preh" itemValue="#{preh.id_prehrana}" itemLabel="#{preh.naslovPrehrane}" />
+											</p:selectOneListbox>
+
 											<br />
 											<br />
 											
