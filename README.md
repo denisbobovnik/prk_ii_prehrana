@@ -41,8 +41,10 @@ Username: posameznik2@eprehrana.si, Geslo: eprehrana, Vloga: POSAMEZNIK
 
 ![1.png](/podatki_za_uvoz/1.png)
 
--
+- Izberite prvo opcijo Import orodja "Import from Dump Project Folder" in izberite imenik, kjer je datoteka prenesena. Nato pa le odkljukajte schemo "prk_ii_prehrana" in kliknite na gumb "Start Import".
 
 ![2.png](/podatki_za_uvoz/2.png)
+
+- Sedaj so vneseni testni podatki. Opomba: pri programih je vnesen po 1 obrok na dan; kar ne pomeni, da ne podpira več obrokov; le ni še vnesenega dovolj velikega nabora receptov, da bi lahko naredili tako količino različnih programov.
 
 - testirano na WildFly 12, MySQL Server 5.7.17 in Eclipse EE Oxygen.2
