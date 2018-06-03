@@ -36,5 +36,8 @@ Username: posameznik2@eprehrana.si, Geslo: eprehrana, Vloga: POSAMEZNIK
 ```
 
 Prenesite si datoteko ![prk_ii_prehrana.sql](/podatki_za_uvoz/prk_ii_prehrana.sql)
+V koliko so v vaši, že kreirani schemi v MySQL že ustvarjene tabele, le-te predhodhno drop-ajte.
+
+![1.png](/podatki_za_uvoz/1.png)
 
 - testirano na WildFly 12, MySQL Server 5.7.17 in Eclipse EE Oxygen.2
