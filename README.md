@@ -27,11 +27,14 @@ add-user
 
 Sledimo navodilom in ustvarimo aplikacijskega uporabnika z uporabniškim imenom, geslom in vlogo (ime vloge: STROKOVNJAK; POSAMEZNIK). Ostale nastavitve nastavimo na "no" (EJB calls, ipd.).
 
-Ker pripravljam podatkovno strukturo, ki jo bo mogoče uvoziti (in imeti že vnesene podatke), ter so nekatere funkcionalnosti omejene na točno določenega uporabnika (ne le vloga, temveč tudi username), je tukaj seznam uporabnikov, ki so prijavljeni v strežnik WF na razvojnem okolju:
+## Uvoz pripravljenih podatkov:
+Ker je pripravljena podatkovna struktura vezana na točno določenega uporabnika (ne le vloga, temveč tudi username), je tukaj seznam uporabnikov, ki so prijavljeni v strežnik WF na naših razvojnih okoljih:
 ```bash
 Username: strokovnjak@eprehrana.si, Geslo: eprehrana, Vloga: STROKOVNJAK
 Username: posameznik@eprehrana.si,  Geslo: eprehrana, Vloga: POSAMEZNIK
 Username: posameznik2@eprehrana.si, Geslo: eprehrana, Vloga: POSAMEZNIK
 ```
+
+Prenesite si datoteko ![prk_ii_prehrana.sql](/podatki_za_uvoz/prk_ii_prehrana.sql)
 
 - testirano na WildFly 12, MySQL Server 5.7.17 in Eclipse EE Oxygen.2
