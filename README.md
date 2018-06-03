@@ -49,4 +49,5 @@ Username: posameznik2@eprehrana.si, Geslo: eprehrana, Vloga: POSAMEZNIK
 - Opomba: pri programih je vnesen po 1 obrok na dan; kar ne pomeni, da ne podpira več obrokov; le ni še vnesenega dovolj velikega nabora receptov, da bi lahko naredili tako količino različnih programov.
 - Opomba: uvoz smo omogočili na ta način, ker imamo v PB shranjene slike kot LONGBLOB, kar ni mogoče uvoziti v obliki navadnih INSERT stavkov.
 
+## Zahteve:
 - testirano na WildFly 12, MySQL Server 5.7.17 in Eclipse EE Oxygen.2
