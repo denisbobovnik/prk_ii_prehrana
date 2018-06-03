@@ -15,17 +15,19 @@ CREATE SCHEMA `prk_ii_prehrana` DEFAULT CHARACTER SET utf8 COLLATE utf8_slovenia
 
 - Nazadnje še s pomočjo CMD dodamo po enega uporabnika spletne strani za posamezno vlogo (en strokovnjak, en posameznik). Navigiramo do imenika našega WF strežnika in gremo v imenik bin (po do tega kopiramo):
 
-V cmd prilepimo in potrdimo:
+- V cmd prilepimo in potrdimo:
 ```bash
 cd <kopirana_pot>
 ```
 
-Napišemo in potrdimo:
+- Napišemo in potrdimo:
 ```bash
 add-user
 ```
 
-Sledimo navodilom in ustvarimo aplikacijskega uporabnika z uporabniškim imenom, geslom in vlogo (ime vloge: STROKOVNJAK; POSAMEZNIK). Ostale nastavitve nastavimo na "no" (EJB calls, ipd.).
+- Sledimo navodilom in ustvarimo aplikacijskega uporabnika z uporabniškim imenom (željeno: e-mail naslov), geslom in vlogo (ime vloge: STROKOVNJAK; POSAMEZNIK). Ostale nastavitve nastavimo na "no" (EJB calls, ipd.).
+
+- Projektni e-mail naslov, s katerega boste lahko prejemali e-pošto: praktikumekd@gmail.com
 
 ## Uvoz pripravljenih podatkov:
 Ker je pripravljena podatkovna struktura vezana na točno določenega uporabnika (ne le vloga, temveč tudi username), je tukaj seznam uporabnikov, ki so prijavljeni v strežnik WF na naših razvojnih okoljih:
