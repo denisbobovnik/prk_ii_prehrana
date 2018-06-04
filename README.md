@@ -25,9 +25,7 @@ cd <kopirana_pot>
 add-user
 ```
 
-- Sledimo navodilom in ustvarimo aplikacijskega uporabnika z uporabniškim imenom (željeno: e-mail naslov), geslom in vlogo (ime vloge: STROKOVNJAK; POSAMEZNIK). Ostale nastavitve nastavimo na "no" (EJB calls, ipd.).
-
-- Projektni e-mail naslov, s katerega boste lahko prejemali e-pošto: praktikumekd@gmail.com
+- Sledimo navodilom in ustvarimo aplikacijskega uporabnika z uporabniškim imenom, geslom in vlogo (ime vloge: STROKOVNJAK; POSAMEZNIK). Ostale nastavitve nastavimo na "no" (EJB calls, ipd.).
 
 ## Uvoz pripravljenih podatkov:
 Ker je pripravljena podatkovna struktura vezana na točno določenega uporabnika (ne le vloga, temveč tudi username), je tukaj seznam uporabnikov, ki so prijavljeni v strežnik WF na naših razvojnih okoljih:
