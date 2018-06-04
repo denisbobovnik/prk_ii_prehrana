@@ -27,19 +27,16 @@
 				<div class="services-card-section spad">
 					<div class="container">
 						<div class="row">
-							<ui:repeat var="prehrana" value="#{PrehranaJSFBean.pD.vrniVse()}" varStatus="loop">
+							<ui:repeat var="namig" value="#{NamigJSFBean.nD.vrniVse()}" varStatus="loop">
 								<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
 								<!-- Single Card -->
 								<div class="col-md-4 col-sm-12">
 									<div class="sv-card">
-										<div class="card-img">
-											<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?klic=prehrana&amp;id=#{prehrana.id_prehrana}" height="271"></p:graphicImage>
-										</div>
 										<div class="card-text">
-											<h2><h:outputText value="#{prehrana.naslovPrehrane}" /></h2>
-											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{PrehranaJSFBean.trimContent121(prehrana.content)}" /></p>
+											<h2><h:outputText value="#{namig.naslov}" /></h2>
+											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{NamigJSFBean.trimContent121(namig.vsebina)}" /></p>
 											<h:form>
-												<h:commandLink class="read-more" value="Ogled" action="prehrana.xhtml" actionListener="#{PrehranaJSFBean.izberiPrehrano(prehrana.id_prehrana)}"></h:commandLink>
+												<h:commandLink class="read-more" value="Ogled" action="namig.xhtml" actionListener="#{NamigJSFBean.izberiNamig(namig.id_namig)}"></h:commandLink>
 											</h:form>
 										</div>
 									</div>
