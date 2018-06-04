@@ -42,6 +42,7 @@ public class NamigJSFBean {
 		}
 	}
 	public void dodaj() throws Exception {
+		namig.setVsebina(namig.getVsebina().replaceAll("\n","<br />"));
 		nD.shrani(namig);
 		namig = new Namig();
 	}
