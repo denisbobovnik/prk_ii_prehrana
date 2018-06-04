@@ -1,0 +1,64 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-all.xhtml">
+		
+		
+		<ui:define name="title">
+			Prehrane
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- services card section-->
+				<div class="services-card-section spad">
+					<div class="container">
+						<div class="row">
+							<ui:repeat var="prehrana" value="#{PrehranaJSFBean.pD.vrniVse()}" varStatus="loop">
+								<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
+								<!-- Single Card -->
+								<div class="col-md-4 col-sm-12">
+									<div class="sv-card">
+										<div class="card-img">
+											<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?klic=prehrana&amp;id=#{prehrana.id_prehrana}" height="271"></p:graphicImage>
+										</div>
+										<div class="card-text">
+											<h2><h:outputText value="#{prehrana.naslovPrehrane}" /></h2>
+											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{PrehranaJSFBean.trimContent121(prehrana.content)}" /></p>
+											<h:form>
+												<h:commandLink class="read-more" value="Ogled" action="prehrana.xhtml" actionListener="#{PrehranaJSFBean.izberiPrehrano(prehrana.id_prehrana)}"></h:commandLink>
+											</h:form>
+										</div>
+									</div>
+								</div>
+							</ui:repeat>
+						</div>
+					</div>
+				</div>
+				<!-- services card section end-->
+
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>
