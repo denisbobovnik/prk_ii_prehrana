@@ -33,6 +33,14 @@ public class NamigJSFBean {
 	public void setIzbranNamig(Namig izbranNamig) {
 		this.izbranNamig = izbranNamig;
 	}
+	public String trimContent121(String content) {
+		if(content.length()<121) {
+			return content;
+		} else {
+			content = content.substring(0, 121);
+			return content;
+		}
+	}
 	
 	
 	
