@@ -41,6 +41,14 @@ public class NamigJSFBean {
 			return content;
 		}
 	}
+	public void dodaj() throws Exception {
+		nD.shrani(namig);
+		namig = new Namig();
+	}
+	public void izberiNamig(int id) throws Exception{
+		izbranNamig = nD.najdi(id);
+		
+	}
 	
 	
 	
