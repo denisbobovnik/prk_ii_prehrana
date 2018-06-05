@@ -82,6 +82,9 @@
 									    	<p><iframe width="640" height="360" src="#{ReceptJSFBean.izbranRecept.linkVideo}"></iframe></p>
 										</ui:fragment>									    
 									</div>
+									<h:form>
+									<h:commandButton class="site-btn" value="Print" action="#{PdfJSFBean.createPDF(ReceptJSFBean.izbranRecept.id_recept)}"/>
+								</h:form>
 								</div>
 							</div>
 						</div>
