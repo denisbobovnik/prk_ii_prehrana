@@ -45,7 +45,7 @@ public class ReceptDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Recept(id_recept int not null auto_increment primary key, ime varchar(100) not null, dolzinaPriprave int not null,steviloPorcij int not null, opis varchar(9999) not null, slika longblob not null, linkVideo varchar(700) not null, kalorije double not null, tipSlike varchar(20) not null, datumDodajanja timestamp not null, sladkorji double not null, kategorija varchar(80) not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Recept(id_recept int not null auto_increment primary key, ime varchar(500) not null, dolzinaPriprave int not null,steviloPorcij int not null, opis varchar(9999) not null, slika longblob not null, linkVideo varchar(700) not null, kalorije double not null, tipSlike varchar(20) not null, datumDodajanja timestamp not null, sladkorji double not null, kategorija varchar(80) not null)");
 			} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
