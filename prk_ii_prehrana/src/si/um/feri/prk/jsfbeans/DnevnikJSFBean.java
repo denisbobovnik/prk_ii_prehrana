@@ -238,11 +238,12 @@ public class DnevnikJSFBean {
 					Recept recept = rD.najdi(hrana.getTk_recept_sestavina_id());
 					if(datumMedDatumoma(c.getDatumZastavitve().getTime(), new GregorianCalendar().getTime(), hrana.getDatumZauzitja().getTime()))
 						if(recept.getKategorija().equals(zadanaKategorija))
-							return "" + 100;
+							return "" + 100; //cilj je opravljen
 				}
-		} else
-			return null;
-		return null;
+		} else {
+			return null; //cilj je nerelevanten
+		}
+		return "" + 0; //cilj še ni opravljen
 	}
 	public String vrniVrednostKalorije(Cilj c) throws Exception {
 		//recept ali sestavina
