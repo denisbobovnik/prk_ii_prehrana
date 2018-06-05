@@ -6,23 +6,24 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import si.um.feri.prk.blockchain.Block;
+import si.um.feri.prk.blockchain.BlockStorage;
 import si.um.feri.prk.dao.CiljDAO;
 import si.um.feri.prk.dao.PrehranaDAO;
 import si.um.feri.prk.dao.ReceptDAO;
 import si.um.feri.prk.dao.SestavineDAO;
-import si.um.feri.prk.dao.ZauzitaHranaDAO;
 import si.um.feri.prk.objekti.Cilj;
 import si.um.feri.prk.objekti.Prehrana;
 import si.um.feri.prk.objekti.Recept;
 import si.um.feri.prk.objekti.Sestavine;
 import si.um.feri.prk.objekti.ZauzitaHrana;
 
+@SuppressWarnings("deprecation")
 @ManagedBean(name="DnevnikJSFBean")
 @SessionScoped
 public class DnevnikJSFBean {
@@ -39,7 +40,10 @@ public class DnevnikJSFBean {
 	private CiljDAO cD = CiljDAO.getInstance();
 	private ReceptDAO rD = ReceptDAO.getInstance();
 	private SestavineDAO sD = SestavineDAO.getInstance();
-	private ZauzitaHranaDAO zhD = ZauzitaHranaDAO.getInstance();
+//	private ZauzitaHranaDAO zhD = ZauzitaHranaDAO.getInstance();
+	
+	private BlockStorage bs = BlockStorage.getInstance();
+	
 	private ArrayList<String> kategorijeHrane = new ArrayList<String>();
 	private String izbranCilj, izbranaKategorija, tipZauziteHrane;
 	private Double steviloKalorij, kolicinaVode, kolicinaSladkorja;
@@ -170,11 +174,17 @@ public class DnevnikJSFBean {
 	public void setsD(SestavineDAO sD) {
 		this.sD = sD;
 	}
-	public ZauzitaHranaDAO getZhD() {
-		return zhD;
+//	public ZauzitaHranaDAO getZhD() {
+//		return zhD;
+//	}
+//	public void setZhD(ZauzitaHranaDAO zhD) {
+//		this.zhD = zhD;
+//	}
+	public BlockStorage getBs() {
+		return bs;
 	}
-	public void setZhD(ZauzitaHranaDAO zhD) {
-		this.zhD = zhD;
+	public void setBs(BlockStorage bs) {
+		this.bs = bs;
 	}
 	
 	public String dobiDejanskoIme(Cilj cilj) {
@@ -233,7 +243,7 @@ public class DnevnikJSFBean {
 		int stDni = daysBetween(c.getDatumZastavitve().getTime(), new GregorianCalendar().getTime()) + 1;
 		if(stDni<=7) {
 			String zadanaKategorija = c.getVrednost();
-			for(ZauzitaHrana hrana : zhD.vrniVseZaPrijavljenega())
+			for(ZauzitaHrana hrana : bs.vrniVseZaPrijavljenega())
 				if(hrana.getVrednost().equals("recept")) {
 					Recept recept = rD.najdi(hrana.getTk_recept_sestavina_id());
 					if(datumMedDatumoma(c.getDatumZastavitve().getTime(), new GregorianCalendar().getTime(), hrana.getDatumZauzitja().getTime()))
@@ -252,7 +262,7 @@ public class DnevnikJSFBean {
 		if(!isSameDay(c.getDatumZastavitve(), new GregorianCalendar())) //cilj ni današnji
 			kalorijeDejansko=-1;
 		else { //gre za današnji dan
-			for(ZauzitaHrana hrana : zhD.vrniVseZaPrijavljenega())
+			for(ZauzitaHrana hrana : bs.vrniVseZaPrijavljenega())
 				if(hrana.getVrednost().equals("recept")) {
 					Recept receptK = rD.najdi(hrana.getTk_recept_sestavina_id());
 					if(isSameDay(c.getDatumZastavitve(), hrana.getDatumZauzitja())) //èe je blo danes zaužito, se beleži
@@ -279,7 +289,7 @@ public class DnevnikJSFBean {
 		if(!isSameDay(c.getDatumZastavitve(), new GregorianCalendar())) //cilj ni današnji
 			vodeDejansko=-1;
 		else { //gre za današnji dan
-			for(ZauzitaHrana hrana : zhD.vrniVseZaPrijavljenega())
+			for(ZauzitaHrana hrana : bs.vrniVseZaPrijavljenega())
 				if(hrana.getVrednost().equals("voda")) {
 					double zauzitaKolicina = (double) hrana.getTk_recept_sestavina_id() / 10;
 					if(isSameDay(c.getDatumZastavitve(), hrana.getDatumZauzitja())) //èe je blo danes zaužito, se beleži
@@ -302,7 +312,7 @@ public class DnevnikJSFBean {
 		if(!isSameDay(c.getDatumZastavitve(), new GregorianCalendar())) //cilj ni današnji
 			sladkorjiDejansko=-1;
 		else { //gre za današnji dan
-			for(ZauzitaHrana hrana : zhD.vrniVseZaPrijavljenega())
+			for(ZauzitaHrana hrana : bs.vrniVseZaPrijavljenega())
 				if(hrana.getVrednost().equals("recept")) {
 					Recept receptK = rD.najdi(hrana.getTk_recept_sestavina_id());
 					if(isSameDay(c.getDatumZastavitve(), hrana.getDatumZauzitja())) //èe je blo danes zaužito, se beleži
@@ -335,7 +345,7 @@ public class DnevnikJSFBean {
 		if(!isSameDay(c.getDatumZastavitve(), new GregorianCalendar())) //cilj ni današnji
 			steviloDejansko=-1;
 		else { //gre za današnji dan
-			for(ZauzitaHrana hrana : zhD.vrniVseZaPrijavljenega())
+			for(ZauzitaHrana hrana : bs.vrniVseZaPrijavljenega())
 				if(hrana.getVrednost().equals("recept"))
 					if(isSameDay(c.getDatumZastavitve(), hrana.getDatumZauzitja())) //èe je blo danes zaužito, se beleži
 						steviloDejansko++;
@@ -366,13 +376,17 @@ public class DnevnikJSFBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		zH.setUser_username(context.getExternalContext().getRemoteUser());
 		zH.setVrednost(tipZauziteHrane);
-		zhD.shrani(zH);
+		
+		bs.addBlock(new Block(zH, bs.getBlockchain().get(bs.getBlockchain().size()-1).hash));
+		
 		zH = new ZauzitaHrana();
 		tipZauziteHrane = null;
 	}
 	public void dodajZauzitoHranoVODA(int kolicina) throws Exception {
 		FacesContext context = FacesContext.getCurrentInstance();
-		ZauzitaHrana voda = new ZauzitaHrana(0, kolicina, context.getExternalContext().getRemoteUser(), "voda");
-		zhD.shrani(voda);
+		ZauzitaHrana voda = new ZauzitaHrana(kolicina, context.getExternalContext().getRemoteUser(), "voda");
+		
+		bs.addBlock(new Block(voda, bs.getBlockchain().get(bs.getBlockchain().size()-1).hash));
+//		zhD.shrani(voda);
 	}
 }

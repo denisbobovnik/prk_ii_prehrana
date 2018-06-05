@@ -334,7 +334,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<h:form>
-													<h:dataTable value="#{DnevnikJSFBean.zhD.vrniVseZaPrijavljenega()}" var="zauzitaHrana">
+													<h:dataTable value="#{DnevnikJSFBean.bs.vrniVseZaPrijavljenega()}" var="zauzitaHrana">
 													   <h:column>    				
 													      <f:facet name="header"><h:outputText value="Datum zaužitja" /></f:facet>    				
 													      <h:outputText value="#{DnevnikJSFBean.formatirajDatum(zauzitaHrana.datumZauzitja)}" />

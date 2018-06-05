@@ -1,10 +1,11 @@
 package si.um.feri.prk.objekti;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class ZauzitaHrana {
-	private int id_zauzitaHrana, tk_recept_sestavina_id;
+public class ZauzitaHrana implements Serializable {
+	private int tk_recept_sestavina_id;
 	private String user_username, vrednost;
 	private Calendar datumZauzitja;
 	
@@ -12,9 +13,8 @@ public class ZauzitaHrana {
 		super();
 		datumZauzitja = new GregorianCalendar();
 	}
-	public ZauzitaHrana(int id_zauzitaHrana, int tk_recept_sestavina_id, String user_username, String vrednost) {
+	public ZauzitaHrana(int tk_recept_sestavina_id, String user_username, String vrednost) {
 		super();
-		this.id_zauzitaHrana = id_zauzitaHrana;
 		this.tk_recept_sestavina_id = tk_recept_sestavina_id;
 		this.user_username = user_username;
 		this.vrednost = vrednost;
@@ -26,12 +26,6 @@ public class ZauzitaHrana {
 	}
 	public void setVrednost(String vrednost) {
 		this.vrednost = vrednost;
-	}
-	public int getId_zauzitaHrana() {
-		return id_zauzitaHrana;
-	}
-	public void setId_zauzitaHrana(int id_zauzitaHrana) {
-		this.id_zauzitaHrana = id_zauzitaHrana;
 	}
 	public int getTk_recept_sestavina_id() {
 		return tk_recept_sestavina_id;
@@ -51,11 +45,10 @@ public class ZauzitaHrana {
 	public void setDatumZauzitja(Calendar datumZauzitja) {
 		this.datumZauzitja = datumZauzitja;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ZauzitaHrana [id_zauzitaHrana=" + id_zauzitaHrana + ", tk_recept_sestavina_id=" + tk_recept_sestavina_id
-				+ ", user_username=" + user_username + ", vrednost=" + vrednost + ", datumZauzitja=" + datumZauzitja
-				+ "]";
+		return "ZauzitaHrana [tk_recept_sestavina_id=" + tk_recept_sestavina_id + ", user_username=" + user_username
+				+ ", vrednost=" + vrednost + ", datumZauzitja=" + datumZauzitja + "]";
 	}
 }
