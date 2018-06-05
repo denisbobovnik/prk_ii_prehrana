@@ -41,12 +41,15 @@
 								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
 									<div class="row">
 										<div class="col-sm-12">
-											Vsebina(*)<p:inputTextarea required="true" id="namig" name="content" value="#{NamigJSFBean.namig}" cols="30" rows="10">
+										   Naslov(*)<p:inputText required="true" id="prehrana-title" name="title" value="#{NamigJSFBean.namig.naslov}" >
+												<f:validateLength minimum="5" maximum="100"></f:validateLength>
+											</p:inputText>
+											Vsebina(*)<p:inputTextarea required="true" id="namig" name="content" value="#{NamigJSFBean.namig.vsebina}" cols="30" rows="10">
 												<f:validateLength maximum="8000" minimum="10"/>
 											</p:inputTextarea>
 											<br />
 											
-											<h:commandButton widgetVar="button" ajax="false" class="site-btn" value="Pošlji" actionListener="#{NamigJSFBean.obvesti()}" action="seznam-prehran.xhtml"/>
+											<h:commandButton widgetVar="button" ajax="false" class="site-btn" value="Pošlji" actionListener="#{NamigJSFBean.dodaj()}" action="index.xhtml"/>
 											
 											<br />
 											<p:messages showDetail="false"/>

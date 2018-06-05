@@ -1,0 +1,61 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-all.xhtml">
+		
+		
+		<ui:define name="title">
+			Prehrane
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- services card section-->
+				<div class="services-card-section spad">
+					<div class="container">
+						<div class="row">
+							<ui:repeat var="namig" value="#{NamigJSFBean.nD.vrniVse()}" varStatus="loop">
+								<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
+								<!-- Single Card -->
+								<div class="col-md-4 col-sm-12">
+									<div class="sv-card">
+										<div class="card-text">
+											<h2><h:outputText value="#{namig.naslov}" /></h2>
+											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{NamigJSFBean.trimContent121(namig.vsebina)}" /></p>
+											<h:form>
+												<h:commandLink class="read-more" value="Ogled" action="namig.xhtml" actionListener="#{NamigJSFBean.izberiNamig(namig.id_namig)}"></h:commandLink>
+											</h:form>
+										</div>
+									</div>
+								</div>
+							</ui:repeat>
+						</div>
+					</div>
+				</div>
+				<!-- services card section end-->
+
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>

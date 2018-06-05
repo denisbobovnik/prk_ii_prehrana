@@ -1,0 +1,58 @@
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-all.xhtml">
+		
+		
+		<ui:define name="title">
+			Recept
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
+
+				<!-- page section -->
+				<div class="page-section spad">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 blog-posts">
+								<!-- Single Post -->
+								<div class="single-post">
+									<div class="post-content">
+										<h2 class="post-title"><h:outputText value="#{NamigJSFBean.izbranNamig.naslov}" /></h2>
+										<div class="post-meta">
+											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ClanekJSFBean.izbranClanek.content}" /></p>
+										</div>								    
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- page section end-->
+
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
+</html>
