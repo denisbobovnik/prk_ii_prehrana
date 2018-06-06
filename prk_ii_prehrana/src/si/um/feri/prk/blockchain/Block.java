@@ -1,10 +1,11 @@
 package si.um.feri.prk.blockchain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import si.um.feri.prk.objekti.ZauzitaHrana;
 
-public class Block {
+public class Block implements Serializable {
 	public String hash;
 	public String previousHash;
 	private ZauzitaHrana zauzitaHrana;
