@@ -243,4 +243,40 @@ public class ReceptDAO {
 		}
 		return seznam;
 	}
+	
+	public Recept vrniZadnji() throws Exception {
+		log.info("ReceptDAO: vrniZadnji ");
+		Recept recept= new Recept();
+		
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Recept where id_recept=(SELECT MAX(id_recept) from Recept)");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				 recept = new Recept(rs.getInt("id_recept"), rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), rs.getDouble("sladkorji"), rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"), rs.getString("kategorija"));
+					
+				Blob blob = rs.getBlob("slika");
+				int blobLength = (int) blob.length();  
+				byte[] blobAsBytes = blob.getBytes(1, blobLength);
+					
+				recept.setSlika(blobAsBytes);
+					
+				recept.setAlergeni(aD.najdiVsePoReceptu(recept.getId_recept()));
+				recept.setSestavine(sD.najdiVsePoReceptu(recept.getId_recept()));
+				recept.setEnote(eD.najdiVsePoReceptu(recept.getId_recept()));
+				
+				recept.getDatumDodajanja().setTimeInMillis(rs.getTimestamp("datumDodajanja").getTime());
+					
+				
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return recept;
+	}
 }
