@@ -63,5 +63,10 @@ Tukaj so podatki o vseh receptih, strukturirani na način:
 - sestavine-mnogo (količina, enota_kolicine, ime, število kalorij, količina sladkorja),
 - alergeni-mnogo (ime).
 
+Povratna povezava do našega projekta bi bila predvidoma na url:
+```bash
+http://localhost:8080/prk_ii_prehrana/faces/seznam-receptov.xhtml
+```
+
 ## Zahteve:
 - testirano na WildFly 12, MySQL Server 5.7.17 in Eclipse EE Oxygen.2
