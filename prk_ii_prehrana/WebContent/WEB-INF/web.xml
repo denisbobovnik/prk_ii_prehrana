@@ -140,4 +140,9 @@
     <role-name>readonly</role-name>
   </security-role>
   <!--Denining security role-->
+  
+  
+    <listener>
+  	<listener-class>si.um.feri.prk.blockchain.BlockStorage</listener-class>
+  </listener>
 </web-app>

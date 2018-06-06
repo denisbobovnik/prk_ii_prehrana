@@ -49,5 +49,24 @@ Username: posameznik2@eprehrana.si, Geslo: eprehrana, Vloga: POSAMEZNIK
 - Opomba: pri programih je vnesen po 1 obrok na dan; kar ne pomeni, da ne podpira več obrokov; le ni še vnesenega dovolj velikega nabora receptov, da bi lahko naredili tako količino različnih programov.
 - Opomba: uvoz smo omogočili na ta način, ker imamo v PB shranjene slike kot LONGBLOB, kar ni mogoče uvoziti v obliki navadnih INSERT stavkov.
 
+## Uporaba rest storitve (za skupino "Corporate Wellness"):
+Da pridete do podatkov o naših receptih (oblike JSON), si prenesite našo aplikacijo v eclipse, jo zdeplojajte (ni potrebno imeti uporabnikov kreiranih, ostalo pa po navodilih za namestitev; prav tako prenesite in uvozite pripravljene podatke po navodilih), nato pa pojdite na url: 
+```bash
+http://localhost:8080/prk_ii_prehrana/rest/eprehrana/recepti
+```
+Tukaj so podatki o vseh receptih, strukturirani na način:
+- ime, 
+- opis,
+- kategorija, 
+- število kalorij (skupno), 
+- količina sladkorja (g) (skupno), 
+- sestavine-mnogo (količina, enota_kolicine, ime, število kalorij, količina sladkorja),
+- alergeni-mnogo (ime).
+
+Povratna povezava do našega projekta bi bila predvidoma na url:
+```bash
+http://localhost:8080/prk_ii_prehrana/faces/seznam-receptov.xhtml
+```
+
 ## Zahteve:
 - testirano na WildFly 12, MySQL Server 5.7.17 in Eclipse EE Oxygen.2
