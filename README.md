@@ -49,6 +49,14 @@ Username: posameznik2@eprehrana.si, Geslo: eprehrana, Vloga: POSAMEZNIK
 - Opomba: pri programih je vnesen po 1 obrok na dan; kar ne pomeni, da ne podpira več obrokov; le ni še vnesenega dovolj velikega nabora receptov, da bi lahko naredili tako količino različnih programov.
 - Opomba: uvoz smo omogočili na ta način, ker imamo v PB shranjene slike kot LONGBLOB, kar ni mogoče uvoziti v obliki navadnih INSERT stavkov.
 
+Dodatno (po Blockchain implementaciji) - uvoz blockchain podatkov iz datoteke "blockchain.data"
+- Zaustavite WF strežnik
+- Datoteko skopiramo v mapo /bin našega izvajalnega okolja WF:
+```bash
+...\wildfly-12.0.0.Final\bin\blockchain.data
+```
+- Nato strežnik poženite in izvedite full publish.
+
 ## Uporaba rest storitve (za skupino "Corporate Wellness"):
 Da pridete do podatkov o naših receptih (oblike JSON), si prenesite našo aplikacijo v eclipse, jo zdeplojajte (ni potrebno imeti uporabnikov kreiranih, ostalo pa po navodilih za namestitev; prav tako prenesite in uvozite pripravljene podatke po navodilih), nato pa pojdite na url: 
 ```bash
