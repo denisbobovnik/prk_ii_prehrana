@@ -37,18 +37,18 @@ public class PdfJSFBean {
 		String alergeni="";
 		for(int i = 0; i<recept.getAlergeni().size(); i++) {
 			if(i<recept.getAlergeni().size()-1) {
-				alergeni += recept.getAlergeni().get(i).getIme_alergena();
-			}else {
 				alergeni += recept.getAlergeni().get(i).getIme_alergena() + ", ";
+			}else {
+				alergeni += recept.getAlergeni().get(i).getIme_alergena();
 			}
 		}
 		Paragraph alerg = new Paragraph("ALERGENI: " + alergeni);
 		String sest = "";
 		for(int i = 0; i<recept.getSestavine().size(); i++) {
 			if(i<recept.getAlergeni().size()-1) {
-				sest += recept.getSestavine().get(i).getIme() + " " +  recept.getSestavine().get(i).getKolicina() +  recept.getSestavine().get(i).getEnota_kolicine();
-			}else {
 				sest += recept.getSestavine().get(i).getIme() + " " +  recept.getSestavine().get(i).getKolicina() +  recept.getSestavine().get(i).getEnota_kolicine() + ", ";
+			}else {
+				sest += recept.getSestavine().get(i).getIme() + " " +  recept.getSestavine().get(i).getKolicina() +  recept.getSestavine().get(i).getEnota_kolicine();
 			}
 		}
 		Paragraph sestavine = new Paragraph("SESTAVINE: " + sest);
