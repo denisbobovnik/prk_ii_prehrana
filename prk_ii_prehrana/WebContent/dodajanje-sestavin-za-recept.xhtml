@@ -23,53 +23,83 @@
 		<ui:define name="content">
 			<f:view>
 
-				<!-- Contact section -->
-				<div class="contact-section spad fix">
-					<div class="container">
-						<div class="row">
-						
-							<!-- contact info -->
-							<div class="col-md-5 col-md-offset-1 contact-info col-push">
-								<div class="section-title left">
-									<h2>Dodajanje sestavin</h2>
-								</div>
-								<p>K pravkar vnesenemu receptu dodajte še njegove sestavine. <br />Ko zaključite z dodajanjem le-teh k receptu, kliknite na "Shrani recept".</p>
-							</div>
-						
-							<!-- contact form -->
-							<div class="col-md-6 col-pull">
-								<div class="row">
-									<div class="col-sm-12">
-										<h:form enctype="multipart/form-data" class="form-class" id="con_form">
-											Naziv(*)<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" />
-												
-											Količina(*)<p:inputText id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.s.kolicina}" />
-												
-											Enota količine(*)<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota_kolicine}" />
-												
-											Kalorije(*)<p:inputText id="kalorije-title" name="kalorije" value="#{ReceptJSFBean.s.kalorije}" /> 
-												
-											Sladkorji(*)<p:inputText id="sladkorji-title" name="sladkorji" value="#{ReceptJSFBean.s.sladkorji}" />
-	
-											<br />
-											<br />
-											
-											<!-- redirect na seznam člankov... -->
-											<h:commandButton widgetVar="button" ajax="false" class="site-btn" value="Dodaj sestavino" actionListener="#{ReceptJSFBean.dodajSestavino()}" action="dodajanje-sestavin-za-recept.xhtml"/>
-										</h:form>
-										<br /><br />
-										<h:form enctype="multipart/form-data" class="form-class" id="con_form2">
-											<h:commandButton widgetVar="button" ajax="false" class="site-btn" value="Shrani recept" actionListener="#{ReceptJSFBean.dodajSestavineReceptu()}" action="seznam-receptov.xhtml"/>
-										</h:form>
-										<br />
-										<p:messages showDetail="false"/>
-										</div>
+				<ui:fragment rendered="#{ReceptJSFBean.id_trenutnega_recepta != 0}">
+					<!-- Contact section -->
+					<div class="contact-section spad fix">
+						<div class="container">
+							<div class="row">
+							
+								<!-- contact info -->
+								<div class="col-md-5 col-md-offset-1 contact-info col-push">
+									<div class="section-title left">
+										<h2>Dodajanje sestavin</h2>
 									</div>
+									<p>K pravkar vnesenemu receptu dodajte še njegove sestavine. <br />Ko zaključite z dodajanjem le-teh k receptu, kliknite na "Shrani recept".</p>
+								</div>
+							
+								<!-- contact form -->
+								<div class="col-md-6 col-pull">
+									<div class="row">
+										<div class="col-sm-12">
+											<h:form enctype="multipart/form-data" class="form-class" id="con_form">
+												Naziv(*)<p:inputText id="sestavina-title" name="sestavina" value="#{ReceptJSFBean.s.ime}" />
+													
+												Količina(*)<p:inputText id="kolicina-title" name="kolicina" value="#{ReceptJSFBean.s.kolicina}" />
+													
+												Enota količine(*)<p:inputText id="enota-title" name="enota" value="#{ReceptJSFBean.s.enota_kolicine}" />
+													
+												Kalorije(*)<p:inputText id="kalorije-title" name="kalorije" value="#{ReceptJSFBean.s.kalorije}" /> 
+													
+												Sladkorji(*)<p:inputText id="sladkorji-title" name="sladkorji" value="#{ReceptJSFBean.s.sladkorji}" />
+		
+												<br />
+												<br />
+												
+												<!-- redirect na seznam člankov... -->
+												<h:commandButton widgetVar="button" ajax="false" class="site-btn" value="Dodaj sestavino" actionListener="#{ReceptJSFBean.dodajSestavino()}" action="dodajanje-sestavin-za-recept.xhtml"/>
+											</h:form>
+											<br /><br />
+											<h:form enctype="multipart/form-data" class="form-class" id="con_form2">
+												<h:commandButton widgetVar="button" ajax="false" class="site-btn" value="Shrani recept" actionListener="#{ReceptJSFBean.dodajSestavineReceptu()}" action="seznam-receptov.xhtml"/>
+											</h:form>
+											<br />
+											<p:messages showDetail="false"/>
+											</div>
+										</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- Contact section end-->	
+					<!-- Contact section end-->
+				</ui:fragment>
+				<ui:fragment rendered="#{ReceptJSFBean.id_trenutnega_recepta == 0}">
+					<!-- Contact section -->
+					<div class="contact-section spad fix">
+						<div class="container">
+							<div class="row">
+							
+								<!-- contact info -->
+								<div class="col-md-5 col-md-offset-1 contact-info col-push">
+									<div class="section-title left">
+										<h2>Tristo kosmatih!</h2>
+									</div>
+									<p>Za uporabo trenutne strani ni na voljo dovolj podatkov. <br />Poskusite ponovno kasneje, sicer pa nas o napaki obvestite na: <a style="color: #ffffff;" href="mailto:eprehrana@gmail.com?Subject=Sporočilo%20o%20napaki" target="_top">eprehrana@gmail.com</a></p>
+								</div>
+							
+								<!-- contact form -->
+								<div class="col-md-6 col-pull">
+									<div class="row">
+										<div class="col-sm-12">
+											<img src="img/data.png" alt="img/data.png" />
+											<a class="site-btn" href="index.xhtml">Domov</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Contact section end-->
+				</ui:fragment>
 	
 			</f:view>
 		</ui:define>

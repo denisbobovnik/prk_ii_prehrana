@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
+encoding//WebContent/403.xhtml=UTF-8
+encoding//WebContent/404.xhtml=UTF-8
+encoding//WebContent/500.xhtml=UTF-8
 encoding//WebContent/WEB-INF/template/template-all.xhtml=UTF-8
 encoding//WebContent/clanek.xhtml=UTF-8
 encoding//WebContent/dnevnik.xhtml=UTF-8

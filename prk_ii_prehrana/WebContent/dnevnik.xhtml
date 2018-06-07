@@ -23,8 +23,26 @@
 		
 		<ui:define name="content">
 			<f:view>
+					
+					<ui:fragment rendered="#{(DnevnikJSFBean.cD.vrniVseZaPrijavljenega().size() > 0) or (DnevnikJSFBean.bs.vrniVseZaPrijavljenega().size() > 0)}">
+						<br />
+						<!-- services section -->
+						<div class="services-section spad" style="padding-bottom: 0px;">
+							<div class="container">
+								<div class="text-center">
+									<ui:fragment rendered="#{DnevnikJSFBean.cD.vrniVseZaPrijavljenega().size() > 0}">
+										<a class="site-btn" style="min-width: 0px; letter-spacing: 0px; padding: 15px;" href="#napredki">Spremljanje napredkov</a>
+									</ui:fragment>
+									<ui:fragment rendered="#{DnevnikJSFBean.bs.vrniVseZaPrijavljenega().size() > 0}">
+										<a class="site-btn" style="min-width: 0px; letter-spacing: 0px; padding: 15px;" href="#vsaHrana">Vsa zaužita hrana</a>
+									</ui:fragment>
+								</div>
+							</div>
+						</div>
+						<!-- services section end -->
+					</ui:fragment>
 			
-					<br /><br /><br />
+					<br />
 					<div class="newsletter-section spad">
 						<div class="container">
 							<div class="row">
@@ -267,105 +285,114 @@
 						<!-- Contact section end-->	
 					</ui:fragment>
 					
-					<!-- page section -->
-					<div class="page-section spad">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12">
-									<!-- Single element -->
-									<div class="element">
-										<h4>Spremljanje napredkov glede na cilje</h4>
-										<div class="row">
-											<!-- Progress bars -->
-											<div class="col-md-12">
-												<ui:repeat var="cilj" value="#{DnevnikJSFBean.cD.vrniVseZaPrijavljenega()}">
-													<ui:fragment rendered="#{(cilj.tip == '1x na teden jej hrano kategorije X') and (DnevnikJSFBean.vrniVrednostKategorija(cilj) != null)}">
-														<div class="single-progress-item">
-															<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
-															<br />
-															<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostKategorija(cilj)}"></div>
-														</div>
-													</ui:fragment>
-													<ui:fragment rendered="#{(cilj.tip == 'Na dan pojej za X kalorij') and (DnevnikJSFBean.vrniVrednostKalorije(cilj) != null)}">
-														<div class="single-progress-item">
-															<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
-															<br />
-															<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostKalorije(cilj)}"></div>
-														</div>
-													</ui:fragment>
-													<ui:fragment rendered="#{(cilj.tip == 'Spij X litrov vode na dan') and (DnevnikJSFBean.vrniVrednostVoda(cilj) != null)}">
-														<div class="single-progress-item">
-															<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
-															<br />
-															<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostVoda(cilj)}"></div>
-														</div>
-													</ui:fragment>
-													<ui:fragment rendered="#{(cilj.tip == 'Na dan zaužij X gramov sladkorja') and (DnevnikJSFBean.vrniVrednostSladkorji(cilj) != null)}">
-														<div class="single-progress-item">
-															<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
-															<br />
-															<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostSladkorji(cilj)}"></div>
-														</div>
-													</ui:fragment>
-													<ui:fragment rendered="#{(cilj.tip == 'X obrokov na dan') and (DnevnikJSFBean.vrniVrednostSteviloObrokov(cilj) != null)}">
-														<div class="single-progress-item">
-															<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
-															<br />
-															<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostSteviloObrokov(cilj)}"></div>
-														</div>
-													</ui:fragment>
-												</ui:repeat>
+					<ui:fragment rendered="#{DnevnikJSFBean.cD.vrniVseZaPrijavljenega().size() > 0}">
+						<!-- page section -->
+						<a name="napredki" />
+						<div class="page-section spad" style="padding-bottom: 0px; padding-top: 0px;">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12">
+										<!-- Single element -->
+										<div class="element">
+											<div class="section-title dark">
+												<h2>Spremljanje napredkov glede na cilje</h2>
+											</div>
+											<div class="row">
+												<!-- Progress bars -->
+												<div class="col-md-12">
+													<ui:repeat var="cilj" value="#{DnevnikJSFBean.cD.vrniVseZaPrijavljenega()}">
+														<ui:fragment rendered="#{(cilj.tip == '1x na teden jej hrano kategorije X') and (DnevnikJSFBean.vrniVrednostKategorija(cilj) != null)}">
+															<div class="single-progress-item">
+																<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
+																<br />
+																<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostKategorija(cilj)}"></div>
+															</div>
+														</ui:fragment>
+														<ui:fragment rendered="#{(cilj.tip == 'Na dan pojej za X kalorij') and (DnevnikJSFBean.vrniVrednostKalorije(cilj) != null)}">
+															<div class="single-progress-item">
+																<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
+																<br />
+																<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostKalorije(cilj)}"></div>
+															</div>
+														</ui:fragment>
+														<ui:fragment rendered="#{(cilj.tip == 'Spij X litrov vode na dan') and (DnevnikJSFBean.vrniVrednostVoda(cilj) != null)}">
+															<div class="single-progress-item">
+																<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
+																<br />
+																<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostVoda(cilj)}"></div>
+															</div>
+														</ui:fragment>
+														<ui:fragment rendered="#{(cilj.tip == 'Na dan zaužij X gramov sladkorja') and (DnevnikJSFBean.vrniVrednostSladkorji(cilj) != null)}">
+															<div class="single-progress-item">
+																<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
+																<br />
+																<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostSladkorji(cilj)}"></div>
+															</div>
+														</ui:fragment>
+														<ui:fragment rendered="#{(cilj.tip == 'X obrokov na dan') and (DnevnikJSFBean.vrniVrednostSteviloObrokov(cilj) != null)}">
+															<div class="single-progress-item">
+																<p><h:outputText value="#{DnevnikJSFBean.dobiDejanskoIme(cilj)}" /></p>
+																<br />
+																<div class="progress-bar-style" data-progress="#{DnevnikJSFBean.vrniVrednostSteviloObrokov(cilj)}"></div>
+															</div>
+														</ui:fragment>
+													</ui:repeat>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</ui:fragment>
 					
-					<!-- page section -->
-					<div class="page-section spad">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12">
-									<!-- Single element -->
-									<div class="element">
-										<h4>Vsa zaužita hrana</h4>
-										<div class="row">
-											<div class="col-md-12">
-												<h:form>
-													<h:dataTable value="#{DnevnikJSFBean.bs.vrniVseZaPrijavljenega()}" var="zauzitaHrana">
-													   <h:column>    				
-													      <f:facet name="header"><h:outputText value="Datum zaužitja" /></f:facet>    				
-													      <h:outputText value="#{DnevnikJSFBean.formatirajDatum(zauzitaHrana.datumZauzitja)}" />
-													   </h:column>
-													   <h:column>
-													      <f:facet name="header"><h:outputText value="Tip vnosa" /></f:facet>
-													      	<h:outputText value="#{zauzitaHrana.vrednost}" />
-													   </h:column>
-													   <h:column>
-													      <f:facet name="header"><h:outputText value="Opis" /></f:facet>
-													      	<ui:fragment rendered="#{zauzitaHrana.vrednost == 'voda'}">
-													      		<h:outputText value="voda#{DnevnikJSFBean.vrniKolicinoVode(zauzitaHrana.tk_recept_sestavina_id)}" />
-													  		</ui:fragment>
-													      	<ui:fragment rendered="#{zauzitaHrana.vrednost == 'sestavina'}">
-													      		<h:outputText value="#{ReceptJSFBean.sD.najdi(zauzitaHrana.tk_recept_sestavina_id).ime} / #{ReceptJSFBean.sD.najdi(zauzitaHrana.tk_recept_sestavina_id).sladkorji}g sladkorja / #{ReceptJSFBean.sD.najdi(zauzitaHrana.tk_recept_sestavina_id).kalorije}kcal" />
-													  		</ui:fragment>
-													  		<ui:fragment rendered="#{zauzitaHrana.vrednost == 'recept'}">
-													      		<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(zauzitaHrana.tk_recept_sestavina_id)}" value="#{ReceptJSFBean.vrniIme(zauzitaHrana.tk_recept_sestavina_id)}" />
-													  		</ui:fragment>
-													   </h:column>
-													</h:dataTable>
-												</h:form>
+					<ui:fragment rendered="#{DnevnikJSFBean.bs.vrniVseZaPrijavljenega().size() > 0}">
+						<!-- Services section -->
+						<a name="vsaHrana" />
+						<div class="services-section spad" style="padding-top: 0px; padding-bottom: 0px;">
+							<div class="container">
+								<div class="section-title dark">
+									<h2>Vsa zaužita hrana</h2>
+								</div>
+								<div class="row">
+									<ui:repeat var="zauzitaHrana" value="#{DnevnikJSFBean.bs.vrniVseZaPrijavljenega()}" varStatus="loop">
+										<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
+										<h:form>
+											<!-- single service -->
+											<div class="col-md-4 col-sm-6">
+												<div class="service">
+													<div class="icon">
+														<ui:fragment rendered="#{zauzitaHrana.vrednost == 'voda'}">
+															<img src="img/3.png" height="50%" alt="3" />
+														</ui:fragment>
+														<ui:fragment rendered="#{zauzitaHrana.vrednost == 'recept'}">
+															<img src="img/2.png" height="50%" alt="2" />
+														</ui:fragment>
+														<ui:fragment rendered="#{zauzitaHrana.vrednost == 'sestavina'}">
+															<img src="img/1.png" height="50%" alt="1" />
+														</ui:fragment>
+													</div>
+													<div class="service-text">
+														<ui:fragment rendered="#{zauzitaHrana.vrednost == 'voda'}">
+															<h2><h:outputText value="voda#{DnevnikJSFBean.vrniKolicinoVode(zauzitaHrana.tk_recept_sestavina_id)}" /></h2>
+														</ui:fragment>
+														<ui:fragment rendered="#{zauzitaHrana.vrednost == 'sestavina'}">
+															<h2><h:outputText value="#{ReceptJSFBean.sD.najdi(zauzitaHrana.tk_recept_sestavina_id).ime} / #{ReceptJSFBean.sD.najdi(zauzitaHrana.tk_recept_sestavina_id).sladkorji}g sladkorja / #{ReceptJSFBean.sD.najdi(zauzitaHrana.tk_recept_sestavina_id).kalorije}kcal" /></h2>
+														</ui:fragment>
+														<ui:fragment rendered="#{zauzitaHrana.vrednost == 'recept'}">
+															<h2><h:commandLink action="recept.xhtml" style="color: #000000;" actionListener="#{ReceptJSFBean.izberiRecept(zauzitaHrana.tk_recept_sestavina_id)}" value="#{ReceptJSFBean.vrniIme(zauzitaHrana.tk_recept_sestavina_id)}" /></h2>
+														</ui:fragment>
+														<p><h:outputText value="#{DnevnikJSFBean.formatirajDatum(zauzitaHrana.datumZauzitja)}" /></p>
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
+										</h:form>
+									</ui:repeat>
 								</div>
 							</div>
 						</div>
-					</div>
-					
-					
+						<!-- services section end -->
+					</ui:fragment>
 					
 				
 

@@ -24,146 +24,176 @@
 		<ui:define name="content">
 			<f:view>
 			
-				<!-- page section -->
-				<div class="page-section spad">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12 col-sm-12 blog-posts">
-								<!-- Single Post -->
-								<div class="single-post">
-									<div class="post-thumbnail">
-										<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=program&amp;id=#{ProgramJSFBean.izbranProgram.id_program}" height="270"/>
-									</div>
-									<div class="post-content">
-										<h2 class="post-title"><h:outputText value="#{ProgramJSFBean.izbranProgram.naslov}" /></h2>
-										<div class="post-meta">
-											<a href=""><h:outputText value="#{ProgramJSFBean.izbranProgram.user_username}" /></a>
+				<ui:fragment rendered="#{ProgramJSFBean.izbranProgram.naslov != null}">
+					<!-- page section -->
+					<div class="page-section spad" style="padding-bottom: 0px;">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 blog-posts">
+									<!-- Single Post -->
+									<div class="single-post">
+										<div class="post-thumbnail">
+											<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=program&amp;id=#{ProgramJSFBean.izbranProgram.id_program}" height="270"/>
+										</div>
+										<div class="post-content">
+											<h2 class="post-title"><h:outputText value="#{ProgramJSFBean.izbranProgram.naslov}" /></h2>
+											<div class="post-meta">
+												<a href="#"><h:outputText value="#{ProgramJSFBean.izbranProgram.user_username}" /></a>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- page section end-->
-				
-				<!-- Services section -->
-				<div class="services-section spad">
-					<div class="container">
-						<div class="row">
-							<!-- single service -->
-							<div class="col-md-4 col-sm-6">
-								<div class="service">
-									<div class="service-text">
-										<h2>Ponedeljek</h2>
-										<c:set var="name1" value="Ponedeljek" scope="request" />
-										<h:form>
-											<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name1)}">
-										      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
-												<h:outputText escape="false" value="&lt;br /&gt;" />
-											</ui:repeat>
-										</h:form>
+					<!-- page section end-->
+					
+					<!-- Services section -->
+					<div class="services-section spad" style="padding-top: 0px; padding-bottom: 0px;">
+						<div class="container">
+							<div class="row">
+								<!-- single service -->
+								<div class="col-md-4 col-sm-6">
+									<div class="service">
+										<div class="service-text">
+											<h2>Ponedeljek</h2>
+											<c:set var="name1" value="Ponedeljek" scope="request" />
+											<h:form>
+												<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name1)}">
+											      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
+													<h:outputText escape="false" value="&lt;br /&gt;" />
+												</ui:repeat>
+											</h:form>
+										</div>
+									</div>
+								</div>
+								<!-- single service -->
+								<div class="col-md-4 col-sm-6">
+									<div class="service">
+										<div class="service-text">
+											<h2>Torek</h2>
+											<c:set var="name2" value="Torek" scope="request" />
+											<h:form>
+												<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name2)}">
+											      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
+													<h:outputText escape="false" value="&lt;br /&gt;" />
+												</ui:repeat>
+											</h:form>
+										</div>
+									</div>
+								</div>
+								<!-- single service -->
+								<div class="col-md-4 col-sm-6">
+									<div class="service">
+										<div class="service-text">
+											<h2>Sreda</h2>
+											<c:set var="name3" value="Sreda" scope="request" />
+											<h:form>
+												<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name3)}">
+											      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
+													<h:outputText escape="false" value="&lt;br /&gt;" />
+												</ui:repeat>
+											</h:form>
+										</div>
 									</div>
 								</div>
 							</div>
-							<!-- single service -->
-							<div class="col-md-4 col-sm-6">
-								<div class="service">
-									<div class="service-text">
-										<h2>Torek</h2>
-										<c:set var="name2" value="Torek" scope="request" />
-										<h:form>
-											<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name2)}">
-										      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
-												<h:outputText escape="false" value="&lt;br /&gt;" />
-											</ui:repeat>
-										</h:form>
+							<div class="row">
+								<!-- single service -->
+								<div class="col-md-4 col-sm-6">
+									<div class="service">
+										<div class="service-text">
+											<h2>Četrtek</h2>
+											<c:set var="name4" value="Četrtek" scope="request" />
+											<h:form>
+												<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name4)}">
+											      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
+													<h:outputText escape="false" value="&lt;br /&gt;" />
+												</ui:repeat>
+											</h:form>
+										</div>
+									</div>
+								</div>
+								<!-- single service -->
+								<div class="col-md-4 col-sm-6">
+									<div class="service">
+										<div class="service-text">
+											<h2>Petek</h2>
+											<c:set var="name5" value="Petek" scope="request" />
+											<h:form>
+												<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name5)}">
+											      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
+													<h:outputText escape="false" value="&lt;br /&gt;" />
+												</ui:repeat>
+											</h:form>
+										</div>
+									</div>
+								</div>
+								<!-- single service -->
+								<div class="col-md-4 col-sm-6">
+									<div class="service">
+										<div class="service-text">
+											<h2>Sobota</h2>
+											<c:set var="name6" value="Sobota" scope="request" />
+											<h:form>
+												<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name6)}">
+											      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
+													<h:outputText escape="false" value="&lt;br /&gt;" />
+												</ui:repeat>
+											</h:form>
+										</div>
 									</div>
 								</div>
 							</div>
-							<!-- single service -->
-							<div class="col-md-4 col-sm-6">
-								<div class="service">
-									<div class="service-text">
-										<h2>Sreda</h2>
-										<c:set var="name3" value="Sreda" scope="request" />
-										<h:form>
-											<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name3)}">
-										      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
-												<h:outputText escape="false" value="&lt;br /&gt;" />
-											</ui:repeat>
-										</h:form>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<!-- single service -->
-							<div class="col-md-4 col-sm-6">
-								<div class="service">
-									<div class="service-text">
-										<h2>Četrtek</h2>
-										<c:set var="name4" value="Četrtek" scope="request" />
-										<h:form>
-											<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name4)}">
-										      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
-												<h:outputText escape="false" value="&lt;br /&gt;" />
-											</ui:repeat>
-										</h:form>
-									</div>
-								</div>
-							</div>
-							<!-- single service -->
-							<div class="col-md-4 col-sm-6">
-								<div class="service">
-									<div class="service-text">
-										<h2>Petek</h2>
-										<c:set var="name5" value="Petek" scope="request" />
-										<h:form>
-											<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name5)}">
-										      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
-												<h:outputText escape="false" value="&lt;br /&gt;" />
-											</ui:repeat>
-										</h:form>
-									</div>
-								</div>
-							</div>
-							<!-- single service -->
-							<div class="col-md-4 col-sm-6">
-								<div class="service">
-									<div class="service-text">
-										<h2>Sobota</h2>
-										<c:set var="name6" value="Sobota" scope="request" />
-										<h:form>
-											<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name6)}">
-										      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
-												<h:outputText escape="false" value="&lt;br /&gt;" />
-											</ui:repeat>
-										</h:form>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<!-- single service -->
-							<div class="col-md-4 col-sm-6">
-								<div class="service">
-									<div class="service-text">
-										<h2>Nedelja</h2>
-										<c:set var="name7" value="Nedelja" scope="request" />
-										<h:form>
-											<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name7)}">
-										      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
-												<h:outputText escape="false" value="&lt;br /&gt;" />
-											</ui:repeat>
-										</h:form>
+							<div class="row">
+								<!-- single service -->
+								<div class="col-md-4 col-sm-6">
+									<div class="service">
+										<div class="service-text">
+											<h2>Nedelja</h2>
+											<c:set var="name7" value="Nedelja" scope="request" />
+											<h:form>
+												<ui:repeat var="recept" value="#{ProgramJSFBean.izbranProgram.vrniZaKonkretenDan(name7)}">
+											      	<h:commandLink action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept)}" value="#{ReceptJSFBean.vrniIme(recept)}" />
+													<h:outputText escape="false" value="&lt;br /&gt;" />
+												</ui:repeat>
+											</h:form>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- services section end -->
+					<!-- services section end -->
+				</ui:fragment>
+				<ui:fragment rendered="#{ProgramJSFBean.izbranProgram.naslov == null}">
+					<!-- Contact section -->
+					<div class="contact-section spad fix">
+						<div class="container">
+							<div class="row">
+							
+								<!-- contact info -->
+								<div class="col-md-5 col-md-offset-1 contact-info col-push">
+									<div class="section-title left">
+										<h2>Tristo kosmatih!</h2>
+									</div>
+									<p>Za uporabo trenutne strani ni na voljo dovolj podatkov. <br />Poskusite ponovno kasneje, sicer pa nas o napaki obvestite na: <a style="color: #ffffff;" href="mailto:eprehrana@gmail.com?Subject=Sporočilo%20o%20napaki" target="_top">eprehrana@gmail.com</a></p>
+								</div>
+							
+								<!-- contact form -->
+								<div class="col-md-6 col-pull">
+									<div class="row">
+										<div class="col-sm-12">
+											<img src="img/data.png" alt="img/data.png" />
+											<a class="site-btn" href="index.xhtml">Domov</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Contact section end-->
+				</ui:fragment>
 				
 			</f:view>
 		</ui:define>

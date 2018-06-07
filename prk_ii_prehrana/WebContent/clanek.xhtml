@@ -24,43 +24,73 @@
 		<ui:define name="content">
 			<f:view>
 
-				<!-- page section -->
-				<div class="page-section spad">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12 col-sm-12 blog-posts">
-								<!-- Single Post -->
-								<div class="single-post">
-									<div class="post-thumbnail">
-										<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?klic=clanek&amp;id=#{ClanekJSFBean.izbranClanek.clanek_id}" height="270"/>
-										<div class="post-date">
-											<h2><h:outputText value="#{ClanekJSFBean.getDayOfMonth(ClanekJSFBean.izbranClanek.datumClanka)}" /></h2>
-											<h3><h:outputText value="#{ClanekJSFBean.getMonthAndYear(ClanekJSFBean.izbranClanek.datumClanka)}" /></h3>
+				<ui:fragment rendered="#{ClanekJSFBean.izbranClanek.title != null}">
+					<!-- page section -->
+					<div class="page-section spad">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 blog-posts">
+									<!-- Single Post -->
+									<div class="single-post">
+										<div class="post-thumbnail">
+											<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?klic=clanek&amp;id=#{ClanekJSFBean.izbranClanek.clanek_id}" height="270"/>
+											<div class="post-date">
+												<h2><h:outputText value="#{ClanekJSFBean.getDayOfMonth(ClanekJSFBean.izbranClanek.datumClanka)}" /></h2>
+												<h3><h:outputText value="#{ClanekJSFBean.getMonthAndYear(ClanekJSFBean.izbranClanek.datumClanka)}" /></h3>
+											</div>
 										</div>
-									</div>
-									<div class="post-content">
-										<h2 class="post-title"><h:outputText value="#{ClanekJSFBean.izbranClanek.title}" /></h2>
-										<div class="post-meta">
-											<a href=""><h:outputText value="#{ClanekJSFBean.izbranClanek.user_username}" /></a>
+										<div class="post-content">
+											<h2 class="post-title"><h:outputText value="#{ClanekJSFBean.izbranClanek.title}" /></h2>
+											<div class="post-meta">
+												<a href="#"><h:outputText value="#{ClanekJSFBean.izbranClanek.user_username}" /></a>
+											</div>
+											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ClanekJSFBean.izbranClanek.content}" /></p>
+											
+											<hr />
+											<c:set var="idIzbranegaClanka" value="#{ClanekJSFBean.izbranClanek.clanek_id}" scope="request" />
+											
+											<h:panelGroup rendered="#{not empty request.remoteUser}">
+												<h:form>
+													<h:commandButton action="seznam-clankov.xhtml" actionListener="#{ClanekJSFBean.izbrisiClanek(idIzbranegaClanka)}" style="background: #d9534f; color: white;" class="site-btn" value="Izbriši"> </h:commandButton>
+												</h:form>
+											</h:panelGroup>
+											<p:messages globalOnly="true" showDetail="false"/>
 										</div>
-										<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ClanekJSFBean.izbranClanek.content}" /></p>
-										
-										<hr />
-										<c:set var="idIzbranegaClanka" value="#{ClanekJSFBean.izbranClanek.clanek_id}" scope="request" />
-										
-										<h:panelGroup rendered="#{not empty request.remoteUser}">
-											<h:form>
-												<h:commandButton action="seznam-clankov.xhtml" actionListener="#{ClanekJSFBean.izbrisiClanek(idIzbranegaClanka)}" style="background: #d9534f; color: white;" class="site-btn" value="Izbriši"> </h:commandButton>
-											</h:form>
-										</h:panelGroup>
-										<p:messages globalOnly="true" showDetail="false"/>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- page section end-->
+					<!-- page section end-->
+				</ui:fragment>
+				<ui:fragment rendered="#{ClanekJSFBean.izbranClanek.title == null}">
+					<!-- Contact section -->
+					<div class="contact-section spad fix">
+						<div class="container">
+							<div class="row">
+							
+								<!-- contact info -->
+								<div class="col-md-5 col-md-offset-1 contact-info col-push">
+									<div class="section-title left">
+										<h2>Tristo kosmatih!</h2>
+									</div>
+									<p>Za uporabo trenutne strani ni na voljo dovolj podatkov. <br />Poskusite ponovno kasneje, sicer pa nas o napaki obvestite na: <a style="color: #ffffff;" href="mailto:eprehrana@gmail.com?Subject=Sporočilo%20o%20napaki" target="_top">eprehrana@gmail.com</a></p>
+								</div>
+							
+								<!-- contact form -->
+								<div class="col-md-6 col-pull">
+									<div class="row">
+										<div class="col-sm-12">
+											<img src="img/data.png" alt="img/data.png" />
+											<a class="site-btn" href="index.xhtml">Domov</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Contact section end-->
+				</ui:fragment>
 
 			</f:view>
 		</ui:define>
