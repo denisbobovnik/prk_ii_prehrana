@@ -160,4 +160,32 @@ public class ClanekDAO {
 		}
 		return seznam;
 	}
+	
+	public Clanek vrniZadnji() throws Exception {
+		log.info("ClanekDAO: vrniVse ");
+		Clanek clanek = new Clanek();
+	
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM CLANEK");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+
+				 clanek = new Clanek(rs.getInt("clanek_id"),rs.getString("user_username"),rs.getString("title"), rs.getString("content"), rs.getBlob("thumbnail"));
+				clanek.setTipSlike(rs.getString("tipSlike"));
+				
+				clanek.getDatumClanka().setTimeInMillis(rs.getTimestamp("datumClanka").getTime());
+
+				
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return clanek;
+	}
 }
