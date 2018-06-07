@@ -52,7 +52,7 @@ public class PdfJSFBean {
 			}
 		}
 		Paragraph sestavine = new Paragraph("SESTAVINE: " + sest);
-		Paragraph opis = new Paragraph("OPIS: " + recept.getOpis());
+		Paragraph opis = new Paragraph("\n" + recept.getOpis().replaceAll("<br />", "\n"));
 		
 		dokument.add(ime);
 		dokument.add(stPorcij);
