@@ -10,7 +10,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -19,11 +19,11 @@ import si.um.feri.prk.objekti.Recept;
 @ManagedBean(name="PdfJSFBean")
 @SessionScoped
 public class PdfJSFBean {
+	
+	private ReceptDAO rD = ReceptDAO.getInstance();
+	
 	public void createPDF(int id) throws Exception {
-		System.out.println("SADASDA");
-		ReceptDAO rD = ReceptDAO.getInstance();
-		Recept recept = new Recept();
-		recept = rD.najdi(id);
+		Recept recept = rD.najdi(id);
 		String imeDatoteke = recept.getIme() + ".pdf";
 		Document dokument = new Document();
 		PdfWriter.getInstance(dokument, new FileOutputStream(imeDatoteke));
@@ -37,22 +37,22 @@ public class PdfJSFBean {
 		String alergeni="";
 		for(int i = 0; i<recept.getAlergeni().size(); i++) {
 			if(i<recept.getAlergeni().size()-1) {
-				alergeni += recept.getAlergeni().get(i).getIme_alergena();
-			}else {
 				alergeni += recept.getAlergeni().get(i).getIme_alergena() + ", ";
+			}else {
+				alergeni += recept.getAlergeni().get(i).getIme_alergena();
 			}
 		}
 		Paragraph alerg = new Paragraph("ALERGENI: " + alergeni);
 		String sest = "";
 		for(int i = 0; i<recept.getSestavine().size(); i++) {
 			if(i<recept.getAlergeni().size()-1) {
-				sest += recept.getSestavine().get(i).getIme() + " " +  recept.getSestavine().get(i).getKolicina() +  recept.getSestavine().get(i).getEnota_kolicine();
-			}else {
 				sest += recept.getSestavine().get(i).getIme() + " " +  recept.getSestavine().get(i).getKolicina() +  recept.getSestavine().get(i).getEnota_kolicine() + ", ";
+			}else {
+				sest += recept.getSestavine().get(i).getIme() + " " +  recept.getSestavine().get(i).getKolicina() +  recept.getSestavine().get(i).getEnota_kolicine();
 			}
 		}
 		Paragraph sestavine = new Paragraph("SESTAVINE: " + sest);
-		Paragraph opis = new Paragraph("OPIS: " + recept.getOpis());
+		Paragraph opis = new Paragraph("\n" + recept.getOpis().replaceAll("<br />", "\n"));
 		
 		dokument.add(ime);
 		dokument.add(stPorcij);
@@ -64,9 +64,5 @@ public class PdfJSFBean {
 		dokument.add(opis);
 		
 		dokument.close();
-		
-		
-		
 	}
-
 }

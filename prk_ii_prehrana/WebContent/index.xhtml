@@ -101,6 +101,77 @@
 				</div>
 				<!-- About section end -->
 				
+				<!-- page section -->
+				<div class="page-section spad">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<!-- Single element -->
+								<div class="element mb0">
+									<h4>Namigi</h4>
+									<div class="row">
+										<!-- Single -->
+										<div class="col-md-4 col-sm-6">
+											<div class="icon-box">
+												<div class="icon">
+													<img src="img/2.png" height="30%" alt="2" />
+												</div>
+												<div class="icon-box-text">
+													<h2>Zadnji recept</h2>
+													<c:set var="recept" value="#{IndexJSFBean.rD.vrniZadnji()}" scope="request" />
+													<p><h:outputText value="#{recept.ime}" /></p>
+													<br />
+													<h:form style="display:inline-block;">
+														<h:commandLink class="read-more" value="Ogled" action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept.id_recept)}"></h:commandLink>
+													</h:form>
+													<ui:fragment rendered="#{facesContext.externalContext.isUserInRole('STROKOVNJAK')}">
+														<h:form style="display:inline-block; margin-left: 20px;">
+															<h:commandLink class="read-more" value="Uredi" action="urejanje-recepta.xhtml" actionListener="#{ReceptJSFBean.urediRecept(recept.id_recept)}"></h:commandLink>
+														</h:form>
+													</ui:fragment>
+												</div>
+											</div>
+										</div>
+										<!-- Single -->
+										<div class="col-md-4 col-sm-6">
+											<div class="icon-box">
+												<div class="icon">
+													<img src="img/5.png" height="30%" alt="5" />
+												</div>
+												<div class="icon-box-text">
+													<h2>Zadnji članek</h2>
+													<c:set var="clanek" value="#{IndexJSFBean.cD.vrniZadnji()}" scope="request" />
+													<p><h:outputText value="#{clanek.title}" /></p>
+													<h:form>
+														<h:commandLink class="read-more" value="Preberi več" action="clanek.xhtml" actionListener="#{ClanekJSFBean.izberiClanek(clanek.clanek_id)}"></h:commandLink>
+													</h:form>
+												</div>
+											</div>
+										</div>
+										<!-- Single -->
+										<div class="col-md-4 col-sm-6">
+											<div class="icon-box">
+												<div class="icon">
+													<img src="img/4.png" height="30%" alt="4" />
+												</div>
+												<div class="icon-box-text">
+													<h2>Najpogostejši cilj</h2>
+													<p><h:outputText value="#{IndexJSFBean.ciD.vrniNajpogostejsiTipCilja()}" /></p>
+													<br />
+													<h:form>
+														<h:commandLink class="read-more" value="Zastavite si ga" action="dnevnik.xhtml"></h:commandLink>
+													</h:form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- page section end-->
+				
 			</f:view>
 		</ui:define>
 		
