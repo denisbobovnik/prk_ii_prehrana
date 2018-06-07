@@ -4,6 +4,22 @@ Projekt pri predmetu Praktikum II
 ## E-R model
 ![er_model](/er_model/er_model.png)
 
+## Navodila za deploy:
+- Pojdite na administrativno konzolo vašega izvajalnega okolja WF (in se vanj prijavite uporabnikom, ki je tipa "Management user"):
+```bash
+http://localhost:9990/console/App.html#home
+```
+
+- Kliknite na "Deployments"
+- Kliknite na "Add"
+- Izberite možnost "Upload a new deployment"
+- Izberite preneseno datoteko "prk_ii_prehrana.war" iz imenika deploy (na GitHub-u)
+- Kliknite Finish
+- Aplikacija je tako dostopna na URL naslovu:
+```bash
+http://localhost:8080/prk_ii_prehrana/faces/index.xhtml
+```
+
 ## Navodila za razvoj/uporabo:
 - Potrebno si je kreirati datasource v Wildfly aplikacijskem strežniku. Ugasnemo strežnik in prepišemo datoteke v njegovem imenu z temi, ki so v sledečem imeniku (prenos): https://mega.nz/#!KZMg1DCS!iNFLC8482Xl1U_pn8hj54rDGCMV9ZphFveeV5pOzOBs
 - Najprej v MySQL ustvarimo podatkovno bazo "prk_ii_prehrana"
@@ -57,8 +73,8 @@ Dodatno (po Blockchain implementaciji) - uvoz blockchain podatkov iz datoteke "b
 ```
 - Nato strežnik poženite in izvedite full publish.
 
-## Uporaba rest storitve (za skupino "Corporate Wellness"):
-Da pridete do podatkov o naših receptih (oblike JSON), si prenesite našo aplikacijo v eclipse, jo zdeplojajte (ni potrebno imeti uporabnikov kreiranih, ostalo pa po navodilih za namestitev; prav tako prenesite in uvozite pripravljene podatke po navodilih), nato pa pojdite na url: 
+## Uporaba rest storitve (za skupini "Corporate Wellness" in "Fitnes"):
+Da pridete do podatkov o naših receptih (oblike JSON), si prenesite našo aplikacijo v eclipse (po navodilih za deploy/razvoj - ni potrebno imeti uporabnikov kreiranih, ostalo pa po navodilih za namestitev; prav tako prenesite in uvozite pripravljene podatke po navodilih), nato pa pojdite na url: 
 ```bash
 http://localhost:8080/prk_ii_prehrana/rest/eprehrana/recepti
 ```
