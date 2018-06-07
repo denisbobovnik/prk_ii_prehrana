@@ -162,23 +162,28 @@ public class ClanekDAO {
 	}
 	
 	public Clanek vrniZadnji() throws Exception {
-		log.info("ClanekDAO: vrniVse ");
-		Clanek clanek = new Clanek();
-	
+		log.info("ClanekDAO: vrniZadnji ");
+		Clanek clanek = null;
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
 
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM CLANEK");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Clanek where clanek_id=(SELECT MAX(clanek_id) from Clanek)");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-
-				 clanek = new Clanek(rs.getInt("clanek_id"),rs.getString("user_username"),rs.getString("title"), rs.getString("content"), rs.getBlob("thumbnail"));
-				clanek.setTipSlike(rs.getString("tipSlike"));
+				clanek = new Clanek(rs.getString("user_username"), rs.getString("title"), rs.getString("content"));
+				clanek.setClanek_id(rs.getInt("clanek_id"));
+				
+				Blob blob = rs.getBlob("thumbnail");
+				int blobLength = (int) blob.length();  
+				byte[] blobAsBytes = blob.getBytes(1, blobLength);
+				
+				clanek.setThumbnail(blobAsBytes);
 				
 				clanek.getDatumClanka().setTimeInMillis(rs.getTimestamp("datumClanka").getTime());
-
 				
+				clanek.setTipSlike(rs.getString("tipSlike"));
+				break;
 			}
 			rs.close();
 		} catch (Exception e) {

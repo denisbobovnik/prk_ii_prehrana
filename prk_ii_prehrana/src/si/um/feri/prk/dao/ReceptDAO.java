@@ -246,7 +246,7 @@ public class ReceptDAO {
 	
 	public Recept vrniZadnji() throws Exception {
 		log.info("ReceptDAO: vrniZadnji ");
-		Recept recept= new Recept();
+		Recept recept = null;
 		
 		Connection conn=null;
 		try {
@@ -255,7 +255,7 @@ public class ReceptDAO {
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Recept where id_recept=(SELECT MAX(id_recept) from Recept)");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				 recept = new Recept(rs.getInt("id_recept"), rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), rs.getDouble("sladkorji"), rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"), rs.getString("kategorija"));
+				recept = new Recept(rs.getInt("id_recept"), rs.getInt("dolzinaPriprave"), rs.getInt("steviloPorcij"), rs.getDouble("sladkorji"), rs.getString("ime"), rs.getString("opis"), rs.getString("linkVideo"), rs.getString("tipSlike"), null, rs.getDouble("kalorije"), rs.getString("kategorija"));
 					
 				Blob blob = rs.getBlob("slika");
 				int blobLength = (int) blob.length();  
@@ -268,8 +268,7 @@ public class ReceptDAO {
 				recept.setEnote(eD.najdiVsePoReceptu(recept.getId_recept()));
 				
 				recept.getDatumDodajanja().setTimeInMillis(rs.getTimestamp("datumDodajanja").getTime());
-					
-				
+				break;
 			}
 			rs.close();
 		} catch (Exception e) {

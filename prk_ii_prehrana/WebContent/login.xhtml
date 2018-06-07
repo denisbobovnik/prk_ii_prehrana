@@ -55,67 +55,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- Contact section end-->	
-				<div class="services-card-section spad" style="padding-top: 10px;">
-						<div class="container">
-							<div class="row">
-								<ui:repeat var="recept" value="#{ReceptJSFBean.rD.vrniZadnji()}" varStatus="loop">
-									<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
-									<!-- Single Card -->
-									<div class="col-md-4 col-sm-12">
-										<div class="sv-card">
-											<div class="card-img">
-												<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=recept&amp;id=#{recept.id_recept}" height="270"/>
-											</div>
-											<div class="card-text">
-												<h2 class="post-title"><h:outputText value="#{recept.ime}" /></h2>
-												<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ReceptJSFBean.trimContent121(recept.opis)}" /></p>
-												<h:form style="display:inline-block;">
-													<h:commandLink class="read-more" value="Ogled" action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept.id_recept)}"></h:commandLink>
-												</h:form>
-												
-												<ui:fragment rendered="#{facesContext.externalContext.isUserInRole('STROKOVNJAK')}">
-													<h:form style="display:inline-block; margin-left: 20px;">
-														<h:commandLink class="read-more" value="Uredi" action="urejanje-recepta.xhtml" actionListener="#{ReceptJSFBean.urediRecept(recept.id_recept)}"></h:commandLink>
-													</h:form>
-												</ui:fragment>
-											</div>
-										</div>
-									</div>
-								</ui:repeat>
-							</div>
-						</div>
-					</div>
-					<div class="page-section spad">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12 col-sm-12 blog-posts">
-								<ui:repeat var="clanek" value="#{ClanekJSFBean.cD.vrniZadnji()}">
-									<!-- Post item -->
-									<div class="post-item">
-										<div class="post-thumbnail">
-											<p:graphicImage id="image" alt="thumbnail" url="/ImageServlet?klic=clanek&amp;id=#{clanek.clanek_id}" height="270"/>
-											<div class="post-date">
-												<h2><h:outputText value="#{ClanekJSFBean.getDayOfMonth(clanek.datumClanka)}" /></h2>
-												<h3><h:outputText value="#{ClanekJSFBean.getMonthAndYear(clanek.datumClanka)}" /></h3>
-											</div>
-										</div>
-										<div class="post-content">
-											<h2 class="post-title"><h:outputText value="#{clanek.title}" /></h2>
-											<div class="post-meta">
-												<a href=""><h:outputText value="#{clanek.user_username}" /></a>
-											</div>
-											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ClanekJSFBean.trimContent318(clanek.content)}" /></p>
-											<h:form>
-												<h:commandLink class="read-more" value="Preberi več" action="clanek.xhtml" actionListener="#{ClanekJSFBean.izberiClanek(clanek.clanek_id)}"></h:commandLink>
-											</h:form>
-										</div>
-									</div>
-								</ui:repeat>
-							</div>
-						</div>
-					</div>
-				</div>
 
 			</f:view>
 		</ui:define>

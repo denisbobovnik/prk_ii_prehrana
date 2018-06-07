@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
@@ -91,5 +92,38 @@ public class BlockStorage implements Serializable, ServletContextListener {
 			}
 		}
 		return vsaZaPrijavljenega;
+	}
+	
+	public Integer vrniNajboljPogostoZauzitoHrano() {
+		ArrayList<ZauzitaHrana> vsaHrana = new ArrayList<ZauzitaHrana>();
+		for(Block block : instance.getBlockchain())
+			vsaHrana.add(block.getZauzitaHrana());
+		
+		for(ZauzitaHrana zH : vsaHrana)
+			if(!zH.getVrednost().equals("recept"))
+				vsaHrana.remove(zH);
+		
+		HashMap<Integer, Integer> grupirano = new HashMap<Integer, Integer>();
+		for(ZauzitaHrana zH : vsaHrana) {
+			if(grupirano.containsKey(zH.getTk_recept_sestavina_id())) {
+				Integer a = grupirano.get(zH.getTk_recept_sestavina_id());
+				a++;
+				grupirano.put(zH.getTk_recept_sestavina_id(), a);
+			} else {
+				grupirano.put(zH.getTk_recept_sestavina_id(), 0);
+			}
+		}
+		
+		Integer max = new Integer(0);
+		for (Integer key : grupirano.keySet())
+			if(grupirano.get(key)>max)
+				max = grupirano.get(key);
+		
+		Integer ret = null;
+		for (Integer key : grupirano.keySet())
+			if(grupirano.get(key)==max)
+				ret = key;
+		
+		return ret;
 	}
 }

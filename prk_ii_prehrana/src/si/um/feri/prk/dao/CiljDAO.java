@@ -83,6 +83,26 @@ public class CiljDAO {
 		return ret;
 	}
 	
+	public String vrniNajpogostejsiTipCilja() throws Exception {
+		log.info("CiljDAO: vrniNajpogostejsiTipCilja ");
+		String ret = null;
+		Connection conn=null;
+		try {
+			conn=baza.getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT tip, COUNT(*) AS steviloPojavitev FROM Cilj GROUP BY tip ORDER BY steviloPojavitev DESC LIMIT 1");
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ret = rs.getString("tip");
+				break;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return ret;
+	}
 	
 	public void shrani(Cilj c) throws Exception {
 		log.info("CiljDAO: shranjujem " + c);
