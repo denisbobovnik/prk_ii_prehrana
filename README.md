@@ -5,7 +5,7 @@ Projekt pri predmetu Praktikum II
 ![er_model](/er_model/er_model.png)
 
 ## Navodila za deploy:
-- Pojdite na administrativno konzolo vašega izvajalnega okolja WF:
+- Pojdite na administrativno konzolo vašega izvajalnega okolja WF (in se vanj prijavite uporabnikom, ki je tipa "Management user"):
 ```bash
 http://localhost:9990/console/App.html#home
 ```
