@@ -2,43 +2,31 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
   <display-name>prk_ii_prehrana</display-name>
   <welcome-file-list>
-  	<welcome-file>/faces/index.xhtml</welcome-file>
+    <welcome-file>/faces/index.xhtml</welcome-file>
   </welcome-file-list>
-  
-  
-  
-  	<!-- Auto scan REST service -->
-	<context-param>
-		<param-name>resteasy.scan</param-name>
-		<param-value>true</param-value>
-	</context-param>
-	
-	<!-- this need same with resteasy servlet url-pattern -->
-	<context-param>
-		<param-name>resteasy.servlet.mapping.prefix</param-name>
-		<param-value>/rest</param-value>
-	</context-param>
-
-	<listener>
-		<listener-class>
+  <context-param>
+    <param-name>resteasy.scan</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>resteasy.servlet.mapping.prefix</param-name>
+    <param-value>/rest</param-value>
+  </context-param>
+  <listener>
+    <listener-class>
 			org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
 		</listener-class>
-	</listener>
-	
-	<servlet>
-		<servlet-name>resteasy-servlet</servlet-name>
-		<servlet-class>
+  </listener>
+  <servlet>
+    <servlet-name>resteasy-servlet</servlet-name>
+    <servlet-class>
 			org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
 		</servlet-class>
-	</servlet>
-     
-	<servlet-mapping>
-		<servlet-name>resteasy-servlet</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
-  
-  
-  
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>resteasy-servlet</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -48,18 +36,15 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
- 
   <servlet>
-  	<servlet-name>Image Servlet</servlet-name>
-  	<servlet-class>si.um.feri.prk.servleti.ImageServlet</servlet-class>
+    <servlet-name>Image Servlet</servlet-name>
+    <servlet-class>si.um.feri.prk.servleti.ImageServlet</servlet-class>
   </servlet>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>Image Servlet</servlet-name>
     <url-pattern>/faces/ImageServlet</url-pattern>
   </servlet-mapping>
-	
-  	<!--Defining security constraint for type of roles available-->   
-   <security-constraint>
+  <security-constraint>
     <display-name>c01</display-name>
     <web-resource-collection>
       <web-resource-name>strokovnjak</web-resource-name>
@@ -80,8 +65,7 @@
       <role-name>STROKOVNJAK</role-name>
     </auth-constraint>
   </security-constraint>
-  
-    <security-constraint>
+  <security-constraint>
     <display-name>c01</display-name>
     <web-resource-collection>
       <web-resource-name>posameznik</web-resource-name>
@@ -98,9 +82,8 @@
       <role-name>POSAMEZNIK</role-name>
     </auth-constraint>
   </security-constraint>
-  
   <security-constraint>
-  <display-name>c01</display-name>
+    <display-name>c01</display-name>
     <web-resource-collection>
       <web-resource-name>login</web-resource-name>
       <url-pattern>/faces/login.xhtml</url-pattern>
@@ -113,41 +96,30 @@
       <role-name>*</role-name>
     </auth-constraint>
   </security-constraint>
-	<!--Defining security constraint for type of roles available--> 
-
-	<!--Defining type of authenitcation mechanism-->  
- 	<login-config>
-	  <auth-method>FORM</auth-method>
-	  <realm-name>prk_ii_prehrana</realm-name>
-	  <form-login-config>
-	  	<form-login-page>/faces/login.xhtml</form-login-page>
-	  	<form-error-page>/faces/error.xhtml</form-error-page>
-	  </form-login-config>
-	</login-config>
-  <!--Defining type of authenitcation mechanism-->
-
-  <!--Denining security role-->
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>prk_ii_prehrana</realm-name>
+    <form-login-config>
+      <form-login-page>/faces/login.xhtml</form-login-page>
+      <form-error-page>/faces/error.xhtml</form-error-page>
+    </form-login-config>
+  </login-config>
   <security-role>
     <role-name>ADMINISTRATOR</role-name>
-  </security-role> 
+  </security-role>
   <security-role>
     <role-name>STROKOVNJAK</role-name>
   </security-role>
   <security-role>
     <role-name>POSAMEZNIK</role-name>
   </security-role>
-    <security-role>
+  <security-role>
     <role-name>readonly</role-name>
   </security-role>
-  <!--Denining security role-->
-  
-  
-    <listener>
-  	<listener-class>si.um.feri.prk.blockchain.BlockStorage</listener-class>
+  <listener>
+    <listener-class>si.um.feri.prk.blockchain.BlockStorage</listener-class>
   </listener>
-  
-  
-    <error-page>
+  <error-page>
     <error-code>404</error-code>
     <location>/faces/404.xhtml</location>
   </error-page>
@@ -155,7 +127,7 @@
     <error-code>500</error-code>
     <location>/faces/500.xhtml</location>
   </error-page>
-    <error-page>
+  <error-page>
     <error-code>403</error-code>
     <location>/faces/403.xhtml</location>
   </error-page>

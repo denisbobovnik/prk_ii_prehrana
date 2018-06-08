@@ -1,10 +1,98 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+	<ui:composition template="WEB-INF/template/template-all.xhtml">
+		
+		
+		<ui:define name="title">
+			Registracija
+		</ui:define>
+		
+		<ui:insert name="pageLoader">
+		</ui:insert>
+		
+		<ui:insert name="header">
+		</ui:insert>
+		
+		<ui:define name="content">
+			<f:view>
 
-</body>
+				<!-- Contact section -->
+				<div class="contact-section spad fix">
+					<div class="container">
+						<div class="row">
+							<!-- contact info -->
+							<div class="col-md-5 col-md-offset-1 contact-info col-push">
+								<div class="section-title left">
+									<h2>Registracija</h2>
+								</div>
+								<p>Če želite postati uporabnik spletne strani, vpišite registracijske podatke in v kratkem boste uživali v hitri, zdravi, predvsem pa okusni prehrani. <br />Po registraciji, preverite vaš email!</p>
+							</div>
+							
+							<!-- contact form -->
+							<div class="col-md-6 col-pull">
+								<h:form class="form-class" id="con_form">
+									<div class="row">
+										<div class="col-sm-6">
+											Ime(*)
+											<p:inputText required="true" id="user-name" name="name" value="#{RegistrationJSFBean.ime}">
+												<f:validateLength minimum="2" maximum="45" />
+												<f:validateRegex pattern="([a-zA-Z_\u00A1-\uFFFF_\s]{2,45})" />
+											</p:inputText>
+										</div>
+										<div class="col-sm-6">
+											Priimek(*)
+											<p:inputText required="true" id="user-surname" name="surname" value="#{RegistrationJSFBean.priimek}">
+												<f:validateLength minimum="2" maximum="45" />
+												<f:validateRegex pattern="([a-zA-Z_\u00A1-\uFFFF_\s]{2,45})" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											Email(*)
+											<p:inputText required="true" id="user-email" name="email" value="#{RegistrationJSFBean.email}">
+												<f:validateLength minimum="2" maximum="45" />
+												<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+											</p:inputText>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											Geslo(*)
+											<p:password required="true" id="user-password" name="password" style="width: 100%; margin-bottom: 26px; border: none; background: #f6edfb; padding: 17px 20px;" value="#{RegistrationJSFBean.password}">
+												<f:validateLength minimum="2" maximum="45" />
+											</p:password>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<h:commandButton action="index.xhtml" actionListener="#{RegistrationJSFBean.registrirajUporabnika()}" style="display: inline-block; margin-right: 20px;" class="site-btn" value="Registracija" />
+											<a class="site-btn" style="display: inline-block;" href="login.xhtml">Prijava</a>
+										</div>
+									</div>
+									<p:messages showDetail="false"/>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</f:view>
+		</ui:define>
+		
+		<ui:insert name="footer">
+		</ui:insert>
+		
+		<ui:insert name="jsAndJQuery">
+		</ui:insert>
+	
+	</ui:composition>
+	</h:body>
 </html>
