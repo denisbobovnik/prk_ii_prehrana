@@ -23,52 +23,82 @@
 		<ui:define name="content">
 			<f:view>
 
-				<!-- Contact section -->
-				<div class="contact-section spad fix">
-					<div class="container">
-						<div class="row">
-						
-							<!-- contact info -->
-							<div class="col-md-5 col-md-offset-1 contact-info col-push">
-								<div class="section-title left">
-									<h2>Nov program</h2>
-								</div>
-								<p>Tukaj določite naslov novega prehranskega programa ("tedenski jedilnik"), mu dodaste sliko (opcijsko) in mu določite pripadnost k določeni prehrani.</p>
-							</div>
-						
-							<!-- contact form -->
-							<div class="col-md-6 col-pull">
-								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
-									<div class="row">
-										<div class="col-sm-12">
-											Naslov(*)<p:inputText required="true" id="program-title" name="title" value="#{ProgramJSFBean.p.naslov}" >
-												<f:validateLength minimum="5" maximum="100"></f:validateLength>
-											</p:inputText>
-									
-											Slika: <p:fileUpload  required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ProgramJSFBean.thumbnail}" mode="simple" />
-	                                        
-	                                        <br />
-	                                        <br />
-	                                        Prehrana, h kateri pripada program(*):
-	                                        <p:selectOneListbox style="width: 100%;" required="true" value="#{ProgramJSFBean.p.tk_id_prehrana}">
-	                                        	<f:selectItems value="#{ProgramJSFBean.vrniVse()}" var="preh" itemValue="#{preh.id_prehrana}" itemLabel="#{preh.naslovPrehrane}" />
-											</p:selectOneListbox>
-
-											<br />
-											<br />
-											
-											<h:commandButton widgetVar="button" ajax="false" class="site-btn" value="Vnesi" actionListener="#{ProgramJSFBean.dodajProgram()}" action="urejanje-programa.xhtml"/>
-											
-											<br />
-											<p:messages showDetail="false"/>
-										</div>
+				<ui:fragment rendered="#{ProgramJSFBean.vrniVse().size() > 0}">
+					<!-- Contact section -->
+					<div class="contact-section spad fix">
+						<div class="container">
+							<div class="row">
+							
+								<!-- contact info -->
+								<div class="col-md-5 col-md-offset-1 contact-info col-push">
+									<div class="section-title left">
+										<h2>Nov program</h2>
 									</div>
-								</h:form>
+									<p>Tukaj določite naslov novega prehranskega programa ("tedenski jedilnik"), mu dodaste sliko (opcijsko) in mu določite pripadnost k določeni prehrani.</p>
+								</div>
+							
+								<!-- contact form -->
+								<div class="col-md-6 col-pull">
+									<h:form enctype="multipart/form-data" class="form-class" id="con_form">
+										<div class="row">
+											<div class="col-sm-12">
+												Naslov(*)<p:inputText required="true" id="program-title" name="title" value="#{ProgramJSFBean.p.naslov}" >
+													<f:validateLength minimum="5" maximum="100"></f:validateLength>
+												</p:inputText>
+										
+												Slika: <p:fileUpload  required="true" skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ProgramJSFBean.thumbnail}" mode="simple" />
+		                                        
+		                                        <br />
+		                                        <br />
+		                                        Prehrana, h kateri pripada program(*):
+		                                        <p:selectOneListbox style="width: 100%;" required="true" value="#{ProgramJSFBean.p.tk_id_prehrana}">
+		                                        	<f:selectItems value="#{ProgramJSFBean.vrniVse()}" var="preh" itemValue="#{preh.id_prehrana}" itemLabel="#{preh.naslovPrehrane}" />
+												</p:selectOneListbox>
+	
+												<br />
+												<br />
+												
+												<h:commandButton widgetVar="button" ajax="false" class="site-btn" value="Vnesi" actionListener="#{ProgramJSFBean.dodajProgram()}" action="urejanje-programa.xhtml"/>
+												
+												<br />
+												<p:messages showDetail="false"/>
+											</div>
+										</div>
+									</h:form>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- Contact section end-->	
+					<!-- Contact section end-->
+				</ui:fragment>
+				<ui:fragment rendered="#{ProgramJSFBean.vrniVse().size() == 0}">
+					<!-- Contact section -->
+					<div class="contact-section spad fix">
+						<div class="container">
+							<div class="row">
+							
+								<!-- contact info -->
+								<div class="col-md-5 col-md-offset-1 contact-info col-push">
+									<div class="section-title left">
+										<h2>Tristo kosmatih!</h2>
+									</div>
+									<p>Za uporabo trenutne strani ni na voljo dovolj podatkov. <br />Poskusite ponovno kasneje, sicer pa nas o napaki obvestite na: <a style="color: #ffffff;" href="mailto:eprehrana@gmail.com?Subject=Sporočilo%20o%20napaki" target="_top">eprehrana@gmail.com</a></p>
+								</div>
+							
+								<!-- contact form -->
+								<div class="col-md-6 col-pull">
+									<div class="row">
+										<div class="col-sm-12">
+											<img src="img/data.png" alt="img/data.png" />
+											<a class="site-btn" href="index.xhtml">Domov</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Contact section end-->
+				</ui:fragment>
 	
 			</f:view>
 		</ui:define>

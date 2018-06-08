@@ -158,6 +158,7 @@ public class ReceptJSFBean {
 	
 	public void urediRecept(int id) throws Exception {
 		urejenRecept = rD.najdi(id);
+		urejenRecept.setOpis(urejenRecept.getOpis().replaceAll("<br />", "\n"));
 	}
 	
 	public void posodobiRecept() throws Exception {

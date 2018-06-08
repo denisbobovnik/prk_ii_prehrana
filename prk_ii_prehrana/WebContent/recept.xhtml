@@ -24,76 +24,106 @@
 		<ui:define name="content">
 			<f:view>
 
-				<!-- page section -->
-				<div class="page-section spad">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12 col-sm-12 blog-posts">
-								<!-- Single Post -->
-								<div class="single-post">
-									<div class="post-thumbnail">
-										<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=recept&amp;id=#{ReceptJSFBean.izbranRecept.id_recept}" height="270"/>
-									</div>
-									<div class="post-content">
-										<h2 style="display:inline-block;" class="post-title"><h:outputText value="#{ReceptJSFBean.izbranRecept.ime}" /></h2>
-										<h:form onsubmit="alert('PDF bo shranjen v ...(vasa_wildfly_namestitev)->bin')" style="display:inline-block; margin-left: 20px;">
-											<h:commandLink action="#{PdfJSFBean.createPDF(ReceptJSFBean.izbranRecept.id_recept)}">
-											    <h:graphicImage value="img/pdf.png" width="40" height="50" />
-											</h:commandLink>
-										</h:form>  				
-										
-										<div class="post-meta">
-											<a href=""><h:outputText value="#{ReceptJSFBean.izbranRecept.kategorija}" /></a>
+				<ui:fragment rendered="#{ReceptJSFBean.izbranRecept.ime != null}">
+					<!-- page section -->
+					<div class="page-section spad" style="padding-bottom: 0px;">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 blog-posts">
+									<!-- Single Post -->
+									<div class="single-post">
+										<div class="post-thumbnail">
+											<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=recept&amp;id=#{ReceptJSFBean.izbranRecept.id_recept}" height="270"/>
 										</div>
-										
-										<div class="row">
-											<div class="col-md-6">
-												<h4><h:outputText value="Sestavine" /></h4>
-												<h:dataTable value="#{ReceptJSFBean.izbranRecept.sestavine}" var="sestavina">
-													<h:column>    				
-														<f:facet name="header"><h:outputText value="Ime" /></f:facet>   				
-														<h:outputText value="#{sestavina.ime}" />
-													</h:column>
-													<h:column>    				
-														<f:facet name="header"><h:outputText value="Količina" /></f:facet>    				
-														<h:outputText value="#{sestavina.kolicina}" /><h:outputText value="#{sestavina.enota_kolicine}" />
-													</h:column>
-													<h:column>    				
-														<f:facet name="header"><h:outputText value="Sladkorji" /></f:facet>    				
-														<h:outputText value="#{sestavina.sladkorji}" /><h:outputText value="g" />
-													</h:column>
-													<h:column>    				
-														<f:facet name="header"><h:outputText value="Kalorije" /></f:facet>    				
-														<h:outputText value="#{sestavina.kalorije}" /><h:outputText value="kcal" />
-													</h:column>
-												</h:dataTable>
+										<div class="post-content">
+											<h2 style="display:inline-block;" class="post-title"><h:outputText value="#{ReceptJSFBean.izbranRecept.ime}" /></h2>
+											<h:form onsubmit="alert('PDF bo shranjen v ...(vasa_wildfly_namestitev)->bin')" style="display:inline-block; margin-left: 20px;">
+												<h:commandLink action="#{PdfJSFBean.createPDF(ReceptJSFBean.izbranRecept.id_recept)}">
+												    <h:graphicImage value="img/pdf.png" width="40" height="50" />
+												</h:commandLink>
+											</h:form>  				
+											
+											<div class="post-meta">
+												<a href="#"><h:outputText value="#{ReceptJSFBean.izbranRecept.kategorija}" /></a>
 											</div>
-											<div class="col-md-6">
-												<br />
-												<h4><h:outputText value="Dolžina priprave: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.dolzinaPriprave}" /> minut</h4>
-												<h4><h:outputText value="Število porcij: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.steviloPorcij}" /></h4>
-												<h4><h:outputText value="Število kalorij: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.kalorije}" />kcal</h4>
-												<h4><h:outputText value="Količina sladkorja: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.sladkorji}" />g</h4>
-												<h4><h:outputText value="Alergeni: " /><h:outputText value="#{ReceptJSFBean.zlepiAlergene(ReceptJSFBean.izbranRecept.alergeni)}" /></h4>
+											
+											<div class="row">
+												<div class="col-md-6">
+													<h4><h:outputText value="Sestavine" /></h4>
+													<h:dataTable value="#{ReceptJSFBean.izbranRecept.sestavine}" var="sestavina">
+														<h:column>    				
+															<f:facet name="header"><h:outputText value="Ime" /></f:facet>   				
+															<h:outputText value="#{sestavina.ime}" />
+														</h:column>
+														<h:column>    				
+															<f:facet name="header"><h:outputText value="Količina" /></f:facet>    				
+															<h:outputText value="#{sestavina.kolicina}" /><h:outputText value="#{sestavina.enota_kolicine}" />
+														</h:column>
+														<h:column>    				
+															<f:facet name="header"><h:outputText value="Sladkorji" /></f:facet>    				
+															<h:outputText value="#{sestavina.sladkorji}" /><h:outputText value="g" />
+														</h:column>
+														<h:column>    				
+															<f:facet name="header"><h:outputText value="Kalorije" /></f:facet>    				
+															<h:outputText value="#{sestavina.kalorije}" /><h:outputText value="kcal" />
+														</h:column>
+													</h:dataTable>
+												</div>
+												<div class="col-md-6">
+													<br />
+													<h4><h:outputText value="Dolžina priprave: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.dolzinaPriprave}" /> minut</h4>
+													<h4><h:outputText value="Število porcij: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.steviloPorcij}" /></h4>
+													<h4><h:outputText value="Število kalorij: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.kalorije}" />kcal</h4>
+													<h4><h:outputText value="Količina sladkorja: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.sladkorji}" />g</h4>
+													<h4><h:outputText value="Alergeni: " /><h:outputText value="#{ReceptJSFBean.zlepiAlergene(ReceptJSFBean.izbranRecept.alergeni)}" /></h4>
+												</div>
 											</div>
+											
+											<br />
+											<h4><h:outputText value="Postopek"/></h4>
+											<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ReceptJSFBean.izbranRecept.opis}" /></p>	
+										    
+										    <c:set var="video" value="#{ReceptJSFBean.izbranRecept.linkVideo}" scope="request" />
+										    <ui:fragment rendered="#{ReceptJSFBean.isURL(video)}">
+										    	<h4><h:outputText value="Video"/></h4>
+										    	<p><iframe width="640" height="360" src="#{ReceptJSFBean.izbranRecept.linkVideo}"></iframe></p>
+											</ui:fragment>									    
 										</div>
-										
-										<br />
-										<h4><h:outputText value="Postopek"/></h4>
-										<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ReceptJSFBean.izbranRecept.opis}" /></p>	
-									    
-									    <c:set var="video" value="#{ReceptJSFBean.izbranRecept.linkVideo}" scope="request" />
-									    <ui:fragment rendered="#{ReceptJSFBean.isURL(video)}">
-									    	<h4><h:outputText value="Video"/></h4>
-									    	<p><iframe width="640" height="360" src="#{ReceptJSFBean.izbranRecept.linkVideo}"></iframe></p>
-										</ui:fragment>									    
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- page section end-->
+					<!-- page section end-->
+				</ui:fragment>
+				<ui:fragment rendered="#{ReceptJSFBean.izbranRecept.ime == null}">
+					<!-- Contact section -->
+					<div class="contact-section spad fix">
+						<div class="container">
+							<div class="row">
+							
+								<!-- contact info -->
+								<div class="col-md-5 col-md-offset-1 contact-info col-push">
+									<div class="section-title left">
+										<h2>Tristo kosmatih!</h2>
+									</div>
+									<p>Za uporabo trenutne strani ni na voljo dovolj podatkov. <br />Poskusite ponovno kasneje, sicer pa nas o napaki obvestite na: <a style="color: #ffffff;" href="mailto:eprehrana@gmail.com?Subject=Sporočilo%20o%20napaki" target="_top">eprehrana@gmail.com</a></p>
+								</div>
+							
+								<!-- contact form -->
+								<div class="col-md-6 col-pull">
+									<div class="row">
+										<div class="col-sm-12">
+											<img src="img/data.png" alt="img/data.png" />
+											<a class="site-btn" href="index.xhtml">Domov</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Contact section end-->
+				</ui:fragment>
 
 			</f:view>
 		</ui:define>

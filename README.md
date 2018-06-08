@@ -4,6 +4,27 @@ Projekt pri predmetu Praktikum II
 ## E-R model
 ![er_model](/er_model/er_model.png)
 
+## Navodila za deploy:
+- Pojdite na administrativno konzolo vašega izvajalnega okolja WF (in se vanj prijavite uporabnikom, ki je tipa "Management user" - pri uporabi naših datotek iz imenikov za prenos je ta uporabniško ime: user, geslo: user):
+```bash
+http://localhost:9990/console/App.html#home
+```
+
+- Kliknite na "Deployments"
+- Kliknite na "Add"
+- Izberite možnost "Upload a new deployment"
+- Izberite preneseno datoteko "prk_ii_prehrana.war" iz imenika deploy (na GitHub-u)
+- Kliknite Finish
+- Aplikacija je tako dostopna na URL naslovu:
+```bash
+http://localhost:8080/prk_ii_prehrana/faces/index.xhtml
+```
+
+- Dodatno bo potrebno ustvariti tudi JMS Queue, zato si prvo prenesite datoteke, ki so v sledečem imeniku (prenos): https://mega.nz/#!KA83RYzJ!uSAp7pcEXAaNaSZA9yaG3tO6oaoWWAVP3vBwAHgNiuY
+- Ugasnemo strežnik in prepišemo njegove datoteke s prenesenimi (ta korak zna pobrisati obstoječe uporabnike - na novo vnesemo in če nas vpraša za update, damo da (a možnost) -  ali pa MySQL datasource - glej navodila spodaj).
+- Strežnik ponovno zaženemo.
+- Projektni email: eprehrana@gmail.com, geslo: ePrehrana2018
+
 ## Navodila za razvoj/uporabo:
 - Potrebno si je kreirati datasource v Wildfly aplikacijskem strežniku. Ugasnemo strežnik in prepišemo datoteke v njegovem imenu z temi, ki so v sledečem imeniku (prenos): https://mega.nz/#!KZMg1DCS!iNFLC8482Xl1U_pn8hj54rDGCMV9ZphFveeV5pOzOBs
 - Najprej v MySQL ustvarimo podatkovno bazo "prk_ii_prehrana"
@@ -11,7 +32,7 @@ Projekt pri predmetu Praktikum II
 CREATE SCHEMA `prk_ii_prehrana` DEFAULT CHARACTER SET utf8 COLLATE utf8_slovenian_ci ;
 ```
 
-- Nato s pomočjo GUI na administrativni konzoli WF strežnika ustvarimo novi Non XA datasource s pomočjo zaznanega MySQL driverja in nastavimo name na "prk_ii_prehrana", JNDI na "java:jboss/datasources/prk_ii_prehrana" in povezavo na "jdbc:mysql://localhost:3306/prk_ii_prehrana"
+- Nato s pomočjo GUI na administrativni konzoli WF strežnika ustvarimo novi Non XA datasource s pomočjo zaznanega MySQL driverja in nastavimo name na "prk_ii_prehrana", JNDI na "java:jboss/datasources/prk_ii_prehrana" in povezavo na "jdbc:mysql://localhost:3306/prk_ii_prehrana". Prav tako vnesemo prijavne podatke za naš MySQL strežnik.
 
 - Nazadnje še s pomočjo CMD dodamo po enega uporabnika spletne strani za posamezno vlogo (en strokovnjak, en posameznik). Navigiramo do imenika našega WF strežnika in gremo v imenik bin (po do tega kopiramo):
 
@@ -57,8 +78,8 @@ Dodatno (po Blockchain implementaciji) - uvoz blockchain podatkov iz datoteke "b
 ```
 - Nato strežnik poženite in izvedite full publish.
 
-## Uporaba rest storitve (za skupino "Corporate Wellness"):
-Da pridete do podatkov o naših receptih (oblike JSON), si prenesite našo aplikacijo v eclipse, jo zdeplojajte (ni potrebno imeti uporabnikov kreiranih, ostalo pa po navodilih za namestitev; prav tako prenesite in uvozite pripravljene podatke po navodilih), nato pa pojdite na url: 
+## Uporaba rest storitve (za skupini "Corporate Wellness" in "Fitnes"):
+Da pridete do podatkov o naših receptih (oblike JSON), si prenesite našo aplikacijo v eclipse (po navodilih za deploy/razvoj - ni potrebno imeti uporabnikov kreiranih, ostalo pa po navodilih za namestitev; prav tako prenesite in uvozite pripravljene podatke po navodilih), nato pa pojdite na url: 
 ```bash
 http://localhost:8080/prk_ii_prehrana/rest/eprehrana/recepti
 ```

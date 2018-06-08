@@ -23,88 +23,118 @@
 		<ui:define name="content">
 			<f:view>
 			
-				<!-- services section -->
-				<div class="services-section spad" style="padding-bottom: 0px;">
-					<div class="container">
-						<div class="text-center">
-							<h:form>
-								<h:commandButton class="site-btn" style="min-width: 0px; letter-spacing: 0px; padding: 15px;" value="Vsi" actionListener="#{ReceptJSFBean.ponastaviKategorijo()}" action="seznam-receptov.xhtml"/>
-								<ui:repeat var="kategorija" value="#{ReceptJSFBean.vrniVseKategorijeReceptov()}">
-									<h:commandButton class="site-btn" style="min-width: 0px; letter-spacing: 0px; padding: 15px;" value="#{kategorija}" actionListener="#{ReceptJSFBean.nastaviKategorijo(kategorija)}" action="seznam-receptov.xhtml"/>
-								</ui:repeat>
-							</h:form>
-						</div>
-					</div>
-				</div>
-				<!-- services section end -->
-
-				<ui:fragment rendered="#{ReceptJSFBean.izbranaKategorijaReceptov == null}">
-					<!-- page section -->
-					<div class="services-card-section spad" style="padding-top: 10px;">
+				<ui:fragment rendered="#{ReceptJSFBean.rD.vrniVse().size() > 0}">
+					<!-- services section -->
+					<div class="services-section spad" style="padding-bottom: 0px;">
 						<div class="container">
-							<div class="row">
-								<ui:repeat var="recept" value="#{ReceptJSFBean.rD.vrniVse()}" varStatus="loop">
-									<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
-									<!-- Single Card -->
-									<div class="col-md-4 col-sm-12">
-										<div class="sv-card">
-											<div class="card-img">
-												<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=recept&amp;id=#{recept.id_recept}" height="270"/>
-											</div>
-											<div class="card-text">
-												<h2 class="post-title"><h:outputText value="#{recept.ime}" /></h2>
-												<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ReceptJSFBean.trimContent121(recept.opis)}" /></p>
-												<h:form style="display:inline-block;">
-													<h:commandLink class="read-more" value="Ogled" action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept.id_recept)}"></h:commandLink>
-												</h:form>
-												
-												<ui:fragment rendered="#{facesContext.externalContext.isUserInRole('STROKOVNJAK')}">
-													<h:form style="display:inline-block; margin-left: 20px;">
-														<h:commandLink class="read-more" value="Uredi" action="urejanje-recepta.xhtml" actionListener="#{ReceptJSFBean.urediRecept(recept.id_recept)}"></h:commandLink>
-													</h:form>
-												</ui:fragment>
-											</div>
-										</div>
-									</div>
-								</ui:repeat>
+							<div class="text-center">
+								<h:form>
+									<h:commandButton class="site-btn" style="min-width: 0px; letter-spacing: 0px; padding: 15px;" value="Vsi" actionListener="#{ReceptJSFBean.ponastaviKategorijo()}" action="seznam-receptov.xhtml"/>
+									<ui:repeat var="kategorija" value="#{ReceptJSFBean.vrniVseKategorijeReceptov()}">
+										<h:commandButton class="site-btn" style="min-width: 0px; letter-spacing: 0px; padding: 15px;" value="#{kategorija}" actionListener="#{ReceptJSFBean.nastaviKategorijo(kategorija)}" action="seznam-receptov.xhtml"/>
+									</ui:repeat>
+								</h:form>
 							</div>
 						</div>
 					</div>
-					<!-- page section end-->
+					<!-- services section end -->
+	
+					<ui:fragment rendered="#{ReceptJSFBean.izbranaKategorijaReceptov == null}">
+						<!-- page section -->
+						<div class="services-card-section spad" style="padding-top: 10px;">
+							<div class="container">
+								<div class="row">
+									<ui:repeat var="recept" value="#{ReceptJSFBean.rD.vrniVse()}" varStatus="loop">
+										<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
+										<!-- Single Card -->
+										<div class="col-md-4 col-sm-12">
+											<div class="sv-card">
+												<div class="card-img">
+													<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=recept&amp;id=#{recept.id_recept}" height="270"/>
+												</div>
+												<div class="card-text">
+													<h2 class="post-title"><h:outputText value="#{recept.ime}" /></h2>
+													<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ReceptJSFBean.trimContent121(recept.opis)}" /></p>
+													<h:form style="display:inline-block;">
+														<h:commandLink class="read-more" value="Ogled" action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept.id_recept)}"></h:commandLink>
+													</h:form>
+													
+													<ui:fragment rendered="#{facesContext.externalContext.isUserInRole('STROKOVNJAK')}">
+														<h:form style="display:inline-block; margin-left: 20px;">
+															<h:commandLink class="read-more" value="Uredi" action="urejanje-recepta.xhtml" actionListener="#{ReceptJSFBean.urediRecept(recept.id_recept)}"></h:commandLink>
+														</h:form>
+													</ui:fragment>
+												</div>
+											</div>
+										</div>
+									</ui:repeat>
+								</div>
+							</div>
+						</div>
+						<!-- page section end-->
+					</ui:fragment>
+					<ui:fragment rendered="#{ReceptJSFBean.izbranaKategorijaReceptov != null}">
+						<!-- page section -->
+						<div class="services-card-section spad" style="padding-top: 10px;">
+							<div class="container">
+								<div class="row">
+									<ui:repeat var="recept" value="#{ReceptJSFBean.vrniRecepteZaPrikaz()}" varStatus="loop">
+										<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
+										<!-- Single Card -->
+										<div class="col-md-4 col-sm-12">
+											<div class="sv-card">
+												<div class="card-img">
+													<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=recept&amp;id=#{recept.id_recept}" height="270"/>
+												</div>
+												<div class="card-text">
+													<h2 class="post-title"><h:outputText value="#{recept.ime}" /></h2>
+													<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ReceptJSFBean.trimContent121(recept.opis)}" /></p>
+													<h:form style="display:inline-block;">
+														<h:commandLink class="read-more" value="Ogled" action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept.id_recept)}"></h:commandLink>
+													</h:form>
+													
+													<ui:fragment rendered="#{facesContext.externalContext.isUserInRole('STROKOVNJAK')}">
+														<h:form style="display:inline-block; margin-left: 20px;">
+															<h:commandLink class="read-more" value="Uredi" action="urejanje-recepta.xhtml" actionListener="#{ReceptJSFBean.urediRecept(recept.id_recept)}"></h:commandLink>
+														</h:form>
+													</ui:fragment>
+												</div>
+											</div>
+										</div>
+									</ui:repeat>
+								</div>
+							</div>
+						</div>
+						<!-- page section end-->
+					</ui:fragment>
 				</ui:fragment>
-				<ui:fragment rendered="#{ReceptJSFBean.izbranaKategorijaReceptov != null}">
-					<!-- page section -->
-					<div class="services-card-section spad" style="padding-top: 10px;">
+				<ui:fragment rendered="#{ReceptJSFBean.rD.vrniVse().size() == 0}">
+					<!-- Contact section -->
+					<div class="contact-section spad fix">
 						<div class="container">
 							<div class="row">
-								<ui:repeat var="recept" value="#{ReceptJSFBean.vrniRecepteZaPrikaz()}" varStatus="loop">
-									<h:outputText value="&lt;/div&gt;&lt;div class='row'&gt;" escape="false" rendered="#{not loop.first and loop.index % 3 == 0}" />
-									<!-- Single Card -->
-									<div class="col-md-4 col-sm-12">
-										<div class="sv-card">
-											<div class="card-img">
-												<p:graphicImage id="image" alt="slika" url="/ImageServlet?klic=recept&amp;id=#{recept.id_recept}" height="270"/>
-											</div>
-											<div class="card-text">
-												<h2 class="post-title"><h:outputText value="#{recept.ime}" /></h2>
-												<p><h:outputText escape="false" style="word-wrap: break-word;" value="#{ReceptJSFBean.trimContent121(recept.opis)}" /></p>
-												<h:form style="display:inline-block;">
-													<h:commandLink class="read-more" value="Ogled" action="recept.xhtml" actionListener="#{ReceptJSFBean.izberiRecept(recept.id_recept)}"></h:commandLink>
-												</h:form>
-												
-												<ui:fragment rendered="#{facesContext.externalContext.isUserInRole('STROKOVNJAK')}">
-													<h:form style="display:inline-block; margin-left: 20px;">
-														<h:commandLink class="read-more" value="Uredi" action="urejanje-recepta.xhtml" actionListener="#{ReceptJSFBean.urediRecept(recept.id_recept)}"></h:commandLink>
-													</h:form>
-												</ui:fragment>
-											</div>
+							
+								<!-- contact info -->
+								<div class="col-md-5 col-md-offset-1 contact-info col-push">
+									<div class="section-title left">
+										<h2>Tristo kosmatih!</h2>
+									</div>
+									<p>Za uporabo trenutne strani ni na voljo dovolj podatkov. <br />Poskusite ponovno kasneje, sicer pa nas o napaki obvestite na: <a style="color: #ffffff;" href="mailto:eprehrana@gmail.com?Subject=Sporočilo%20o%20napaki" target="_top">eprehrana@gmail.com</a></p>
+								</div>
+							
+								<!-- contact form -->
+								<div class="col-md-6 col-pull">
+									<div class="row">
+										<div class="col-sm-12">
+											<img src="img/data.png" alt="img/data.png" />
+											<a class="site-btn" href="index.xhtml">Domov</a>
 										</div>
 									</div>
-								</ui:repeat>
+								</div>
 							</div>
 						</div>
 					</div>
-					<!-- page section end-->
+					<!-- Contact section end-->
 				</ui:fragment>
 
 			</f:view>

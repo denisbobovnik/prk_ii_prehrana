@@ -23,60 +23,90 @@
 		<ui:define name="content">
 			<f:view>
 
-				<!-- Contact section -->
-				<div class="contact-section spad fix">
-					<div class="container">
-						<div class="row">
-						
-							<!-- contact info -->
-							<div class="col-md-5 col-md-offset-1 contact-info col-push">
-								<div class="section-title left">
-									<h2>Urejanje recepta</h2>
-								</div>
-								<p>Manjka kaj pri receptu (kakšna kuharska skrivnost?), ali pa se je pretihotapil tipkarski škrat? <br />Uredite recept prav tukaj!</p>
-							</div>
-						
-							<!-- contact form -->
-							<div class="col-md-6 col-pull">
-								<h:form enctype="multipart/form-data" class="form-class" id="con_form">
-									<div class="row">
-										<div class="col-sm-12">
-											Ime(*)<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.urejenRecept.ime}">
-												<f:validateLength minimum="3" maximum="100"></f:validateLength>
-											</p:inputText>
-											
-											Dolžina priprave(*)<p:inputText id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.urejenRecept.dolzinaPriprave}" />
-											
-											Število porcij(*)<p:inputText id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.urejenRecept.steviloPorcij}" />
+				<ui:fragment rendered="#{ReceptJSFBean.urejenRecept.ime != null}">
+					<!-- Contact section -->
+					<div class="contact-section spad fix">
+						<div class="container">
+							<div class="row">
 							
-											Opis(*)<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.urejenRecept.opis}" cols="30" rows="10">
-												<f:validateLength maximum="8000" minimum="10"/>
-											</p:inputTextarea>
-											
-											Slika: <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
-											
-											<br />
-											<br />
-											
-											Video(*)<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.urejenRecept.linkVideo}" />
-											
-											Kategorija(*)<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.urejenRecept.kategorija}" />
-											
-											<br />
-											
-											<!-- redirect na seznam člankov... -->
-											<h:commandButton widgetVar="button" ajax="false" class="site-btn" value="Posodobi" action="seznam-receptov.xhtml" actionListener="#{ReceptJSFBean.posodobiRecept()}" />
-											
-											<br />
-											<p:messages showDetail="false"/>
-										</div>
+								<!-- contact info -->
+								<div class="col-md-5 col-md-offset-1 contact-info col-push">
+									<div class="section-title left">
+										<h2>Urejanje recepta</h2>
 									</div>
-								</h:form>
+									<p>Manjka kaj pri receptu (kakšna kuharska skrivnost?), ali pa se je pretihotapil tipkarski škrat? <br />Uredite recept prav tukaj!</p>
+								</div>
+							
+								<!-- contact form -->
+								<div class="col-md-6 col-pull">
+									<h:form enctype="multipart/form-data" class="form-class" id="con_form">
+										<div class="row">
+											<div class="col-sm-12">
+												Ime(*)<p:inputText id="recept-title" name="ime" value="#{ReceptJSFBean.urejenRecept.ime}">
+													<f:validateLength minimum="3" maximum="100"></f:validateLength>
+												</p:inputText>
+												
+												Dolžina priprave(*)<p:inputText id="dolzina-title" name="dolzina" value="#{ReceptJSFBean.urejenRecept.dolzinaPriprave}" />
+												
+												Število porcij(*)<p:inputText id="stevilo-title" name="stevilo" value="#{ReceptJSFBean.urejenRecept.steviloPorcij}" />
+								
+												Opis(*)<p:inputTextarea id="recept-content" name="content" value="#{ReceptJSFBean.urejenRecept.opis}" cols="30" rows="10">
+													<f:validateLength maximum="8000" minimum="10"/>
+												</p:inputTextarea>
+												
+												Slika: <p:fileUpload skinSimple="true" a:onchange="if (tagName == 'INPUT') { if (!!value) PF('button').enable(); else PF('button').disable(); }" value="#{ReceptJSFBean.thumbnail}" mode="simple" />
+												
+												<br />
+												<br />
+												
+												Video(*)<p:inputText id="video-title" name="video" value="#{ReceptJSFBean.urejenRecept.linkVideo}" />
+												
+												Kategorija(*)<p:inputText id="kategorija-title" name="kategorija" value="#{ReceptJSFBean.urejenRecept.kategorija}" />
+												
+												<br />
+												
+												<!-- redirect na seznam člankov... -->
+												<h:commandButton widgetVar="button" ajax="false" class="site-btn" value="Posodobi" action="seznam-receptov.xhtml" actionListener="#{ReceptJSFBean.posodobiRecept()}" />
+												
+												<br />
+												<p:messages showDetail="false"/>
+											</div>
+										</div>
+									</h:form>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- Contact section end-->	
+					<!-- Contact section end-->	
+				</ui:fragment>
+				<ui:fragment rendered="#{ReceptJSFBean.urejenRecept.ime == null}">
+					<!-- Contact section -->
+					<div class="contact-section spad fix">
+						<div class="container">
+							<div class="row">
+							
+								<!-- contact info -->
+								<div class="col-md-5 col-md-offset-1 contact-info col-push">
+									<div class="section-title left">
+										<h2>Tristo kosmatih!</h2>
+									</div>
+									<p>Za uporabo trenutne strani ni na voljo dovolj podatkov. <br />Poskusite ponovno kasneje, sicer pa nas o napaki obvestite na: <a style="color: #ffffff;" href="mailto:eprehrana@gmail.com?Subject=Sporočilo%20o%20napaki" target="_top">eprehrana@gmail.com</a></p>
+								</div>
+							
+								<!-- contact form -->
+								<div class="col-md-6 col-pull">
+									<div class="row">
+										<div class="col-sm-12">
+											<img src="img/data.png" alt="img/data.png" />
+											<a class="site-btn" href="index.xhtml">Domov</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Contact section end-->
+				</ui:fragment>
 	
 			</f:view>
 		</ui:define>
