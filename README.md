@@ -5,7 +5,7 @@ Projekt pri predmetu Praktikum II
 ![er_model](/er_model/er_model.png)
 
 ## Navodila za deploy:
-- Pojdite na administrativno konzolo vašega izvajalnega okolja WF (in se vanj prijavite uporabnikom, ki je tipa "Management user"):
+- Pojdite na administrativno konzolo vašega izvajalnega okolja WF (in se vanj prijavite uporabnikom, ki je tipa "Management user" - pri uporabi naših datotek iz imenikov za prenos je ta uporabniško ime: user, geslo: user):
 ```bash
 http://localhost:9990/console/App.html#home
 ```
@@ -20,8 +20,9 @@ http://localhost:9990/console/App.html#home
 http://localhost:8080/prk_ii_prehrana/faces/index.xhtml
 ```
 
-Dodatno bo potrebno ustvariti tudi JMS Queue: 
-- 
+- Dodatno bo potrebno ustvariti tudi JMS Queue, zato si prvo prenesite datoteke, ki so v sledečem imeniku (prenos): https://mega.nz/#!KA83RYzJ!uSAp7pcEXAaNaSZA9yaG3tO6oaoWWAVP3vBwAHgNiuY
+- Ugasnemo strežnik in prepišemo njegove datoteke s prenesenimi (če so že ustvarjeni aplikacijski uporabniki, bo le-te potrebno ustvariti ponovno).
+- Strežnik ponovno zaženemo.
 
 ## Navodila za razvoj/uporabo:
 - Potrebno si je kreirati datasource v Wildfly aplikacijskem strežniku. Ugasnemo strežnik in prepišemo datoteke v njegovem imenu z temi, ki so v sledečem imeniku (prenos): https://mega.nz/#!KZMg1DCS!iNFLC8482Xl1U_pn8hj54rDGCMV9ZphFveeV5pOzOBs
