@@ -32,10 +32,10 @@
 							<div class="container">
 								<div class="text-center">
 									<ui:fragment rendered="#{PrehranaJSFBean.pD.pD.vrniSplosneProgrameZaToPrehrano(IDIzbranePrehrane).size() > 0}">
-										<a class="site-btn" style="min-width: 0px; letter-spacing: 0px; padding: 15px;" href="#splosni">Splošni programi</a>
+										<a class="site-btn" style="display: inline-block; margin-right: 20px; min-width: 0px; letter-spacing: 0px; padding: 15px;" href="#splosni">Splošni programi</a>
 									</ui:fragment>
 									<ui:fragment rendered="#{(PrehranaJSFBean.username ne null) and (PrehranaJSFBean.vrniPersonaliziranePrograme().size() > 0)}">
-										<a class="site-btn" style="min-width: 0px; letter-spacing: 0px; padding: 15px;" href="#personalizirani">Personalizirani programi</a>
+										<a class="site-btn" style="display: inline-block; min-width: 0px; letter-spacing: 0px; padding: 15px;" href="#personalizirani">Personalizirani programi</a>
 									</ui:fragment>
 								</div>
 							</div>
