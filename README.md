@@ -21,7 +21,7 @@ http://localhost:8080/prk_ii_prehrana/faces/index.xhtml
 ```
 
 - Dodatno bo potrebno ustvariti tudi JMS Queue, zato si prvo prenesite datoteke, ki so v sledečem imeniku (prenos): https://mega.nz/#!KA83RYzJ!uSAp7pcEXAaNaSZA9yaG3tO6oaoWWAVP3vBwAHgNiuY
-- Ugasnemo strežnik in prepišemo njegove datoteke s prenesenimi (če so že ustvarjeni aplikacijski uporabniki, bo le-te potrebno ustvariti ponovno).
+- Ugasnemo strežnik in prepišemo njegove datoteke s prenesenimi (ta korak zna pobrisati obstoječe uporabnike ali pa MySQL datasource - glej navodila spodaj).
 - Strežnik ponovno zaženemo.
 
 ## Navodila za razvoj/uporabo:
