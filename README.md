@@ -20,6 +20,9 @@ http://localhost:9990/console/App.html#home
 http://localhost:8080/prk_ii_prehrana/faces/index.xhtml
 ```
 
+Dodatno bo potrebno ustvariti tudi JMS Queue: 
+- 
+
 ## Navodila za razvoj/uporabo:
 - Potrebno si je kreirati datasource v Wildfly aplikacijskem strežniku. Ugasnemo strežnik in prepišemo datoteke v njegovem imenu z temi, ki so v sledečem imeniku (prenos): https://mega.nz/#!KZMg1DCS!iNFLC8482Xl1U_pn8hj54rDGCMV9ZphFveeV5pOzOBs
 - Najprej v MySQL ustvarimo podatkovno bazo "prk_ii_prehrana"
