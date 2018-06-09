@@ -23,6 +23,7 @@ http://localhost:8080/prk_ii_prehrana/faces/index.xhtml
 - Dodatno bo potrebno ustvariti tudi JMS Queue, zato si prvo prenesite datoteke, ki so v sledečem imeniku (prenos): https://mega.nz/#!KA83RYzJ!uSAp7pcEXAaNaSZA9yaG3tO6oaoWWAVP3vBwAHgNiuY
 - Ugasnemo strežnik in prepišemo njegove datoteke s prenesenimi (ta korak zna pobrisati obstoječe uporabnike - na novo vnesemo in če nas vpraša za update, damo da (a možnost) -  ali pa MySQL datasource - glej navodila spodaj).
 - Strežnik ponovno zaženemo.
+- Projektni email: eprehrana@gmail.com, geslo: ePrehrana2018
 
 ## Navodila za razvoj/uporabo:
 - Potrebno si je kreirati datasource v Wildfly aplikacijskem strežniku. Ugasnemo strežnik in prepišemo datoteke v njegovem imenu z temi, ki so v sledečem imeniku (prenos): https://mega.nz/#!KZMg1DCS!iNFLC8482Xl1U_pn8hj54rDGCMV9ZphFveeV5pOzOBs
