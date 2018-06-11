@@ -57,15 +57,15 @@
 														</h:column>
 														<h:column>    				
 															<f:facet name="header"><h:outputText value="Količina" /></f:facet>    				
-															<h:outputText value="#{sestavina.kolicina}" /><h:outputText value="#{sestavina.enota_kolicine}" />
+															<h:outputText value="#{sestavina.kolicina}"><f:convertNumber pattern="#0.00" /></h:outputText><h:outputText value="#{sestavina.enota_kolicine}" />
 														</h:column>
 														<h:column>    				
 															<f:facet name="header"><h:outputText value="Sladkorji" /></f:facet>    				
-															<h:outputText value="#{sestavina.sladkorji}" /><h:outputText value="g" />
+															<h:outputText value="#{sestavina.sladkorji}"><f:convertNumber pattern="#0.00" /></h:outputText><h:outputText value="g" />
 														</h:column>
 														<h:column>    				
-															<f:facet name="header"><h:outputText value="Kalorije" /></f:facet>    				
-															<h:outputText value="#{sestavina.kalorije}" /><h:outputText value="kcal" />
+															<f:facet name="header"><h:outputText value="Kalorije" /></f:facet>
+															<h:outputText value="#{sestavina.kalorije}"><f:convertNumber pattern="#0.00" /></h:outputText><h:outputText value="kcal" />
 														</h:column>
 													</h:dataTable>
 												</div>
@@ -73,8 +73,8 @@
 													<br />
 													<h4><h:outputText value="Dolžina priprave: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.dolzinaPriprave}" /> minut</h4>
 													<h4><h:outputText value="Število porcij: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.steviloPorcij}" /></h4>
-													<h4><h:outputText value="Število kalorij: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.kalorije}" />kcal</h4>
-													<h4><h:outputText value="Količina sladkorja: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.sladkorji}" />g</h4>
+													<h4><h:outputText value="Število kalorij: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.kalorije}"><f:convertNumber pattern="#0.00" /></h:outputText>kcal</h4>
+													<h4><h:outputText value="Količina sladkorja: " /><h:outputText value="#{ReceptJSFBean.izbranRecept.sladkorji}"><f:convertNumber pattern="#0.00" /></h:outputText>g</h4>
 													<h4><h:outputText value="Alergeni: " /><h:outputText value="#{ReceptJSFBean.zlepiAlergene(ReceptJSFBean.izbranRecept.alergeni)}" /></h4>
 												</div>
 											</div>

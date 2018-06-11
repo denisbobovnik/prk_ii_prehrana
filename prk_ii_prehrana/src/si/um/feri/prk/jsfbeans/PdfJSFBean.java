@@ -3,6 +3,8 @@ package si.um.feri.prk.jsfbeans;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -49,8 +51,8 @@ public class PdfJSFBean {
 	
 		Paragraph dolzina = new Paragraph("Dolzina priprave: " + recept.getDolzinaPriprave() + " minut", smallBold);
 		Paragraph stPorcij = new Paragraph("Stevilo porcij: " + recept.getSteviloPorcij(), smallBold);
-		Paragraph kalorije = new Paragraph("Stevilo kalorij: " + recept.getKalorije() + "kcal", smallBold);
-		Paragraph sladkorji = new Paragraph("Kolicina sladkorja: " + recept.getSladkorji() + "g", smallBold);
+		Paragraph kalorije = new Paragraph("Stevilo kalorij: " + round(recept.getKalorije(), 2) + "kcal", smallBold);
+		Paragraph sladkorji = new Paragraph("Kolicina sladkorja: " + round(recept.getSladkorji(), 2) + "g", smallBold);
 		
 		String alergeni = "";
 		for(Alergeni a : recept.getAlergeni())
@@ -76,9 +78,9 @@ public class PdfJSFBean {
 	    table.setHeaderRows(1);
 	    for(Sestavine s : recept.getSestavine()) {
 	    	table.addCell(vrniBrezSumnikov(s.getIme()));
-	    	table.addCell(vrniBrezSumnikov(s.getKolicina() + s.getEnota_kolicine()));
-	    	table.addCell(vrniBrezSumnikov(s.getSladkorji() + "g"));
-	    	table.addCell(vrniBrezSumnikov(s.getKalorije() + "kcal"));
+	    	table.addCell(vrniBrezSumnikov(round(s.getKolicina(), 2) + s.getEnota_kolicine()));
+	    	table.addCell(vrniBrezSumnikov(round(s.getSladkorji(), 2) + "g"));
+	    	table.addCell(vrniBrezSumnikov(round(s.getKalorije(), 2) + "kcal"));
 	    }
 
 		addPhoto();
@@ -132,5 +134,12 @@ public class PdfJSFBean {
     	input = input.replaceAll("è", "c");
     	input = input.replaceAll("ž", "z");
     	return input;
+    }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }
