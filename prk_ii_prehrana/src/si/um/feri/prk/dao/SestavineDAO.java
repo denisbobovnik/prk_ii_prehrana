@@ -39,7 +39,7 @@ public class SestavineDAO {
 		Connection conn=null;
 		try {
 			conn=baza.getConnection();
-			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Sestavine(id_sestavine int not null auto_increment primary key, ime varchar(100) not null, enota_kolicine varchar(45) not null, tk_recept_id int not null, kolicina double not null, kalorije double not null, sladkorji double not null)");
+			conn.createStatement().execute("CREATE TABLE IF NOT EXISTS Sestavine(id_sestavine int not null auto_increment primary key, ime varchar(500) not null, enota_kolicine varchar(45) not null, tk_recept_id int not null, kolicina double not null, kalorije double not null, sladkorji double not null)");
 			} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
