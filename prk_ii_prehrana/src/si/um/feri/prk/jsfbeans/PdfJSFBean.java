@@ -37,7 +37,6 @@ import si.um.feri.prk.objekti.Sestavine;
 public class PdfJSFBean {
 	
 	private static SimpleDateFormat sdf=new SimpleDateFormat("dd. MM. yyyy HH.mm.ss.SSS");
-	private Document dokument = new Document();
 	private ReceptDAO rD = ReceptDAO.getInstance();
 	private Recept recept = null;
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
@@ -46,7 +45,20 @@ public class PdfJSFBean {
 	public void createPDF(int id) throws Exception {
 		recept = rD.najdi(id);
 		String imeDatoteke = vrniBrezSumnikov(recept.getIme()) + "-" + sdf.format(new GregorianCalendar().getTime()) + ".pdf";
-		PdfWriter.getInstance(dokument, new FileOutputStream(imeDatoteke));
+		
+		Document dokument = new Document();
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + imeDatoteke + "\"");
+		context.responseComplete();
+		PdfWriter.getInstance(dokument, response.getOutputStream());
+		
+		dokument.addAuthor("ePrehrana");
+		dokument.addCreationDate();
+		dokument.addTitle("Natisnjen izbran recept");
+		
 		dokument.open();
 	
 		Paragraph dolzina = new Paragraph("Dolzina priprave: " + recept.getDolzinaPriprave() + " minut", smallBold);
@@ -83,7 +95,7 @@ public class PdfJSFBean {
 	    	table.addCell(vrniBrezSumnikov(round(s.getKalorije(), 2) + "kcal"));
 	    }
 
-		addPhoto();
+		addPhoto(dokument);
 		
 		Paragraph preface = new Paragraph();
         dokument.add(new Paragraph(" "));
@@ -109,7 +121,7 @@ public class PdfJSFBean {
 		
 		dokument.close();
 	}
-    private void addPhoto() throws DocumentException, MalformedURLException, IOException {
+    private void addPhoto(Document dokument) throws DocumentException, MalformedURLException, IOException {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String url = request.getRequestURL().toString();
         int odreziTu = url.indexOf("/faces");

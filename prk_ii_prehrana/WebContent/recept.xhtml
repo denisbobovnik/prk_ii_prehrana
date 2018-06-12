@@ -37,7 +37,7 @@
 										</div>
 										<div class="post-content">
 											<h2 style="display:inline-block;" class="post-title"><h:outputText value="#{ReceptJSFBean.izbranRecept.ime}" /></h2>
-											<h:form onsubmit="alert('PDF bo shranjen v ...(vasa_wildfly_namestitev)->bin')" style="display:inline-block; margin-left: 20px;">
+											<h:form style="display:inline-block; margin-left: 20px;">
 												<h:commandLink action="#{PdfJSFBean.createPDF(ReceptJSFBean.izbranRecept.id_recept)}">
 												    <h:graphicImage value="img/print.png" width="40" height="40" />
 												</h:commandLink>
